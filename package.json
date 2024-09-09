@@ -5,8 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:production": "pnpm build",
     "start": "next start",
     "lint": "next lint",
+    "pretty": "prettier --write src",
+    "eslint:fix": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern",
+    "lint:fix": "next lint --fix && npm run pretty && npm run eslint:fix && npm run stylelint:fix",
+    "stylelint:fix": "stylelint --fix src/**/*.{scss,css} --allow-empty-input",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
