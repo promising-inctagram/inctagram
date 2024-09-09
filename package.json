@@ -3,19 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 5175",
     "build": "next build",
     "build:production": "pnpm build",
     "start": "next start",
     "lint": "next lint",
     "pretty": "prettier --write src",
     "eslint:fix": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern",
-    "lint:fix": "next lint --fix && npm run pretty && npm run eslint:fix && npm run stylelint:fix",
+    "lint:fix": "next lint --fix && pnpm run pretty && pnpm run eslint:fix && pnpm run stylelint:fix",
     "stylelint:fix": "stylelint --fix src/**/*.{scss,css} --allow-empty-input",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.0.21",
     "@fontsource/roboto": "^5.0.15",
     "next": "14.2.8",
     "react": "^18",
