@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react'
 import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
-import '../styles/index.scss';
+import '../src/app/styles/index.scss'
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';

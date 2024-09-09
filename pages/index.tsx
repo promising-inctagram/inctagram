@@ -10,7 +10,7 @@ export default function Home() {
                 <link rel="icon" href="/public/favicon.ico"/>
             </Head>
             <main>
-
+                hello from index
             </main>
 
         </>
