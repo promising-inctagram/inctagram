@@ -24,3 +24,13 @@ dist-ssr
 *.sw?
 
 *storybook.log
+
+# next.js
+/.next/
+/out/
+
+# local env files
+.env*.local
+
+# production
+/build
