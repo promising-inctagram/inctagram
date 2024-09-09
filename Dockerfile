@@ -16,10 +16,11 @@ WORKDIR /app
 RUN npm install -g pnpm
 ENV NODE_ENV production
 # If you are using a custom next.config.js file, uncomment this line.
-COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/next.config.mjs ./
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 EXPOSE 3000
+RUN npm install -g pnpm
 CMD ["pnpm", "start"]
