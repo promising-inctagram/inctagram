@@ -1,0 +1,8 @@
+export { default as BraveIcon } from './BraveIcon'
+export { default as FirefoxIcon } from './FirefoxIcon'
+export { default as MSEdgeIcon } from './MSEdgeIcon'
+export { default as MSExplorerIcon } from './MSExplorerIcon'
+export { default as OperaIcon } from './OperaIcon'
+export { default as SafariIcon } from './SafariIcon'
+export { default as UcBrowserIcon } from './UcBrowserIcon'
+export { default as YandexIcon } from './YandexIcon'
