@@ -4,11 +4,12 @@ import { clsx } from 'clsx'
 
 import s from './Card.module.scss'
 
-export type CardProps<T extends ElementType = 'div'> = {
+type CardProps<T extends ElementType = 'div'> = {
   as?: T
 } & ComponentPropsWithoutRef<T>
+type InferType<T> = T extends ElementType<infer U> ? U : never
 export const Card = forwardRef(
-  <T extends ElementType = 'div'>(props: CardProps, ref: ForwardedRef<T>) => {
+  <T extends ElementType = 'div'>(props: CardProps<T>, ref: ForwardedRef<InferType<T>>) => {
     const { as: Component = 'div', className, ...rest } = props
     const cn = clsx(s.card, className)
 

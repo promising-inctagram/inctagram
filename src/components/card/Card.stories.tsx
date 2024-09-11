@@ -3,7 +3,12 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Card } from './Card'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    as: {
+      control: { type: 'radio' },
+      options: ['div', 'article', 'section'],
+    },
+  },
   component: Card,
   tags: ['autodocs'],
   title: 'Components/Card',
@@ -14,7 +19,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    as: 'div',
     children: (
       <p>
         <div>Card</div>
