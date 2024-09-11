@@ -3,11 +3,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import { Card } from './Card'
 
 const meta = {
-  argTypes: {
-    variant: {
-      options: ['dark', 'light'],
-    },
-  },
+  argTypes: {},
   component: Card,
   tags: ['autodocs'],
   title: 'Components/Card',
@@ -16,37 +12,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Light: Story = {
+export const Default: Story = {
   args: {
     as: 'div',
     children: (
       <p>
-        <div>Light</div>
+        <div>Card</div>
       </p>
     ),
-    maxWidth: '300px',
-    variant: 'light',
-  },
-}
-
-export const Dark: Story = {
-  args: {
-    as: 'div',
-    children: (
-      <div>
-        <div
-          style={{
-            alignItems: 'center',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <div>Dark</div>
-          <span>X</span>
-        </div>
-      </div>
-    ),
-    maxWidth: '644px',
-    variant: 'dark',
   },
 }
