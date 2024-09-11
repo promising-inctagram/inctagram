@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { RadioButtonUncheckedIcon } from '@/components/icons'
+import { FlagRussiaIcon, RadioButtonUncheckedIcon } from '@/components/icons'
 
 import { Button } from './'
 
@@ -8,7 +8,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: ['primary', 'secondary', 'outlined', 'link', 'icon'],
+      options: ['primary', 'secondary', 'outlined', 'link', 'icon', 'language'],
     },
   },
   component: Button,
@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    as: 'a',
+    as: 'button',
     children: 'Primary Button',
     disabled: false,
     variant: 'primary',
@@ -71,5 +71,19 @@ export const FullWidth: Story = {
     disabled: false,
     fullWidth: true,
     variant: 'primary',
+  },
+}
+
+export const Language: Story = {
+  args: {
+    as: 'button',
+    children: (
+      <>
+        <FlagRussiaIcon />
+        <span>English</span>
+      </>
+    ),
+    disabled: false,
+    variant: 'language',
   },
 }
