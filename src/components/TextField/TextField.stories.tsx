@@ -3,13 +3,13 @@ import { EyeOutlineIcon, SearchOutlineIcon } from '@/components/icons'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof TextField> = {
+  args: { disabled: false },
   component: TextField,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   title: 'components/TextField',
-  args: { disabled: false },
 }
 
 export default meta
