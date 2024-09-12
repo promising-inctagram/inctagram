@@ -73,7 +73,7 @@
 
   &:focus-visible {
     color: var(--color-accent-700);
-    outline: 2px solid var(--color-accent-700); 
+    outline: 2px solid var(--color-accent-700);
   }
 
   &:disabled {
@@ -104,9 +104,9 @@
 }
 
 .icon {
-  padding: 0;
-  margin: 0;
   display: flex;
+  margin: 0;
+  padding: 0;
 
   &:hover {
     color: var(--color-accent-100);
@@ -127,12 +127,14 @@
 }
 
 .language {
-  padding: 6px 12px;
-  background-color: var(--color-dark-300);
   display: grid;
   grid-auto-flow: column;
   gap: 10px;
   align-items: center;
+
+  padding: 6px 12px;
+
+  background-color: var(--color-dark-300);
 
   &:hover {
     color: var(--color-accent-100);

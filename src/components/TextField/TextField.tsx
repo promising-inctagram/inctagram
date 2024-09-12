@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ComponentProps, ReactNode, forwardRef, useRef, useState } from 'react'
+import React, { ChangeEvent, ComponentProps, ReactNode, forwardRef, useState } from 'react'
 
 import clsx from 'clsx'
 
@@ -95,7 +95,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           value={value}
           {...rest}
         />
-        {iconEnd && <button className={clsx(s.iconEnd, disabled && s.disabled)}>{iconEnd}</button>}
+        {/*{iconEnd && <button className={clsx(s.iconEnd, disabled && s.disabled)}>{iconEnd}</button>}*/}
       </div>
       {error && <span className={s.errorMessage}>{error}</span>}
     </div>
