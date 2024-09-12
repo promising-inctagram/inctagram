@@ -1,7 +1,6 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
 
 import { EyeOffOutlineIcon, EyeOutlineIcon, SearchOutlineIcon } from '@/components/icons'
-import { Typography } from '@/components/typography'
 import { Button } from '@/components/ui/Button'
 import clsx from 'clsx'
 
@@ -10,7 +9,7 @@ import s from './TextField.module.scss'
 type Props = {
   error?: string
   label?: string
-  type?: 'password' | 'search' | 'text'
+  variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
@@ -62,7 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           {...rest}
         />
         {type === 'password' && (
-          <button
+          <Button
             className={clsx(s.passwordControl, isShowIcon && s.showIcon, className)}
             onClick={() => {
               setIsVisiblePassword(prevState => !prevState)
@@ -70,14 +69,14 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
             type={'button'}
           >
             {isVisiblePassword ? <EyeOutlineIcon /> : <EyeOffOutlineIcon />}
-          </button>
+          </Button>
         )}
       </div>
       {
         error && <span className={s.errorMessage}>{error}</span>
         /*<Typography as={'span'} className={s.errorMessage} variant>
-                          {error}
-                        </Typography>*/
+                                          {error}
+                                        </Typography>*/
       }
     </div>
   )

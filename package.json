@@ -8,8 +8,9 @@
     "build:production": "pnpm build",
     "start": "next start",
     "pretty": "prettier --write src",
+    "format": "prettier --write src",
     "eslint:fix": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern",
-    "lint:fix": "next lint --fix && pnpm run pretty && pnpm run eslint:fix && pnpm run stylelint:fix",
+    "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "stylelint:fix": "stylelint --fix src/**/*.{scss,css} --allow-empty-input",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
