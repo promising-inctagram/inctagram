@@ -1,7 +1,8 @@
-import React, { ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
+import React, { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
 
-import { EyeOutlineIcon, SearchOutlineIcon } from '@/components/icons'
+import { EyeOffOutlineIcon, EyeOutlineIcon, SearchOutlineIcon } from '@/components/icons'
 import { Typography } from '@/components/typography'
+import { Button } from '@/components/ui/Button'
 import clsx from 'clsx'
 
 import s from './TextField.module.scss'
@@ -13,46 +14,31 @@ type Props = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { disabled, error, label, placeholder, type, value, ...rest } = props
+  console.log('render')
+  const {
+    className,
+    disabled,
+    error,
+    label,
+    onChange,
+    onChangeValue,
+    placeholder,
+    type,
+    value,
+    ...rest
+  } = props
 
   const id = useId()
+  const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
+  const [isShowIcon, setIsShowIcon] = useState<boolean>(false)
 
-  const [isFocused, setIsFocused] = useState(false)
-  const [isFocusVisible, setIsFocusVisible] = useState(false)
-
-  const handleFocus = () => {
-    setIsFocused(true)
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e)
+    setIsShowIcon(e.currentTarget.value.length > 0)
   }
-
-  const handleBlur = () => {
-    setIsFocused(false)
-  }
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Tab') {
-      setIsFocusVisible(true)
-    }
-  }
-
-  const handleKeyUp = () => {
-    setIsFocusVisible(false)
-  }
-
-  const inputClassNames = clsx(
-    s.input,
-    error && s.error,
-    disabled && s.disabled,
-    isFocusVisible && s.inputFocusVisible
-  )
-  const iconSearchClassNames = clsx(
-    s.iconSearch,
-    isFocused && s.focusedIconSearch,
-    error && s.focusedIconSearch,
-    disabled && s.disabled
-  )
 
   return (
-    <div className={s.root}>
+    <div className={clsx(s.box, className)}>
       {label && (
         <label className={clsx(s.label, disabled && s.disabled)} htmlFor={id}>
           {label}
@@ -60,37 +46,39 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       )}
       <div className={s.inputContainer}>
         {type === 'search' && (
-          <span className={iconSearchClassNames}>
+          <span className={clsx(s.iconSearch, disabled && s.disabled)}>
             <SearchOutlineIcon />
           </span>
         )}
         <input
-          className={inputClassNames}
+          className={clsx(s.input, error && s.error)}
           disabled={disabled}
           id={id}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
-          onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
+          onChange={onChangeHandler}
           placeholder={placeholder}
           ref={ref}
-          type={type}
+          type={type === 'password' && isVisiblePassword ? 'text' : type}
           value={value}
           {...rest}
         />
         {type === 'password' && (
-          // eslint-disable-next-line react/button-has-type
-          <button className={clsx(s.iconEye, disabled && s.disabled)}>
-            <EyeOutlineIcon />
+          <button
+            className={clsx(s.passwordControl, isShowIcon && s.showIcon, className)}
+            onClick={() => {
+              setIsVisiblePassword(prevState => !prevState)
+            }}
+            type={'button'}
+          >
+            {isVisiblePassword ? <EyeOutlineIcon /> : <EyeOffOutlineIcon />}
           </button>
         )}
       </div>
-      {error && (
+      {
+        error && <span className={s.errorMessage}>{error}</span>
         /*<Typography as={'span'} className={s.errorMessage} variant>
-                  {error}
-                </Typography>*/
-        <span className={s.errorMessage}>{error}</span>
-      )}
+                          {error}
+                        </Typography>*/
+      }
     </div>
   )
 })

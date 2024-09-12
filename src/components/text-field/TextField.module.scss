@@ -1,4 +1,7 @@
-.root {
+.box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   font-size: var(--font-size-s);
   font-weight: var(--font-weight-400);
 }
@@ -9,6 +12,8 @@
 
 .inputContainer {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .iconSearch {
@@ -16,8 +21,9 @@
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
-
   color: var(--color-light-900);
+  display: flex;
+  align-items: center;
 }
 
 .iconSearch svg {
@@ -25,25 +31,16 @@
   height: 20px;
 }
 
-.focusedIconSearch {
+.inputContainer:focus-within .iconSearch {
   color: inherit;
   transition: color 0.3s ease;
 }
 
-.iconEye {
-  cursor: pointer;
-
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-}
 
 .input {
   all: unset;
-
-  box-sizing: border-box;
   width: 100%;
+  box-sizing: border-box;
   height: 36px;
   padding: 6px 12px;
 
@@ -63,12 +60,8 @@
     color: transparent;
   }
 
-  /* &:focus-visible {
-    border: 1px solid var(--color-accent-500);
-  } */
-
   &:focus {
-    border: 1px solid var(--color-light-100);
+    border: 1px solid var(--color-accent-500);
   }
 
   &:hover {
@@ -78,18 +71,38 @@
   &[type='search'] {
     padding-left: 40px;
   }
+
+  &:disabled::placeholder {
+    color: var(--color-dark-100);
+  }
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:hover {
   box-shadow: 0 0 0 30px var(--color-dark-700) inset; /* Ваш цвет фона */
-
   -webkit-text-fill-color: var(--color-light-100); /* Цвет текста */
 }
 
-.inputFocusVisible {
-  border: 1px solid var(--color-accent-500);
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+
+.passwordControl {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  /*display: flex;
+  align-items: center;*/
+  display: none;
+}
+.showIcon{
+  display: inline-block;
 }
 
 .error {
@@ -103,8 +116,4 @@ input:-webkit-autofill:hover {
 .disabled {
   color: var(--color-dark-100);
   fill: var(--color-dark-100);
-
-  &::placeholder {
-    color: var(--color-dark-100);
-  }
 }

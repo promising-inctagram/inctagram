@@ -64,3 +64,9 @@
   color: var(--color-accent-500);
   text-decoration-line: underline;
 }
+
+.error {
+  @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-400));
+
+  color: var(--color-danger-500);
+}
