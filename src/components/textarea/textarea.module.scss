@@ -1,9 +1,9 @@
-.container{
+.container {
   display: flex;
   flex-direction: column;
 }
 
-.textarea{
+.textarea {
   width: 100%;
   padding: 6px 12px 8px;
 
@@ -11,13 +11,12 @@
   font-weight: 400;
   font-style: normal;
   line-height: 24px;
-
   color: var(--color-light-900);
 
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
-  outline:none;
+  outline: none;
 
   &::placeholder {
     color: var(--color-light-900);
@@ -51,6 +50,7 @@
       color: var(--color-dark-100);
     }
   }
+
   &.error {
     border: 1px solid var(--color-danger-500);
 
@@ -60,10 +60,10 @@
   }
 }
 
-.label{
+.label {
   color: var(--color-light-900);
 }
 
-.error{
+.error {
   color: var(--color-danger-500);
 }
