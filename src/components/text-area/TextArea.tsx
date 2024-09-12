@@ -3,17 +3,15 @@ import { ComponentProps, forwardRef } from 'react'
 import { Typography } from '@/components/typography'
 import { clsx } from 'clsx'
 
-import s from './textarea.module.scss'
+import s from './TextArea.module.scss'
 
 type TextAreaProps = {
-  errorMessage?: boolean
+  errorMessage?: string
   label?: string
 } & ComponentProps<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ className, errorMessage, label, ...rest }, ref) => {
-    const showError = !!errorMessage
-
     return (
       <div className={s.container}>
         {label && (
@@ -22,12 +20,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           </Typography>
         )}
         <textarea
-          className={clsx(s.textarea, showError && s.error, className)}
+          className={clsx(s.textarea, errorMessage && s.error, className)}
           ref={ref}
           {...rest}
         />
 
-        {showError && (
+        {errorMessage && (
           <Typography className={s.error} variant={'regular_text_14'}>
             {errorMessage}
           </Typography>
