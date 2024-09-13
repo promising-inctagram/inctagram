@@ -4,13 +4,12 @@ import { clsx } from 'clsx'
 
 import s from './Typography.module.scss'
 
-export type TypographyType<T extends ElementType> = {
+type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
-  children?: ReactNode
-  className?: string
   variant?:
     | 'bold_text_14'
     | 'bold_text_16'
+    | 'error'
     | 'h1'
     | 'h2'
     | 'h3'
@@ -24,11 +23,9 @@ export type TypographyType<T extends ElementType> = {
     | 'small_text'
 } & ComponentPropsWithoutRef<T>
 
-export const Typography = <T extends ElementType>(
-  props: Omit<ComponentPropsWithoutRef<T>, keyof TypographyType<T>> & TypographyType<T>
-) => {
-  const { as: Component = 'p', className, text, variant = 'regular_text_14', ...rest } = props
-  const typographyClasses = clsx(s[variant], className)
+export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
+  const { as: Component = 'p', className, variant = 'regular_text_14', ...rest } = props
+  const cn = clsx(s[variant], className)
 
-  return <Component className={typographyClasses} {...rest} />
+  return <Component className={cn} {...rest} />
 }
