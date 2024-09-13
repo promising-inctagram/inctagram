@@ -26,21 +26,8 @@ type Story = StoryObj<typeof meta>
 
 export const RadioGroup: Story = {
   args: {
+    defaultValue: '2',
     options: mockRadio,
-    value: '2',
-  },
-  render: args => (
-    <Card>
-      <Radio {...args} />
-    </Card>
-  ),
-}
-
-export const RadioGroupDisabled: Story = {
-  args: {
-    disabled: true,
-    options: mockRadio,
-    value: '3',
   },
   render: args => (
     <Card>
