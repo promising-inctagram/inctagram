@@ -9,7 +9,8 @@ export default function Home() {
         <meta content={'width=device-width, initial-scale=1'} name={'viewport'} />
         <link href={'/public/favicon.ico'} rel={'icon'} />
       </Head>
-      <main></main>
+      <main>
+      </main>
     </>
   )
 }
