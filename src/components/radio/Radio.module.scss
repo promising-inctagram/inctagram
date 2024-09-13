@@ -46,11 +46,11 @@ button {
   }
 
   &[data-state='checked'] {
-    border-color: var(--color-dark-900);
+    border-color: var(--color-light-100);
   }
 
   &:hover::after {
-    background-color: var(--color-dark-100);
+    background-color: var(--color-dark-300);
   }
 
   &:active::after {
@@ -58,7 +58,7 @@ button {
   }
 
   &:focus-visible::after {
-    background-color: var(--color-dark-100);
+    background-color: var(--color-dark-500);
   }
 
   &:hover:disabled::after {
@@ -67,7 +67,7 @@ button {
 
   &[data-disabled] {
     cursor: default;
-    border-color: var(--color-dark-900);
+    border-color: var(--color-dark-100);
   }
 }
 
@@ -90,12 +90,12 @@ button {
     width: 10px;
     height: 10px;
 
-    background-color: var(--color-dark-900);
+    background-color: var(--color-light-100);
     border-radius: var(--border-radius-rounded);
   }
 
   &[data-disabled]::after {
-    background-color: var(--color-dark-900);
+    background-color: var(--color-dark-100);
   }
 }
 
