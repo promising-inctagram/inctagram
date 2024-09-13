@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { TextArea } from './textarea'
+import { TextArea } from './TextArea'
 
 const meta = {
   component: TextArea,
@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>
 export const TextAreaDefault: Story = {
   args: {
     disabled: false,
-    error: false,
     label: 'Some label',
     placeholder: 'Text Area',
   },
@@ -29,7 +28,6 @@ export const TextAreaDisabled: Story = {
 
 export const TextAreaError: Story = {
   args: {
-    error: true,
     errorMessage: 'Текст ошибки / подсказка',
     label: 'Some label',
     placeholder: 'Text Area',
