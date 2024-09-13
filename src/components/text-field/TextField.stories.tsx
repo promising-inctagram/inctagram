@@ -14,11 +14,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof TextField>
 
-export const Email: { args: { label: string; placeholder: string; type: string } } = {
+export const Email: Story = {
   args: {
     label: 'Email',
     placeholder: 'Epam@epam.com',
-    type: 'email',
+    variant: 'text',
   },
 }
 
@@ -30,19 +30,18 @@ export const Password: Story = {
   },
 }
 
-//
-// export const Search: Story = {
-//   args: {
-//     placeholder: 'Input search',
-//     type: 'search',
-//   },
-// }
-//
-// export const Error: Story = {
-//   args: {
-//     error: 'Error text',
-//     label: 'Email',
-//     placeholder: 'Epam@epam.com',
-//     type: 'text',
-//   },
-// }
+export const Search: Story = {
+  args: {
+    placeholder: 'Input search',
+    variant: 'search',
+  },
+}
+
+export const Error: Story = {
+  args: {
+    error: 'Error text',
+    label: 'Email',
+    placeholder: 'Epam@epam.com',
+    variant: 'text',
+  },
+}

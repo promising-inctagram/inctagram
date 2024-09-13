@@ -23,28 +23,28 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
     onChangeValue,
     placeholder,
     type,
-    value,
+    variant,
     ...rest
   } = props
 
   const id = useId()
-  const [isVisiblePassword, setIsVisiblePassword] = useState<boolean>(false)
-  const [isShowIcon, setIsShowIcon] = useState<boolean>(false)
+  const [isVisiblePassword, setIsVisiblePassword] = useState(false)
+  const [value, setValue] = useState('')
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
-    setIsShowIcon(e.currentTarget.value.length > 0)
+    setValue(e.currentTarget.value)
   }
 
   return (
-    <div className={clsx(s.box, className)}>
+    <div className={s.box}>
       {label && (
         <label className={clsx(s.label, disabled && s.disabled)} htmlFor={id}>
           {label}
         </label>
       )}
       <div className={s.inputContainer}>
-        {type === 'search' && (
+        {variant === 'search' && (
           <span className={clsx(s.iconSearch, disabled && s.disabled)}>
             <SearchOutlineIcon />
           </span>
@@ -56,13 +56,13 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           onChange={onChangeHandler}
           placeholder={placeholder}
           ref={ref}
-          type={type === 'password' && isVisiblePassword ? 'text' : type}
+          type={variant === 'password' && isVisiblePassword ? 'text' : variant}
           value={value}
           {...rest}
         />
-        {type === 'password' && (
+        {variant === 'password' && (
           <Button
-            className={clsx(s.passwordControl, isShowIcon && s.showIcon, className)}
+            className={clsx(s.passwordControl, !!value && s.showIcon)}
             onClick={() => {
               setIsVisiblePassword(prevState => !prevState)
             }}
@@ -75,8 +75,8 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       {
         error && <span className={s.errorMessage}>{error}</span>
         /*<Typography as={'span'} className={s.errorMessage} variant>
-                                          {error}
-                                        </Typography>*/
+                                                          {error}
+                                                        </Typography>*/
       }
     </div>
   )
