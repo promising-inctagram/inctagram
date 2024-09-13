@@ -8,12 +8,12 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
+import {fn} from "@storybook/test";
 
 
 const preview: Preview = {
   parameters: {
-    actions: { /*argTypesRegex: '^on[A-Z].*'*/onClick: fn(),
-      onHover: fn(), },
+    actions: { onClick: fn(), },
     docs: {
       theme: themes.dark,
     },

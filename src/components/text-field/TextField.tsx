@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import clsx from 'clsx'
 
 import s from './TextField.module.scss'
+import {Typography} from "@/components/typography";
 
 type Props = {
   error?: string
@@ -72,12 +73,11 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           </Button>
         )}
       </div>
-      {
-        error && <span className={s.errorMessage}>{error}</span>
-        /*<Typography as={'span'} className={s.errorMessage} variant>
-                                                          {error}
-                                                        </Typography>*/
-      }
+      {error && (
+        <Typography as={'span'} className={s.errorMessage}>
+          {error}
+        </Typography>
+      )}
     </div>
   )
 })
