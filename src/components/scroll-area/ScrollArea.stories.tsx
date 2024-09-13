@@ -1,24 +1,20 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Card } from '../card'
-import { ScrollArea } from './ScrollArea'
+import { ScrollArea as ScrollAreaComponent } from './ScrollArea'
 
 const meta = {
-  component: ScrollArea,
+  component: ScrollAreaComponent,
   tags: ['autodocs'],
   title: 'Components/ScrollArea',
-} satisfies Meta<typeof ScrollArea>
+} satisfies Meta<typeof ScrollAreaComponent>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ScrollAreaDefault: Story = {
-  args: {},
-  render: args => (
-    <div
-      style={{ backgroundColor: 'transparent', height: '300px', padding: '20px', width: '100%' }}
-    >
-      <ScrollArea {...args}>
+export const ScrollArea: Story = {
+  args: {
+    children: (
+      <div style={{ width: '800px' }}>
         <p>
           Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
           invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
@@ -102,7 +98,13 @@ export const ScrollAreaDefault: Story = {
           dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
           laoreet dolore magna aliquam erat volutpat.{' '}
         </p>
-      </ScrollArea>
-    </div>
-  ),
+      </div>
+    ),
+    style: {
+      boxShadow: '0 2px 5px #4d90e2',
+      height: '400px',
+      padding: '10px',
+      width: '500px',
+    },
+  },
 }
