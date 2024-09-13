@@ -1,11 +1,11 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useId, useState } from 'react'
 
 import { EyeOffOutlineIcon, EyeOutlineIcon, SearchOutlineIcon } from '@/components/icons'
+import { Typography } from '@/components/typography'
 import { Button } from '@/components/ui/Button'
 import clsx from 'clsx'
 
 import s from './TextField.module.scss'
-import {Typography} from "@/components/typography";
 
 type Props = {
   error?: string
@@ -15,18 +15,7 @@ type Props = {
 
 export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   console.log('render')
-  const {
-    className,
-    disabled,
-    error,
-    label,
-    onChange,
-    onChangeValue,
-    placeholder,
-    type,
-    variant,
-    ...rest
-  } = props
+  const { className, disabled, error, label, onChange, placeholder, type, variant, ...rest } = props
 
   const id = useId()
   const [isVisiblePassword, setIsVisiblePassword] = useState(false)
