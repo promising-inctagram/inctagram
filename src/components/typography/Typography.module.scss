@@ -1,5 +1,6 @@
 @mixin typography($fontSize, $lineHeight, $fontWeight) {
   margin: 0;
+  padding: 0;
 
   font-size: $fontSize;
   font-weight: $fontWeight;
@@ -64,7 +65,9 @@
   color: var(--color-accent-500);
   text-decoration-line: underline;
 }
-.error{
+
+.error {
   @include typography(var(--font-size-xs), var(--line-height-s), var(--font-weight-400));
+
   color: var(--color-danger-500);
 }
