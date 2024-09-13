@@ -101,7 +101,8 @@ export const ScrollArea: Story = {
       </div>
     ),
     style: {
-      boxShadow: '0 2px 5px #4d90e2',
+      backgroundColor: '#0d0d0d',
+      color: '#d5dae0',
       height: '400px',
       padding: '10px',
       width: '500px',
