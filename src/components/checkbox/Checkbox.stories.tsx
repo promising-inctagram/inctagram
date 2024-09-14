@@ -26,8 +26,8 @@ export const Default: Story = {
 
     return (
       <div style={containerStyle}>
-        <Checkbox checked={checked1} id={'1'} onChangeChecked={setChecked1} />
-        <Checkbox checked={checked2} id={'2'} onChangeChecked={setChecked2} />
+        <Checkbox checked={checked1} onCheckedChange={(checked: boolean) => setChecked1(checked)} />
+        <Checkbox checked={checked2} onCheckedChange={(checked: boolean) => setChecked2(checked)} />
       </div>
     )
   },
@@ -36,16 +36,16 @@ export const Default: Story = {
 export const WithChildren: Story = {
   render: args => {
     const [checked1, setChecked1] = useState<boolean>(true)
-    const [checked2, setChecked2] = useState<boolean>(false)
+    const [checked2, setChecked2] = useState<'indeterminate' | boolean>(false)
 
     return (
       <div style={containerStyle}>
-        <Checkbox checked={checked1} id={'3'} onChangeChecked={setChecked1}>
-          children 1
-        </Checkbox>
-        <Checkbox checked={checked2} id={'4'} onChangeChecked={setChecked2}>
-          children 2
-        </Checkbox>
+        <Checkbox
+          checked={checked1}
+          label={'children 1'}
+          onCheckedChange={(checked: boolean) => setChecked1(checked)}
+        />
+        <Checkbox checked={checked2} label={'children 2'} onCheckedChange={setChecked2} />
       </div>
     )
   },
@@ -58,12 +58,19 @@ export const Disabled: Story = {
 
     return (
       <div style={containerStyle}>
-        <Checkbox checked={checked1} disabled id={'5'} onChangeChecked={setChecked1}>
-          Disabled 1
-        </Checkbox>
-        <Checkbox checked={checked2} disabled id={'6'} onChangeChecked={setChecked2}>
-          Disabled 2
-        </Checkbox>
+        <Checkbox
+          checked={checked1}
+          disabled
+          label={'disabled 1'}
+          onCheckedChange={(checked: boolean) => setChecked1(checked)}
+        />
+
+        <Checkbox
+          checked={checked2}
+          disabled
+          label={'disabled 1'}
+          onCheckedChange={(checked: boolean) => setChecked2(checked)}
+        />
       </div>
     )
   },

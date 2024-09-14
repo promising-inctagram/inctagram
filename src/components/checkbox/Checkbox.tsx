@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
+import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
 import { CheckmarkOutlineIcon } from '@/components/icons'
 import { Typography } from '@/components/typography'
@@ -7,44 +7,33 @@ import { clsx } from 'clsx'
 
 import styles from './Checkbox.module.scss'
 
-type Props = {
-  checked?: boolean
-  id: number | string
-  onChangeChecked?: (checked: boolean) => void
+type CheckboxProps = {
+  label?: string
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 
 type CheckboxForwardRef = ElementRef<typeof RadixCheckbox.Root>
 
-export const Checkbox = forwardRef<CheckboxForwardRef, Props>(
-  ({ checked, children, disabled, id, onChangeChecked, ...props }: Props, ref) => {
-    const handleChange = (stateChecked: boolean): void => {
-      onChangeChecked?.(stateChecked)
-    }
+export const Checkbox = forwardRef<CheckboxForwardRef, CheckboxProps>((props, ref) => {
+  const { className, label } = props
+  const checkboxId = useId()
 
-    return (
-      <div className={styles.Wrapper}>
-        <RadixCheckbox.Root
-          checked={checked}
-          className={clsx(
-            styles.Root,
-            checked && styles.checked,
-            disabled && !checked && styles.disableUnchecked
-          )}
-          defaultChecked={checked}
-          disabled={disabled}
-          id={id}
-          onCheckedChange={handleChange}
-          ref={ref}
-          {...props}
-        >
-          <RadixCheckbox.Indicator className={styles.Indicator}>
-            {<CheckmarkOutlineIcon className={styles.Icon} />}
-          </RadixCheckbox.Indicator>
-        </RadixCheckbox.Root>
-        <Typography as={'label'} className={styles.Label} htmlFor={id}>
-          {children}
+  return (
+    <div className={styles.Wrapper}>
+      <RadixCheckbox.Root
+        {...props}
+        className={clsx(styles.Root, className)}
+        id={checkboxId}
+        ref={ref}
+      >
+        <RadixCheckbox.Indicator className={styles.Indicator}>
+          <CheckmarkOutlineIcon className={styles.Icon} />
+        </RadixCheckbox.Indicator>
+      </RadixCheckbox.Root>
+      {label && (
+        <Typography as={'label'} className={styles.Label} htmlFor={checkboxId}>
+          {label}
         </Typography>
-      </div>
-    )
-  }
-)
+      )}
+    </div>
+  )
+})
