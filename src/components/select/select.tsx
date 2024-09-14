@@ -46,9 +46,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
         >
           {label && <Typography className={s.label}>{label}</Typography>}
           <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
-            <div className={s.value}>
-              <RadixSelect.Value placeholder={placeHolder} />
-            </div>
+            <RadixSelect.Value placeholder={placeHolder} />
             <RadixSelect.Icon>
               <ArrowIosDownOutlineIcon className={s.icon} />
             </RadixSelect.Icon>
@@ -65,5 +63,3 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
     )
   }
 )
-
-export default RadixSelect

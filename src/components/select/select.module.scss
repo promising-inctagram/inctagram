@@ -5,10 +5,6 @@
   z-index: 101;
   color: var(--color-light-900);
 }
-.value{
-  margin-right: 6px;
-  margin-left: 6px;
-}
 .trigger{
   cursor: pointer;
   display: flex;
@@ -39,6 +35,9 @@
     outline: none;
   }
 }
+.trigger:disabled {
+  opacity: 0.5;
+}
 .content{
   z-index: 101;
 
@@ -67,17 +66,5 @@
   &:hover{
     color: var(--color-accent-500);
     background: var(--color-dark-300);
-  }
-}
-.icon{
-
-}
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }

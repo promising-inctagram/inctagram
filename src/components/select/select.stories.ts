@@ -29,6 +29,7 @@ export const WithDefaultValue: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+    placeHolder: 'choose options...',
     value: '',
   },
 }
