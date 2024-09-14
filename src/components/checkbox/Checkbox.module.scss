@@ -75,7 +75,11 @@
   }
 
   &[data-state='unchecked'] {
-    background-color: var(--color-dark-900) !important;
+    background-color: var(--color-dark-900);
     border-color: var(--color-light-500);
+  }
+  &[data-state='unchecked'][data-disabled] {
+    background-color: var(--color-dark-900) !important;
+    border-color: var(--color-light-900);
   }
 }
