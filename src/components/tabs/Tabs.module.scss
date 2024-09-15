@@ -5,15 +5,19 @@
 
 .trigger {
   all: unset;
+
   cursor: pointer;
+
   width: 100%;
-  white-space: nowrap;
-  text-align: center;
   padding: 6px 25px;
 
   font-weight: var(--font-weight-600);
   color: var(--color-dark-100);
+  text-align: center;
+  white-space: nowrap;
+
   border-bottom: 2px solid var(--color-dark-100);
+
   transition: background-color 0.3s ease;
 
   &[data-state='active'] {
@@ -22,11 +26,11 @@
   }
 
   &:active {
-    background-color: rgba(115, 165, 255, 0.15);
+    background-color: rgb(115 165 255 / 15%);
   }
 
   &:hover {
-    background-color: rgba(35, 78, 153, 0.15);
+    background-color: rgb(35 78 153 / 15%);
   }
 
   &:focus-visible {
@@ -42,6 +46,7 @@
 .highlight {
   color: var(--color-accent-500);
   border-bottom: 2px solid var(--color-accent-500);
+
   &:disabled {
     color: var(--color-accent-900);
     border-bottom: 2px solid var(--color-accent-900);
