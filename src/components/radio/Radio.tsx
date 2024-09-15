@@ -13,7 +13,7 @@ export type Option = {
   value: string
 }
 
-export type RadioProps = {
+type RadioProps = {
   options: Option[]
 } & ComponentPropsWithoutRef<typeof RadixRadio.Root>
 type RadioGroupRef = ElementRef<typeof RadixRadio.Root>

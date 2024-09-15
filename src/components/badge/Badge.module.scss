@@ -1,0 +1,36 @@
+.root {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: fit-content;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px;
+
+  background-color: var(--color-danger-500);
+  border-radius: var(--border-radius-rounded);
+}
+
+.standard {
+  transform: translate(25%, -25%);
+  min-width: 14px;
+  height: 14px;
+}
+
+.dot {
+  transform: translate(10%, -10%);
+  width: 10px;
+  height: 10px;
+}
