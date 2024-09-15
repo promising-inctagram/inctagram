@@ -1,7 +1,9 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useState } from 'react'
 
 import * as RadixTabs from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
+
+import s from './Tabs.module.scss'
 
 export type TabType = {
   disabled?: boolean
@@ -15,13 +17,27 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
 export const Tabs = (props: Props) => {
-  const { className, tabs, ...rest } = props
+  const { tabs, ...rest } = props
+
+  const [isFirstItemHighlighted, setIsFirstItemHighlighted] = useState(true)
+
+  const handleItemClick = (index: number) => {
+    if (index !== 0) {
+      setIsFirstItemHighlighted(false)
+    }
+  }
 
   return (
-    <RadixTabs.Root {...rest}>
-      <RadixTabs.List>
-        {tabs.map(tab => (
-          <RadixTabs.Trigger disabled={tab.disabled} key={tab.value} value={tab.value}>
+    <RadixTabs.Root className={s.root} {...rest}>
+      <RadixTabs.List className={s.list}>
+        {tabs.map((tab, index) => (
+          <RadixTabs.Trigger
+            className={clsx(s.trigger, index === 0 && isFirstItemHighlighted && s.highlight)}
+            disabled={tab.disabled}
+            key={tab.value}
+            onClick={() => handleItemClick(index)}
+            value={tab.value}
+          >
             {tab.title}
           </RadixTabs.Trigger>
         ))}
