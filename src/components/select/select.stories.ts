@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Select } from './select'
+import { OptionsValue } from './select'
+import {FlagRussiaIcon} from "@/components/icons/flags";
 
 const meta = {
   argTypes: {},
@@ -12,23 +14,31 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const mockOptions: OptionsValue[] = [
+  { title: 'Select-box1', value: 'apple' },
+  { title: 'Select-box2', value: 'banana' },
+  { title: 'Select-box3', value: 'English',image:<FlagRussiaIcon/> },
+]
+
 export const Default: Story = {
   args: {
     label: 'Select-box',
+    options: mockOptions,
     placeHolder: 'choose options...',
-    value: '',
   },
 }
 export const WithDefaultValue: Story = {
   args: {
     label: 'Select-box',
+    options: mockOptions,
     placeHolder: 'choose options...',
-    value: 'apple',
+    defaultValue:'apple'
   },
 }
 export const Disabled: Story = {
   args: {
     disabled: true,
+    options: mockOptions,
     placeHolder: 'choose options...',
     value: '',
   },

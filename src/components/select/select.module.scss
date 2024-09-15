@@ -79,6 +79,12 @@
     background: var(--color-dark-300);
   }
 }
+.selectItemFlex{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  align-items: center;
+}
 
 @keyframes fade-in {
   from {
