@@ -6,27 +6,34 @@ import { clsx } from 'clsx'
 import s from './Avatar.module.scss'
 
 type AvatarProps = {
-  avatarOwner?: string
   size?: number
   src?: string
+  userName?: string
 } & ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
 
-export const Avatar = (props: AvatarProps) => {
-  const { avatarOwner, className, size, ...rest } = props
+export const Avatar = ({ className, size = 204, src, userName, ...rest }: AvatarProps) => {
   const classNames = {
-    fallback: clsx(s.fallback),
-    image: clsx(s.avatar_img),
+    fallback: s.fallback,
+    image: s.avatar_img,
     root: clsx(s.root, className),
   }
+  const fallbackTitle = userName?.[0].toUpperCase()
 
   return (
     <AvatarPrimitive.Root className={classNames.root} {...rest}>
-      <AvatarPrimitive.Image alt={'avatar'} className={classNames.image} src={src} />
-      <AvatarPrimitive.Fallback className={classNames.fallback}>
-        <Typography variant={'subtitle2'}>{fallbackTitle}</Typography>
+      <AvatarPrimitive.Image
+        alt={'avatar'}
+        className={classNames.image}
+        height={size}
+        src={src}
+        width={size}
+      />
+      <AvatarPrimitive.Fallback
+        className={classNames.fallback}
+        style={{ height: `${size}px`, width: `${size}px` }}
+      >
+        {fallbackTitle}
       </AvatarPrimitive.Fallback>
     </AvatarPrimitive.Root>
   )
 }
-
-export default Avatar
