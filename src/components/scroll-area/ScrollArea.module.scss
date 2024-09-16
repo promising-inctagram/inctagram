@@ -1,0 +1,42 @@
+.root {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.viewport {
+  width: 100%;
+  height: 100%;
+}
+
+.scrollbar {
+  touch-action: none;
+  user-select: none;
+
+  display: flex;
+
+  background: var(--color-dark-300);
+  border-radius: 2px;
+
+  transition: background 160ms ease-out;
+
+  &[data-orientation='vertical'] {
+    width: 4px;
+  }
+
+  &[data-orientation='horizontal'] {
+    flex-direction: column;
+    height: 4px;
+  }
+}
+
+.thumb {
+  position: relative;
+  flex: 1;
+  background: var(--color-dark-100);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--color-light-900);
+  }
+}

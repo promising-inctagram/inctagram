@@ -7,6 +7,7 @@ import s from './Typography.module.scss'
 type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   variant?:
+    | 'badge'
     | 'bold_text_14'
     | 'bold_text_16'
     | 'error'
