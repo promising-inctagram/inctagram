@@ -19,23 +19,19 @@ type Props = {
 export const Tabs = (props: Props) => {
   const { tabs, ...rest } = props
 
-  const [isFirstItemHighlighted, setIsFirstItemHighlighted] = useState(true)
-
-  const handleItemClick = (index: number) => {
-    if (index !== 0) {
-      setIsFirstItemHighlighted(false)
-    }
+  const [activeTab, setActiveTab] = useState('tab1')
+  const handleTabChange = (value: string) => {
+    setActiveTab(value)
   }
 
   return (
-    <RadixTabs.Root className={s.root} {...rest}>
-      <RadixTabs.List className={s.list}>
+    <RadixTabs.Root className={s.root} onValueChange={handleTabChange} value={activeTab} {...rest}>
+      <RadixTabs.List className={s.list} loop>
         {tabs.map((tab, index) => (
           <RadixTabs.Trigger
-            className={clsx(s.trigger, index === 0 && isFirstItemHighlighted && s.highlight)}
+            className={clsx(s.trigger, index === 0 && activeTab === 'tab1' && s.highlight)}
             disabled={tab.disabled}
             key={tab.value}
-            onClick={() => handleItemClick(index)}
             value={tab.value}
           >
             {tab.title}
