@@ -23,6 +23,7 @@ export const TabsDefault: Story = {
     ],
   },
 }
+
 export const Disabled: Story = {
   args: {
     tabs: [

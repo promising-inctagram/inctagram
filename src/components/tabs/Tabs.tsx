@@ -8,7 +8,6 @@ import s from './Tabs.module.scss'
 export type TabType = {
   disabled?: boolean
   title: string
-  /** A unique value that associates the trigger with a content. */
   value: string
 }
 
@@ -16,10 +15,8 @@ type Props = {
   tabs: TabType[]
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
-export const Tabs = (props: Props) => {
-  const { tabs, ...rest } = props
-
-  const [activeTab, setActiveTab] = useState('tab1')
+export const Tabs = ({ tabs, ...rest }: Props) => {
+  const [activeTab, setActiveTab] = useState(tabs[0].value || '')
   const handleTabChange = (value: string) => {
     setActiveTab(value)
   }
@@ -29,7 +26,7 @@ export const Tabs = (props: Props) => {
       <RadixTabs.List className={s.list} loop>
         {tabs.map((tab, index) => (
           <RadixTabs.Trigger
-            className={clsx(s.trigger, index === 0 && activeTab === 'tab1' && s.highlight)}
+            className={clsx(s.trigger, index === 0 && activeTab === tab.value && s.highlight)}
             disabled={tab.disabled}
             key={tab.value}
             value={tab.value}
