@@ -22,7 +22,7 @@ export const Tabs = ({ tabs, ...rest }: Props) => {
   }
 
   return (
-    <RadixTabs.Root className={s.root} onValueChange={handleTabChange} value={activeTab} {...rest}>
+    <RadixTabs.Root onValueChange={handleTabChange} value={activeTab} {...rest}>
       <RadixTabs.List className={s.list} loop>
         {tabs.map((tab, index) => (
           <RadixTabs.Trigger
