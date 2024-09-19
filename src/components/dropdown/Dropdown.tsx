@@ -15,6 +15,8 @@ const Trigger = forwardRef<TriggerRef, TriggerProps>(({ ...rest }, ref) => {
   return <DropdownMenu.Trigger className={clsx(s.trigger)} ref={ref} {...rest} />
 })
 
+Trigger.displayName = 'DropdownMenu.Trigger'
+
 type ContentRef = ElementRef<typeof DropdownMenu.Content>
 type ContentProps = {
   align?: 'center' | 'end' | 'start'
@@ -28,11 +30,15 @@ const Content = forwardRef<ContentRef, ContentProps>(({ align = 'start', ...rest
   )
 })
 
+Content.displayName = 'DropdownMenu.Content'
+
 type ItemRef = ElementRef<typeof DropdownMenu.Item>
 type ItemProps = ComponentPropsWithoutRef<typeof DropdownMenu.Item>
 
 const Item = forwardRef<ItemRef, ItemProps>(({ ...rest }, ref) => {
   return <DropdownMenu.Item asChild className={clsx(s.itemIcon)} ref={ref} {...rest} />
 })
+
+Item.displayName = 'DropdownMenu.Item'
 
 export { Content, Item, Root, Trigger }
