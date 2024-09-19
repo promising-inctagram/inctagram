@@ -1,0 +1,141 @@
+.root {
+  width: 100%;
+  max-width: 300px;
+  padding: 16px 24px;
+
+  background-color: var(--color-dark-500);
+  border-radius: var(--border-radius-xs);
+}
+
+.months {
+  position: relative;
+  width: 100%;
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.month {
+  width: 100%;
+}
+
+.monthCaption {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  width: 100%;
+  height: 36px;
+  margin-bottom: 12px;
+  padding-left: 8px;
+}
+
+.captionLabel {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.PreviousMonthButton,
+.nextMonthButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: var(--color-dark-100);
+  border-radius: var(--border-radius-rounded);
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-dark-300);
+  }
+
+  &:focus {
+    border-radius: var(--border-radius-rounded);
+    outline: 2px solid var(--color-accent-300);
+  }
+}
+
+.monthGrid {
+  border-collapse: collapse;
+
+  width: 100%;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-400);
+  line-height: var(--line-height-m);
+}
+
+.weekday {
+  width: 36px;
+  height: 40px;
+  font-weight: var(--font-weight-400);
+  color: var(--color-dark-100);
+}
+
+.day {
+  width: 36px;
+  height: 36px;
+  color: var(--color-light-100);
+  text-align: center;
+}
+
+.dayButton {
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-accent-700);
+    border-radius: var(--border-radius-rounded);
+  }
+
+  &:focus {
+    border-radius: var(--border-radius-rounded);
+    outline: 2px solid var(--color-accent-300);
+  }
+}
+
+.focused {
+  border-radius: var(--border-radius-rounded);
+  outline: 2px solid var(--color-accent-00);
+}
+
+.today {
+  font-weight: var(--font-weight-700);
+  color: var(--color-accent-500);
+}
+
+.weekend {
+  color: var(--color-danger-500);
+}
+
+.outside {
+  color: var(--color-light-900);
+}
+
+.selected {
+  background-color: var(--color-accent-900);
+  border-radius: var(--border-radius-rounded);
+}
+
+.rangeEnd {
+  border-radius: 0 50% 50% 0;
+}
+
+.rangeStart {
+  border-radius: 50% 0 0 50%;
+}
+
+.rangeMiddle {
+  border-radius: 0;
+}
