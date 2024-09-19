@@ -14,23 +14,22 @@ type Props = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { className, disabled, error, label, onChange, placeholder, type, variant, ...rest } = props
+  const { className, disabled, error, label, placeholder, type, variant, ...rest } = props
 
   const id = useId()
   const [isVisiblePassword, setIsVisiblePassword] = useState(false)
   const [value, setValue] = useState('')
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e)
     setValue(e.currentTarget.value)
   }
 
   return (
     <div className={s.box}>
       {label && (
-        <label className={clsx(s.label, disabled && s.disabled)} htmlFor={id}>
+        <Typography as={'label'} className={clsx(s.label, disabled && s.disabled)} htmlFor={id}>
           {label}
-        </label>
+        </Typography>
       )}
       <div className={s.inputContainer}>
         {variant === 'search' && (
@@ -39,10 +38,10 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           </span>
         )}
         <input
-          className={clsx(s.input, error && s.error)}
+          className={clsx(s.input, error && s.error, className)}
           disabled={disabled}
           id={id}
-          onChange={onChangeHandler}
+          // onChange={onChangeHandler}
           placeholder={placeholder}
           ref={ref}
           type={variant === 'password' && isVisiblePassword ? 'text' : variant}

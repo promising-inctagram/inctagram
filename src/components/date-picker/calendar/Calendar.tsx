@@ -1,15 +1,8 @@
-import { useState } from 'react'
-import {
-  DateRange,
-  DayFlag,
-  DayPicker,
-  type DayPickerProps,
-  SelectionState,
-  UI,
-} from 'react-day-picker'
+import { DayFlag, DayPicker, type DayPickerProps, SelectionState, UI } from 'react-day-picker'
 
 import { ArrowIosBackIcon, ArrowIosForwardIcon } from '@/components/icons'
-import { enUS, ru } from 'date-fns/locale'
+import clsx from 'clsx'
+import { enUS } from 'date-fns/locale'
 
 import s from './Calendar.module.scss'
 
@@ -24,8 +17,9 @@ export const Calendar = ({
   fixedWeeks = true,
   locale = enUS,
   weekStartsOn = WeekDays.Monday,
+  ...rest
 }: DayPickerProps) => {
-  const [selected, setSelected] = useState<DateRange>()
+  // const [selected, setSelected] = useState<DateRange>()
 
   return (
     <DayPicker
@@ -34,11 +28,14 @@ export const Calendar = ({
         [DayFlag.focused]: s.focused,
         [DayFlag.outside]: s.outside,
         [DayFlag.today]: s.today,
+
         [SelectionState.range_end]: s.rangeEnd,
         [SelectionState.range_middle]: s.rangeMiddle,
         [SelectionState.range_start]: s.rangeStart,
         [SelectionState.selected]: s.selected,
+
         [UI.CaptionLabel]: s.captionLabel,
+        [UI.Chevron]: s.icon,
         [UI.Day]: s.day,
         [UI.DayButton]: s.dayButton,
         [UI.Month]: s.month,
@@ -46,7 +43,6 @@ export const Calendar = ({
         [UI.MonthGrid]: s.monthGrid,
         [UI.Months]: s.months,
         [UI.Nav]: s.nav,
-
         [UI.NextMonthButton]: s.nextMonthButton,
         [UI.PreviousMonthButton]: s.PreviousMonthButton,
         [UI.Root]: s.root,
@@ -63,8 +59,8 @@ export const Calendar = ({
         },
       }}
       fixedWeeks={fixedWeeks}
-      locale={ru}
-      mode={'range'}
+      locale={locale}
+      // mode={'range'}
       modifiers={{
         saturday: { dayOfWeek: [6] },
         sunday: { dayOfWeek: [0] },
@@ -73,9 +69,10 @@ export const Calendar = ({
         saturday: s.weekend,
         sunday: s.weekend,
       }}
-      onSelect={setSelected}
-      selected={selected}
+      // onSelect={setSelected}
+      // selected={selected}
       weekStartsOn={weekStartsOn}
+      {...rest}
     />
   )
 }

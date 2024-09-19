@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+}
+
+.inputContainer {
+  height: 36px;
+  position: relative;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 18px;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
