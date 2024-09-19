@@ -3,9 +3,6 @@ import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   component: Tabs,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   title: 'components/Tabs',
 } satisfies Meta<typeof Tabs>
