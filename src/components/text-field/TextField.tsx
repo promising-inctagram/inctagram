@@ -7,13 +7,13 @@ import clsx from 'clsx'
 
 import s from './TextField.module.scss'
 
-type Props = {
+export type TextFieldProps = {
   error?: string
   label?: string
   variant?: 'password' | 'search' | 'text'
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
+export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
   const { className, disabled, error, label, onChange, placeholder, type, variant, ...rest } = props
 
   const id = useId()
