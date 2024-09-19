@@ -9,6 +9,7 @@ import {
 } from 'react-day-picker'
 
 import { ArrowIosBackIcon, ArrowIosForwardIcon } from '@/components/icons'
+import { enUS, ru } from 'date-fns/locale'
 
 import s from './Calendar.module.scss'
 
@@ -21,6 +22,7 @@ export const Calendar = ({
   className,
   classNames,
   fixedWeeks = true,
+  locale = enUS,
   weekStartsOn = WeekDays.Monday,
 }: DayPickerProps) => {
   const [selected, setSelected] = useState<DateRange>()
@@ -61,6 +63,7 @@ export const Calendar = ({
         },
       }}
       fixedWeeks={fixedWeeks}
+      locale={ru}
       mode={'range'}
       modifiers={{
         saturday: { dayOfWeek: [6] },

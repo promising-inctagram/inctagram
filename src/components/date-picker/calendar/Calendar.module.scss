@@ -34,6 +34,8 @@
   height: 36px;
   margin-bottom: 12px;
   padding-left: 8px;
+
+  text-transform: capitalize;
 }
 
 .captionLabel {
@@ -80,6 +82,7 @@
   height: 40px;
   font-weight: var(--font-weight-400);
   color: var(--color-dark-100);
+  text-transform: capitalize;
 }
 
 .day {
