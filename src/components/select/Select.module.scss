@@ -1,5 +1,6 @@
 .container {
-  width: 100%;
+  // width: 100%; //оч мешает
+  display: flex; //если не добавить то контейнер меньше содержимого
 }
 
 .label {
@@ -9,7 +10,6 @@
 
 .trigger {
   cursor: pointer;
-
   display: flex;
   flex-direction: row;
   align-items: center;

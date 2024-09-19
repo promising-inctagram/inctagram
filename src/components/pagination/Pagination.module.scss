@@ -1,5 +1,62 @@
 .wrapper {
-    width: 535px;
-    height: 24px;
-    border: 1px solid white;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 24px;
+}
+
+.elemPage {
+  font-size: var(--font-size-s);
+  border: 2px solid transparent;
+  border-radius: 2px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-left: 12px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus-visible {
+    border: 2px solid var(--color-accent-700);
+  }
+}
+
+.activePage {
+  background-color: var(--color-light-100);
+  color: var(--color-dark-900);
+  &:hover {
+    background-color: var(--color-light-100);
+  }
+}
+
+.container {
+  display: flex;
+}
+
+.select {
+  width: 50px !important;
+  height: 24px;
+  font-size: var(--font-size-s);
+  padding: 0 !important;
+  padding-left: 6px !important;
+}
+
+.icon {
+  margin-top: 12px;
+  margin-left: 12px;
+  width: 24px;
+  height: 12px;
+}
+
+.iconArrow {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
