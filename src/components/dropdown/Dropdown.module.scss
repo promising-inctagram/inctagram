@@ -1,6 +1,5 @@
 .trigger {
   cursor: pointer;
-  display: flex;
 
   &[data-state='open'] {
     color: var(--color-accent-500);
@@ -13,19 +12,34 @@
   border-radius: 2px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px;
 
   transform-origin: var(--radix-dropdown-menu-content-transform-origin);
   animation: scale-in 0.5s ease-out;
 }
 
-.itemIcon {
+.item {
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 12px;
-  outline: none;
+  padding: 12px;
+
+  &:active {
+    background-color: rgb(115 165 255 / 15%);
+  }
+
+  &:hover {
+    background-color: rgb(35 78 153 / 15%);
+  }
+
+  &:disabled {
+    color: var(--color-dark-300);
+    border-bottom: 2px solid var(--color-dark-300);
+  }
+  &:focus-visible {
+    outline: none;
+    color: inherit;
+  }
 }
 
 @keyframes scale-in {
