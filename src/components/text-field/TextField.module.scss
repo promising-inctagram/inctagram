@@ -77,10 +77,6 @@
 
   &:disabled {
     pointer-events: none;
-
-    &:focus {
-      outline: none;
-    }
   }
 
   &.search {
@@ -140,5 +136,6 @@
 }
 
 .disabled {
+  cursor: default;
   color: var(--color-dark-100);
 }

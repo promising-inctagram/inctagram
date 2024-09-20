@@ -90,7 +90,13 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
         />
         {isPassword && !!inputValue && (
           <Button
-            className={clsx(s.passwordControl, error && s.error, s.showIcon)}
+            className={clsx(
+              s.passwordControl,
+              error && s.error,
+              disabled && s.disabled,
+              s.showIcon
+            )}
+            disabled={disabled}
             onClick={showPasswordHandler}
             variant={'icon'}
           >
@@ -102,7 +108,12 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           </Button>
         )}
         {isSearch && !!inputValue && (
-          <Button className={s.clearIcon} onClick={clearInputHandler} variant={'icon'}>
+          <Button
+            className={clsx(s.clearIcon, disabled && s.disabled)}
+            disabled={disabled}
+            onClick={clearInputHandler}
+            variant={'icon'}
+          >
             <CloseOutlineIcon className={s.icon} />
           </Button>
         )}

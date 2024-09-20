@@ -1,77 +1,60 @@
-import { useState } from 'react'
-
-import { Checkbox } from '@/components/checkbox/Checkbox'
 import { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof Checkbox> = {
-  args: { disabled: false },
-  component: Checkbox,
+import { CheckBox } from './Checkbox'
+
+const meta: Meta<typeof CheckBox> = {
+  argTypes: {
+    checked: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    error: {
+      control: {
+        type: 'text',
+      },
+    },
+    isRequired: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
+  component: CheckBox,
+  tags: ['autodocs'],
+  title: 'components/CheckBox',
 }
 
 export default meta
-type Story = StoryObj<typeof Checkbox>
+type Story = StoryObj<typeof CheckBox>
 
-const containerStyle = {
-  alignItems: 'center',
-  display: 'flex',
-  gap: '20px',
-  height: '100vh',
-  justifyContent: 'center',
+export const DefaultStory: Story = {
+  args: {
+    isRequired: true,
+    label: 'CheckBox label',
+  },
+  name: 'CheckBox',
 }
 
-export const Default: Story = {
-  render: args => {
-    const [checked1, setChecked1] = useState<boolean>(true)
-    const [checked2, setChecked2] = useState<boolean>(false)
-
-    return (
-      <div style={containerStyle}>
-        <Checkbox checked={checked1} onCheckedChange={(checked: boolean) => setChecked1(checked)} />
-        <Checkbox checked={checked2} onCheckedChange={(checked: boolean) => setChecked2(checked)} />
-      </div>
-    )
+export const DisabledStory: Story = {
+  args: {
+    checked: true,
+    disabled: true,
+    label: 'CheckBox label',
   },
+  name: 'Disabled CheckBox',
 }
 
-export const WithChildren: Story = {
-  render: args => {
-    const [checked1, setChecked1] = useState<boolean>(true)
-    const [checked2, setChecked2] = useState<'indeterminate' | boolean>(false)
-
-    return (
-      <div style={containerStyle}>
-        <Checkbox
-          checked={checked1}
-          label={'children 1'}
-          onCheckedChange={(checked: boolean) => setChecked1(checked)}
-        />
-        <Checkbox checked={checked2} label={'children 2'} onCheckedChange={setChecked2} />
-      </div>
-    )
+export const ErrorStory: Story = {
+  args: {
+    checked: true,
+    error: 'Some error occurred',
+    label: 'CheckBox label',
   },
-}
-
-export const Disabled: Story = {
-  render: args => {
-    const [checked1, setChecked1] = useState<boolean>(true)
-    const [checked2, setChecked2] = useState<boolean>(false)
-
-    return (
-      <div style={containerStyle}>
-        <Checkbox
-          checked={checked1}
-          disabled
-          label={'disabled 1'}
-          onCheckedChange={(checked: boolean) => setChecked1(checked)}
-        />
-
-        <Checkbox
-          checked={checked2}
-          disabled
-          label={'disabled 1'}
-          onCheckedChange={(checked: boolean) => setChecked2(checked)}
-        />
-      </div>
-    )
-  },
+  name: 'CheckBox with Error',
 }

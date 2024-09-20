@@ -5,33 +5,47 @@ import { Typography } from '@/components/typography'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
 
-import styles from './Checkbox.module.scss'
+import s from './Checkbox.module.scss'
 
 type CheckboxProps = {
+  error?: string
+  isRequired?: boolean
   label?: string
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 
-type CheckboxForwardRef = ElementRef<typeof RadixCheckbox.Root>
+type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>
 
-export const Checkbox = forwardRef<CheckboxForwardRef, CheckboxProps>((props, ref) => {
-  const { className, label } = props
+export const CheckBox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
+  const { className, disabled, error, isRequired, label, ...rest } = props
   const checkboxId = useId()
 
   return (
-    <div className={styles.Wrapper}>
+    <div>
       <RadixCheckbox.Root
-        {...props}
-        className={clsx(styles.Root, className)}
+        className={clsx(s.root, error && s.error, className)}
+        disabled={disabled}
         id={checkboxId}
         ref={ref}
+        {...rest}
       >
-        <RadixCheckbox.Indicator className={styles.Indicator}>
-          <CheckmarkOutlineIcon className={styles.Icon} />
+        <RadixCheckbox.Indicator className={clsx(s.indicator, disabled && s.disabled)}>
+          <CheckmarkOutlineIcon className={clsx(s.icon, disabled && s.disabledIcon)} />
         </RadixCheckbox.Indicator>
+        {label && (
+          <Typography
+            as={'label'}
+            className={clsx(s.label, disabled && s.disabled)}
+            htmlFor={checkboxId}
+            isRequired={isRequired}
+            variant={'regular_text_14'}
+          >
+            {label}
+          </Typography>
+        )}
       </RadixCheckbox.Root>
-      {label && (
-        <Typography as={'label'} className={styles.Label} htmlFor={checkboxId}>
-          {label}
+      {error && (
+        <Typography as={'span'} variant={'error'}>
+          {error}
         </Typography>
       )}
     </div>
