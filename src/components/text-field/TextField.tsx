@@ -3,6 +3,7 @@ import {
   ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
+  useEffect,
   useId,
   useState,
 } from 'react'
@@ -61,6 +62,10 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   const showPasswordHandler = () => {
     setShowPassword(prev => !prev)
   }
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [value])
 
   return (
     <div className={s.container}>

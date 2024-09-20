@@ -97,6 +97,7 @@ button {
 }
 
 .disabled {
+  cursor: default;
   color: var(--color-light-900);
 }
 

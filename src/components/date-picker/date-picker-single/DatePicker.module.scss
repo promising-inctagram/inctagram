@@ -24,6 +24,11 @@
   }
 }
 
+.disabled {
+  cursor: default;
+  color: var(--color-light-900);
+}
+
 .error {
   color: var(--color-danger-500);
 }

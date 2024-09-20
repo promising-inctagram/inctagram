@@ -1,4 +1,4 @@
-import { Locale, PropsSingle } from 'react-day-picker'
+import { DateRange, Locale, PropsRange } from 'react-day-picker'
 
 import { Calendar } from '@/components/date-picker/calendar'
 import { useDatePicker } from '@/components/date-picker/hooks'
@@ -7,7 +7,7 @@ import { Typography } from '@/components/typography'
 import { Content, Portal, Root, Trigger } from '@radix-ui/react-popover'
 import clsx from 'clsx'
 
-import s from './DatePicker.module.scss'
+import s from '../date-picker-single/DatePicker.module.scss'
 
 type DatePickerProps = {
   disabled?: boolean
@@ -15,23 +15,23 @@ type DatePickerProps = {
   isRequired?: boolean
   label?: string
   locale?: Locale
-  onSelectSingleDate: (date: Date | undefined) => void
-  selected?: Date | undefined
-} & Omit<PropsSingle, 'mode'>
+  onSelectRangeDate: (date: DateRange | undefined) => void
+  selected?: DateRange | undefined
+} & Omit<PropsRange, 'mode'>
 
-export const DatePicker = ({
+export const DatePickerRange = ({
   disabled,
   error,
   isRequired,
   label,
-  onSelectSingleDate,
+  onSelectRangeDate,
   selected,
   ...rest
 }: DatePickerProps) => {
   const {
-    dayPickerSingleHandler,
+    dayPickerRangeHandler,
     id,
-    inputSingleDateChangeHandler,
+    inputRangeDateChangeHandler,
     inputValue,
     isOpen,
     month,
@@ -41,7 +41,7 @@ export const DatePicker = ({
   } = useDatePicker({
     disabled,
     error,
-    onSelectSingleDate,
+    onSelectRangeDate,
   })
 
   return (
@@ -61,7 +61,7 @@ export const DatePicker = ({
           className={clsx(error && s.error)}
           disabled={disabled}
           error={error}
-          onChange={inputSingleDateChangeHandler}
+          onChange={inputRangeDateChangeHandler}
           value={inputValue}
         />
         <Root onOpenChange={setIsOpen} open={isOpen}>
@@ -71,10 +71,10 @@ export const DatePicker = ({
           <Portal>
             <Content align={'start'} avoidCollisions sideOffset={-16}>
               <Calendar
-                mode={'single'}
+                mode={'range'}
                 month={month}
                 onMonthChange={setMonth}
-                onSelect={dayPickerSingleHandler}
+                onSelect={dayPickerRangeHandler}
                 selected={selected}
                 {...rest}
               />
