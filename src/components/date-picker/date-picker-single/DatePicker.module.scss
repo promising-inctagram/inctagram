@@ -3,22 +3,24 @@
 }
 
 .inputContainer {
-  height: 36px;
   position: relative;
+  height: 36px;
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  cursor: pointer;
+
   position: absolute;
   top: 18px;
   right: 12px;
   transform: translateY(-50%);
-  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
 
   &:focus {
-    outline: 2px solid var(--color-accent-300);
     border-radius: var(--border-radius-xs);
+    outline: 2px solid var(--color-accent-300);
   }
 }
 
