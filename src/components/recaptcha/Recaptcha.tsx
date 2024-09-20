@@ -1,4 +1,4 @@
-import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
+import { ReCAPTCHAProps } from 'react-google-recaptcha'
 
 import clsx from 'clsx'
 
@@ -6,13 +6,12 @@ import s from './Recaptcha.module.scss'
 
 type Props = {
   error: string
-  onChange: (token: null | string) => void
-} & ReCAPTCHAProps
+} & Omit<ReCAPTCHAProps, 'sitekey'>
 
-export const Recaptcha = ({ className, error, hl, onChange, sitekey, theme }: Props) => {
+export const Recaptcha = ({ children, className, error }: Props) => {
   return (
     <div className={clsx(error && s.rootError, className)}>
-      <ReCAPTCHA hl={hl} onChange={onChange} sitekey={sitekey} theme={theme} />
+      {children}
       {error && <div className={s.error}>{error}</div>}
     </div>
   )

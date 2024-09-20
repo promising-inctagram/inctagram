@@ -1,10 +1,8 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Recaptcha } from '@/components/recaptcha/Recaptcha'
 import { Meta, StoryObj } from '@storybook/react'
-import clsx from 'clsx'
-
-import s from '@/components/recaptcha/Recaptcha.module.scss'
 
 const meta = {
   component: Recaptcha,
@@ -17,9 +15,13 @@ type Story = StoryObj<typeof Recaptcha>
 
 export const Default: Story = {
   args: {
-    hl: 'en',
-    sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string,
-    theme: 'dark',
+    children: (
+      <ReCAPTCHA
+        hl={'en'}
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string}
+        theme={'dark'}
+      />
+    ),
   },
 }
 export const Error: Story = {
@@ -49,13 +51,9 @@ export const Error: Story = {
         <button style={{ cursor: 'pointer', marginBottom: '20px' }} type={'submit'}>
           Нажми на меня до галочки
         </button>
-        <Recaptcha
-          error={error}
-          hl={'en'}
-          onChange={handleTokenChange}
-          sitekey={sitekey}
-          theme={'dark'}
-        />
+        <Recaptcha error={error}>
+          <ReCAPTCHA hl={'en'} onChange={handleTokenChange} sitekey={sitekey} theme={'dark'} />
+        </Recaptcha>
       </form>
     )
   },
