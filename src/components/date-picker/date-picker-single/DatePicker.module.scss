@@ -15,4 +15,13 @@
   right: 12px;
   transform: translateY(-50%);
   cursor: pointer;
+
+  &:focus {
+    outline: 2px solid var(--color-accent-300);
+    border-radius: var(--border-radius-xs);
+  }
+}
+
+.error {
+  color: var(--color-danger-500);
 }

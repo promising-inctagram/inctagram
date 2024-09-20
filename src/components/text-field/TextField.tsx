@@ -45,7 +45,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
           placeholder={placeholder}
           ref={ref}
           type={variant === 'password' && isVisiblePassword ? 'text' : variant}
-          value={value}
+          // value={value}
           {...rest}
         />
         {variant === 'password' && (
@@ -61,7 +61,7 @@ export const TextField = forwardRef<HTMLInputElement, Props>((props, ref) => {
         )}
       </div>
       {error && (
-        <Typography as={'span'} className={s.errorMessage}>
+        <Typography as={'span'} variant={'error'}>
           {error}
         </Typography>
       )}

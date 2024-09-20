@@ -4,9 +4,6 @@ import { Meta, StoryObj } from '@storybook/react'
 const meta = {
   args: { disabled: false },
   component: TextField,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   title: 'components/TextField',
 } satisfies Meta<typeof TextField>

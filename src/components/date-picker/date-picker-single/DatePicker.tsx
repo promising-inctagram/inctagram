@@ -1,10 +1,11 @@
-import { ChangeEvent, useEffect, useId, useState } from 'react'
+import { ChangeEvent, useId, useState } from 'react'
 import { PropsSingle } from 'react-day-picker'
 
 import { CalendarIcon, CalendarOutlineIcon } from '@/components/icons'
 import { TextField } from '@/components/text-field'
 import { Typography } from '@/components/typography'
 import { Content, Portal, Root, Trigger } from '@radix-ui/react-popover'
+import clsx from 'clsx'
 import { format, isValid, parse } from 'date-fns'
 
 import s from './DatePicker.module.scss'
@@ -25,13 +26,17 @@ export const DatePicker = ({ error, isRequired, label, ...rest }: DatePickerProp
   const [inputValue, setInputValue] = useState('')
 
   const triggerIcon = isOpen ? (
-    <CalendarIcon className={s.icon} />
+    <CalendarIcon className={clsx(s.icon, error && s.error)} />
   ) : (
-    <CalendarOutlineIcon className={s.icon} />
+    <CalendarOutlineIcon className={clsx(s.icon, error && s.error)} />
   )
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
+    const newValue = e.target.value
+
+    const formattedValue = formatInputValue(newValue)
+
+    setInputValue(formattedValue)
 
     const parsedDate = parse(e.target.value, 'dd/MM/yyyy', new Date())
 
@@ -66,9 +71,16 @@ export const DatePicker = ({ error, isRequired, label, ...rest }: DatePickerProp
         {label}
       </Typography>
       <div className={s.inputContainer}>
-        <TextField autoComplete={'off'} onChange={inputChangeHandler} value={inputValue} />
+        <TextField
+          autoComplete={'off'}
+          error={error}
+          onChange={inputChangeHandler}
+          value={inputValue}
+        />
         <Root onOpenChange={setIsOpen} open={isOpen}>
-          <Trigger id={id}>{triggerIcon}</Trigger>
+          <Trigger id={id} title={'open calendar'}>
+            {triggerIcon}
+          </Trigger>
           <Portal>
             <Content align={'start'} avoidCollisions sideOffset={-16}>
               <Calendar
@@ -83,11 +95,30 @@ export const DatePicker = ({ error, isRequired, label, ...rest }: DatePickerProp
           </Portal>
         </Root>
       </div>
-      {error && (
-        <Typography as={'span'} variant={'error'}>
-          {error}
-        </Typography>
-      )}
     </div>
   )
+}
+
+// todo: подумать куда вынести утилиту для форматирования даты
+function formatInputValue(value: string) {
+  const digitsOnly = value.replace(/\D/g, '')
+  const parts = digitsOnly.match(/(\d{0,2})(\d{0,2})(\d{0,4})/)
+
+  if (!parts) {
+    return ''
+  }
+
+  let formattedValue = ''
+
+  if (parts[1]) {
+    formattedValue += parts[1]
+  }
+  if (parts[2]) {
+    formattedValue += '/' + parts[2]
+  }
+  if (parts[3]) {
+    formattedValue += '/' + parts[3]
+  }
+
+  return formattedValue
 }

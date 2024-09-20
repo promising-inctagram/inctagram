@@ -2,7 +2,18 @@ import { DatePicker } from '@/components/date-picker/date-picker-single/DatePick
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    error: {
+      control: {
+        type: 'text',
+      },
+    },
+    isRequired: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
   component: DatePicker,
   tags: ['autodocs'],
   title: 'Components/DatePicker/DatePicker',
@@ -20,17 +31,6 @@ export const DatePickerStory: Story = {
   render: args => (
     <div>
       <DatePicker isRequired {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
-      <DatePicker {...args} />
     </div>
   ),
 }
