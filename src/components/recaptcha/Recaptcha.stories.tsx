@@ -8,9 +8,6 @@ import s from '@/components/recaptcha/Recaptcha.module.scss'
 
 const meta = {
   component: Recaptcha,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
   title: 'components/Recaptcha',
 } satisfies Meta<typeof Recaptcha>
@@ -18,11 +15,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof Recaptcha>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    hl: 'en',
+    sitekey: process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string,
+    theme: 'dark',
+  },
+}
 export const Error: Story = {
   render: () => {
     const [token, setToken] = useState<null | string>(null)
     const [error, setError] = useState('')
+
+    const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
 
     const handleTokenChange = (token: null | string) => {
       setToken(token)
@@ -44,7 +49,13 @@ export const Error: Story = {
         <button style={{ cursor: 'pointer', marginBottom: '20px' }} type={'submit'}>
           Нажми на меня до галочки
         </button>
-        <Recaptcha error={error} onChange={handleTokenChange} />
+        <Recaptcha
+          error={error}
+          hl={'en'}
+          onChange={handleTokenChange}
+          sitekey={sitekey}
+          theme={'dark'}
+        />
       </form>
     )
   },

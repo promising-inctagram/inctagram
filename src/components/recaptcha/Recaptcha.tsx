@@ -1,5 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
 
 import clsx from 'clsx'
 
@@ -8,13 +7,12 @@ import s from './Recaptcha.module.scss'
 type Props = {
   error: string
   onChange: (token: null | string) => void
-}
-export const Recaptcha = ({ error, onChange }: Props) => {
-  const sitekey = '6LcO4kYqAAAAAMbu4Su-r90zP-vsqSaJVJc1usYC'
+} & ReCAPTCHAProps
 
+export const Recaptcha = ({ className, error, hl, onChange, sitekey, theme }: Props) => {
   return (
-    <div className={clsx(error && s.rootError)}>
-      <ReCAPTCHA onChange={onChange} sitekey={sitekey} theme={'dark'} />
+    <div className={clsx(error && s.rootError, className)}>
+      <ReCAPTCHA hl={hl} onChange={onChange} sitekey={sitekey} theme={theme} />
       {error && <div className={s.error}>{error}</div>}
     </div>
   )

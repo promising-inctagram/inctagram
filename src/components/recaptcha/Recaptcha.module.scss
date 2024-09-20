@@ -1,6 +1,8 @@
 .rootError {
   outline: 1px solid #ff0000;
+  box-sizing: content-box;
   padding: 8px;
+  width: 300px;
 }
 
 .error {
