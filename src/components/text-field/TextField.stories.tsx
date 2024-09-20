@@ -2,7 +2,28 @@ import { TextField } from '@/components/text-field/TextField'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  args: { disabled: false },
+  argTypes: {
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    error: {
+      control: {
+        type: 'text',
+      },
+    },
+    isRequired: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    placeholder: { control: 'text' },
+    variant: {
+      control: { type: 'select' },
+      options: ['password', 'search', 'text'],
+    },
+  },
   component: TextField,
   tags: ['autodocs'],
   title: 'components/TextField',
@@ -11,34 +32,34 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof TextField>
 
-export const Email: Story = {
+export const Text: Story = {
   args: {
-    label: 'Email',
-    placeholder: 'Epam@epam.com',
-    variant: 'text',
+    label: 'Some text-field label',
+    placeholder: 'type something...',
+  },
+}
+
+export const TextWithError: Story = {
+  args: {
+    error: 'Some error occurred...',
+    isRequired: true,
+    label: 'Some text-field label',
+    placeholder: 'type something...',
   },
 }
 
 export const Password: Story = {
   args: {
-    label: 'Password',
-    placeholder: 'Password',
+    label: 'Some text-field label',
+    placeholder: 'type password...',
     variant: 'password',
   },
 }
 
 export const Search: Story = {
   args: {
-    placeholder: 'Input search',
+    label: 'Some text-field label',
+    placeholder: 'type to start searching...',
     variant: 'search',
-  },
-}
-
-export const Error: Story = {
-  args: {
-    error: 'Error text',
-    label: 'Email',
-    placeholder: 'Epam@epam.com',
-    variant: 'text',
   },
 }

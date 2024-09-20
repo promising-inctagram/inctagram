@@ -1,15 +1,7 @@
-.box {
+.container {
   display: flex;
   flex-direction: column;
-
   width: 100%;
-
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-400);
-}
-
-.label {
-  color: var(--color-light-900);
 }
 
 .inputContainer {
@@ -19,6 +11,8 @@
 }
 
 .iconSearch {
+  width: 20px;
+  height: 20px;
   position: absolute;
   top: 50%;
   left: 12px;
@@ -30,12 +24,22 @@
   color: var(--color-light-900);
 }
 
-.iconSearch svg {
-  width: 20px;
-  height: 20px;
+.icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-light-900);
 }
 
-.inputContainer:focus-within .iconSearch {
+.clearIcon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+
+.inputContainer:focus-within .iconSearch,
+.inputContainer:focus-within .icon,
+.inputContainer:focus-within .clearIcon {
   color: inherit;
   transition: color 0.3s ease;
 }
@@ -49,11 +53,11 @@
   padding: 6px 12px;
 
   font-size: var(--font-size-m);
-
+  font-weight: var(--font-weight-400);
+  line-height: var(--line-height-m);
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
-  outline: none;
-  caret-color: #fff;
+  caret-color: var(--color-light-100);
 
   transition: border-color 0.3s ease;
 
@@ -61,24 +65,33 @@
     color: var(--color-light-900);
   }
 
-  &:focus::placeholder {
-    color: transparent;
-  }
-
   &:focus {
-    border: 1px solid var(--color-accent-500);
+    outline: 1px solid var(--color-accent-500);
   }
 
   &:hover {
     border: 1px solid var(--color-light-900);
   }
 
-  &[type='search'] {
-    padding-left: 40px;
+  &:disabled {
+    pointer-events: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 
-  &:disabled::placeholder {
-    color: var(--color-dark-100);
+  &.search {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  &.text {
+    padding-right: 12px;
+  }
+
+  &.password {
+    padding-right: 32px;
   }
 }
 
@@ -121,9 +134,9 @@
 
 .error {
   border-color: var(--color-danger-500);
+  color: var(--color-danger-500);
 }
 
 .disabled {
   color: var(--color-dark-100);
-  fill: var(--color-dark-100);
 }
