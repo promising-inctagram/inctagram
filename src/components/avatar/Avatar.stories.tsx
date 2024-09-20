@@ -1,11 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Avatar } from './Avatar'
-
 const meta = {
   argTypes: {
     size: {
-      options: ['l' | 'm' | 's' | 'xs'],
+      options: ['l', 'm', 's', 'xs'],
     },
   },
   component: Avatar,
