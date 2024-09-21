@@ -13,10 +13,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/dialog/Dialog'
-import { CloseOutlineIcon, ImageOutlineIcon, MoreHorizontalIcon } from '@/components/icons'
+import { CloseOutlineIcon, MoreHorizontalIcon } from '@/components/icons'
 import { TextField } from '@/components/text-field'
 import { Typography } from '@/components/typography'
-import { action } from '@storybook/addon-actions'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 const descriptionMockText =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. ' +
@@ -36,9 +36,9 @@ export const Dialog: Story = {
   render: () => {
     return (
       <DialogRoot>
-        <DialogTitle asChild title={'Dialog Title'} />
         <Trigger />
         <DialogContent style={{ maxWidth: '542px' }}>
+          <Title />
           <Header />
           <Description />
           <Body />
@@ -57,6 +57,12 @@ const Trigger = () => (
   </DialogTrigger>
 )
 
+const Title = () => (
+  <VisuallyHidden asChild>
+    <DialogTitle>Dialog Title</DialogTitle>
+  </VisuallyHidden>
+)
+
 const Header = () => (
   <DialogHeader>
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -73,22 +79,15 @@ const Header = () => (
 )
 
 const Description = () => (
-  <DialogDescription>
-    <Typography grey variant={'regular_text_14'}>
-      Description:
-    </Typography>
-    <Typography grey variant={'regular_text_14'}>
-      {descriptionMockText}
-    </Typography>
-  </DialogDescription>
+  <VisuallyHidden>
+    <DialogDescription>{descriptionMockText}</DialogDescription>
+  </VisuallyHidden>
 )
 
 const Body = () => (
   <DialogBody>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <Typography variant={'regular_text_14'}>
-        Body: <Typography variant={'regular_text_14'}>{descriptionMockText}</Typography>
-      </Typography>
+      <Typography variant={'regular_text_14'}>{descriptionMockText}</Typography>
       <TextField label={'Some Label'} placeholder={'some placeholder...'} />
       <CheckBox isRequired label={'CheckBox label'} />
     </div>
