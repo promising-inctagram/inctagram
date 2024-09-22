@@ -1,13 +1,14 @@
 .table {
   border-collapse: collapse;
-  color: var(--color-light-100);
   font-size: 14px;
+  color: var(--color-light-100);
   white-space: nowrap;
 
   .tableHead {
-    font-weight: var(--font-weight-600);
     cursor: pointer;
+    font-weight: var(--font-weight-600);
   }
+
   .cell {
     font-weight: var(--font-weight-400);
   }
