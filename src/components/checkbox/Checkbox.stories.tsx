@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { CheckBox } from './Checkbox'
+import { Checkbox } from './Checkbox'
 
-const meta: Meta<typeof CheckBox> = {
+const meta: Meta<typeof Checkbox> = {
   argTypes: {
     checked: {
       control: {
@@ -25,36 +25,36 @@ const meta: Meta<typeof CheckBox> = {
       },
     },
   },
-  component: CheckBox,
+  component: Checkbox,
   tags: ['autodocs'],
-  title: 'components/CheckBox',
+  title: 'components/Checkbox',
 }
 
 export default meta
-type Story = StoryObj<typeof CheckBox>
+type Story = StoryObj<typeof Checkbox>
 
 export const DefaultStory: Story = {
   args: {
     isRequired: true,
     label: 'CheckBox label',
   },
-  name: 'CheckBox',
+  name: 'Checkbox',
 }
 
 export const DisabledStory: Story = {
   args: {
     checked: true,
     disabled: true,
-    label: 'CheckBox label',
+    label: 'Checkbox label',
   },
-  name: 'Disabled CheckBox',
+  name: 'Disabled Checkbox',
 }
 
 export const ErrorStory: Story = {
   args: {
     checked: true,
     error: 'Some error occurred',
-    label: 'CheckBox label',
+    label: 'Checkbox label',
   },
-  name: 'CheckBox with Error',
+  name: 'Checkbox with Error',
 }
