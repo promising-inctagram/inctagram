@@ -11,4 +11,6 @@ const meta: Meta<typeof SideBar> = {
 export default meta
 type Story = StoryObj<typeof SideBar>
 
-export const DefaultStory: Story = {}
+export const DefaultStory: Story = {
+  name: 'SideBar',
+}

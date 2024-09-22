@@ -16,13 +16,13 @@ const HomeIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
           fill={'#fff'}
           fillOpacity={0}
           height={23}
-          rx={-0.5}
+          rx={0.5}
           transform={'translate(.5 .5)'}
           width={23}
         />
       </clipPath>
     </defs>
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <g clipPath={'url(#home_svg__a)'} fill={'currentColor'}>
       <path d={'M10 14h4v7h-4z'} fillRule={'evenodd'} />
       <path
