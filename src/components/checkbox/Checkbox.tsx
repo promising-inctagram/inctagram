@@ -15,7 +15,7 @@ type CheckboxProps = {
 
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>
 
-export const CheckBox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
   const { className, disabled, error, isRequired, label, ...rest } = props
   const checkboxId = useId()
 
