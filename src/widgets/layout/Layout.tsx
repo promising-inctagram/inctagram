@@ -8,7 +8,7 @@ export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <header></header>
-      <main className={s.layout}>{children}</main>
+      {children}
     </>
   )
 }
