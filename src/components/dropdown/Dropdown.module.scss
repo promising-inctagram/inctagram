@@ -1,5 +1,6 @@
 .trigger {
   cursor: pointer;
+  display: flex;
 
   &[data-state='open'] {
     color: var(--color-accent-500);
