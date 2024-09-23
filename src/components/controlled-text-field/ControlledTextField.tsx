@@ -2,24 +2,26 @@ import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { TextField, TextFieldProps } from '@/components/text-field'
 
-type Props<T extends FieldValues> = Omit<
-  TextFieldProps,
-  'error' | 'helperText' | 'onChange' | 'ref' | 'value'
-> &
+type Props<T extends FieldValues> = Omit<TextFieldProps, 'onBlur' | 'onChange' | 'ref' | 'value'> &
   UseControllerProps<T>
 
 export const ControlledTextField = <T extends FieldValues>({
   control,
+  defaultValue,
   name,
+  rules,
   ...props
 }: Props<T>) => {
   const {
-    field: { ...field },
-    fieldState: { error },
+    field: { onBlur, onChange, ref, value, ...field },
   } = useController({
     control,
+    defaultValue,
     name,
+    rules,
   })
 
-  return <TextField {...props} error={error?.message} {...field} />
+  return (
+    <TextField onBlur={onBlur} onChange={onChange} ref={ref} value={value} {...props} {...field} />
+  )
 }
