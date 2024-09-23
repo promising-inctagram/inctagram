@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
-
-import Link from 'next/link'
+import React from 'react'
 
 import styles from './Pagination.module.scss'
 
@@ -12,6 +10,7 @@ export type PaginationProps = {
   activePage: number
   pages: number
   setActivePage: (current: number) => void
+  setElemsOnPage: (value: string) => void
 }
 
 const selectItems: OptionsValue[] = [
@@ -23,11 +22,8 @@ const selectItems: OptionsValue[] = [
 ]
 
 export const Pagination = (props: PaginationProps) => {
-  // const { pages = 8, activePage, setActivePage, selectItems } = props
-  const [activePage, setActivePage] = useState(1)
-  const pages = 55
+  const { activePage, pages, setActivePage, setElemsOnPage } = props
 
-  //функционал пагинации
   const getPageNumbers = () => {
     const pageNumbers: number[] = []
 
@@ -95,6 +91,7 @@ export const Pagination = (props: PaginationProps) => {
         <Select
           className={styles.select}
           defaultValue={selectItems[0].value}
+          onValueChange={(value: string) => setElemsOnPage(value)}
           options={selectItems}
         />
         <span style={{ marginLeft: '7px' }}>on page</span>
