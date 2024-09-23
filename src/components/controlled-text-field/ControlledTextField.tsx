@@ -10,6 +10,7 @@ export const ControlledTextField = <T extends FieldValues>({
   defaultValue,
   name,
   rules,
+  shouldUnregister,
   ...props
 }: Props<T>) => {
   const {
@@ -19,6 +20,7 @@ export const ControlledTextField = <T extends FieldValues>({
     defaultValue,
     name,
     rules,
+    shouldUnregister,
   })
 
   return (
