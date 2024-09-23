@@ -17,13 +17,13 @@ import {
 
 // todo: подумать куда вынести enum
 enum Paths {
-  create = 'create',
-  favourites = 'favourites',
-  home = '/home',
-  messages = 'messages',
-  profile = 'profile',
-  search = 'search',
-  statistics = 'statistics',
+  create = '/create',
+  favourites = '/favourites',
+  home = '/',
+  messages = '/messages',
+  profile = '/profile',
+  search = '/search',
+  statistics = '/statistics',
 }
 
 export const menuItems = [
