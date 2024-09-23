@@ -6,8 +6,9 @@ import { enUS } from 'date-fns/locale'
 import s from './Calendar.module.scss'
 
 // todo: подумать куда вынести enums
-enum WeekDays {
+export enum WeekDays {
   Monday = 1,
+  Sunday = 0,
 }
 
 export const Calendar = ({
@@ -41,7 +42,7 @@ export const Calendar = ({
         [UI.Months]: s.months,
         [UI.Nav]: s.nav,
         [UI.NextMonthButton]: s.nextMonthButton,
-        [UI.PreviousMonthButton]: s.PreviousMonthButton,
+        [UI.PreviousMonthButton]: s.previousMonthButton,
         [UI.Root]: s.root,
         [UI.Weekday]: s.weekday,
         ...classNames,
