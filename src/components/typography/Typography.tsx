@@ -6,6 +6,8 @@ import s from './Typography.module.scss'
 
 type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
+  grey?: boolean
+  isRequired?: boolean
   variant?:
     | 'badge'
     | 'bold_text_14'
@@ -25,8 +27,15 @@ type TypographyProps<T extends ElementType = 'p'> = {
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
-  const { as: Component = 'p', className, variant = 'regular_text_14', ...rest } = props
-  const cn = clsx(s[variant], className)
+  const {
+    as: Component = 'p',
+    className,
+    grey,
+    isRequired = false,
+    variant = 'regular_text_14',
+    ...rest
+  } = props
+  const cn = clsx(s[variant], grey && s.grey, isRequired && s.required, className)
 
   return <Component className={cn} {...rest} />
 }
