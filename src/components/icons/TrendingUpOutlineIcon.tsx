@@ -16,13 +16,13 @@ const TrendingUpOutlineIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEl
           fill={'#fff'}
           fillOpacity={0}
           height={23}
-          rx={-0.5}
+          rx={0.5}
           transform={'translate(.5 .5)'}
           width={23}
         />
       </clipPath>
     </defs>
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <g clipPath={'url(#trending-up-outline_svg__a)'}>
       <path
         d={
