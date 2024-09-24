@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '@/components/button'
-import { CheckBox } from '@/components/checkbox'
 import {
   DialogBody,
   DialogClose,
@@ -17,6 +16,8 @@ import { CloseOutlineIcon, MoreHorizontalIcon } from '@/components/icons'
 import { TextField } from '@/components/text-field'
 import { Typography } from '@/components/typography'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+
+import { Checkbox } from '../checkbox'
 
 const descriptionMockText =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. ' +
@@ -89,7 +90,7 @@ const Body = () => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <Typography variant={'regular_text_14'}>{descriptionMockText}</Typography>
       <TextField label={'Some Label'} placeholder={'some placeholder...'} />
-      <CheckBox isRequired label={'CheckBox label'} />
+      <Checkbox isRequired label={'CheckBox label'} />
     </div>
   </DialogBody>
 )

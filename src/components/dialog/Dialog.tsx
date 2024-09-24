@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RDXD from '@radix-ui/react-dialog'
 import clsx from 'clsx'
@@ -44,9 +44,7 @@ const DialogTitle = forwardRef<DialogTitleRef, DialogTitleProps>(({ className, .
 
 DialogTitle.displayName = RDXD.Title.displayName
 
-type DialogHeaderProps = {
-  flexContainerProps?: ComponentPropsWithoutRef<'div'>
-} & HTMLAttributes<HTMLDivElement>
+type DialogHeaderProps = ComponentPropsWithoutRef<'div'>
 
 const DialogHeader = ({ className, ...rest }: DialogHeaderProps) => (
   <div className={clsx(s.header, className)} {...rest} />
@@ -63,17 +61,13 @@ const DialogDescription = forwardRef<DialogDescriptionRef, DialogDescriptionProp
 
 DialogDescription.displayName = RDXD.Description.displayName
 
-type DialogBodyProps = {
-  flexContainerProps?: ComponentPropsWithoutRef<'div'>
-} & HTMLAttributes<HTMLDivElement>
+type DialogBodyProps = ComponentPropsWithoutRef<'div'>
 
 const DialogBody = ({ className, ...rest }: DialogBodyProps) => (
   <div className={clsx(s.body, className)} {...rest} />
 )
 
-type DialogFooterProps = {
-  flexContainerProps?: ComponentPropsWithoutRef<'div'>
-} & HTMLAttributes<HTMLDivElement>
+type DialogFooterProps = ComponentPropsWithoutRef<'div'>
 
 const DialogFooter = ({ className, ...rest }: DialogFooterProps) => (
   <div className={clsx(s.footer, className)} {...rest} />
