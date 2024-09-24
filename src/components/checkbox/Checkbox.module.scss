@@ -1,8 +1,4 @@
 .root {
-  & > button {
-    all: unset;
-  }
-
   cursor: pointer;
 
   position: relative;
@@ -17,6 +13,10 @@
   background-color: transparent;
   border: 2px solid var(--color-light-100);
   border-radius: var(--border-radius-xs);
+
+  & > button {
+    all: unset;
+  }
 
   &:disabled {
     cursor: default;
