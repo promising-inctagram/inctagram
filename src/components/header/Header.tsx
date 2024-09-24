@@ -11,6 +11,7 @@ import { Typography } from '../typography'
 export type HeaderProps = {
   countNotification?: number
   isAuth: boolean
+  setLanguage: (value: string) => void
 }
 
 const selectItemsWithIcons: OptionsValue[] = [
@@ -19,7 +20,7 @@ const selectItemsWithIcons: OptionsValue[] = [
 ]
 
 export const Header = (props: HeaderProps) => {
-  const { countNotification, isAuth = false } = props
+  const { countNotification, isAuth, setLanguage } = props
 
   return (
     <div className={styles.wrapper}>
@@ -37,17 +38,22 @@ export const Header = (props: HeaderProps) => {
         <Select
           className={styles.select}
           defaultValue={selectItemsWithIcons[0].value}
-          onValueChange={(value: string) => console.log(value)}
+          onValueChange={(value: string) => setLanguage(value)}
           options={selectItemsWithIcons}
         />
         {!isAuth && (
-          <Button style={{ marginLeft: 36, width: 100 }} variant={'link'}>
-            <Link href={'/auth'}>Log in</Link>
+          <Button as={Link} href={'/auth'} style={{ marginLeft: 36, width: 100 }} variant={'link'}>
+            Log in
           </Button>
         )}
         {!isAuth && (
-          <Button style={{ marginLeft: 24, padding: '6px 20px', width: 100 }} variant={'primary'}>
-            <Link href={'/auth'}>Sign up</Link>
+          <Button
+            as={Link}
+            href={'/auth'}
+            style={{ marginLeft: 24, padding: '6px 20px', width: 100 }}
+            variant={'primary'}
+          >
+            Sign up
           </Button>
         )}
       </div>
