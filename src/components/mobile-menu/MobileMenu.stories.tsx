@@ -10,4 +10,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof MobileMenu>
 
-export const MobileMenuBar: Story = {}
+export const DefaultStory: Story = {
+  name: 'MobileMenu',
+}
