@@ -16,13 +16,13 @@ const MessageCircleOutlineIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSV
           fill={'#fff'}
           fillOpacity={0}
           height={23}
-          rx={-0.5}
+          rx={0.5}
           transform={'translate(.5 .5)'}
           width={23}
         />
       </clipPath>
     </defs>
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <g clipPath={'url(#message-circle-outline_svg__a)'} fill={'currentColor'}>
       <path
         d={

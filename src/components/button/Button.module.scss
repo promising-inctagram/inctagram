@@ -58,7 +58,6 @@
 
 .outlined {
   color: var(--color-accent-500);
-  background-color: var(--color-dark-700);
   outline: 1px solid var(--color-accent-500);
 
   &:hover {
@@ -72,7 +71,6 @@
   }
 
   &:focus-visible {
-    color: var(--color-accent-700);
     outline: 2px solid var(--color-accent-700);
   }
 
@@ -83,8 +81,6 @@
 }
 
 .link {
-  color: var(--color-accent-500);
-
   &:hover {
     color: var(--color-accent-100);
   }
@@ -94,7 +90,6 @@
   }
 
   &:focus-visible {
-    color: var(--color-accent-500);
     outline: 2px solid var(--color-accent-700);
   }
 
@@ -117,7 +112,6 @@
   }
 
   &:focus-visible {
-    color: var(--color-accent-700);
     outline: 2px solid var(--color-accent-700);
   }
 
@@ -145,7 +139,6 @@
   }
 
   &:focus-visible {
-    color: var(--color-accent-700);
     outline: 2px solid var(--color-accent-700);
   }
 
