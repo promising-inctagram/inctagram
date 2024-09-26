@@ -1,3 +1,5 @@
+import { SignInForm } from '@/components/forms/sign-in/SignInForm'
+
 export default function SignIn() {
-  return <div> Sign In</div>
+  return <SignInForm />
 }
