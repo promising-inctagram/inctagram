@@ -48,7 +48,7 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/addon-actions':
-        specifier: ^8.3.0
+        specifier: ^8.2.9
         version: 8.3.0(storybook@8.3.0)
       clsx:
         specifier: ^2.1.1
@@ -68,15 +68,15 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.3.1(react@18.3.1)
-      swiper:
-        specifier: ^11.1.14
-        version: 11.1.14
       react-google-recaptcha:
         specifier: ^3.1.0
         version: 3.1.0(react@18.3.1)
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      swiper:
+        specifier: ^11.1.14
+        version: 11.1.14
     devDependencies:
       '@chromatic-com/storybook':
         specifier: 1.9.0
@@ -10105,7 +10105,7 @@ snapshots:
       date-fns: 4.1.0
       react: 18.3.1
 
-  react-docgen-typescript@2.2.2(typescript@5.5.4):
+  react-docgen-typescript@2.2.2(typescript@5.6.2):
     dependencies:
       typescript: 5.6.2
 

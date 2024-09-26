@@ -22,37 +22,36 @@ const selectItemsWithIcons: OptionsValue[] = [
 export const Header = (props: HeaderProps) => {
   const { countNotification, isAuth, setLanguage } = props
 
+  // возможным решением будет использование контейнеров
+
   return (
     <div className={styles.wrapper}>
       <Typography as={'h1'} variant={'large'}>
         Inctagram
       </Typography>
       <div className={styles.container}>
-        {isAuth && (
-          <Button style={{ marginRight: 48 }} variant={'icon'}>
-            <Badge count={countNotification}>
-              <BellOutlineIcon />
-            </Badge>
-          </Button>
-        )}
-        <Select
-          className={styles.select}
-          defaultValue={selectItemsWithIcons[0].value}
-          onValueChange={(value: string) => setLanguage(value)}
-          options={selectItemsWithIcons}
-        />
+        <div className={styles.button}>
+          {isAuth && (
+            <Button className={styles.buttonBell} variant={'icon'}>
+              <Badge count={countNotification}>
+                <BellOutlineIcon />
+              </Badge>
+            </Button>
+          )}
+          <Select
+            className={styles.select}
+            defaultValue={selectItemsWithIcons[0].value}
+            onValueChange={(value: string) => setLanguage(value)}
+            options={selectItemsWithIcons}
+          />
+        </div>
         {!isAuth && (
-          <Button as={Link} href={'/auth'} style={{ marginLeft: 36, width: 100 }} variant={'link'}>
+          <Button as={Link} className={styles.button1} href={'/auth'} variant={'link'}>
             Log in
           </Button>
         )}
         {!isAuth && (
-          <Button
-            as={Link}
-            href={'/auth'}
-            style={{ marginLeft: 24, padding: '6px 20px', width: 100 }}
-            variant={'primary'}
-          >
+          <Button as={Link} className={styles.button2} href={'/auth'} variant={'primary'}>
             Sign up
           </Button>
         )}

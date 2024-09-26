@@ -17,7 +17,7 @@ export const Default: Story = {
   args: {
     countNotification: 3,
     isAuth: true,
-    setLanguage: (value: string) => console.log(value),
+    setLanguage: () => {},
   },
   render: () => {
     const [language, setLanguage] = useState<string>()
