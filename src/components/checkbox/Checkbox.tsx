@@ -7,7 +7,7 @@ import { clsx } from 'clsx'
 
 import s from './Checkbox.module.scss'
 
-type CheckboxProps = {
+export type CheckboxProps = {
   error?: string
   isRequired?: boolean
   label?: string

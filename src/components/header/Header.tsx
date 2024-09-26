@@ -7,6 +7,7 @@ import { Button } from '../button'
 import { BellOutlineIcon, FlagRussiaIcon, FlagUnitedKingdomIcon } from '../icons'
 import { OptionsValue, Select } from '../select/Select'
 import { Typography } from '../typography'
+import { Paths } from './../sidebar/menu-items'
 
 export type HeaderProps = {
   countNotification?: number
@@ -46,12 +47,12 @@ export const Header = (props: HeaderProps) => {
           />
         </div>
         {!isAuth && (
-          <Button as={Link} className={styles.button1} href={'/auth'} variant={'link'}>
+          <Button as={Link} className={styles.button1} href={Paths.login} variant={'link'}>
             Log in
           </Button>
         )}
         {!isAuth && (
-          <Button as={Link} className={styles.button2} href={'/auth'} variant={'primary'}>
+          <Button as={Link} className={styles.button2} href={Paths.signin} variant={'primary'}>
             Sign up
           </Button>
         )}

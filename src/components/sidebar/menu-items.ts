@@ -16,13 +16,15 @@ import {
 } from '@/components/icons'
 
 // todo: подумать куда вынести enum
-enum Paths {
+export enum Paths {
   create = '/create',
   favourites = '/favourites',
   home = '/',
+  login = '/logIn',
   messages = '/messages',
   profile = '/profile',
   search = '/search',
+  signin = '/signIn',
   statistics = '/statistics',
 }
 
