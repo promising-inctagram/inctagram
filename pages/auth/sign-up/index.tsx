@@ -1,3 +1,5 @@
-export default function SignUp() {
-  return <div> Terms of Service</div>
+function SignUpPage() {
+  return <div>Sign Up page</div>
 }
+
+export default SignUpPage

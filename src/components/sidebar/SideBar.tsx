@@ -1,13 +1,14 @@
 import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef } from 'react'
 
-import { LogOutOutlineIcon } from '@/components/icons'
 import { menuItems } from '@/components/sidebar/menu-items'
-import { Typography } from '@/components/typography'
+import { LogOutOutlineIcon } from '@/components/ui/icons'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import s from './SideBar.module.scss'
+
+import { Typography } from '../ui/typography'
 
 type SideBarProps = ComponentPropsWithoutRef<'nav'>
 type SideBarRef = ElementRef<'nav'>

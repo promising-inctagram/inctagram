@@ -1,3 +1,5 @@
-export default function PrivacyPolicy() {
-  return <div>Privacy Policy</div>
+function PrivacyPolicyPage() {
+  return <div>Privacy Policy page</div>
 }
+
+export default PrivacyPolicyPage

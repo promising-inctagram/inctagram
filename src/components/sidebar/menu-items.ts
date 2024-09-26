@@ -13,7 +13,7 @@ import {
   SearchOutlineIcon,
   TrendingUpIcon,
   TrendingUpOutlineIcon,
-} from '@/components/icons'
+} from '@/components/ui/icons'
 
 // todo: подумать куда вынести enum
 enum Paths {

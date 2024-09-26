@@ -1,3 +1,5 @@
-export default function CreateNewPassword() {
-  return <div>CreateNewPassword</div>
+function CreatePasswordPage() {
+  return <div>Create New Password page</div>
 }
+
+export default CreatePasswordPage
