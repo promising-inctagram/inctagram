@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { render } from 'react-dom'
 
 import { StoryObj } from '@storybook/react'
 
@@ -17,21 +16,21 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     activePage: 1,
-    pages: 55,
     setActivePage: (current: number) => console.log(current),
     setElemsOnPage: (value: string) => console.log(value),
+    totalPages: 1,
   },
   render: args => {
-    const pages = 55
+    const totalPages = 1
     const [activePage, setActivePage] = useState(1)
     const [elemsOnPage, setElemsOnPage] = useState('10')
 
     return (
       <Pagination
         activePage={activePage}
-        pages={pages}
         setActivePage={setActivePage}
         setElemsOnPage={setElemsOnPage}
+        totalPages={totalPages}
       />
     )
   },
