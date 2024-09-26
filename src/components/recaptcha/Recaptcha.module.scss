@@ -1,0 +1,15 @@
+.rootError {
+  box-sizing: content-box;
+  width: 300px;
+  padding: 8px;
+  outline: 1px solid #f00;
+}
+
+.error {
+  padding: 13px 0 5px;
+
+  font-family: var(--font-family-roboto);
+  font-size: var(--font-size-xxs);
+  line-height: 12px;
+  color: #f00;
+}

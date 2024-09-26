@@ -1,5 +1,5 @@
+import { themes } from '@storybook/theming'
 import type { Preview } from '@storybook/react'
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 
 import '../src/app/styles/index.scss'
 import '@fontsource/inter/400.css';
@@ -8,31 +8,30 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
+import {fn} from "@storybook/test";
 
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { onClick: fn(), },
+    docs: {
+      theme: themes.dark,
+    },
     backgrounds: {
-      default: 'background',
+      default: 'dark',
       values: [
         {
-          name: 'background',
-          value: '#0D0D0D',
+          name: 'dark',
+          value: '#000000',
         },
       ],
     },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
+        date: /Date$/,
       },
     },
-    docs: { controls: { sort: 'requiredFirst' }, toc: true },
-    nextRouter: {
-      Provider: AppRouterContext.Provider,
-    },
   },
-};
-
+}
 export default preview;

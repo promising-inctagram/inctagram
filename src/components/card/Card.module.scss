@@ -1,0 +1,16 @@
+.default {
+  padding: 23px 24px 36px;
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  @media screen and (width <= 480px) {
+    padding: 15px 17px;
+  }
+}
+
+.transparent {
+  width: fit-content;
+  background-color: rgb(51 51 51 / 50%);
+  border-radius: 2px;
+}
