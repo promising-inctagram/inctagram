@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+}
+
+.inputContainer {
+  position: relative;
+  height: 36px;
+}
+
+.icon {
+  cursor: pointer;
+
+  position: absolute;
+  top: 18px;
+  right: 12px;
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+
+  &:focus {
+    border-radius: var(--border-radius-xs);
+    outline: 2px solid var(--color-accent-300);
+  }
+}
+
+.disabled {
+  cursor: default;
+  color: var(--color-light-900);
+}
+
+.error {
+  color: var(--color-danger-500);
+}
