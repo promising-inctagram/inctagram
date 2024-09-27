@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-import { Recaptcha } from '@/components/recaptcha/Recaptcha'
+import { Recaptcha } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

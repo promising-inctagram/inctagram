@@ -1,7 +1,3 @@
-button {
-  all: unset;
-}
-
 .root {
   position: relative;
   z-index: 0;
@@ -13,6 +9,7 @@ button {
 
 .itemContainer {
   display: flex;
+  gap: 8px;
   align-items: center;
 }
 

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
+import { Header } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Header } from './Header'
 
 const meta = {
   component: Header,

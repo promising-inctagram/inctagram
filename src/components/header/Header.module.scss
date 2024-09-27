@@ -1,8 +1,14 @@
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
   display: flex;
   justify-content: space-between;
-  padding: 12px 64px 12px 60px;
+  padding: 12px 60px;
   border-bottom: 1px solid var(--color-dark-300);
+  background-color: var(--color-dark-700);
 }
 
 .container {

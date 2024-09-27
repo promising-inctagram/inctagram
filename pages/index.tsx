@@ -1,3 +1,4 @@
+import { getLayout } from '@/layout'
 import Head from 'next/head'
 
 export default function Home() {
@@ -13,3 +14,5 @@ export default function Home() {
     </>
   )
 }
+
+Home.getLayout = getLayout

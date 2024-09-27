@@ -1,8 +1,8 @@
-import { Paths } from '@/components/sidebar/menu-items'
 import { Badge, Button, Select, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
 import FlagRussiaIcon from '@/components/ui/icons/flags/FlagRussiaIcon'
 import FlagUnitedKingdomIcon from '@/components/ui/icons/flags/FlagUnitedKingdomIcon'
+import { Paths } from '@/shared/enums'
 import Link from 'next/link'
 
 import styles from '@/components/header/Header.module.scss'
@@ -11,8 +11,8 @@ import { OptionsValue } from '../ui/select'
 
 export type HeaderProps = {
   countNotification?: number
-  isAuth: boolean
-  setLanguage: (value: string) => void
+  isAuth?: boolean
+  setLanguage?: (value: string) => void
 }
 
 const selectItemsWithIcons: OptionsValue[] = [
@@ -20,11 +20,9 @@ const selectItemsWithIcons: OptionsValue[] = [
   { icon: <FlagUnitedKingdomIcon />, value: 'English' },
 ]
 
-export const Header = (props: HeaderProps) => {
-  const { countNotification, isAuth, setLanguage } = props
-
+export const Header = ({ countNotification, isAuth = false, setLanguage }: HeaderProps) => {
   const handleLanguage = (value: string) => {
-    setLanguage(value)
+    setLanguage?.(value)
   }
 
   return (
@@ -47,10 +45,10 @@ export const Header = (props: HeaderProps) => {
         />
         {!isAuth && (
           <>
-            <Button as={Link} className={styles.button} href={Paths.login} variant={'link'}>
+            <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
               Log in
             </Button>
-            <Button as={Link} className={styles.button} href={Paths.signin} variant={'primary'}>
+            <Button as={Link} className={styles.button} href={Paths.signUp} variant={'primary'}>
               Sign up
             </Button>
           </>
