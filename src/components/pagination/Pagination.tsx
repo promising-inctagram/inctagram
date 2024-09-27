@@ -1,13 +1,12 @@
 import React from 'react'
 
+import { Button } from '@/components/button'
+import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '@/components/icons'
+import { OptionsValue, Select } from '@/components/select/Select'
+import { Typography } from '@/components/typography'
 import clsx from 'clsx'
 
-import styles from './Pagination.module.scss'
-
-import { Button } from '../button'
-import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '../icons'
-import { OptionsValue, Select } from '../select/Select'
-import { Typography } from '../typography'
+import styles from '@/components/pagination/Pagination.module.scss'
 
 export type PaginationProps = {
   activePage: number
@@ -103,13 +102,12 @@ export const Pagination = (props: PaginationProps) => {
 
       <div className={styles.container}>
         <Typography variant={'regular_text_14'}>Show</Typography>
-        <div className={styles.selectContainer}>
-          <Select
-            defaultValue={selectItems[0].value}
-            onValueChange={(value: string) => setPageSize(value)}
-            options={selectItems}
-          />
-        </div>
+        <Select
+          className={styles.select}
+          defaultValue={selectItems[0].value}
+          onValueChange={(value: string) => setPageSize(value)}
+          options={selectItems}
+        />
         <Typography variant={'regular_text_14'}>on page</Typography>
       </div>
     </div>
