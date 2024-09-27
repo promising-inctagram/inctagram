@@ -11,9 +11,10 @@ import { Typography } from '../typography'
 
 export type PaginationProps = {
   activePage: number
+  pageSize: string
   setActivePage: (current: number) => void
-  setElemsOnPage: (value: string) => void
-  totalPages: number
+  setPageSize: (value: string) => void
+  totalCount: number
 }
 
 const selectItems: OptionsValue[] = [
@@ -57,7 +58,8 @@ const getPageNumbers = (totalPages: number, activePage: number) => {
 }
 
 export const Pagination = (props: PaginationProps) => {
-  const { activePage, setActivePage, setElemsOnPage, totalPages } = props
+  const { activePage, pageSize, setActivePage, setPageSize, totalCount } = props
+  const totalPages = Math.ceil(totalCount / Number(pageSize)) //Привожу к number тк в селекте option использует string => и я использую string
 
   const incrementPage = () => {
     setActivePage(activePage + 1)
@@ -71,48 +73,44 @@ export const Pagination = (props: PaginationProps) => {
   return (
     <div className={styles.wrapper}>
       {totalPages > 1 && (
-        <Button className={styles.iconArrow} disabled={activePage === 1} variant={'icon'}>
-          <ArrowIosBackIcon onClick={decrementPage} />
-        </Button>
-      )}
-      {pageNumbersArr.map((elem, index) =>
-        elem !== 0 ? (
-          <button
-            className={clsx(styles.elemPage, activePage === elem && styles.activePage)}
-            key={index}
-            onClick={() => setActivePage(elem)}
-            type={'button'}
+        <div className={styles.containerPages}>
+          <Button className={styles.iconArrow} disabled={activePage === 1} variant={'icon'}>
+            <ArrowIosBackIcon onClick={decrementPage} />
+          </Button>
+          {pageNumbersArr.map((elem, index) =>
+            elem !== 0 ? (
+              <Button
+                className={clsx(styles.elemPage, activePage === elem && styles.activePage)}
+                key={elem}
+                onClick={() => setActivePage(elem)}
+                variant={'secondary'}
+              >
+                {elem}
+              </Button>
+            ) : (
+              <MoreHorizontalIcon className={styles.icon} key={`more-${elem}`} />
+            )
+          )}
+          <Button
+            className={styles.iconArrow}
+            disabled={activePage === totalPages}
+            variant={'icon'}
           >
-            {elem}
-          </button>
-        ) : (
-          <MoreHorizontalIcon className={styles.icon} key={index} />
-        )
-      )}
-      {totalPages > 1 && (
-        <Button
-          className={styles.iconArrow}
-          disabled={activePage === totalPages}
-          style={{ marginLeft: '12px' }}
-          variant={'icon'}
-        >
-          <ArrowIosForwardIcon onClick={incrementPage} />
-        </Button>
+            <ArrowIosForwardIcon onClick={incrementPage} />
+          </Button>
+        </div>
       )}
 
       <div className={styles.container}>
-        <Typography style={{ marginLeft: '24px', marginRight: '4px' }} variant={'regular_text_14'}>
-          Show
-        </Typography>
-        <Select
-          className={styles.select}
-          defaultValue={selectItems[0].value}
-          onValueChange={(value: string) => setElemsOnPage(value)}
-          options={selectItems}
-        />
-        <Typography style={{ marginLeft: '7px' }} variant={'regular_text_14'}>
-          on page
-        </Typography>
+        <Typography variant={'regular_text_14'}>Show</Typography>
+        <div className={styles.selectContainer}>
+          <Select
+            defaultValue={selectItems[0].value}
+            onValueChange={(value: string) => setPageSize(value)}
+            options={selectItems}
+          />
+        </div>
+        <Typography variant={'regular_text_14'}>on page</Typography>
       </div>
     </div>
   )

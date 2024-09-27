@@ -1,36 +1,32 @@
 .wrapper {
   display: flex;
+  gap: 24px;
+}
+
+.containerPages {
+  display: flex;
+  gap: 12px;
   align-items: center;
   width: fit-content;
   height: 24px;
-}
-
-.elemPage {
-  font-size: var(--font-size-s);
-  border: 2px solid transparent;
-  border-radius: 2px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin-left: 12px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--color-dark-500);
+  & > .elemPage {
+    padding: 0;
+    font-size: var(--font-size-s);
+    background-color: transparent;
+    outline-width: 2px;
+    width: 24px;
+    height: 24px;
+    font-weight: var(--font-weight-400);
+    &:hover {
+      background-color: var(--color-dark-500);
+    }
   }
-
-  &:focus-visible {
-    border: 2px solid var(--color-accent-700);
-  }
-}
-
-.activePage {
-  background-color: var(--color-light-100);
-  color: var(--color-dark-900);
-  &:hover {
+  & > .activePage {
     background-color: var(--color-light-100);
+    color: var(--color-dark-900);
+    &:hover {
+      background-color: var(--color-light-100);
+    }
   }
 }
 
@@ -38,17 +34,22 @@
   display: flex;
 }
 
-.select {
-  width: 50px !important;
-  height: 24px;
-  font-size: var(--font-size-s);
-  padding: 0 !important;
-  padding-left: 6px !important;
+.selectContainer {
+  display: flex;
+  margin-left: 4px;
+  margin-right: 7px;
+  & > div > button {
+    box-sizing: border-box;
+    padding: 0;
+    padding-left: 6px;
+    width: 50px;
+    height: 24px;
+    font-size: var(--font-size-s);
+  }
 }
 
 .icon {
   margin-top: 12px;
-  margin-left: 12px;
   width: 24px;
   height: 12px;
 }

@@ -16,21 +16,23 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     activePage: 1,
-    setActivePage: (current: number) => console.log(current),
-    setElemsOnPage: (value: string) => console.log(value),
-    totalPages: 1,
+    pageSize: '10',
+    setActivePage: () => {},
+    setPageSize: () => {},
+    totalCount: 50,
   },
   render: args => {
-    const totalPages = 1
+    const totalCount = 100
     const [activePage, setActivePage] = useState(1)
-    const [elemsOnPage, setElemsOnPage] = useState('10')
+    const [pageSize, setPageSize] = useState('10')
 
     return (
       <Pagination
         activePage={activePage}
+        pageSize={pageSize}
         setActivePage={setActivePage}
-        setElemsOnPage={setElemsOnPage}
-        totalPages={totalPages}
+        setPageSize={setPageSize}
+        totalCount={totalCount}
       />
     )
   },
