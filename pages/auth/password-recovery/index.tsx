@@ -1,4 +1,4 @@
-import { getLayout } from '@/layout'
+import { getLayout } from '@/components'
 
 function PasswordRecoveryPage() {
   return <div>Password Recovery page</div>

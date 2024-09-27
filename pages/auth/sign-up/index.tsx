@@ -1,4 +1,4 @@
-import { getLayout } from '@/layout'
+import { getLayout } from '@/components'
 
 function SignUpPage() {
   return <div>Sign Up page</div>
