@@ -16,13 +16,13 @@ const BookmarkOutlineIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElem
           fill={'#fff'}
           fillOpacity={0}
           height={23}
-          rx={-0.5}
+          rx={0.5}
           transform={'translate(.5 .5)'}
           width={23}
         />
       </clipPath>
     </defs>
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <g clipPath={'url(#bookmark-outline_svg__a)'}>
       <path
         d={

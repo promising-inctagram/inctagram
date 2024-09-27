@@ -75,3 +75,14 @@
 .badge {
   @include typography(var(--font-size-xxxs), var(--line-height-xs), var(--font-weight-400));
 }
+
+.grey {
+  color: var(--color-light-900);
+}
+
+.required {
+  &::after {
+    content: '*';
+    color: var(--color-danger-500);
+  }
+}

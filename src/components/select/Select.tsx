@@ -7,6 +7,7 @@ import { SelectGroup, SelectItem } from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import s from './Select.module.scss'
+
 export type OptionsValue = {
   icon?: ReactNode
   id?: string
@@ -38,41 +39,41 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
         <RadixSelect.ItemText>
           <div className={s.selectItemFlex}>
             {option.icon && option.icon}
-            <Typography as={'span'}>{option.value}</Typography>
+            <Typography as={'span'} variant={'regular_text_16'}>
+              {option.value}
+            </Typography>
           </div>
         </RadixSelect.ItemText>
       </SelectItem>
     ))
 
     return (
-      <div className={s.container}>
-        <RadixSelect.Root
-          defaultValue={defaultValue}
-          disabled={disabled}
-          onValueChange={onValueChange}
-          value={value}
-          {...rest}
-        >
-          {label && (
-            <Typography as={'label'} className={s.label}>
-              {label}
-            </Typography>
-          )}
-          <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
-            <RadixSelect.Value placeholder={placeHolder} />
-            <RadixSelect.Icon>
-              <ArrowIosDownOutlineIcon className={s.icon} />
-            </RadixSelect.Icon>
-          </RadixSelect.Trigger>
-          <RadixSelect.Portal>
-            <RadixSelect.Content className={s.content} position={'popper'}>
-              <RadixSelect.Viewport>
-                <SelectGroup>{mappedOptions}</SelectGroup>
-              </RadixSelect.Viewport>
-            </RadixSelect.Content>
-          </RadixSelect.Portal>
-        </RadixSelect.Root>
-      </div>
+      <RadixSelect.Root
+        defaultValue={defaultValue}
+        disabled={disabled}
+        onValueChange={onValueChange}
+        value={value}
+        {...rest}
+      >
+        {label && (
+          <Typography as={'label'} grey>
+            {label}
+          </Typography>
+        )}
+        <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
+          <RadixSelect.Value placeholder={placeHolder} />
+          <RadixSelect.Icon asChild>
+            <ArrowIosDownOutlineIcon className={s.icon} />
+          </RadixSelect.Icon>
+        </RadixSelect.Trigger>
+        <RadixSelect.Portal>
+          <RadixSelect.Content className={s.content} position={'popper'}>
+            <RadixSelect.Viewport>
+              <SelectGroup>{mappedOptions}</SelectGroup>
+            </RadixSelect.Viewport>
+          </RadixSelect.Content>
+        </RadixSelect.Portal>
+      </RadixSelect.Root>
     )
   }
 )
