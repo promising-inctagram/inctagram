@@ -67,6 +67,11 @@ export const Pagination = (props: PaginationProps) => {
     setActivePage(activePage - 1)
   }
 
+  const changePageSize = (value: string) => {
+    setPageSize(value)
+    setActivePage(1)
+  }
+
   const pageNumbersArr = getPageNumbers(totalPages, activePage)
 
   return (
@@ -105,7 +110,7 @@ export const Pagination = (props: PaginationProps) => {
         <Select
           className={styles.select}
           defaultValue={selectItems[0].value}
-          onValueChange={(value: string) => setPageSize(value)}
+          onValueChange={changePageSize}
           options={selectItems}
         />
         <Typography variant={'regular_text_14'}>on page</Typography>
