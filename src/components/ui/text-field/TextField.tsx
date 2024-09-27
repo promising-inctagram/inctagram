@@ -18,8 +18,8 @@ import clsx from 'clsx'
 
 import s from './TextField.module.scss'
 
-import { Button } from '../button'
-import { Typography } from '../typography'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
 
 type TextFieldProps = {
   error?: string

@@ -8,7 +8,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   fullWidth?: boolean
   variant?: 'icon' | 'language' | 'link' | 'outlined' | 'primary' | 'secondary'
-} & ComponentPropsWithoutRef<'button'>
+} & ComponentPropsWithoutRef<T>
 
 export const Button = forwardRef(
   <T extends ElementType = 'button'>(
