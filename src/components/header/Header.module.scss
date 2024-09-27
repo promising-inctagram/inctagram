@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 64px 12px 60px;
+  border-bottom: 1px solid var(--color-dark-300);
+}
+
+.container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonBell {
+  margin-right: 12px;
+}
+
+.button {
+  text-wrap: nowrap;
+}
