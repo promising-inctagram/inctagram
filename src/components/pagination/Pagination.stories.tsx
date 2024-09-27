@@ -19,7 +19,7 @@ export const Default: Story = {
     pageSize: '10',
     setActivePage: () => {},
     setPageSize: () => {},
-    totalCount: 50,
+    totalCount: 100,
   },
   render: args => {
     const totalCount = 100

@@ -81,14 +81,14 @@ export const Pagination = (props: PaginationProps) => {
             elem !== 0 ? (
               <Button
                 className={clsx(styles.elemPage, activePage === elem && styles.activePage)}
-                key={elem}
+                key={`page-${elem}-${index}`}
                 onClick={() => setActivePage(elem)}
                 variant={'secondary'}
               >
                 {elem}
               </Button>
             ) : (
-              <MoreHorizontalIcon className={styles.icon} key={`more-${elem}`} />
+              <MoreHorizontalIcon className={styles.icon} key={`ellipsis-${elem}-${index}`} />
             )
           )}
           <Button
