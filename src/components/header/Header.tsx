@@ -40,22 +40,16 @@ export const Header = (props: HeaderProps) => {
           </Button>
         )}
         <Select
-          className={styles.select}
           defaultValue={selectItemsWithIcons[0].value}
           onValueChange={handleLanguage}
           options={selectItemsWithIcons}
         />
         {!isAuth && (
           <>
-            <Button as={Link} className={styles.buttonLogin} href={Paths.login} variant={'link'}>
+            <Button as={Link} className={styles.button} href={Paths.login} variant={'link'}>
               Log in
             </Button>
-            <Button
-              as={Link}
-              className={styles.buttonSignup}
-              href={Paths.signin}
-              variant={'primary'}
-            >
+            <Button as={Link} className={styles.button} href={Paths.signin} variant={'primary'}>
               Sign up
             </Button>
           </>

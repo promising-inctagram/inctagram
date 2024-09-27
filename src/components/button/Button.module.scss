@@ -10,8 +10,9 @@
   text-align: center;
 
   border-radius: 2px;
+
   & > a {
-    color: inherit
+    color: inherit;
   }
 }
 
@@ -85,6 +86,7 @@
 
 .link {
   color: var(--color-accent-500);
+
   &:hover {
     color: var(--color-accent-100);
   }

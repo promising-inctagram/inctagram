@@ -1,32 +1,21 @@
 .wrapper {
-  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   padding: 12px 64px 12px 60px;
   border-bottom: 1px solid var(--color-dark-300);
 }
+
 .container {
   display: flex;
+  gap: 24px;
   align-items: center;
+  justify-content: center;
 }
 
 .buttonBell {
-  margin-right: 48px;
+  margin-right: 12px;
 }
 
-.select {
-  box-sizing: border-box;
-  width: 163px;
-  height: 36px;
-}
-
-.buttonLogin {
-  width: 100px;
-  padding: 6px 20px;
-  margin: 0 24px 0 36px;
-}
-
-.buttonSignup {
-  width: 100px;
-  padding: 6px 20px;
+.button {
+  text-wrap: nowrap;
 }
