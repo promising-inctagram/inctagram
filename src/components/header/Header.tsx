@@ -46,14 +46,19 @@ export const Header = (props: HeaderProps) => {
           options={selectItemsWithIcons}
         />
         {!isAuth && (
-          <Button as={Link} className={styles.buttonLogin} href={Paths.login} variant={'link'}>
-            Log in
-          </Button>
-        )}
-        {!isAuth && (
-          <Button as={Link} className={styles.buttonSignup} href={Paths.signin} variant={'primary'}>
-            Sign up
-          </Button>
+          <>
+            <Button as={Link} className={styles.buttonLogin} href={Paths.login} variant={'link'}>
+              Log in
+            </Button>
+            <Button
+              as={Link}
+              className={styles.buttonSignup}
+              href={Paths.signin}
+              variant={'primary'}
+            >
+              Sign up
+            </Button>
+          </>
         )}
       </div>
     </div>
