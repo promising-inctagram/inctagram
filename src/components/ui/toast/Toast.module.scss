@@ -1,3 +1,16 @@
+.progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background-color: currentcolor;
+
+  animation: progress-bar var(--animation-duration, 5s) linear forwards;
+}
+
 .rootClass {
   position: relative;
 
@@ -59,19 +72,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  .progressBar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    height: 2px;
-
-    background-color: currentcolor;
-
-    animation: progressBar var(--animation-duration, 5s) linear forwards;
-  }
 }
 
 .closeButton {
@@ -79,7 +79,7 @@
   display: flex;
 }
 
-@keyframes progressBar {
+@keyframes progress-bar {
   from {
     width: 100%;
   }

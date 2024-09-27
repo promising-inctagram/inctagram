@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import { Typography } from '@/components/ui'
+import { MAX_BADGE_COUNT } from '@/shared/constants'
 import clsx from 'clsx'
 
 import s from './Badge.module.scss'
@@ -12,9 +13,6 @@ type BadgeProps = {
 } & ComponentPropsWithoutRef<'div'>
 
 type BadgeRef = ElementRef<'div'>
-
-//todo: подумать куда вынести константы
-const MAX_BADGE_COUNT = 99
 
 export const Badge = forwardRef<BadgeRef, BadgeProps>(
   ({ children, count, variant = 'standard', ...rest }, ref) => {

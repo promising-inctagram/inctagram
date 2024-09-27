@@ -29,7 +29,7 @@ const FlagUnitedKingdomIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGEl
         }
       />
     </defs>
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <path d={'M0 0h24v24H0z'} fill={'url(#flag-united-kingdom_svg__b)'} />
   </svg>
 )

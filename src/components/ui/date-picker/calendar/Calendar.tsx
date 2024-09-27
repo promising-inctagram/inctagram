@@ -1,15 +1,10 @@
 import { DayFlag, DayPicker, type DayPickerProps, SelectionState, UI } from 'react-day-picker'
 
 import { ArrowIosBackIcon, ArrowIosForwardIcon } from '@/components/ui/icons'
+import { WeekDays } from '@/shared/enums'
 import { enUS } from 'date-fns/locale'
 
 import s from './Calendar.module.scss'
-
-// todo: подумать куда вынести enums
-export enum WeekDays {
-  Monday = 1,
-  Sunday = 0,
-}
 
 export const Calendar = ({
   className,

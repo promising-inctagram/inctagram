@@ -1,4 +1,4 @@
-import { EyeIcon } from '@/components/ui/icons'
+import { Button } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Toaster, showToast } from './Toast'
@@ -13,133 +13,42 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const style = {
-  alignItems: 'center',
-  display: 'flex',
-  fontSize: '100px',
-  height: '100vh',
-  justifyContent: 'center',
-}
-
-export const Success: Story = {
+export const BaseStory: Story = {
+  name: 'Toast',
   render: () => {
-    const onClickHandler = () => {
+    const successHandler = () => {
       showToast({
-        message: 'Your settings are saved',
+        message: 'Sucess!',
       })
     }
 
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
+    const warningHandler = () => {
+      showToast({
+        message: 'Warning!',
+        variant: 'warning',
+      })
+    }
 
-export const Error: Story = {
-  render: () => {
-    const onClickHandler = () => {
+    const errorHandler = () => {
       showToast({
         message: 'Error! Server is not available',
         variant: 'error',
       })
     }
 
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
-
-export const Warning: Story = {
-  render: () => {
-    const onClickHandler = () => {
+    const infoHandler = () => {
       showToast({
-        message: 'Warning!!!',
-        variant: 'warning',
-      })
-    }
-
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
-
-export const Info: Story = {
-  render: () => {
-    const onClickHandler = () => {
-      showToast({
-        message: 'Some information!!!',
+        message: 'Info!',
         variant: 'info',
       })
     }
 
     return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
-
-export const SuccessProgressBar: Story = {
-  render: () => {
-    const onClickHandler = () => {
-      showToast({
-        duration: 15000,
-        message: 'Some information!!!',
-        progress: true,
-      })
-    }
-
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
-
-export const DifferentIcon: Story = {
-  render: () => {
-    const onClickHandler = () => {
-      showToast({
-        icon: <EyeIcon />,
-        message: 'Some information!!!',
-      })
-    }
-
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
-        <Toaster />
-      </div>
-    )
-  },
-}
-
-export const LongText: Story = {
-  render: () => {
-    const onClickHandler = () => {
-      showToast({
-        message: 'Some informationsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-      })
-    }
-
-    return (
-      <div style={style}>
-        <div onClick={onClickHandler}>Показать тост</div>
+      <div style={{ display: 'flex', gap: '16px' }}>
+        <Button onClick={successHandler}>Success</Button>
+        <Button onClick={warningHandler}>Warning</Button>
+        <Button onClick={errorHandler}>Error</Button>
+        <Button onClick={infoHandler}>Info</Button>
         <Toaster />
       </div>
     )
