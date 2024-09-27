@@ -1,6 +1,6 @@
+import { Iconography } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Iconography } from './Iconography'
 import {
   browserIconsList,
   flagsIconsList,

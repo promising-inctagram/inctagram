@@ -1,10 +1,9 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
+import { Typography } from '@/components/ui'
 import clsx from 'clsx'
 
 import s from './Badge.module.scss'
-
-import { Typography } from '../typography'
 
 type BadgeProps = {
   children: ReactNode

@@ -1,11 +1,10 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
+import { Typography } from '@/components/ui'
 import * as Dropdown from '@radix-ui/react-dropdown-menu'
 
 import s from '@/components/ui/dropdown/Dropdown.module.scss'
-
-import { Typography } from '../typography'
 
 type Props = {
   title: string

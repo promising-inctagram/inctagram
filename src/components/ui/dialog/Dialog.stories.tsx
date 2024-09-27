@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Button, Checkbox, TextField, Typography } from '@/components/ui'
 import {
   DialogBody,
   DialogClose,
@@ -13,11 +14,6 @@ import {
 } from '@/components/ui/dialog/Dialog'
 import { CloseOutlineIcon, MoreHorizontalIcon } from '@/components/ui/icons'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
-
-import { Button } from '../button'
-import { Checkbox } from '../checkbox'
-import { TextField } from '../text-field'
-import { Typography } from '../typography'
 
 const descriptionMockText =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt. ' +

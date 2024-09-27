@@ -1,6 +1,5 @@
+import { Calendar } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Calendar } from './Calendar'
 
 const meta = {
   argTypes: {},

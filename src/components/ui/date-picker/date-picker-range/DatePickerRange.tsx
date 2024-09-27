@@ -1,14 +1,10 @@
 import { DateRange, Locale, PropsRange } from 'react-day-picker'
 
+import { Calendar, TextField, Typography, useDatePicker } from '@/components/ui'
 import { Content, Portal, Root, Trigger } from '@radix-ui/react-popover'
 import clsx from 'clsx'
 
 import s from '@/components/ui/date-picker/date-picker-single/DatePicker.module.scss'
-
-import { TextField } from '../../text-field'
-import { Typography } from '../../typography'
-import { Calendar } from '../calendar'
-import { useDatePicker } from '../hooks'
 
 type DatePickerProps = {
   disabled?: boolean

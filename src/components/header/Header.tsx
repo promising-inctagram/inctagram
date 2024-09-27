@@ -1,12 +1,13 @@
-import { Badge } from '@/components/badge'
-import { Button } from '@/components/button'
-import { BellOutlineIcon, FlagRussiaIcon, FlagUnitedKingdomIcon } from '@/components/icons'
-import { OptionsValue, Select } from '@/components/select/Select'
 import { Paths } from '@/components/sidebar/menu-items'
-import { Typography } from '@/components/typography'
+import { Badge, Button, Select, Typography } from '@/components/ui'
+import { BellOutlineIcon } from '@/components/ui/icons'
+import FlagRussiaIcon from '@/components/ui/icons/flags/FlagRussiaIcon'
+import FlagUnitedKingdomIcon from '@/components/ui/icons/flags/FlagUnitedKingdomIcon'
 import Link from 'next/link'
 
 import styles from '@/components/header/Header.module.scss'
+
+import { OptionsValue } from '../ui/select'
 
 export type HeaderProps = {
   countNotification?: number

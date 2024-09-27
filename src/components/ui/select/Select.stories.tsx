@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { OptionsValue, Select } from '@/components/ui/select/Select'
-
-import { FlagRussiaIcon, FlagUnitedKingdomIcon } from '../icons/flags'
+import { OptionsValue, Select } from '@/components/ui'
+import { FlagRussiaIcon, FlagUnitedKingdomIcon } from '@/components/ui/icons'
 
 const meta = {
   component: Select,

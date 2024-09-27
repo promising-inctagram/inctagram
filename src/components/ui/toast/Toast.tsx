@@ -1,12 +1,11 @@
 import React, { CSSProperties } from 'react'
 
+import { Typography } from '@/components/ui'
 import { CloseIcon } from '@/components/ui/icons'
 import { clsx } from 'clsx'
 import { ToastT, Toaster, toast } from 'sonner'
 
 import styles from './Toast.module.scss'
-
-import { Typography } from '../typography'
 
 const DEFAULT_DURATION = 5000
 const DEFAULT_POSITION = 'bottom-left'

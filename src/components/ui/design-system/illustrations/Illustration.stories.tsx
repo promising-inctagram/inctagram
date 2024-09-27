@@ -2,7 +2,7 @@ import {
   SignUpConfirmedIllustration,
   SignUpIllustration,
   TimeManagementIllustration,
-} from '@/components/ui/design-system/illustrations/index'
+} from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

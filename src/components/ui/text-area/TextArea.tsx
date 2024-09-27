@@ -1,10 +1,9 @@
 import { ComponentProps, forwardRef } from 'react'
 
+import { Typography } from '@/components/ui'
 import { clsx } from 'clsx'
 
 import s from './TextArea.module.scss'
-
-import { Typography } from '../typography'
 
 type TextAreaProps = {
   errorMessage?: string

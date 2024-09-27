@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
-import { DatePickerRange } from '@/components/ui/date-picker/date-picker-range/index'
+import { DatePickerRange } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 import { enUS, ru } from 'date-fns/locale'
 

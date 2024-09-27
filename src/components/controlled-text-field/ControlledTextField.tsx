@@ -1,6 +1,6 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { TextField, TextFieldProps } from '@/components/text-field'
+import { TextField, TextFieldProps } from '@/components/ui/text-field'
 
 type Props<T extends FieldValues> = Omit<TextFieldProps, 'onBlur' | 'onChange' | 'ref' | 'value'> &
   UseControllerProps<T>

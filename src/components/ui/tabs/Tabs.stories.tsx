@@ -1,4 +1,4 @@
-import { Tabs } from '@/components/ui/tabs/Tabs'
+import { Tabs } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {

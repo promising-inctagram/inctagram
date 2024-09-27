@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Card } from '@/components/ui'
 import { Option } from '@/components/ui/radio/Radio'
 
-import { Card } from '../card'
 import { Radio } from './Radio'
 
 const mockRadio: Option[] = [

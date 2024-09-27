@@ -1,13 +1,12 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import { ArrowIosDownOutlineIcon } from '@/components/ui/icons'
+import { Typography } from '@/components/ui/typography'
 import * as RadixSelect from '@radix-ui/react-select'
 import { SelectGroup, SelectItem } from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import s from './Select.module.scss'
-
-import { Typography } from '@/components/ui/typography'
 export type OptionsValue = {
   icon?: ReactNode
   id?: string

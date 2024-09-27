@@ -1,12 +1,11 @@
 import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
+import { Typography } from '@/components/ui'
 import { CheckmarkOutlineIcon } from '@/components/ui/icons'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
 
 import s from './Checkbox.module.scss'
-
-import { Typography } from '../typography'
 
 export type CheckboxProps = {
   error?: string

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import './freestyle.scss'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui'
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './Table'
+import './freestyle.scss'
 
 const meta = {
   argTypes: {

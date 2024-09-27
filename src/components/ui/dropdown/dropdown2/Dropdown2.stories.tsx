@@ -1,10 +1,9 @@
+import { Typography } from '@/components/ui'
 import { Content, Item, Root, Trigger } from '@/components/ui/dropdown/dropdown2/Dropdown2'
 import EditOutlineIcon from '@/components/ui/icons/EditOutlineIcon'
 import MoreHorizontalIcon from '@/components/ui/icons/MoreHorizontalIcon'
 import TrashOutlineIcon from '@/components/ui/icons/TrashOutlineIcon'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { Typography } from '../../typography'
 
 const meta = {
   component: Root,

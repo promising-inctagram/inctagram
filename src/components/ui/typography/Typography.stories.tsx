@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Typography } from './Typography'
+import { Typography } from '@/components/ui'
 
 const text = `В туманном лесу, где свет пробивается сквозь густые ветви деревьев, маленькая 
 сова сидела на ветке, наблюдая за миром. Она думала о том, как быстро летит время, 

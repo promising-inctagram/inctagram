@@ -8,6 +8,7 @@ import {
   useState,
 } from 'react'
 
+import { Button, Typography } from '@/components/ui'
 import {
   CloseOutlineIcon,
   EyeOffOutlineIcon,
@@ -18,10 +19,7 @@ import clsx from 'clsx'
 
 import s from './TextField.module.scss'
 
-import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
-
-type TextFieldProps = {
+export type TextFieldProps = {
   error?: string
   isRequired?: boolean
   label?: string

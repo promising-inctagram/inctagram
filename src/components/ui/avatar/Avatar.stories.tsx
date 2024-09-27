@@ -1,6 +1,6 @@
+import { Avatar } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Avatar } from './Avatar'
 const meta = {
   argTypes: {
     size: {

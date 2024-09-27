@@ -1,10 +1,9 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
+import { ScrollArea } from '@/components/ui'
 import clsx from 'clsx'
 
 import s from './Table.module.scss'
-
-import { ScrollArea } from '../scroll-area'
 
 const Table = forwardRef<ElementRef<'table'>, ComponentPropsWithoutRef<'table'>>(
   ({ className, ...props }, ref) => {

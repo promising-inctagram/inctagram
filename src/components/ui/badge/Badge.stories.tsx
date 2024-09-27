@@ -1,7 +1,6 @@
-import { Badge } from '@/components/ui/badge/Badge'
+import { Badge } from '@/components/ui'
+import { BellOutlineIcon } from '@/components/ui/icons'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { BellOutlineIcon } from '../icons'
 
 const meta = {
   argTypes: {

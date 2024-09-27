@@ -1,6 +1,5 @@
+import { ScrollArea as ScrollAreaComponent } from '@/components/ui'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { ScrollArea as ScrollAreaComponent } from './ScrollArea'
 
 const meta = {
   component: ScrollAreaComponent,

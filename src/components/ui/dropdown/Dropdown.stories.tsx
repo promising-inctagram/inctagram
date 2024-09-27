@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { Button, Typography } from '@/components/ui'
 import { DropDownMenu } from '@/components/ui/dropdown/DropDownMenu'
 import { DropDownSubMenu } from '@/components/ui/dropdown/DropDownSubMenu'
 import { Item } from '@/components/ui/dropdown/DropdownItem'
@@ -7,11 +8,6 @@ import EditOutlineIcon from '@/components/ui/icons/EditOutlineIcon'
 import MoreHorizontalIcon from '@/components/ui/icons/MoreHorizontalIcon'
 import TrashOutlineIcon from '@/components/ui/icons/TrashOutlineIcon'
 import { Meta, StoryObj } from '@storybook/react'
-
-import s from '@/components/ui/dropdown/Dropdown.module.scss'
-
-import { Button } from '../button'
-import { Typography } from '../typography'
 
 const meta = {
   component: DropDownMenu,
