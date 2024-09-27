@@ -20,7 +20,7 @@ import clsx from 'clsx'
 
 import s from './TextField.module.scss'
 
-type TextFieldProps = {
+export type TextFieldProps = {
   error?: string
   isRequired?: boolean
   label?: string

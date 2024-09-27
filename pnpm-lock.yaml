@@ -4377,12 +4377,6 @@ packages:
       react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
       react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
 
-  react-hook-form@7.53.0:
-    resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: ^16.8.0 || ^17 || ^18 || ^19
-
   react-google-recaptcha@3.1.0:
     resolution: {integrity: sha512-cYW2/DWas8nEKZGD7SCu9BSuVz8iOcOLHChHyi7upUuVhkpkhYG/6N3KDiTQ3XAiZ2UAZkfvYKMfAHOzBOcGEg==}
     peerDependencies:
@@ -10158,10 +10152,6 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.1.0
-
-  react-hook-form@7.53.0(react@18.3.1):
-    dependencies:
-      react: 18.3.1
 
   react-google-recaptcha@3.1.0(react@18.3.1):
     dependencies:
