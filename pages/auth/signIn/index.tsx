@@ -1,5 +1,9 @@
-import { SignInForm } from '@/components/forms/sign-in/SignInForm'
+import { SignInCard } from '@/components/forms/sign-in/SignInForm'
 
 export default function SignIn() {
-  return <SignInForm />
+  return (
+    <section>
+      <SignInCard />
+    </section>
+  )
 }
