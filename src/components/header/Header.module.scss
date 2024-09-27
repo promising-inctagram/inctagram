@@ -9,19 +9,24 @@
   display: flex;
   align-items: center;
 }
+
+.buttonBell {
+  margin-right: 48px;
+}
+
 .select {
   box-sizing: border-box;
-  min-width: 163px;
+  width: 163px;
   height: 36px;
 }
-.button {
-  display: flex;
-  gap: 48px;
-  align-items: center;
+
+.buttonLogin {
+  width: 100px;
+  padding: 6px 20px;
+  margin: 0 24px 0 36px;
 }
-.button1 {
-  margin-left: 36px;
-}
-.button2 {
-  margin-left: 24px;
+
+.buttonSignup {
+  width: 100px;
+  padding: 6px 20px;
 }

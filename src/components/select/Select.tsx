@@ -45,34 +45,32 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
     ))
 
     return (
-      <div className={s.container}>
-        <RadixSelect.Root
-          defaultValue={defaultValue}
-          disabled={disabled}
-          onValueChange={onValueChange}
-          value={value}
-          {...rest}
-        >
-          {label && (
-            <Typography as={'label'} className={s.label}>
-              {label}
-            </Typography>
-          )}
-          <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
-            <RadixSelect.Value placeholder={placeHolder} />
-            <RadixSelect.Icon>
-              <ArrowIosDownOutlineIcon className={s.icon} />
-            </RadixSelect.Icon>
-          </RadixSelect.Trigger>
-          <RadixSelect.Portal>
-            <RadixSelect.Content className={s.content} position={'popper'}>
-              <RadixSelect.Viewport>
-                <SelectGroup>{mappedOptions}</SelectGroup>
-              </RadixSelect.Viewport>
-            </RadixSelect.Content>
-          </RadixSelect.Portal>
-        </RadixSelect.Root>
-      </div>
+      <RadixSelect.Root
+        defaultValue={defaultValue}
+        disabled={disabled}
+        onValueChange={onValueChange}
+        value={value}
+        {...rest}
+      >
+        {label && (
+          <Typography as={'label'} className={s.label}>
+            {label}
+          </Typography>
+        )}
+        <RadixSelect.Trigger className={clsx(s.trigger, className)} ref={ref}>
+          <RadixSelect.Value placeholder={placeHolder} />
+          <RadixSelect.Icon>
+            <ArrowIosDownOutlineIcon className={s.icon} />
+          </RadixSelect.Icon>
+        </RadixSelect.Trigger>
+        <RadixSelect.Portal>
+          <RadixSelect.Content className={s.content} position={'popper'}>
+            <RadixSelect.Viewport>
+              <SelectGroup>{mappedOptions}</SelectGroup>
+            </RadixSelect.Viewport>
+          </RadixSelect.Content>
+        </RadixSelect.Portal>
+      </RadixSelect.Root>
     )
   }
 )
