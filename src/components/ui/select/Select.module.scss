@@ -28,13 +28,13 @@
     transition: all 0.3s ease-in-out;
   }
 
-  &:hover {
-    background: var(--dark-500, #333);
+  &[data-placeholder] {
+    color: var(--color-dark-100);
   }
 
   &:focus {
     border-radius: 2px;
-    outline: 2px solid var(--color-accent-500);
+    outline: 1px solid var(--color-accent-500);
   }
 }
 
@@ -55,13 +55,9 @@
 
 .selectItem {
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-
+  gap: 12px;
   height: 36px;
   padding: 6px 11px;
-
   color: var(--color-light-100);
 
   transition: all 0.3s;
@@ -74,9 +70,14 @@
     color: var(--color-accent-500);
     background: var(--color-dark-300);
   }
+
+  &[data-state='checked'] {
+    color: var(--color-accent-300) !important;
+    outline: none;
+  }
 }
 
-.selectItemFlex {
+.option {
   display: flex;
   flex-wrap: nowrap;
   gap: 12px;
