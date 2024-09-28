@@ -55,11 +55,11 @@ type ItemProps = {
   Icon: ComponentType<{ className: string }>
   OutlineIcon: ComponentType<{ className: string }>
   isActive: boolean
-  label: string
+  label?: string
   path: string
 }
 
-const Item = ({ Icon, OutlineIcon, isActive, label, path }: ItemProps) => {
+export const Item = ({ Icon, OutlineIcon, isActive, label, path }: ItemProps) => {
   return (
     <Typography
       as={Link}
