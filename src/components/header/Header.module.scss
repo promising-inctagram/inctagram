@@ -16,7 +16,14 @@
 
 .container {
   display: flex;
-  gap: 24px;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 50px;
   align-items: center;
   justify-content: center;
 }

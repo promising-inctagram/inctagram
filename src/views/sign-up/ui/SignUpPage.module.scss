@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 380px;
+  padding: 24px;
+}
+
+.socials {
+  display: flex;
+  gap: 60px;
+  justify-content: center;
+  width: 100%;
+}
+
+.socialsButton {
+  &:focus {
+    border-radius: var(--border-radius-rounded);
+    outline-offset: 4px;
+  }
+}
+
+.icon {
+  width: var(--icon-size-l);
+  height: var(--icon-size-l);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

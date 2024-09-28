@@ -1,1 +1,1 @@
-export { default } from '@/views/terms-of-service/TermsOfServicePage'
+export { default } from '@/views/terms-of-service'
