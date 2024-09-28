@@ -1,3 +1,4 @@
+export * from './docs-content'
 export * from './header'
 export * from './layout'
 export * from './page'

@@ -1,6 +1,11 @@
 .button {
   cursor: pointer;
 
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+
   box-sizing: border-box;
   padding: 6px 24px;
 
@@ -85,6 +90,7 @@
 }
 
 .link {
+  padding: 0;
   color: var(--color-accent-500);
 
   &:hover {
