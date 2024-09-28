@@ -1,7 +1,8 @@
+import { Page } from '@/components'
 import { getLayout } from '@/components/layout'
 
 function PrivacyPolicyPage() {
-  return <div>Privacy Policy page</div>
+  return <Page>Privacy Policy page</Page>
 }
 
 PrivacyPolicyPage.getLayout = getLayout

@@ -1,7 +1,7 @@
-import { getLayout } from '@/components'
+import { Page, getLayout } from '@/components'
 
 function SignInPage() {
-  return <div>Sign In page</div>
+  return <Page>Sign In page</Page>
 }
 
 SignInPage.getLayout = getLayout

@@ -1,7 +1,7 @@
-import { getLayout } from '@/components'
+import { Page, getLayout } from '@/components'
 
 function TermsOfServicePage() {
-  return <div>Terms of Service page</div>
+  return <Page>Terms of Service page</Page>
 }
 
 TermsOfServicePage.getLayout = getLayout
