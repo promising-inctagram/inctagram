@@ -1,7 +1,16 @@
 .wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+
   display: flex;
   justify-content: space-between;
-  padding: 12px 64px 12px 60px;
+
+  width: 100%;
+  height: var(--header-height);
+  padding: 12px 60px;
+
+  background-color: var(--color-dark-700);
   border-bottom: 1px solid var(--color-dark-300);
 }
 

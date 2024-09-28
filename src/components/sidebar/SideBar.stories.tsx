@@ -1,4 +1,4 @@
-import { SideBar } from '@/components/sidebar/SideBar'
+import { SideBar } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof SideBar> = {
