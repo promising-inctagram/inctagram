@@ -1,4 +1,4 @@
-import { getLayout } from '@/components/layout'
+import { getLayout } from '@/components'
 import Head from 'next/head'
 
 export default function Home() {

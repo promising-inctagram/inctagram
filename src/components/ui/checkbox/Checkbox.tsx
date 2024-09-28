@@ -5,7 +5,7 @@ import { CheckmarkOutlineIcon } from '@/components/ui/icons'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
 
-import s from './Checkbox.module.scss'
+import s from '@/components/ui/checkbox/Checkbox.module.scss'
 
 export type CheckboxProps = {
   error?: string
