@@ -25,6 +25,10 @@
 }
 
 .socialsButton {
+  &:hover {
+    color: inherit;
+  }
+
   &:focus {
     border-radius: var(--border-radius-rounded);
     outline-offset: 4px;

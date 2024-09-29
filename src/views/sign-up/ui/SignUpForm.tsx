@@ -4,16 +4,23 @@ import { ControlledCheckbox } from '@/components/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
+import { TermsAgreementLabel } from '@/views/sign-up/ui/TermsAgreementLabel'
 
 import s from './SignUpFrom.module.scss'
 
-type SignUpFormProps = {}
-export const SignUpForm = (props: SignUpFormProps) => {
+type SignUpFormProps = {
+  // todo: fix any
+  onSubmit: (formData: any) => void
+}
+export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const { t } = useTranslation()
+  const { labels, placeholders, policy, submitButton, terms, termsAgreement } =
+    t.signUpPage.signUpForm
+
   const { control, handleSubmit } = useForm()
 
   const formHandler = handleSubmit(data => {
-    console.log(data)
+    onSubmit(data)
   })
 
   return (
@@ -21,35 +28,39 @@ export const SignUpForm = (props: SignUpFormProps) => {
       <div className={s.textFieldContainer}>
         <ControlledTextField
           control={control}
-          label={t.signUpPage.signUpForm.labels.name}
+          label={labels.name}
           name={'name'}
-          placeholder={t.signUpPage.signUpForm.placeholders.addUsername}
+          placeholder={placeholders.addUsername}
         />
         <ControlledTextField
           control={control}
-          label={t.signUpPage.signUpForm.labels.email}
+          label={labels.email}
           name={'email'}
-          placeholder={t.signUpPage.signUpForm.placeholders.addEmail}
+          placeholder={placeholders.addEmail}
         />
         <ControlledTextField
           control={control}
-          label={t.signUpPage.signUpForm.labels.password}
+          label={labels.password}
           name={'password'}
-          placeholder={t.signUpPage.signUpForm.placeholders.createPassword}
+          placeholder={placeholders.createPassword}
+          variant={'password'}
         />
         <ControlledTextField
           control={control}
-          label={t.signUpPage.signUpForm.labels.confirmPassword}
+          label={labels.confirmPassword}
           name={'confirmPassword'}
-          placeholder={t.signUpPage.signUpForm.placeholders.repeatPassword}
+          placeholder={placeholders.repeatPassword}
+          variant={'password'}
         />
       </div>
       <ControlledCheckbox
         control={control}
-        label={'I agree to the Terms of Service and Privacy Policy'}
-        name={'serviceAgreement'}
-      ></ControlledCheckbox>
-      <Button fullWidth>{t.signUpPage.signUpForm.submitButton}</Button>
+        label={
+          <TermsAgreementLabel policy={policy} terms={terms} termsAgreement={termsAgreement} />
+        }
+        name={'termsAgreement'}
+      />
+      <Button fullWidth>{submitButton}</Button>
     </form>
   )
 }

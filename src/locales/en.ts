@@ -28,7 +28,10 @@ export const en = {
         createPassword: 'create strong password',
         repeatPassword: 'repeat your strong password',
       },
+      policy: 'Privacy Policy',
       submitButton: 'Sign Up',
+      terms: 'Terms of Service',
+      termsAgreement: 'I agree to the <1>Terms of Service</1> and <2>Privacy Policy</2>',
     },
   },
   termsOfServicePage: {

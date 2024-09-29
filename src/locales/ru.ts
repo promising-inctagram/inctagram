@@ -31,7 +31,11 @@ export const ru: LocaleType = {
         createPassword: 'создайте надежный пароль',
         repeatPassword: 'повторите пароль',
       },
+      policy: 'политикой конфиденциальности',
       submitButton: 'Зарегистрироваться',
+      terms: 'условиями предоставления услуг',
+      termsAgreement:
+        'Согласен с <1>условиями предоставления услуг</1> и <2>политикой конфиденциальности</2>',
     },
   },
   termsOfServicePage: {

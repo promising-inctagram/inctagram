@@ -1,9 +1,15 @@
+.container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .root {
   cursor: pointer;
 
-  position: relative;
-
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
 
@@ -80,13 +86,6 @@
 .icon {
   width: 18px;
   height: 18px;
-}
-
-.label {
-  cursor: pointer;
-  position: absolute;
-  left: 26px;
-  white-space: nowrap;
 }
 
 .error {

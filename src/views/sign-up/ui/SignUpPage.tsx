@@ -10,13 +10,19 @@ import s from './SignUpPage.module.scss'
 
 function SignUpPage() {
   const { t } = useTranslation()
+  const { accountExistsQuestion, linkToSignIn, pageTitle } = t.signUpPage
+
+  // todo: fix any
+  const formSubmitHandler = (data: any) => {
+    console.log(data)
+  }
 
   return (
     <Page>
       <div className={s.container}>
         <Card className={s.card}>
           <Typography as={'h1'} variant={'h1'}>
-            {t.signUpPage.pageTitle}
+            {pageTitle}
           </Typography>
           <div className={s.socials}>
             <Button className={s.socialsButton} variant={'icon'}>
@@ -26,13 +32,11 @@ function SignUpPage() {
               <GoogleIcon className={s.icon} />
             </Button>
           </div>
-          <SignUpForm />
+          <SignUpForm onSubmit={formSubmitHandler} />
           <div className={s.footer}>
-            <Typography variant={'regular_text_16'}>
-              {t.signUpPage.accountExistsQuestion}
-            </Typography>
+            <Typography variant={'regular_text_16'}>{accountExistsQuestion}</Typography>
             <Button as={Link} href={Paths.logIn} variant={'link'}>
-              {t.signUpPage.linkToSignIn}
+              {linkToSignIn}
             </Button>
           </div>
         </Card>
