@@ -1,6 +1,5 @@
-import { Button } from '@/components/button'
-import { GoogleIcon } from '@/components/icons'
-import GithubIcon from '@/components/icons/social-networks/GithubIcon'
+import { Button } from '@/components/ui'
+import { GithubIcon, GoogleIcon } from '@/components/ui/icons'
 
 type Props = {}
 export const AuthSocial = (props: Props) => {

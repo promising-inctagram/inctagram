@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import RecaptchaComponent from 'react-google-recaptcha'
 
-import { Recaptcha } from '@/components/recaptcha/Recaptcha'
+import { Recaptcha } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Recaptcha>
 export const Default: Story = {
   args: {
     children: (
-      <ReCAPTCHA
+      <RecaptchaComponent
         hl={'en'}
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string}
         theme={'dark'}
@@ -52,7 +52,12 @@ export const Error: Story = {
           Нажми на меня до галочки
         </button>
         <Recaptcha error={error}>
-          <ReCAPTCHA hl={'en'} onChange={handleTokenChange} sitekey={sitekey} theme={'dark'} />
+          <RecaptchaComponent
+            hl={'en'}
+            onChange={handleTokenChange}
+            sitekey={sitekey}
+            theme={'dark'}
+          />
         </Recaptcha>
       </form>
     )

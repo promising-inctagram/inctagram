@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef } from 'react'
 
-import { LogOutOutlineIcon } from '@/components/icons'
 import { menuItems } from '@/components/sidebar/menu-items'
-import { Typography } from '@/components/typography'
+import { Typography } from '@/components/ui'
+import { LogOutOutlineIcon } from '@/components/ui/icons'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -55,11 +55,11 @@ type ItemProps = {
   Icon: ComponentType<{ className: string }>
   OutlineIcon: ComponentType<{ className: string }>
   isActive: boolean
-  label: string
+  label?: string
   path: string
 }
 
-const Item = ({ Icon, OutlineIcon, isActive, label, path }: ItemProps) => {
+export const Item = ({ Icon, OutlineIcon, isActive, label, path }: ItemProps) => {
   return (
     <Typography
       as={Link}

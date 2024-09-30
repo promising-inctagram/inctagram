@@ -1,19 +1,18 @@
 import { themes } from '@storybook/theming'
 import type { Preview } from '@storybook/react'
 
-import '../src/app/styles/index.scss'
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
+import '@/styles/index.scss'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
-import {fn} from "@storybook/test";
-
+import { fn } from '@storybook/test'
 
 const preview: Preview = {
   parameters: {
-    actions: { onClick: fn(), },
+    actions: { onClick: fn() },
     docs: {
       theme: themes.dark,
     },
@@ -34,4 +33,4 @@ const preview: Preview = {
     },
   },
 }
-export default preview;
+export default preview
