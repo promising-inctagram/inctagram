@@ -6,7 +6,7 @@ import { SignInForm } from '@/views/sign-in/ui/SignInForm'
 import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
 import Link from 'next/link'
 
-import s from './SignInForm.module.scss'
+import s from './SignIn.module.scss'
 
 export type LoginArgs = {
   email: string
@@ -21,7 +21,7 @@ function SignInPage() {
   }
 
   return (
-    <Page>
+    <Page className={s.container} pt={36}>
       <Card className={s.card}>
         <Typography as={'h1'} variant={'h1'}>
           {pageTitle}

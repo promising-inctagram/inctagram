@@ -7,7 +7,7 @@ import { useTranslation } from '@/shared/hooks/useTranslations'
 import { LoginArgs } from '@/views/sign-in/ui/SignInPage'
 import Link from 'next/link'
 
-import s from './SignInForm.module.scss'
+import s from './SignIn.module.scss'
 
 type Props = {
   onSubmit: SubmitHandler<LoginArgs>
@@ -19,7 +19,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
   const { control, handleSubmit } = useForm<LoginArgs>()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledTextField
         className={s.emailInput}
         control={control}
