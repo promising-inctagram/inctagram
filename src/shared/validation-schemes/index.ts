@@ -1,12 +1,10 @@
 import { LocaleValidationPassword, LocaleValidationUserName } from '@/locales/en'
 import {
-  AT_LEAST_ONE_LETTER_REGEX,
-  AT_LEAST_ONE_NUMBER_REGEX,
-  AT_LEAST_ONE_SPEC_SYMBOL_REGEX,
   MAX_PASSWORD_LENGTH,
   MAX_USERNAME_LENGTH,
   MIN_PASSWORD_LENGTH,
   MIN_USERNAME_LENGTH,
+  PASSWORD_REGEX,
   USERNAME_REGEX,
 } from '@/shared/constants'
 import { z } from 'zod'
@@ -30,10 +28,8 @@ export const passwordScheme = (args: LocaleValidationPassword) =>
     .regex(/^\S*$/, { message: args.noWhiteSpace })
     .min(MIN_PASSWORD_LENGTH, { message: args.minLength })
     .max(MAX_PASSWORD_LENGTH, { message: args.maxLength })
-    .refine(value => AT_LEAST_ONE_LETTER_REGEX.test(value), { message: args.mustContainLetter })
-    .refine(value => AT_LEAST_ONE_NUMBER_REGEX.test(value), { message: args.mustContainNumber })
-    .refine(value => AT_LEAST_ONE_SPEC_SYMBOL_REGEX.test(value), {
-      message: args.mustContainSpecSymbols,
+    .refine(value => PASSWORD_REGEX.test(value), {
+      message: args.mustContain,
     })
 
 export const confirmPasswordScheme = z.string().trim()
