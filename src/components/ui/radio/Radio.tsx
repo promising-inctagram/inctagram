@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
-import { RadioOption } from '@/shared/types/common'
+import { RadioOption } from '@/shared/types'
 import * as RadixRadio from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 

@@ -3,6 +3,7 @@ import { Button, Card, Typography } from '@/components/ui'
 import { GithubIcon, GoogleIcon } from '@/components/ui/icons'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
+import { SignUpFields } from '@/views/sign-up/model/types'
 import { SignUpForm } from '@/views/sign-up/ui/SignUpForm'
 import Link from 'next/link'
 
@@ -12,8 +13,7 @@ function SignUpPage() {
   const { t } = useTranslation()
   const { accountExistsQuestion, linkToSignIn, pageTitle } = t.signUpPage
 
-  // todo: fix any
-  const formSubmitHandler = (data: any) => {
+  const formSubmitHandler = (data: SignUpFields) => {
     console.log(data)
   }
 
