@@ -1,14 +1,14 @@
-import { ComponentProps, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import { Typography } from '@/components/ui'
 import { clsx } from 'clsx'
 
 import s from './TextArea.module.scss'
 
-type TextAreaProps = {
+export type TextAreaProps = {
   errorMessage?: string
   label?: string
-} & ComponentProps<'textarea'>
+} & ComponentPropsWithoutRef<'textarea'>
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ className, errorMessage, label, ...rest }, ref) => {
