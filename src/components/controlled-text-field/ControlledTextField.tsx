@@ -33,7 +33,7 @@ export const ControlledTextField = <T extends FieldValues>({
   return (
     <TextField
       {...props}
-      error={errorMessage ?? error?.message}
+      errorMessage={errorMessage ?? error?.message}
       onBlur={onBlur}
       onChange={onChange}
       ref={ref}
