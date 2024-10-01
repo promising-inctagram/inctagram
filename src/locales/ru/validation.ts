@@ -10,7 +10,7 @@ export const validation = {
     noWhiteSpace: 'Использование пробелов запрещено',
   },
   passwordsMatch: 'Пароли должны совпадать',
-  requiredField: 'Обязательное поле БЛЯ',
+  requiredField: 'Обязательное поле',
   userName: {
     allowedSymbols: 'Имя пользователя может содержать символы: 0-9, A-Z, a-z, _ или -.',
     maxLength: 'Максимальное количество символов 30',
