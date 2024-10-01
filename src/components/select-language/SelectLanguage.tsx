@@ -32,7 +32,7 @@ export const SelectLanguage = forwardRef<SelectLanguageRef, SelectLanguageProps>
     return (
       <Select
         className={clsx(s.container, className)}
-        defaultValue={locale}
+        defaultValue={locale ?? 'en'}
         onValueChange={changeLangHandler}
         options={languages}
         ref={ref}

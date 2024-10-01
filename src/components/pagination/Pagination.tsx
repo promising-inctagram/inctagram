@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/button'
-import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '@/components/icons'
-import { OptionsValue, Select } from '@/components/select/Select'
-import { Typography } from '@/components/typography'
+import { Button, OptionsValue, Select, Typography } from '@/components/ui'
+import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '@/components/ui/icons'
 import clsx from 'clsx'
 
 import styles from '@/components/pagination/Pagination.module.scss'
@@ -17,11 +15,11 @@ export type PaginationProps = {
 }
 
 const selectItems: OptionsValue[] = [
-  { value: '10' },
-  { value: '20' },
-  { value: '30' },
-  { value: '50' },
-  { value: '100' },
+  { option: '10', value: '10' },
+  { option: '20', value: '20' },
+  { option: '30', value: '30' },
+  { option: '50', value: '50' },
+  { option: '100', value: '100' },
 ]
 
 const getPageNumbers = (totalPages: number, activePage: number) => {
