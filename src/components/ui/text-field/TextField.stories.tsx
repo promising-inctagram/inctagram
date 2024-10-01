@@ -8,7 +8,7 @@ const meta = {
         type: 'boolean',
       },
     },
-    error: {
+    errorMessage: {
       control: {
         type: 'text',
       },
@@ -41,7 +41,7 @@ export const Text: Story = {
 
 export const TextWithError: Story = {
   args: {
-    error: 'Some error occurred...',
+    errorMessage: 'Some error occurred...',
     isRequired: true,
     label: 'Some text-field label',
     placeholder: 'type something...',
