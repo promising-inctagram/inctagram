@@ -2,16 +2,11 @@ import { Page, getLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks/useTranslations'
-import { SignInForm } from '@/views/sign-in/ui/SignInForm'
+import { LoginArgs, SignInForm } from '@/views/sign-in/ui/SignInForm'
 import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
 import Link from 'next/link'
 
 import s from './SignIn.module.scss'
-
-export type LoginArgs = {
-  email: string
-  password: string
-}
 
 function SignInPage() {
   const { t } = useTranslation()
