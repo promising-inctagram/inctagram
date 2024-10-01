@@ -20,7 +20,7 @@ import clsx from 'clsx'
 import s from './TextField.module.scss'
 
 export type TextFieldProps = {
-  error?: string
+  errorMessage?: string
   isRequired?: boolean
   label?: string
   variant?: 'password' | 'search' | 'text'
@@ -32,7 +32,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   const {
     className,
     disabled,
-    error,
+    errorMessage,
     isRequired = false,
     label,
     onChange,
@@ -83,7 +83,13 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
       <div className={s.inputContainer}>
         {isSearch && <SearchOutlineIcon className={clsx(s.iconSearch, disabled && s.disabled)} />}
         <input
-          className={clsx(s.input, s[variant], error && s.error, disabled && s.disabled, className)}
+          className={clsx(
+            s.input,
+            s[variant],
+            errorMessage && s.error,
+            disabled && s.disabled,
+            className
+          )}
           disabled={disabled}
           id={id}
           onChange={inputChangeHandler}
@@ -97,7 +103,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           <Button
             className={clsx(
               s.passwordControl,
-              error && s.error,
+              errorMessage && s.error,
               disabled && s.disabled,
               s.showIcon
             )}
@@ -123,9 +129,9 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           </Button>
         )}
       </div>
-      {error && (
+      {errorMessage && (
         <Typography as={'span'} variant={'error'}>
-          {error}
+          {errorMessage}
         </Typography>
       )}
     </div>
