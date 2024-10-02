@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
@@ -12,12 +12,14 @@ import { z } from 'zod'
 import s from './SignIn.module.scss'
 
 type Props = {
-  onSubmit: SubmitHandler<LoginArgs>
+  onSubmit: (args: LoginArgs) => void
 }
 
+const errorMessage = 'The email or password are incorrect. Try again please'
+
 const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6, 'The email or password are incorrect. Try again please'),
+  email: z.string().trim().email({ message: errorMessage }),
+  password: z.string({ message: errorMessage }).trim(),
 })
 
 export type LoginArgs = z.infer<typeof loginSchema>
@@ -29,35 +31,32 @@ export const SignInForm = ({ onSubmit }: Props) => {
     control,
     formState: { errors },
     handleSubmit,
-    trigger,
   } = useForm<LoginArgs>({
     resolver: zodResolver(loginSchema),
   })
 
-  const [emailBlurred, setEmailBlurred] = useState(false)
-
-  const handleEmailBlur = async () => {
-    setEmailBlurred(true)
-    await trigger('email')
-  }
+  const errorMessages = [errors.email?.message, errors.password?.message].filter(Boolean).join(', ')
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={s.form}
+      onSubmit={handleSubmit((args, e) => {
+        if (e) {
+          e.preventDefault()
+          onSubmit(args)
+        }
+      })}
+    >
       <ControlledTextField
         className={s.emailInput}
         control={control}
         label={labels.email}
         name={'email'}
-        /*onBlur={handleEmailBlur}*/
         placeholder={placeholders.addEmail}
       />
       <ControlledTextField
         control={control}
-        error={
-          errors.password?.message ||
-          /*emailBlurred && */ (errors.email &&
-            'The email or password are incorrect. Try again please')
-        }
+        error={errorMessages}
         label={labels.password}
         name={'password'}
         placeholder={placeholders.addPassword}

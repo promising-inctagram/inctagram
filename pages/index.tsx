@@ -1,7 +1,12 @@
 import { getLayout } from '@/components'
+import { useLoginMutation } from '@/services/instagram.api'
 import Head from 'next/head'
 
 export default function Home() {
+  const result = useLoginMutation()
+
+  console.log(result)
+
   return (
     <>
       <Head>
