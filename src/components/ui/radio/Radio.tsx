@@ -8,7 +8,7 @@ import s from './Radio.module.scss'
 
 import { Typography } from '../typography'
 
-type RadioProps = {
+export type RadioProps = {
   options: RadioOption[]
 } & ComponentPropsWithoutRef<typeof RadixRadio.Root>
 type RadioGroupRef = ElementRef<typeof RadixRadio.Root>
