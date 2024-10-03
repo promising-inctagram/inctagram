@@ -7,10 +7,11 @@ import { SelectGroup, SelectItem } from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
 import s from './Select.module.scss'
+
 export type OptionsValue = {
   icon?: ReactNode
-  id?: string
-  value?: string
+  option: string
+  value: string
 }
 export type SelectProps = {
   className?: string
@@ -26,21 +27,19 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Trigger>, SelectP
       disabled,
       label,
       onValueChange,
-      options,
+      options = [],
       placeHolder,
       value,
       ...rest
     },
     ref
   ) => {
-    const mappedOptions = options?.map(option => (
-      <SelectItem className={s.selectItem} key={option.value} value={option?.value || ''}>
-        <RadixSelect.ItemText>
-          <div className={s.selectItemFlex}>
-            {option.icon && option.icon}
-            <Typography as={'span'} variant={'regular_text_16'}>
-              {option.value}
-            </Typography>
+    const mappedOptions = options?.map((item, index) => (
+      <SelectItem className={s.selectItem} key={item.value + index} value={item.value}>
+        <RadixSelect.ItemText asChild>
+          <div className={s.option}>
+            {item.icon}
+            {item.option}
           </div>
         </RadixSelect.ItemText>
       </SelectItem>

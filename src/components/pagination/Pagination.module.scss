@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.containerPages {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  width: fit-content;
+  height: 24px;
+}
+
+.elemPage {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-400);
+
+  background-color: transparent;
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus-visible {
+    outline-width: 2px;
+  }
+}
+
+.activePage {
+  color: var(--color-dark-900);
+  background-color: var(--color-light-100);
+
+  &:hover {
+    background-color: var(--color-light-100);
+  }
+}
+
+.container {
+  display: flex;
+}
+
+.select {
+  box-sizing: border-box;
+  width: 52px;
+  height: 24px;
+  margin-right: 7px;
+  margin-left: 4px;
+  padding: 0;
+  padding-left: 6px;
+
+  font-size: var(--font-size-s);
+}
+
+.icon {
+  width: 24px;
+  height: 12px;
+  margin-top: 12px;
+}
+
+.iconArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 16px;
+  height: 16px;
+}

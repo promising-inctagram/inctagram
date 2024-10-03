@@ -12,10 +12,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const selectItems: OptionsValue[] = [{ value: 'apple' }, { value: 'banana' }, { value: 'orange' }]
+const selectItems: OptionsValue[] = [
+  { option: 'apple', value: 'apple' },
+  { option: 'banana', value: 'banana' },
+  { option: 'orange', value: 'orange' },
+]
+
 const selectItemsWithIcons: OptionsValue[] = [
-  { icon: <FlagRussiaIcon />, value: 'Russia' },
-  { icon: <FlagUnitedKingdomIcon />, value: 'English' },
+  { icon: <FlagRussiaIcon />, option: 'Russian', value: 'Russian' },
+  { icon: <FlagUnitedKingdomIcon />, option: 'English', value: 'English' },
 ]
 
 export const Default: Story = {

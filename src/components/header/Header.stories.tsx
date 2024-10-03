@@ -1,9 +1,19 @@
-import { useState } from 'react'
-
 import { Header } from '@/components'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
+  argTypes: {
+    countNotification: {
+      control: {
+        type: 'number',
+      },
+    },
+    isAuth: {
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
   component: Header,
   tags: ['autodocs'],
   title: 'Components/Header',
@@ -12,28 +22,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    countNotification: 3,
-    isAuth: true,
-    setLanguage: () => {},
-  },
-  render: () => {
-    const [language, setLanguage] = useState<string>()
-    const countNotification = 3
-
-    return <Header countNotification={countNotification} isAuth setLanguage={setLanguage} />
-  },
-}
-
-export const NotAutorealized: Story = {
-  args: {
-    isAuth: false,
-    setLanguage: (value: string) => console.log(value),
-  },
-  render: () => {
-    const [language, setLanguage] = useState<string>()
-
-    return <Header isAuth={false} setLanguage={setLanguage} />
-  },
+export const DefaultStory: Story = {
+  name: 'Header',
 }
