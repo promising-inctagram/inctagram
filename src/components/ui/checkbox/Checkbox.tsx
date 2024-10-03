@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId } from 'react'
 
 import { Typography } from '@/components/ui'
 import { CheckmarkOutlineIcon } from '@/components/ui/icons'
@@ -10,7 +10,7 @@ import s from '@/components/ui/checkbox/Checkbox.module.scss'
 export type CheckboxProps = {
   error?: string
   isRequired?: boolean
-  label?: string
+  label?: ReactNode
 } & ComponentPropsWithoutRef<typeof RadixCheckbox.Root>
 
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>
@@ -21,20 +21,22 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
 
   return (
     <div>
-      <RadixCheckbox.Root
-        className={clsx(s.root, error && s.error, className)}
-        disabled={disabled}
-        id={checkboxId}
-        ref={ref}
-        {...rest}
-      >
-        <RadixCheckbox.Indicator className={clsx(s.indicator, disabled && s.disabled)}>
-          <CheckmarkOutlineIcon className={clsx(s.icon, disabled && s.disabledIcon)} />
-        </RadixCheckbox.Indicator>
+      <div className={s.container}>
+        <RadixCheckbox.Root
+          className={clsx(s.root, error && s.error, className)}
+          disabled={disabled}
+          id={checkboxId}
+          ref={ref}
+          {...rest}
+        >
+          <RadixCheckbox.Indicator className={clsx(s.indicator, disabled && s.disabled)}>
+            <CheckmarkOutlineIcon className={clsx(s.icon, disabled && s.disabledIcon)} />
+          </RadixCheckbox.Indicator>
+        </RadixCheckbox.Root>
         {label && (
           <Typography
             as={'label'}
-            className={clsx(s.label, disabled && s.disabled)}
+            className={clsx(disabled && s.disabled)}
             htmlFor={checkboxId}
             isRequired={isRequired}
             variant={'regular_text_14'}
@@ -42,7 +44,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
             {label}
           </Typography>
         )}
-      </RadixCheckbox.Root>
+      </div>
       {error && (
         <Typography as={'span'} variant={'error'}>
           {error}
