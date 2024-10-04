@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 380px;
+  height: 505px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.emailInput {
+  margin-bottom: 24px;
+}
+
+.passwordLink {
+  align-self: end;
+  margin: 36px 0 24px;
+}
+
+.paragraph {
+  margin: 18px 0 6px;
+}
