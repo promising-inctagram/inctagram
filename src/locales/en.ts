@@ -7,6 +7,7 @@ export type LocaleType = typeof en
 export type LocaleValidation = typeof en.validation
 export type LocaleValidationUserName = typeof en.validation.userName
 export type LocaleValidationPassword = typeof en.validation.password
+export type LocaleEmailSentDialog = typeof en.signUpPage.signUpForm.emailSentDialog
 
 export const en = {
   language: {
