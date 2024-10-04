@@ -59,7 +59,6 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   }
 
   const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
-    e.preventDefault()
     setShowPassword(prev => !prev)
   }
 

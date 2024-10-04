@@ -20,6 +20,10 @@
   & > a {
     color: inherit;
   }
+
+  &:disabled {
+    cursor: default;
+  }
 }
 
 .primary {
@@ -41,7 +45,7 @@
 
   &:disabled {
     color: var(--color-light-900);
-    background-color: var(--color-accent-700);
+    background-color: var(--color-accent-900);
   }
 }
 

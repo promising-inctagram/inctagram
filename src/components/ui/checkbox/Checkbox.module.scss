@@ -95,9 +95,10 @@
   outline-offset: 2px;
 }
 
-.disabled {
-  cursor: default;
-  color: var(--color-light-900);
+.label {
+  &.disabled {
+    color: var(--color-light-900);
+  }
 }
 
 .disabledIcon {
