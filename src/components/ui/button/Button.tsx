@@ -15,10 +15,17 @@ export const Button = forwardRef(
     props: ButtonProps<T>,
     ref: ForwardedRef<HTMLButtonElement>
   ) => {
-    const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
+    const {
+      as: Component = 'button',
+      className,
+      fullWidth,
+      type = 'button',
+      variant = 'primary',
+      ...rest
+    } = props
     const cn = clsx(styles.button, styles[variant], fullWidth && styles.fullWidth, className)
 
-    return <Component className={cn} ref={ref} {...rest} />
+    return <Component className={cn} ref={ref} type={type} {...rest} />
   }
 )
 

@@ -4,20 +4,31 @@ import { ControlledCheckbox } from '@/components/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
+import { signUpSchemeCreator } from '@/views/sign-up/model/sign-up-scheme-creator'
+import { SignUpFields } from '@/views/sign-up/model/types'
 import { TermsAgreementLabel } from '@/views/sign-up/ui/TermsAgreementLabel'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './SignUpFrom.module.scss'
 
 type SignUpFormProps = {
-  // todo: fix any
-  onSubmit: (formData: any) => void
+  onSubmit: (formData: SignUpFields) => void
 }
 export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
   const { t } = useTranslation()
   const { labels, placeholders, policy, submitButton, terms, termsAgreement } =
     t.signUpPage.signUpForm
 
-  const { control, handleSubmit } = useForm()
+  const {
+    control,
+    formState: { isDirty, isValid },
+    handleSubmit,
+  } = useForm<SignUpFields>({
+    mode: 'onTouched',
+    resolver: zodResolver(signUpSchemeCreator(t.validation)),
+  })
+
+  const isSubmitDisabled = !isValid || !isDirty
 
   const formHandler = handleSubmit(data => {
     onSubmit(data)
@@ -60,7 +71,9 @@ export const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
         }
         name={'termsAgreement'}
       />
-      <Button fullWidth>{submitButton}</Button>
+      <Button disabled={isSubmitDisabled} type={'submit'}>
+        {submitButton}
+      </Button>
     </form>
   )
 }

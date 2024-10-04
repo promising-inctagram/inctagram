@@ -36,7 +36,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         {label && (
           <Typography
             as={'label'}
-            className={clsx(disabled && s.disabled)}
+            className={clsx(s.label, disabled && s.disabled)}
             htmlFor={checkboxId}
             isRequired={isRequired}
             variant={'regular_text_14'}
