@@ -4,7 +4,7 @@ import {
   emailScheme,
   passwordScheme,
   userNameScheme,
-} from '@/shared/validation-schemes'
+} from '@/shared/lib/validations'
 import { ZodErrorMap, z } from 'zod'
 
 /**
@@ -34,17 +34,17 @@ export const signUpSchemeCreator = (t: LocaleValidation) => {
 
   return z
     .object({
+      agreement: z.boolean().default(false),
       confirmPassword: confirmPasswordScheme,
       email: emailScheme(t.email),
-      name: userNameScheme(t.userName),
       password: passwordScheme(t.password),
-      termsAgreement: z.boolean().default(false),
+      username: userNameScheme(t.userName),
     })
     .refine(val => val.password === val.confirmPassword, {
       message: t.passwordsMatch,
       path: ['confirmPassword'],
     })
-    .refine(val => val.termsAgreement, {
+    .refine(val => val.agreement, {
       message: t.agreeToTerms,
       path: ['termsAgreement'],
     })

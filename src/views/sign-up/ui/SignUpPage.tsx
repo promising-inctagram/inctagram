@@ -3,7 +3,6 @@ import { Button, Card, Typography } from '@/components/ui'
 import { GithubIcon, GoogleIcon } from '@/components/ui/icons'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { SignUpFields } from '@/views/sign-up/model/types'
 import { SignUpForm } from '@/views/sign-up/ui/SignUpForm'
 import Link from 'next/link'
 
@@ -11,11 +10,8 @@ import s from './SignUpPage.module.scss'
 
 function SignUpPage() {
   const { t } = useTranslation()
-  const { accountExistsQuestion, linkToSignIn, pageTitle } = t.signUpPage
-
-  const formSubmitHandler = (data: SignUpFields) => {
-    console.log(data)
-  }
+  const { accountExistsQuestion, githubButton, googleButton, linkToSignIn, pageTitle } =
+    t.signUpPage
 
   return (
     <Page>
@@ -25,14 +21,14 @@ function SignUpPage() {
             {pageTitle}
           </Typography>
           <div className={s.socials}>
-            <Button className={s.socialsButton} variant={'icon'}>
+            <Button className={s.socialsButton} title={githubButton} variant={'icon'}>
               <GithubIcon className={s.icon} />
             </Button>
-            <Button className={s.socialsButton} variant={'icon'}>
+            <Button className={s.socialsButton} title={googleButton} variant={'icon'}>
               <GoogleIcon className={s.icon} />
             </Button>
           </div>
-          <SignUpForm onSubmit={formSubmitHandler} />
+          <SignUpForm />
           <div className={s.footer}>
             <Typography variant={'regular_text_16'}>{accountExistsQuestion}</Typography>
             <Button as={Link} href={Paths.logIn} variant={'link'}>
