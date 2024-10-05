@@ -1,4 +1,5 @@
 import {
+  BadRequestIllustration,
   SignUpConfirmedIllustration,
   SignUpIllustration,
   TimeManagementIllustration,
@@ -23,4 +24,8 @@ export const SignUp: Story = {
 
 export const TimeManagement: Story = {
   render: () => <TimeManagementIllustration />,
+}
+
+export const BadRequest: Story = {
+  render: () => <BadRequestIllustration />,
 }

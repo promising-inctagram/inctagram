@@ -69,9 +69,9 @@ function ConfirmPasswordEmail() {
     <Page mt={'36px'}>
       <div className={s.container}>
         {isSuccess ? (
-          <LinkExpired onClick={resendVerificationEmailHandler} t={linkExpired} />
-        ) : (
           <ConfirmedEmail t={emailConfirmed} />
+        ) : (
+          <LinkExpired onClick={resendVerificationEmailHandler} t={linkExpired} />
         )}
       </div>
     </Page>
