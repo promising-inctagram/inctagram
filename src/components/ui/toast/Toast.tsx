@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import { CSSProperties, ReactNode } from 'react'
 
 import { Typography } from '@/components/ui'
 import { CloseIcon } from '@/components/ui/icons'
@@ -8,11 +8,11 @@ import { ToastT, Toaster, toast } from 'sonner'
 import styles from './Toast.module.scss'
 
 const DEFAULT_DURATION = 5000
-const DEFAULT_POSITION = 'bottom-left'
+const DEFAULT_POSITION = 'bottom-right'
 
 type ToastType = 'error' | 'info' | 'success' | 'warning'
 type ToastOptions = {
-  message: React.ReactNode
+  message: ReactNode
   progress?: boolean
   variant?: ToastType
 } & Omit<ToastT, 'id'>

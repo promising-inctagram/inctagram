@@ -4,3 +4,7 @@ export type CreateUserArgs = {
   password: string
   username: string
 }
+
+export type ConfirmEmailArgs = {
+  code: string
+}

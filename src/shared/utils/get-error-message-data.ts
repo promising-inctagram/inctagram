@@ -14,7 +14,6 @@ export type CustomerError = {
 }
 
 export function getErrorMessageData(error: unknown) {
-  debugger
   if (isFetchBaseQueryError(error)) {
     if ('data' in error) {
       const errorData = error as CustomerError
