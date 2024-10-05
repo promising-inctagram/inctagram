@@ -10,4 +10,10 @@ export const confirmEmailPage = {
     resendButton: 'Переотправить ссылку',
     title: 'Срок действия ссылки для проверки email истек',
   },
+  resendLinkForm: {
+    button: 'Отправить запрос',
+    label: 'Email',
+    placeholder: 'Введите ваш email',
+    successMessage: 'Ссылка была отправлена на',
+  },
 }

@@ -10,4 +10,10 @@ export const confirmEmailPage = {
     resendButton: 'Resend verification link',
     title: 'Email verification link expired',
   },
+  resendLinkForm: {
+    button: 'Send request',
+    label: 'Email',
+    placeholder: 'Enter your email',
+    successMessage: 'We have sent a link to',
+  },
 }

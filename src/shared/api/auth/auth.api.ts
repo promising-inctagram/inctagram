@@ -1,6 +1,6 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
-import { ConfirmEmailArgs, CreateUserArgs } from './auth.types'
+import { ConfirmEmailArgs, CreateUserArgs, ResendRegistrationArgs } from './auth.types'
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
@@ -19,11 +19,11 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
-      resendVerificationEmail: builder.mutation<void, ConfirmEmailArgs>({
+      resendRegistrationEmail: builder.mutation<void, ResendRegistrationArgs>({
         query: args => ({
           body: { ...args },
           method: 'POST',
-          url: '/v1/auth/registration-confirmation',
+          url: '/v1/auth/registration-email-resending',
         }),
       }),
     }
@@ -33,5 +33,5 @@ export const authApi = inctagramApi.injectEndpoints({
 export const {
   useConfirmEmailMutation,
   useCreateUserMutation,
-  useResendVerificationEmailMutation,
+  useResendRegistrationEmailMutation,
 } = authApi

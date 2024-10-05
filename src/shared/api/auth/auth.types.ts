@@ -8,3 +8,6 @@ export type CreateUserArgs = {
 export type ConfirmEmailArgs = {
   code: string
 }
+export type ResendRegistrationArgs = {
+  email: string
+}

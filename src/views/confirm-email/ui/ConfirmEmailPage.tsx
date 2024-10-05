@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { Page, getLayout } from '@/components'
-import { BadRequestIllustration, showToast } from '@/components/ui'
-import {
-  useConfirmEmailMutation,
-  useResendVerificationEmailMutation,
-} from '@/shared/api/auth/auth.api'
+import { showToast } from '@/components/ui'
+import { useConfirmEmailMutation } from '@/shared/api/auth/auth.api'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { ConfirmedEmail } from '@/views/confirm-email/ui/ConfirmedEmail'
@@ -19,8 +16,7 @@ function ConfirmPasswordEmail() {
   const { emailConfirmed, linkExpired } = t.confirmEmailPage
 
   const [isRequestCompleted, setIsRequestCompleted] = useState(false)
-  const [confirmEmail, { isError, isSuccess }] = useConfirmEmailMutation()
-  const [resendVerificationEmail] = useResendVerificationEmailMutation()
+  const [confirmEmail, { isSuccess }] = useConfirmEmailMutation()
 
   const router = useRouter()
   const code = Array.isArray(router.query.code) ? router.query.code[0] : router.query.code
@@ -45,34 +41,14 @@ function ConfirmPasswordEmail() {
     }
   }, [confirmEmail, code])
 
-  const resendVerificationEmailHandler = () => {
-    if (code) {
-      resendVerificationEmail({ code })
-    }
-  }
-
   if (!isRequestCompleted) {
     return null
-  }
-
-  if (isError) {
-    return (
-      <Page mt={'36px'}>
-        <div className={s.container}>
-          <BadRequestIllustration />
-        </div>
-      </Page>
-    )
   }
 
   return (
     <Page mt={'36px'}>
       <div className={s.container}>
-        {isSuccess ? (
-          <ConfirmedEmail t={emailConfirmed} />
-        ) : (
-          <LinkExpired onClick={resendVerificationEmailHandler} t={linkExpired} />
-        )}
+        {isSuccess ? <ConfirmedEmail t={emailConfirmed} /> : <LinkExpired t={linkExpired} />}
       </div>
     </Page>
   )
