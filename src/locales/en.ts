@@ -1,4 +1,5 @@
 import { confirmEmailPage } from '@/locales/en/confirm-email-page'
+import { confirmLogoutPage } from '@/locales/en/confirm-logout-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
@@ -18,6 +19,7 @@ export const en = {
     en: 'English',
     ru: ' Russian',
   },
+  logoutConfirmation: confirmLogoutPage,
   privacyPolicyPage: privacyPolicyPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,

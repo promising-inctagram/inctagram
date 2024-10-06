@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef } from 
 import { menuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
 import { LogOutOutlineIcon } from '@/components/ui/icons'
+import { Paths } from '@/shared/enums'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -14,6 +15,11 @@ type SideBarRef = ElementRef<'nav'>
 
 export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...rest }, ref) => {
   const router = useRouter()
+
+  const handleLogoutClick = () => {
+    localStorage.setItem('previousPath', router.asPath)
+    router.push(Paths.logout)
+  }
 
   return (
     <nav className={clsx(s.sidebar, className)} ref={ref} {...rest}>
@@ -42,7 +48,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
         ))}
       </div>
       <div className={s.group}>
-        <Typography as={'button'} className={s.title} onClick={logout} variant={'medium_text_14'}>
+        <Typography className={s.title} onClick={handleLogoutClick} variant={'medium_text_14'}>
           <LogOutOutlineIcon className={s.icon} />
           Log Out
         </Typography>
