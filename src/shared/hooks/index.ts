@@ -1,1 +1,2 @@
-export * from './use-loader/useLoader'
+export * from './useLoader'
+export * from './useTranslations'

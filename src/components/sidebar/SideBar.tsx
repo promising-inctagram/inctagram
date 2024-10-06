@@ -42,7 +42,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
         ))}
       </div>
       <div className={s.group}>
-        <Typography as={'button'} className={s.title} variant={'medium_text_14'}>
+        <Typography as={'button'} className={s.title} onClick={logout} variant={'medium_text_14'}>
           <LogOutOutlineIcon className={s.icon} />
           Log Out
         </Typography>
