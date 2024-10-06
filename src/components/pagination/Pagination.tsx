@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/button'
-import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '@/components/icons'
-import { OptionsValue, Select } from '@/components/select/Select'
-import { Typography } from '@/components/typography'
+import { Button, OptionsValue, Select, Typography } from '@/components/ui'
+import { ArrowIosBackIcon, ArrowIosForwardIcon, MoreHorizontalIcon } from '@/components/ui/icons'
 import clsx from 'clsx'
 
 import styles from '@/components/pagination/Pagination.module.scss'

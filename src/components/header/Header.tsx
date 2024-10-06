@@ -20,7 +20,7 @@ const selectItemsWithIcons: OptionsValue[] = [
   { icon: <FlagUnitedKingdomIcon />, value: 'English' },
 ]
 
-export const Header = ({ countNotification, isAuth = false, setLanguage }: HeaderProps) => {
+export const Header = ({ countNotification, isAuth = true, setLanguage }: HeaderProps) => {
   const handleLanguage = (value: string) => {
     setLanguage?.(value)
   }
