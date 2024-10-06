@@ -1,61 +1,46 @@
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
-import { useTranslation } from '@/shared/hooks/useTranslations'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useLoginValidation } from '@/views/sign-in/model/useLoginValidation'
 import Link from 'next/link'
-import { z } from 'zod'
 
 import s from './SignIn.module.scss'
 
-type Props = {
-  onSubmit: (args: LoginArgs) => void
+export type LoginArgs = {
+  email: string
+  password: string
 }
 
-const errorMessage = 'The email or password are incorrect. Try again please'
-
-const loginSchema = z.object({
-  email: z.string().trim().email(),
-  password: z.string({ message: errorMessage }).trim(),
-})
-
-export type LoginArgs = z.infer<typeof loginSchema>
+type Props = {
+  onSubmit: (data: LoginArgs) => void
+}
 
 export const SignInForm = ({ onSubmit }: Props) => {
-  const { t } = useTranslation()
+  const { control, errors, handleSubmit, isValid, t } = useLoginValidation()
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<LoginArgs>({
-    resolver: zodResolver(loginSchema),
-  })
+  const [showLoginError, setShowLoginError] = useState(false)
 
-  const errorMessages = [errors.email?.message, errors.password?.message].filter(Boolean).join(', ')
+  const loginError = 'The email or password are\n' + 'incorrect. Try again please'
+
+  const handleFormSubmit = (data: any) => {
+    setShowLoginError(true)
+    onSubmit(data)
+  }
 
   return (
-    <form
-      className={s.form}
-      onSubmit={handleSubmit((args, e) => {
-        if (e) {
-          e.preventDefault()
-          onSubmit(args)
-        }
-      })}
-    >
+    <form className={s.form} onSubmit={handleSubmit(handleFormSubmit)}>
       <ControlledTextField
-        className={s.emailInput}
         control={control}
+        errorMessage={errors.email?.message}
         label={labels.email}
         name={'email'}
         placeholder={placeholders.addEmail}
       />
       <ControlledTextField
         control={control}
-        errorMessage={errorMessages}
+        errorMessage={showLoginError && !isValid ? loginError : errors.password?.message}
         label={labels.password}
         name={'password'}
         placeholder={placeholders.addPassword}
@@ -64,7 +49,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
       <Typography as={Link} className={s.passwordLink} grey href={Paths.forgotPassword}>
         {forgotPassword}
       </Typography>
-      <Button fullWidth type={'submit'}>
+      <Button disabled={!isValid} fullWidth type={'submit'}>
         {submitButton}
       </Button>
     </form>

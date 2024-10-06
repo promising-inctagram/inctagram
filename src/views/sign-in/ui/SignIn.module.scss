@@ -6,7 +6,7 @@
 .card {
   max-width: 380px;
   width: 100%;
-  height: 505px;
+  height: auto;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -17,15 +17,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-}
-
-.emailInput {
-  margin-bottom: 24px;
+  gap: 24px;
 }
 
 .passwordLink {
   align-self: end;
-  margin: 36px 0 24px;
+  margin: 12px;
 }
 
 .paragraph {

@@ -1,8 +1,8 @@
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
+import { signInPage } from '@/locales/en/sign-in-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
 import { validation } from '@/locales/en/validation'
-import { signInPage } from '@/locales/ru/sign-in-page'
 
 export type LocaleType = typeof en
 export type LocaleValidation = typeof en.validation

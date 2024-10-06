@@ -12,8 +12,8 @@ function SignInPage() {
   const { t } = useTranslation()
   const { accountExistsQuestion, linkToSignUp, pageTitle } = t.signInPage
 
-  const onSubmit = async (args: LoginArgs) => {
-    console.log(args)
+  const onSubmit = async (data: LoginArgs) => {
+    console.log(data)
   }
 
   return (
