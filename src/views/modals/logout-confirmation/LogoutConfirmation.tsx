@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react'
-
 import {
   Button,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogRoot,
+  DialogTitle,
   Typography,
   showToast,
 } from '@/components/ui'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { getUserData } from '@/views/logout/model/getUserData'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRouter } from 'next/router'
 
 import s from './LogoutConfirmation.module.scss'
@@ -22,71 +22,63 @@ type Props = {
 }
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
-  const [previousPath, setPreviousPath] = useState<null | string>(null)
-  const { email, nickName } = getUserData() // где-то надо доставать данные о пользователе
   const [logout, { isLoading }] = useLogoutMutation()
-  const router = useRouter()
   const {
     t: {
-      logoutConfirmation: { confirmButton, confirmationMessage, rejectButton },
+      logoutConfirmation: {
+        accessibilityDescription,
+        accessibilityTitle,
+        confirmButton,
+        confirmationMessage,
+        rejectButton,
+      },
     },
   } = useTranslation()
+  const router = useRouter()
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedPreviousPath = localStorage.getItem('previousPath')
-
-      setPreviousPath(storedPreviousPath)
-    }
-  }, [])
-
-  const confirmButtonHandler = () => {
+  const logoutHandler = () => {
     logout()
       .unwrap()
       .then(() => {
+        // Также будет зачищаться localstorage
+
         onOpenChange(false)
         router.push(Paths.logIn)
       })
       .catch(e => {
         showToast({ message: e.data?.errorsMessage, variant: 'error' })
-
-        if (previousPath) {
-          router.push(previousPath)
-        }
       })
-  }
-
-  const rejectOrOutsideClick = () => {
-    if (previousPath) {
-      router.push(previousPath)
-    }
   }
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
       <DialogContent
         className={s.content}
-        onPointerDownOutside={rejectOrOutsideClick}
+        onPointerDownOutside={() => {}}
         overlayClassName={s.overlay}
       >
+        <VisuallyHidden asChild>
+          <DialogTitle>{accessibilityTitle}</DialogTitle>
+        </VisuallyHidden>
+        <VisuallyHidden>
+          <DialogDescription>{accessibilityDescription}</DialogDescription>
+        </VisuallyHidden>
         <DialogHeader className={s.header}>
           <Typography as={'h3'} variant={'h3'}>
             {confirmationMessage}
           </Typography>
-          <Typography>
-            {email} {nickName}?
-          </Typography>
+          <Typography>___email name___?</Typography>
         </DialogHeader>
         <DialogFooter className={s.footer}>
           <Button
             className={s.button}
             disabled={isLoading}
-            onClick={confirmButtonHandler}
+            onClick={logoutHandler}
             variant={'primary'}
           >
             {confirmButton}
           </Button>
-          <Button className={s.button} onClick={rejectOrOutsideClick} variant={'outlined'}>
+          <Button className={s.button} onClick={() => onOpenChange(false)} variant={'outlined'}>
             {rejectButton}
           </Button>
         </DialogFooter>

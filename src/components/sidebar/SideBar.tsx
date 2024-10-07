@@ -1,9 +1,10 @@
-import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef, useState } from 'react'
 
 import { menuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
 import { LogOutOutlineIcon } from '@/components/ui/icons'
 import { Paths } from '@/shared/enums'
+import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -15,10 +16,9 @@ type SideBarRef = ElementRef<'nav'>
 
 export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...rest }, ref) => {
   const router = useRouter()
-
+  const [openLogoutModal, setOpenLogoutModal] = useState(false)
   const handleLogoutClick = () => {
-    localStorage.setItem('previousPath', router.asPath)
-    router.push(Paths.logout)
+    setOpenLogoutModal(true)
   }
 
   return (
@@ -53,6 +53,9 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
           Log Out
         </Typography>
       </div>
+      {openLogoutModal && (
+        <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
+      )}
     </nav>
   )
 })
