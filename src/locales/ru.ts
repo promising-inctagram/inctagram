@@ -1,4 +1,5 @@
 import { LocaleType } from '@/locales/en'
+import { signInPage } from '@/locales/en/sign-in-page'
 import { confirmEmailPage } from '@/locales/ru/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/ru/confirm-logout-page'
 import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
@@ -14,6 +15,7 @@ export const ru: LocaleType = {
   },
   logoutConfirmation: confirmLogoutPage,
   privacyPolicyPage: privacyPolicyPage,
+  signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,
   validation: validation,
