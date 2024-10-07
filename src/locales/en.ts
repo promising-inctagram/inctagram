@@ -1,3 +1,4 @@
+import { passwordRecoveryPage } from '@/locales/en/password-recovery'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
@@ -13,6 +14,7 @@ export const en = {
     en: 'English',
     ru: ' Russian',
   },
+  passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,

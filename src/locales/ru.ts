@@ -1,4 +1,5 @@
 import { LocaleType } from '@/locales/en'
+import { passwordRecoveryPage } from '@/locales/ru/password-recovery'
 import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
 import { signUpPage } from '@/locales/ru/sign-up-page'
 import { termsOfServicePage } from '@/locales/ru/terms-of-service-page'
@@ -9,6 +10,7 @@ export const ru: LocaleType = {
     en: 'Английский',
     ru: ' Русский',
   },
+  passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,
