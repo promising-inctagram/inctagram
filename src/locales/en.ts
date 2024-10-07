@@ -1,3 +1,4 @@
+import { confirmEmailPage } from '@/locales/en/confirm-email-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
@@ -7,8 +8,12 @@ export type LocaleType = typeof en
 export type LocaleValidation = typeof en.validation
 export type LocaleValidationUserName = typeof en.validation.userName
 export type LocaleValidationPassword = typeof en.validation.password
+export type LocaleEmailSentDialog = typeof en.signUpPage.signUpForm.emailSentDialog
+export type LocaleEmailConfirmed = typeof en.confirmEmailPage.emailConfirmed
+export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
 
 export const en = {
+  confirmEmailPage: confirmEmailPage,
   language: {
     en: 'English',
     ru: ' Russian',

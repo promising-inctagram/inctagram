@@ -10,7 +10,7 @@ const BellIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+    <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
     <path
       clipRule={'evenodd'}
       d={
@@ -37,7 +37,7 @@ const BellIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
       />
     </mask>
     <g mask={'url(#fill-bell_svg__a)'}>
-      <rect fill={'none'} height={23} rx={-0.5} transform={'translate(.5 .5)'} width={23} />
+      <rect fill={'none'} height={23} rx={0.5} transform={'translate(.5 .5)'} width={23} />
       <path d={'M0 0h24v24H0z'} fill={'currentColor'} />
       <path d={'M0 0h24v24H0z'} />
     </g>
