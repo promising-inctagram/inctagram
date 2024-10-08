@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
-import { RadioOption } from '@/shared/types/common'
+import { RadioOption } from '@/shared/types'
 import * as RadixRadio from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
 
@@ -8,7 +8,7 @@ import s from './Radio.module.scss'
 
 import { Typography } from '../typography'
 
-type RadioProps = {
+export type RadioProps = {
   options: RadioOption[]
 } & ComponentPropsWithoutRef<typeof RadixRadio.Root>
 type RadioGroupRef = ElementRef<typeof RadixRadio.Root>

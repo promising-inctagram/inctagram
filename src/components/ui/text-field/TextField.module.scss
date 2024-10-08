@@ -64,7 +64,8 @@
   transition: border-color 0.3s ease;
 
   &::placeholder {
-    color: var(--color-light-900);
+    font-style: italic;
+    color: var(--color-dark-300);
   }
 
   &:focus {
@@ -104,6 +105,25 @@
 .input input[type='search']::-webkit-search-cancel-button {
   display: none;
   appearance: none;
+}
+
+/* Chrome, Edge и Safari,
+Ensure consistent autofill styling in all states (hover, focus, active) */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  background-color: var(--color-dark-900);
+  transition: background-color 3000s ease-in-out 0s;
+
+  -webkit-text-fill-color: var(--color-light-100);
+}
+
+.input.error:-webkit-autofill,
+.input.error:-webkit-autofill:hover,
+.input.error:-webkit-autofill:focus,
+.input.error:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--color-danger-300);
 }
 
 .passwordControl {

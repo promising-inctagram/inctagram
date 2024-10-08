@@ -10,7 +10,7 @@ function TermsOfServicePage() {
       <DocsContent
         buttonText={t.termsOfServicePage.backButton}
         docsContent={t.termsOfServicePage.content}
-        href={Paths.termsOfService}
+        href={Paths.signUp}
         title={t.termsOfServicePage.pageTitle}
       />
     </Page>

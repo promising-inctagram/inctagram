@@ -10,6 +10,7 @@
   padding: 6px 24px;
 
   font-family: inherit;
+  font-size: var(--font-size-m);
   font-weight: var(--font-weight-600);
   color: inherit;
   text-align: center;
@@ -18,6 +19,10 @@
 
   & > a {
     color: inherit;
+  }
+
+  &:disabled {
+    cursor: default;
   }
 }
 
@@ -40,7 +45,7 @@
 
   &:disabled {
     color: var(--color-light-900);
-    background-color: var(--color-accent-700);
+    background-color: var(--color-accent-900);
   }
 }
 

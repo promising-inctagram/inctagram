@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import { CSSProperties, ReactNode } from 'react'
 
 import { Typography } from '@/components/ui'
 import { CloseIcon } from '@/components/ui/icons'
@@ -12,7 +12,7 @@ const DEFAULT_POSITION = 'bottom-left'
 
 type ToastType = 'error' | 'info' | 'success' | 'warning'
 type ToastOptions = {
-  message: React.ReactNode
+  message: ReactNode
   progress?: boolean
   variant?: ToastType
 } & Omit<ToastT, 'id'>

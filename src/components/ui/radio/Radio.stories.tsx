@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Card } from '@/components/ui'
-import { RadioOption } from '@/shared/types/common'
+import { RadioOption } from '@/shared/types'
 
 import { Radio } from './Radio'
 
