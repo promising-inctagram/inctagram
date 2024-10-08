@@ -21,13 +21,15 @@ const DialogOverlay = forwardRef<DialogOverlayRef, DialogOverlayProps>(
 
 DialogOverlay.displayName = RDXD.Overlay.displayName
 
-type DialogContentProps = ComponentPropsWithoutRef<typeof RDXD.Content>
+type DialogContentProps = {
+  overlayClassName?: string
+} & ComponentPropsWithoutRef<typeof RDXD.Content>
 type DialogContentRef = ElementRef<typeof RDXD.Content>
 
 const DialogContent = forwardRef<DialogContentRef, DialogContentProps>(
-  ({ className, ...rest }, ref) => (
+  ({ className, overlayClassName, ...rest }, ref) => (
     <DialogPortal>
-      <DialogOverlay />
+      <DialogOverlay className={overlayClassName} />
       <RDXD.Content className={clsx(s.content, className)} ref={ref} {...rest} />
     </DialogPortal>
   )
