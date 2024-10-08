@@ -8,6 +8,11 @@ export const passwordRecoveryPage = {
     placeholderConfirmPassword: 'Повторно введите новый пароль',
     placeholderPassword: 'Введите новый пароль',
   },
+  forgotPasswordModalPage: {
+    modalText:
+      'Мы отправили ссылку для подтверждения вашего адреса электронной почты на epam@epam.com',
+    modalTitle: 'Письмо отправлено',
+  },
   forgotPasswordPage: {
     formButton: 'Отправить Ссылку',
     formContent: 'Введите свой адрес электронной почты, и мы вышлем вам дальнейшие инструкции',
