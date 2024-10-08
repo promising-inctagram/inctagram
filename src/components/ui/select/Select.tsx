@@ -13,7 +13,7 @@ export type OptionsValue = {
   option: string
   value: string
 }
-type SelectProps = {
+export type SelectProps = {
   className?: string
   label?: string
   options?: OptionsValue[]
