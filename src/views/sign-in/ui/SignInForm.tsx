@@ -1,5 +1,6 @@
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
+import { useAppSelector } from '@/lib/store'
 import { LoginArgs } from '@/shared/api/auth/auth.types'
 import { errorSelector } from '@/shared/api/auth/model/auth-slice'
 import { Paths } from '@/shared/enums'

@@ -26,7 +26,6 @@ export const authApi = inctagramApi.injectEndpoints({
         }),
       }),
       login: builder.mutation<ResponseLogin, LoginArgs>({
-        invalidatesTags: ['Me'],
         query: args => ({
           body: { ...args },
           method: 'POST',

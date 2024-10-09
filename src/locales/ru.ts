@@ -1,5 +1,4 @@
 import { LocaleType } from '@/locales/en'
-import { signInPage } from '@/locales/en/sign-in-page'
 import { confirmEmailPage } from '@/locales/ru/confirm-email-page'
 import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
 import { signInPage } from '@/locales/ru/sign-in-page'

@@ -28,9 +28,6 @@ const slice = createSlice({
   initialState,
   name: 'auth',
   reducers: {
-    setEmail: (state, action: PayloadAction<null | string>) => {
-      state.email = action.payload
-    },
     setError: (state, action: PayloadAction<null | string>) => {
       state.error = action.payload
     },
@@ -41,10 +38,9 @@ const slice = createSlice({
   selectors: {
     errorSelector: state => state.error,
     isAuthSelector: state => state.isAuth,
-    userEmailSelector: state => state.email,
   },
 })
 
 export const authReducers = slice.reducer
 export const authActions = slice.actions
-export const { errorSelector, isAuthSelector, userEmailSelector } = slice.selectors
+export const { errorSelector, isAuthSelector } = slice.selectors

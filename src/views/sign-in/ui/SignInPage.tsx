@@ -1,5 +1,6 @@
 import { Page, getLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
+import { AppDispatch, useAppDispatch } from '@/lib/store'
 import { useLoginMutation } from '@/shared/api/auth/auth.api'
 import { LoginArgs } from '@/shared/api/auth/auth.types'
 import { authActions } from '@/shared/api/auth/model/auth-slice'
@@ -9,6 +10,7 @@ import { SignInForm } from '@/views/sign-in/ui/SignInForm'
 import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import s from './SignIn.module.scss'
 
@@ -16,6 +18,7 @@ function SignInPage() {
   const { t } = useTranslation()
   const { accountExistsQuestion, linkToSignUp, pageTitle } = t.signInPage
   const [login] = useLoginMutation()
+  const router = useRouter()
 
   const dispatch = useAppDispatch()
 
@@ -27,11 +30,8 @@ function SignInPage() {
         const accessToken = resData.accessToken
 
         localStorage.setItem('accessToken', accessToken)
-        localStorage.setItem('email', data.email)
 
-        const message = JSON.stringify({ action: 'success_sign-in' })
-
-        localStorage.setItem('sign-in', message)
+        await router.push('/')
 
         dispatch(authActions.setIsAuth(true))
       }
