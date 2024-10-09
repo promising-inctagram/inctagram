@@ -1,17 +1,13 @@
-import { useState } from 'react'
-
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
+import { useAppSelector } from '@/lib/store'
+import { LoginArgs } from '@/shared/api/auth/auth.types'
+import { errorSelector } from '@/shared/api/auth/model/auth-slice'
 import { Paths } from '@/shared/enums'
 import { useLoginValidation } from '@/views/sign-in/model/useLoginValidation'
 import Link from 'next/link'
 
 import s from './SignIn.module.scss'
-
-export type LoginArgs = {
-  email: string
-  password: string
-}
 
 type Props = {
   onSubmit: (data: LoginArgs) => void
@@ -20,17 +16,10 @@ type Props = {
 export const SignInForm = ({ onSubmit }: Props) => {
   const { control, errors, handleSubmit, isValid, t } = useLoginValidation()
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
-  const [showLoginError, setShowLoginError] = useState(false)
-
-  const loginError = 'The email or password are\n' + 'incorrect. Try again please'
-
-  const handleFormSubmit = (data: any) => {
-    setShowLoginError(true)
-    onSubmit(data)
-  }
+  const error = useAppSelector(errorSelector)
 
   return (
-    <form className={s.form} onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledTextField
         control={control}
         errorMessage={errors.email?.message}
@@ -40,7 +29,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
       />
       <ControlledTextField
         control={control}
-        errorMessage={showLoginError && !isValid ? loginError : errors.password?.message}
+        errorMessage={errors.password?.message || error}
         label={labels.password}
         name={'password'}
         placeholder={placeholders.addPassword}
