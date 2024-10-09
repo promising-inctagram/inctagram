@@ -3,20 +3,21 @@ import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
+import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
 import styles from './CreateNewPasswordForm.module.scss'
 
+import { createNewPasswordSchemeCreator } from '../model/create-new-password-scheme-creator'
+
 export type formTypes = {
+  confirmPassword: string
   password: string
-  passwordConfirmation: string
 }
 
-interface CreateNewPasswordFormProps {
-  onSubmit: (data: formTypes) => void
-}
-
-export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) => {
+export const CreateNewPasswordForm = () => {
   const { t } = useTranslation()
   const {
     formButton,
@@ -27,10 +28,27 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
     placeholderPassword,
   } = t.passwordRecoveryPage.createNewPassword
 
-  const { control, handleSubmit } = useForm<formTypes>()
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    reset,
+    trigger,
+  } = useForm<formTypes>({
+    defaultValues: {
+      confirmPassword: '',
+      password: '',
+    },
+    mode: 'onChange',
+    resolver: zodResolver(createNewPasswordSchemeCreator(t.validation)),
+  })
 
   const formHandler = handleSubmit(data => {
-    onSubmit(data)
+    trigger()
+    if (isValid) {
+      console.log(data)
+      reset()
+    }
   })
 
   return (
@@ -46,7 +64,7 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
         <ControlledTextField
           control={control}
           label={labelConfirmPassword}
-          name={'passwordConfirmation'}
+          name={'confirmPassword'}
           placeholder={placeholderConfirmPassword}
           variant={'password'}
         />
@@ -54,7 +72,9 @@ export const CreateNewPasswordForm = ({ onSubmit }: CreateNewPasswordFormProps) 
       <Typography className={styles.text} variant={'regular_text_14'}>
         {passwordHelp}
       </Typography>
-      <Button>{formButton}</Button>
+      <Button as={Link} href={Paths.logIn} type={'submit'}>
+        {formButton}
+      </Button>
     </form>
   )
 }

@@ -12,10 +12,6 @@ export default function PasswordRecoveryPage() {
   const { t } = useTranslation()
   const { pageTitle } = t.passwordRecoveryPage.createNewPassword
 
-  const formSubmitHandler = (data: formTypes) => {
-    console.log(data)
-  }
-
   return (
     <Page mt={'60px'}>
       <div className={styles.container}>
@@ -23,7 +19,7 @@ export default function PasswordRecoveryPage() {
           <Typography as={'h1'} variant={'h1'}>
             {pageTitle}
           </Typography>
-          <CreateNewPasswordForm onSubmit={formSubmitHandler} />
+          <CreateNewPasswordForm />
         </Card>
       </div>
     </Page>
