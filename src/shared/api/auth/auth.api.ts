@@ -1,11 +1,12 @@
+import { inctagramApi } from '@/shared/api/inctagram.api'
+
 import {
   ConfirmEmailArgs,
   CreateUserArgs,
   LoginArgs,
   ResendRegistrationArgs,
   ResponseLogin,
-} from '@/shared/api/auth/auth.types'
-import { inctagramApi } from '@/shared/api/inctagram.api'
+} from './auth.types'
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => {

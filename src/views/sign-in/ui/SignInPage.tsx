@@ -1,6 +1,5 @@
 import { Page, getLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
-import { useAppDispatch } from '@/lib/store'
 import { useLoginMutation } from '@/shared/api/auth/auth.api'
 import { LoginArgs } from '@/shared/api/auth/auth.types'
 import { authActions } from '@/shared/api/auth/model/auth-slice'
