@@ -1,11 +1,11 @@
 import { LocaleValidation } from '@/locales/en'
-import { passwordScheme } from '@/shared/lib/validations'
+import { confirmPasswordScheme, passwordScheme } from '@/shared/lib/validations'
 import { z } from 'zod'
 
 export const createNewPasswordSchemeCreator = (t: LocaleValidation) => {
   return z
     .object({
-      confirmPassword: passwordScheme(t.password),
+      confirmPassword: confirmPasswordScheme,
       password: passwordScheme(t.password),
     })
     .refine(val => val.password === val.confirmPassword, {
