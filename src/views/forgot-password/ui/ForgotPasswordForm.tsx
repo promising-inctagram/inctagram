@@ -9,10 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import styles from './ForgotPasswordForm.module.scss'
 
 import { forgotPasswordSchemeCreator } from '../model/forgot-password-scheme-creator'
-
-export type formTypes = {
-  email: string
-}
+import { ForgotPasswordFields } from '../model/types'
 
 interface ForgotPasswordFormProps {
   setIsModal: (value: boolean) => void
@@ -29,7 +26,7 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
     formState: { isValid },
     handleSubmit,
     reset,
-  } = useForm<formTypes>({
+  } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
     },
@@ -37,7 +34,7 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
   })
 
-  const formHandler = handleSubmit((data: formTypes) => {
+  const formHandler = handleSubmit((data: ForgotPasswordFields) => {
     if (token) {
       console.log(data.email)
       console.log(token)

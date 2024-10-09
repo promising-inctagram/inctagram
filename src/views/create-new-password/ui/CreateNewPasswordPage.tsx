@@ -1,10 +1,7 @@
 import { Page, getLayout } from '@/components'
 import { Card, Typography } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
-import {
-  CreateNewPasswordForm,
-  formTypes,
-} from '@/views/create-new-password/ui/CreateNewPasswordForm'
+import { CreateNewPasswordForm } from '@/views/create-new-password/ui/CreateNewPasswordForm'
 
 import styles from './CreateNewPasswordPage.module.scss'
 

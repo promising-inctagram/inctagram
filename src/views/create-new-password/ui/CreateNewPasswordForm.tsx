@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
@@ -11,11 +10,7 @@ import Link from 'next/link'
 import styles from './CreateNewPasswordForm.module.scss'
 
 import { createNewPasswordSchemeCreator } from '../model/create-new-password-scheme-creator'
-
-export type formTypes = {
-  confirmPassword: string
-  password: string
-}
+import { CreatePWDFields } from '../model/types'
 
 export const CreateNewPasswordForm = () => {
   const { t } = useTranslation()
@@ -34,7 +29,7 @@ export const CreateNewPasswordForm = () => {
     handleSubmit,
     reset,
     trigger,
-  } = useForm<formTypes>({
+  } = useForm<CreatePWDFields>({
     defaultValues: {
       confirmPassword: '',
       password: '',

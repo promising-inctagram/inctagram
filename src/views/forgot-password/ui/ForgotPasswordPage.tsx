@@ -23,7 +23,7 @@ export default function ForgotPasswordPage() {
     <Page mt={'72px'}>
       <div className={styles.container}>
         <Card className={styles.card}>
-          {isModal && <ForgotPasswordModal setIsModal={setIsModal} />}
+          <ForgotPasswordModal isOpen={isModal} setIsModal={setIsModal} />
           <Typography as={'h1'} variant={'h1'}>
             {pageTitle}
           </Typography>

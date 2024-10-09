@@ -10,7 +10,6 @@ interface ForgotRecaptchaProps {
 }
 
 export const ForgotRecaptcha = ({ error, setError, setToken }: ForgotRecaptchaProps) => {
-  //   const { locale } = useRouter()
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
 
   const handleTokenChange = (token: null | string) => {
