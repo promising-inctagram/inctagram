@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
 
 import s from './ConfirmEmailPage.module.scss'
 
-function ConfirmPasswordEmail() {
+function ConfirmEmailPage() {
   const { t } = useTranslation()
   const { emailConfirmed, linkExpired } = t.confirmEmailPage
 
@@ -56,5 +56,5 @@ function ConfirmPasswordEmail() {
   )
 }
 
-ConfirmPasswordEmail.getLayout = getLayout
-export default ConfirmPasswordEmail
+ConfirmEmailPage.getLayout = getLayout
+export default ConfirmEmailPage

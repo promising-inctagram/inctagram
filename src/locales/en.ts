@@ -1,4 +1,5 @@
 import { confirmEmailPage } from '@/locales/en/confirm-email-page'
+import { passwordRecoveryPage } from '@/locales/en/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { signInPage } from '@/locales/en/sign-in-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
@@ -19,6 +20,7 @@ export const en = {
     en: 'English',
     ru: ' Russian',
   },
+  passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   signInPage: signInPage,
   signUpPage: signUpPage,
