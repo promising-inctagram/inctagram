@@ -31,7 +31,7 @@ function SignInPage() {
 
         localStorage.setItem('accessToken', accessToken)
 
-        await router.push('/')
+        await router.push(Paths.home)
 
         dispatch(authActions.setIsAuth(true))
       }
