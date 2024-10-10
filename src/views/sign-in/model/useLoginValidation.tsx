@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 
 import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH, PASSWORD_REGEX } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
-import { useFormRevalidate } from '@/shared/hooks/useFormRevalidate'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -33,20 +32,11 @@ export const useLoginValidation = () => {
   const {
     control,
     formState: { errors, isValid },
-    getValues,
     handleSubmit,
-    setValue,
   } = useForm<LoginData>({
     defaultValues,
     mode: 'onBlur',
     resolver: zodResolver(loginSchema),
-  })
-
-  useFormRevalidate({
-    errors,
-    locale,
-    setValue,
-    values: getValues(),
   })
 
   return {
