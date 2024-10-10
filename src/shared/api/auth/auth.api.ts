@@ -19,6 +19,12 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
+      logout: builder.mutation<void, void>({
+        query: () => ({
+          method: 'POST',
+          url: '/v1/auth/logout',
+        }),
+      }),
       resendRegistrationEmail: builder.mutation<void, ResendRegistrationArgs>({
         query: args => ({
           body: { ...args },
@@ -33,5 +39,6 @@ export const authApi = inctagramApi.injectEndpoints({
 export const {
   useConfirmEmailMutation,
   useCreateUserMutation,
+  useLogoutMutation,
   useResendRegistrationEmailMutation,
 } = authApi

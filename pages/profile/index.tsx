@@ -1,7 +1,7 @@
-import { getSidebarLayout } from '@/components'
+import { Page, getSidebarLayout } from '@/components'
 
 function ProfilePage() {
-  return <div>Profile page</div>
+  return <Page>Profile page</Page>
 }
 
 ProfilePage.getLayout = getSidebarLayout
