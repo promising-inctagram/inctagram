@@ -2,18 +2,10 @@
   width: 380px;
 }
 
-.overlay {
-  &[data-state='open'] {
-    opacity: 0.5;
-  }
-}
-
-.header {
-}
-
 .footer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: end;
+  gap: 20px;
 }
 
 .button {

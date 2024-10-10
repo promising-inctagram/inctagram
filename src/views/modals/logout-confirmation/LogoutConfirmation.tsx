@@ -12,6 +12,7 @@ import {
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRouter } from 'next/router'
 
@@ -40,23 +41,33 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
     logout()
       .unwrap()
       .then(() => {
-        // Также будет зачищаться localstorage
+        // todo: Также будет зачищаться localstorage
 
-        onOpenChange(false)
         router.push(Paths.logIn)
       })
       .catch(e => {
-        showToast({ message: e.data?.errorsMessage, variant: 'error' })
+        const error = getErrorMessageData(e)
+
+        if (typeof error !== 'string') {
+          error.forEach(el => {
+            showToast({ message: el.message, variant: 'error' })
+          })
+        } else {
+          showToast({ message: error, variant: 'error' })
+        }
       })
+      .finally(() => {
+        closeHandler()
+      })
+  }
+
+  const closeHandler = () => {
+    onOpenChange(false)
   }
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
-      <DialogContent
-        className={s.content}
-        onPointerDownOutside={() => {}}
-        overlayClassName={s.overlay}
-      >
+      <DialogContent className={s.content}>
         <VisuallyHidden asChild>
           <DialogTitle>{accessibilityTitle}</DialogTitle>
         </VisuallyHidden>
@@ -78,7 +89,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
           >
             {confirmButton}
           </Button>
-          <Button className={s.button} onClick={() => onOpenChange(false)} variant={'outlined'}>
+          <Button className={s.button} onClick={closeHandler} variant={'outlined'}>
             {rejectButton}
           </Button>
         </DialogFooter>

@@ -5,7 +5,6 @@ export enum Paths {
   forgotPassword = '/auth/forgot-password',
   home = '/',
   logIn = '/auth/sign-in',
-  logout = '/auth/logout/confirmation',
   messages = '/messages',
   passwordRecovery = '/auth/password-recovery',
   privacyPolicy = '/docs/privacy-policy',
