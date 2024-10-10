@@ -8,7 +8,7 @@ import { ToastT, Toaster, toast } from 'sonner'
 import styles from './Toast.module.scss'
 
 const DEFAULT_DURATION = 5000
-const DEFAULT_POSITION = 'bottom-right'
+const DEFAULT_POSITION = 'bottom-left'
 
 type ToastType = 'error' | 'info' | 'success' | 'warning'
 type ToastOptions = {
