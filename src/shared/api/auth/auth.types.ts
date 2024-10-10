@@ -11,3 +11,11 @@ export type ConfirmEmailArgs = {
 export type ResendRegistrationArgs = {
   email: string
 }
+
+export type LoginArgs = {
+  email: string
+  password: string
+}
+export type ResponseLogin = {
+  accessToken: string
+}

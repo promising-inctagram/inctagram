@@ -1,43 +1,36 @@
-import { useForm } from 'react-hook-form'
-
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
+import { useAppSelector } from '@/lib/store'
+import { LoginArgs } from '@/shared/api/auth/auth.types'
+import { errorSelector } from '@/shared/api/auth/model/auth-slice'
 import { Paths } from '@/shared/enums'
-import { useTranslation } from '@/shared/hooks/useTranslations'
+import { useTranslation } from '@/shared/hooks'
+import { useLoginValidation } from '@/views/sign-in/model/useLoginValidation'
 import Link from 'next/link'
 
 import s from './SignIn.module.scss'
 
-export type LoginData = {
-  email: string
-  password: string
-}
-
 type Props = {
-  onSubmit: (data: LoginData) => void
+  onSubmit: (data: LoginArgs) => void
 }
 
 export const SignInForm = ({ onSubmit }: Props) => {
-  const { t } = useTranslation()
+  const { control, errors, handleSubmit, isValid, t } = useLoginValidation()
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
-  const { control, handleSubmit } = useForm<LoginData>()
+  const error = useAppSelector(errorSelector)
 
   return (
-    <form
-      className={s.form}
-      onSubmit={handleSubmit(data => {
-        onSubmit(data)
-      })}
-    >
+    <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
       <ControlledTextField
-        className={s.emailInput}
         control={control}
+        errorMessage={errors.email?.message}
         label={labels.email}
         name={'email'}
         placeholder={placeholders.addEmail}
       />
       <ControlledTextField
         control={control}
+        errorMessage={errors.password?.message || error}
         label={labels.password}
         name={'password'}
         placeholder={placeholders.addPassword}
@@ -46,7 +39,7 @@ export const SignInForm = ({ onSubmit }: Props) => {
       <Typography as={Link} className={s.passwordLink} grey href={Paths.forgotPassword}>
         {forgotPassword}
       </Typography>
-      <Button fullWidth type={'submit'}>
+      <Button disabled={!isValid} fullWidth type={'submit'}>
         {submitButton}
       </Button>
     </form>

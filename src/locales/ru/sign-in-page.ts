@@ -1,4 +1,4 @@
-export const signUpPage = {
+export const signInPage = {
   accountExistsQuestion: 'У вас уже есть аккаунт?',
   linkToSignUp: 'Регистрация',
   pageTitle: 'Войти',
