@@ -7,7 +7,7 @@ import styles from './Button.module.scss'
 export type ButtonProps<T extends ElementType = 'button'> = {
   as?: T
   fullWidth?: boolean
-  variant?: 'icon' | 'language' | 'link' | 'outlined' | 'primary' | 'secondary'
+  variant?: 'icon' | 'language' | 'link' | 'nb-outlined' | 'outlined' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
 export const Button = forwardRef(
