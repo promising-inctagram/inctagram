@@ -6,6 +6,7 @@ import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import styles from './CreateNewPasswordForm.module.scss'
 
@@ -22,6 +23,11 @@ export const CreateNewPasswordForm = () => {
     placeholderConfirmPassword,
     placeholderPassword,
   } = t.passwordRecoveryPage.createNewPassword
+  const searchParams = useRouter()
+
+  // const recoveryCode = searchParams.get('recoveryCode')
+  //я считываю recoveryCode и его вместе с новым паролем отправляю на new-password
+  console.log(searchParams.query.recoveryCode)
 
   const {
     control,

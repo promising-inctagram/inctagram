@@ -3,7 +3,9 @@ import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
+import { useSentEmailMutation } from '@/shared/api/auth/auth.api'
 import { useTranslation } from '@/shared/hooks'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import styles from './ForgotPasswordForm.module.scss'
@@ -17,15 +19,17 @@ interface ForgotPasswordFormProps {
 }
 
 export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProps) => {
-  const [isMessageSent, setIsMessageSent] = useState<boolean>(false)
   const { t } = useTranslation()
   const { formButton, formContent, sentLinkText } = t.passwordRecoveryPage.forgotPasswordPage
+  const [isMessageSent, setIsMessageSent] = useState<boolean>(false)
+  const [sentEmail] = useSentEmailMutation()
 
   const {
     control,
     formState: { isValid },
     handleSubmit,
     reset,
+    setError,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
@@ -34,17 +38,25 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
   })
 
-  const formHandler = handleSubmit((data: ForgotPasswordFields) => {
-    if (token) {
-      console.log(data.email)
-      console.log(token)
+  const formHandler = handleSubmit(async (data: ForgotPasswordFields) => {
+    try {
+      const res = await sentEmail(data).unwrap()
+
       setIsMessageSent(true)
       setIsModal(true)
       reset()
-    } else {
-      console.log(token)
-      console.log('error')
+      console.log(res)
+      console.log('resolve')
+    } catch (e) {
+      const errors = getErrorMessageData(e)
+
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          setError(el.field as keyof ForgotPasswordFields, { message: el.message })
+        })
+      }
     }
+    // console.log(token) токен рекапчи
   })
 
   const buttonDisabled = isValid && token

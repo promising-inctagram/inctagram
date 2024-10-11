@@ -11,3 +11,7 @@ export type ConfirmEmailArgs = {
 export type ResendRegistrationArgs = {
   email: string
 }
+
+export type SentEmailArgs = {
+  email: string
+}
