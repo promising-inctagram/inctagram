@@ -5,7 +5,7 @@ import { Button, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import styles from './CreateNewPasswordForm.module.scss'
 
@@ -22,27 +22,28 @@ export const CreateNewPasswordForm = () => {
     placeholderConfirmPassword,
     placeholderPassword,
   } = t.passwordRecoveryPage.createNewPassword
+  const router = useRouter()
 
   const {
     control,
     formState: { isValid },
     handleSubmit,
     reset,
-    trigger,
   } = useForm<CreatePWDFields>({
     defaultValues: {
       confirmPassword: '',
       password: '',
     },
     mode: 'onChange',
+    reValidateMode: 'onSubmit',
     resolver: zodResolver(createNewPasswordSchemeCreator(t.validation)),
   })
 
   const formHandler = handleSubmit(data => {
-    trigger()
     if (isValid) {
       console.log(data)
       reset()
+      router.push(Paths.logIn)
     }
   })
 
@@ -67,9 +68,7 @@ export const CreateNewPasswordForm = () => {
       <Typography className={styles.text} variant={'regular_text_14'}>
         {passwordHelp}
       </Typography>
-      <Button as={Link} href={Paths.logIn} type={'submit'}>
-        {formButton}
-      </Button>
+      <Button type={'submit'}>{formButton}</Button>
     </form>
   )
 }
