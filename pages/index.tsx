@@ -1,7 +1,4 @@
-import { Provider } from 'react-redux'
-
 import { getLayout } from '@/components'
-import { store } from '@/lib/store'
 import Head from 'next/head'
 
 export default function Home() {

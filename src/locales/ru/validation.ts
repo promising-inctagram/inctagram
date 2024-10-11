@@ -1,7 +1,6 @@
 export const validation = {
   agreeToTerms: 'Пожалуйста, согласитесь с правилами и условиями',
   email: 'Email должен соответствовать формату example@example.com',
-  loginError: 'Электронная почта или пароль\n' + 'неверны. Пожалуйста, попробуйте снова',
   password: {
     maxLength: 'Максимальное количество символов 20',
     minLength: 'Минимальное количество символов 6',
@@ -12,7 +11,6 @@ export const validation = {
   },
   passwordsMatch: 'Пароли должны совпадать',
   requiredField: 'Обязательное поле',
-  unknownError: 'Неизвестная ошибка',
   userName: {
     allowedSymbols: 'Имя пользователя может содержать символы: 0-9, A-Z, a-z, _ или -.',
     maxLength: 'Максимальное количество символов 30',
