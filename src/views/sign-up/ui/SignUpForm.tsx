@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { useForm, useWatch } from 'react-hook-form'
 
 import { ControlledCheckbox } from '@/components/controlled-checkbox'
 import { ControlledTextField } from '@/components/controlled-text-field'
@@ -39,8 +39,20 @@ export const SignUpForm = () => {
       username: '',
     },
     mode: 'onTouched',
+    reValidateMode: 'onSubmit',
     resolver: zodResolver(signUpSchemeCreator(t.validation)),
   })
+
+  const password = useWatch({ control, name: 'password' })
+  const confirmPassword = useWatch({ control, name: 'confirmPassword' })
+
+  useEffect(() => {
+    if (password && confirmPassword && password !== confirmPassword) {
+      setError('confirmPassword', { message: t.validation.passwordsMatch })
+    } else {
+      setError('confirmPassword', { message: '' })
+    }
+  }, [password, confirmPassword, setError, t.validation.passwordsMatch])
 
   const isSubmitDisabled = !isValid || !isDirty
 
