@@ -1,12 +1,15 @@
 import { useState } from 'react'
+import Recaptcha from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
 import { useSentEmailMutation } from '@/shared/api/auth/auth.api'
+import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
 import styles from './ForgotPasswordForm.module.scss'
 
@@ -15,14 +18,14 @@ import { ForgotPasswordFields } from '../model/types'
 
 interface ForgotPasswordFormProps {
   setIsModal: (value: boolean) => void
-  token: null | string
 }
 
-export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProps) => {
-  const { t } = useTranslation()
-  const { formButton, formContent, sentLinkText } = t.passwordRecoveryPage.forgotPasswordPage
+export const ForgotPasswordForm = ({ setIsModal }: ForgotPasswordFormProps) => {
   const [isMessageSent, setIsMessageSent] = useState<boolean>(false)
+  const { t } = useTranslation()
+  const { formButton, formContent, pageLink, sentLinkText } = t.passwordRecoveryPage.forgotPasswordPage
   const [sentEmail] = useSentEmailMutation()
+  const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
 
   const {
     control,
@@ -30,11 +33,14 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
     handleSubmit,
     reset,
     setError,
+    setValue,
+    trigger,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
+      tokenRecaptcha: '',
     },
-    mode: 'onTouched',
+    mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
   })
 
@@ -56,10 +62,12 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
         })
       }
     }
-    // console.log(token) токен рекапчи
   })
 
-  const buttonDisabled = isValid && token
+  const handleTokenChange = (token: null | string) => {
+    setValue('tokenRecaptcha', token!)
+    trigger()
+  }
 
   return (
     <form className={styles.form} onSubmit={formHandler}>
@@ -78,9 +86,13 @@ export const ForgotPasswordForm = ({ setIsModal, token }: ForgotPasswordFormProp
           {sentLinkText}
         </Typography>
       )}
-      <Button disabled={!buttonDisabled} type={'submit'}>
+      <Button disabled={!isValid} type={'submit'}>
         {formButton}
       </Button>
+      <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
+        {pageLink}
+      </Button>
+      <Recaptcha hl={'en'} onChange={handleTokenChange} sitekey={sitekey} theme={'dark'} />
     </form>
   )
 }

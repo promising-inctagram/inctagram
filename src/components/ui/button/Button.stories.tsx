@@ -7,7 +7,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: 'radio' },
-      options: ['primary', 'secondary', 'outlined', 'link', 'icon', 'language'],
+      options: ['primary', 'secondary', 'outlined', 'nb-outlined', 'link', 'icon', 'language'],
     },
   },
   component: Button,
@@ -42,6 +42,15 @@ export const Outlined: Story = {
     children: 'Outlined Button',
     disabled: false,
     variant: 'outlined',
+  },
+}
+
+export const OutlinedNoBorder: Story = {
+  args: {
+    as: 'button',
+    children: 'Outlined Button',
+    disabled: false,
+    variant: 'nb-outlined',
   },
 }
 

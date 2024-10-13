@@ -28,7 +28,7 @@ export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
         <SelectLanguage />
         {!isAuth && (
           <div className={styles.buttonContainer}>
-            <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
+            <Button as={Link} className={styles.button} href={Paths.logIn} variant={'nb-outlined'}>
               Log in
             </Button>
             <Button as={Link} className={styles.button} href={Paths.signUp} variant={'primary'}>
