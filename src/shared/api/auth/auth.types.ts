@@ -19,10 +19,3 @@ export type LoginData = {
 export type ResponseLogin = {
   accessToken: string
 }
-
-export type ErrorResponseLogin = {
-  data: {
-    errorsMessage: string
-  }
-  status: number
-}

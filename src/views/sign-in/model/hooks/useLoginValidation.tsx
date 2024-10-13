@@ -1,17 +1,24 @@
 import { useForm } from 'react-hook-form'
 
+import { LocaleValidation } from '@/locales/en'
 import { useTranslation } from '@/shared/hooks'
-import { signInSchemeCreator } from '@/views/sign-in/model/sign-in-scheme-creator'
+import { emailScheme, passwordScheme } from '@/shared/lib/validations'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
 export const useLoginValidation = () => {
   const { t } = useTranslation()
+  const signInSchemeCreator = (t: LocaleValidation) => {
+    return z.object({
+      email: emailScheme(t.email),
+      password: passwordScheme(t.password),
+    })
+  }
 
   type SignInFields = z.infer<ReturnType<typeof signInSchemeCreator>>
   const {
     control,
-    formState: { errors, isValid },
+    formState: { isValid },
     handleSubmit,
     setError,
   } = useForm<SignInFields>({
@@ -25,7 +32,6 @@ export const useLoginValidation = () => {
 
   return {
     control,
-    errors,
     handleSubmit,
     isValid,
     setError,
