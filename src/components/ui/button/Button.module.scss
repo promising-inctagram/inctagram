@@ -94,8 +94,16 @@
   }
 }
 
+.nb-outlined {
+  padding: 6px 24px;
+}
+
 .link {
   padding: 0;
+}
+
+.nb-outlined,
+.link {
   color: var(--color-accent-500);
 
   &:hover {
