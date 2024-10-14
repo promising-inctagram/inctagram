@@ -15,3 +15,8 @@ export type ResendRegistrationArgs = {
 export type SentEmailArgs = {
   email: string
 }
+
+export type createNewPasswordArgs = {
+  newPassword: string
+  recoveryCode: string
+}

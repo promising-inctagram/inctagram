@@ -17,13 +17,15 @@ import { forgotPasswordSchemeCreator } from '../model/forgot-password-scheme-cre
 import { ForgotPasswordFields } from '../model/types'
 
 interface ForgotPasswordFormProps {
+  setEmail: (email: string) => void
   setIsModal: (value: boolean) => void
 }
 
-export const ForgotPasswordForm = ({ setIsModal }: ForgotPasswordFormProps) => {
+export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormProps) => {
   const [isMessageSent, setIsMessageSent] = useState<boolean>(false)
   const { t } = useTranslation()
-  const { formButton, formContent, pageLink, sentLinkText } = t.passwordRecoveryPage.forgotPasswordPage
+  const { formButton, formContent, pageLink, sentLinkText } =
+    t.passwordRecoveryPage.forgotPasswordPage
   const [sentEmail] = useSentEmailMutation()
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
 
@@ -46,13 +48,12 @@ export const ForgotPasswordForm = ({ setIsModal }: ForgotPasswordFormProps) => {
 
   const formHandler = handleSubmit(async (data: ForgotPasswordFields) => {
     try {
-      const res = await sentEmail(data).unwrap()
+      setEmail(data.email)
+      await sentEmail(data).unwrap()
 
       setIsMessageSent(true)
       setIsModal(true)
       reset()
-      console.log(res)
-      console.log('resolve')
     } catch (e) {
       const errors = getErrorMessageData(e)
 
@@ -77,7 +78,6 @@ export const ForgotPasswordForm = ({ setIsModal }: ForgotPasswordFormProps) => {
         name={'email'}
         placeholder={'Epam@epam.com'}
       />
-      {/* todo :Если email не зарегистрирован : User with this email doesn't exist */}
       <Typography className={styles.text} variant={'regular_text_14'}>
         {formContent}
       </Typography>
