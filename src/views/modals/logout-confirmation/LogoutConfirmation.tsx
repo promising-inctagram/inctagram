@@ -26,7 +26,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   const [logout, { isLoading }] = useLogoutMutation()
   const {
     t: {
-      logoutConfirmation: {
+      confirmLogoutPage: {
         accessibilityDescription,
         accessibilityTitle,
         confirmButton,
