@@ -13,18 +13,8 @@ import {
   SearchOutlineIcon,
   TrendingUpIcon,
   TrendingUpOutlineIcon,
-} from '@/components/icons'
-
-// todo: подумать куда вынести enum
-enum Paths {
-  create = '/create',
-  favourites = '/favourites',
-  home = '/',
-  messages = '/messages',
-  profile = '/profile',
-  search = '/search',
-  statistics = '/statistics',
-}
+} from '@/components/ui/icons'
+import { Paths } from '@/shared/enums'
 
 export const menuItems = [
   {

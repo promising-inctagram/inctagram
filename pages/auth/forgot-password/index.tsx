@@ -1,3 +1,1 @@
-export default function ForgotPassword() {
-  return <div>Forgot Password</div>
-}
+export { default } from '@/views/forgot-password'
