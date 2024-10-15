@@ -1,5 +1,3 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-
 import { inctagramApi } from '@/shared/api/inctagram.api'
 import { Action, ThunkAction, combineSlices, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'

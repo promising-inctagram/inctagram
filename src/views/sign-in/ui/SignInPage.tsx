@@ -2,7 +2,7 @@ import { Page, getLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks/useTranslations'
-import { LoginData, SignInForm } from '@/views/sign-in/ui/SignInForm'
+import { SignInForm } from '@/views/sign-in/ui/SignInForm'
 import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
 import Link from 'next/link'
 
@@ -12,10 +12,6 @@ function SignInPage() {
   const { t } = useTranslation()
   const { accountExistsQuestion, linkToSignUp, pageTitle } = t.signInPage
 
-  const onSubmit = async (data: LoginData) => {
-    console.log(data)
-  }
-
   return (
     <Page className={s.container} mt={36}>
       <Card className={s.card}>
@@ -23,7 +19,7 @@ function SignInPage() {
           {pageTitle}
         </Typography>
         <AuthSocial />
-        <SignInForm onSubmit={onSubmit} />
+        <SignInForm />
         <Typography className={s.paragraph} variant={'regular_text_16'}>
           {accountExistsQuestion}
         </Typography>
