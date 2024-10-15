@@ -3,18 +3,18 @@ import { GithubIcon, GoogleIcon } from '@/components/ui/icons/social-networks'
 import { useTranslation } from '@/shared/hooks'
 import { useRouter } from 'next/router'
 
-import s from './authSocial.module.scss'
+import s from './OAuthIcons.module.scss'
 
-export const AuthSocial = () => {
+export const OAuthIcons = () => {
   const router = useRouter()
   const { t } = useTranslation()
   const { githubButton, googleButton } = t.signUpPage
 
   const onGoogle = () => {
-    router.push(`${process.env.NEXT_PUBLIC_BACKEND_API}/auth/google`)
+    router.push(`${process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL}/v1/auth/google`)
   }
   const onGithub = () => {
-    router.push(`${process.env.NEXT_PUBLIC_BACKEND_API}/auth/github`)
+    router.push(`${process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL}/v1/auth/github`)
   }
 
   return (
