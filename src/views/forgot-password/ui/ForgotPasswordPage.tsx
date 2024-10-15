@@ -11,6 +11,7 @@ import { ForgotPasswordModal } from './ForgotPasswordModal'
 
 export default function ForgotPasswordPage() {
   const [isModal, setIsModal] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>('')
   const { t } = useTranslation()
   const { pageTitle } = t.passwordRecoveryPage.forgotPasswordPage
 
@@ -18,11 +19,11 @@ export default function ForgotPasswordPage() {
     <Page mt={'72px'}>
       <div className={styles.container}>
         <Card className={styles.card}>
-          <ForgotPasswordModal isOpen={isModal} setIsModal={setIsModal} />
+          <ForgotPasswordModal email={email} isOpen={isModal} setIsModal={setIsModal} />
           <Typography as={'h1'} variant={'h1'}>
             {pageTitle}
           </Typography>
-          <ForgotPasswordForm setIsModal={setIsModal} />
+          <ForgotPasswordForm setEmail={setEmail} setIsModal={setIsModal} />
         </Card>
       </div>
     </Page>

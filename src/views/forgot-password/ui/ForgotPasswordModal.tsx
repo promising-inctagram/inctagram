@@ -17,11 +17,12 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import styles from './ForgotPasswordModal.module.scss'
 
 type ForgotPasswordModalProps = {
+  email: string
   isOpen: boolean
   setIsModal: (value: boolean) => void
 }
 
-export const ForgotPasswordModal = ({ isOpen, setIsModal }: ForgotPasswordModalProps) => {
+export const ForgotPasswordModal = ({ email, isOpen, setIsModal }: ForgotPasswordModalProps) => {
   const { t } = useTranslation()
   const { modalText, modalTitle } = t.passwordRecoveryPage.forgotPasswordModalPage
 
@@ -49,7 +50,10 @@ export const ForgotPasswordModal = ({ isOpen, setIsModal }: ForgotPasswordModalP
           </DialogClose>
         </DialogHeader>
         <DialogBody>
-          <Typography variant={'regular_text_16'}>{modalText}</Typography>
+          <Typography variant={'regular_text_16'}>
+            {modalText}
+            {email}
+          </Typography>
         </DialogBody>
         <DialogFooter className={styles.buttonContainer}>
           <Button onClick={handleModalPage}>OK</Button>
