@@ -1,23 +1,29 @@
-import { Button } from '@/components/ui'
-import { GithubIcon, GoogleIcon } from '@/components/ui/icons'
+import { Button } from '@/components/ui/button'
+import { GithubIcon, GoogleIcon } from '@/components/ui/icons/social-networks'
+import { useTranslation } from '@/shared/hooks'
+import { useRouter } from 'next/router'
 
-type Props = {}
-export const AuthSocial = (props: Props) => {
+import s from './authSocial.module.scss'
+
+export const AuthSocial = () => {
+  const router = useRouter()
+  const { t } = useTranslation()
+  const { githubButton, googleButton } = t.signUpPage
+
+  const onGoogle = () => {
+    router.push(`${process.env.NEXT_PUBLIC_BACKEND_API}/auth/google`)
+  }
+  const onGithub = () => {
+    router.push(`${process.env.NEXT_PUBLIC_BACKEND_API}/auth/github`)
+  }
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '60px',
-        justifyContent: 'center',
-        margin: '13px 0 24px',
-        width: '100%',
-      }}
-    >
-      <Button type={'button'} variant={'icon'}>
-        <GoogleIcon style={{ height: 36, width: 36 }} />
+    <div className={s.socials}>
+      <Button className={s.socialsButton} onClick={onGithub} title={githubButton} variant={'icon'}>
+        <GithubIcon className={s.icon} />
       </Button>
-      <Button type={'button'} variant={'icon'}>
-        <GithubIcon style={{ height: 36, width: 36 }} />
+      <Button className={s.socialsButton} onClick={onGoogle} title={googleButton} variant={'icon'}>
+        <GoogleIcon className={s.icon} />
       </Button>
     </div>
   )
