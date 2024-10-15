@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
+import { OAuthIcons } from '@/views/sign-in/ui/oAuthIcons/OAuthIcons'
 import { SignUpForm } from '@/views/sign-up/ui/SignUpForm'
 import Link from 'next/link'
 
@@ -13,8 +13,7 @@ import s from './SignUpPage.module.scss'
 
 function SignUpPage() {
   const { t } = useTranslation()
-  const { accountExistsQuestion, githubButton, googleButton, linkToSignIn, pageTitle } =
-    t.signUpPage
+  const { accountExistsQuestion, linkToSignIn, pageTitle } = t.signUpPage
 
   return (
     <Page>
@@ -23,7 +22,7 @@ function SignUpPage() {
           <Typography as={'h1'} variant={'h1'}>
             {pageTitle}
           </Typography>
-          <AuthSocial />
+          <OAuthIcons />
           <SignUpForm />
           <div className={s.footer}>
             <Typography variant={'regular_text_16'}>{accountExistsQuestion}</Typography>
