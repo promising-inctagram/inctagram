@@ -12,13 +12,18 @@ export type TabType = {
 }
 
 type Props = {
+  tabClickCallback: (index: number) => void
   tabs: TabType[]
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
-export const Tabs = ({ tabs, ...rest }: Props) => {
+export const Tabs = ({ tabClickCallback, tabs, ...rest }: Props) => {
   const [activeTab, setActiveTab] = useState(tabs[0].value || '')
   const handleTabChange = (value: string) => {
     setActiveTab(value)
+  }
+
+  const handleTabClick = (index: number) => {
+    tabClickCallback(index)
   }
 
   return (
@@ -29,6 +34,7 @@ export const Tabs = ({ tabs, ...rest }: Props) => {
             className={clsx(s.trigger, index === 0 && activeTab === tab.value && s.highlight)}
             disabled={tab.disabled}
             key={tab.value}
+            onClick={() => handleTabClick(index)}
             value={tab.value}
           >
             {tab.title}

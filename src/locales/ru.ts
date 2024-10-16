@@ -1,4 +1,6 @@
 import { LocaleType } from '@/locales/en'
+import { profile } from '@/locales/en/profile'
+import { profileSettingsDevices } from '@/locales/en/profile-settings-devices'
 import { confirmEmailPage } from '@/locales/ru/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/ru/confirm-logout-page'
 import { passwordRecoveryPage } from '@/locales/ru/password-recovery-page'
@@ -17,6 +19,8 @@ export const ru: LocaleType = {
   },
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
+  profile: profile,
+  profileSettingsDevices: profileSettingsDevices,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,
