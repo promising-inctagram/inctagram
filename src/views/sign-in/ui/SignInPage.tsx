@@ -3,7 +3,7 @@ import { Button, Card, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks/useTranslations'
 import { SignInForm } from '@/views/sign-in/ui/SignInForm'
-import { AuthSocial } from '@/views/sign-in/ui/authSocial/authSocial'
+import { OAuthIcons } from '@/views/sign-in/ui/oAuthIcons/OAuthIcons'
 import Link from 'next/link'
 
 import s from './SignIn.module.scss'
@@ -18,7 +18,7 @@ function SignInPage() {
         <Typography as={'h1'} variant={'h1'}>
           {pageTitle}
         </Typography>
-        <AuthSocial />
+        <OAuthIcons />
         <SignInForm />
         <Typography className={s.paragraph} variant={'regular_text_16'}>
           {accountExistsQuestion}
