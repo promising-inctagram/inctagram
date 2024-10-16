@@ -1,13 +1,21 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { Page, getSidebarLayout } from '@/components'
-import { Button, Tabs, Typography } from '@/components/ui'
-import { BraveIcon } from '@/components/ui/icons'
+import { getSidebarLayout } from '@/components'
+import { Button, Card, Typography } from '@/components/ui'
+import {
+  BraveIcon,
+  ChromeIcon,
+  FirefoxIcon,
+  MSEdgeIcon,
+  OperaIcon,
+  SafariIcon,
+  UcBrowserIcon,
+  YandexIcon,
+} from '@/components/ui/icons'
 import { useGetDevicesQuery } from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
 import { ActiveSessions } from '@/views/profile/profile-settings/devices/ui/ActiveSessions'
-import { CurrentDevice } from '@/views/profile/profile-settings/devices/ui/current-device/CurrentDevice'
 import UAParser from 'ua-parser-js'
 
 import s from './Devices.module.scss'
@@ -15,22 +23,21 @@ import s from './Devices.module.scss'
 const iconBrowser = (browserName: string | undefined): React.ReactNode => {
   switch (browserName) {
     case 'Chrome':
+      return <ChromeIcon />
+    case 'Firefox':
+      return <FirefoxIcon />
+    case 'Safari':
+      return <SafariIcon />
+    case 'Edge':
+      return <MSEdgeIcon />
+    case 'Opera':
+      return <OperaIcon />
+    case 'Yandex':
+      return <YandexIcon />
+    case 'Brave':
       return <BraveIcon />
-    /* case 'Firefox':
-                       return <Firefox />
-                     case 'Safari' || 'Mobile Safari':
-                       return <Safari />
-                     case 'Edge':
-                       return <MicrosoftEdge />
-                     case 'Opera':
-                       return <Opera />
-                     case 'Yandex':
-                       return <Yandex />
-                     case 'Brave':
-                       return <Brave />
-                     default:
-                       return <Browser />
-                   }*/
+    default:
+      return <UcBrowserIcon />
   }
 }
 
@@ -43,8 +50,7 @@ const getIP = async () => {
 
 const Devices = () => {
   const { t } = useTranslation()
-  const { activeSessions, currentDevice, lastVisit, logOut, terminateSessions } =
-    t.profileSettingsDevices
+  const { activeSessions, currentDevice, terminateSessions } = t.profileSettingsDevices
   const { data } = useGetDevicesQuery()
   const [IP, setIP] = useState(null)
   const { browser } = new UAParser().getResult()
@@ -55,19 +61,27 @@ const Devices = () => {
   console.log(data)
 
   return (
-    <div className={s.container}>
-      <Typography variant={'h3'}>{currentDevice}</Typography>
-      <CurrentDevice icon={iconBrowser(browser?.name)} ip={IP} title={browser?.name} />
+    <div>
+      <Typography className={s.title} variant={'h3'}>
+        {currentDevice}
+      </Typography>
+      <Card className={s.card}>
+        <div>{iconBrowser(browser.name)}</div>
+        <div>
+          <Typography className={s.browserName} variant={'bold_text_16'}>
+            {browser.name}
+          </Typography>
+          <Typography variant={'regular_text_14'}>IP: {IP}</Typography>
+        </div>
+      </Card>
       <div className={s.terminateSessions}>
         <Button variant={'outlined'}>{terminateSessions}</Button>
       </div>
-      <div className={s.container}>
-        <Typography variant={'h3'}>{activeSessions}</Typography>
-        <div className={s.activeSessions}>
-          {data?.map(device => (
-            <ActiveSessions date={device.lastActiveDate} key={device.id} title={device.title} />
-          ))}
-        </div>
+      <Typography variant={'h3'}>{activeSessions}</Typography>
+      <div>
+        {data?.map(device => (
+          <ActiveSessions date={device.lastActiveDate} key={device.id} title={device.title} />
+        ))}
       </div>
     </div>
   )
