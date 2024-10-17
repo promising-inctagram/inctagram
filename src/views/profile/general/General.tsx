@@ -4,15 +4,15 @@ import { Page, getSidebarLayout } from '@/components'
 import { Tabs } from '@/components/ui'
 import { useTabs } from '@/shared/hooks/useTabs'
 
-const ProfileSettingsPage = () => {
+const General = () => {
   const tabs = useTabs()
 
   return (
     <Page mb={36} mt={36}>
-      <Tabs tabs={tabs} />
+      <Tabs defaultValue={'General information'} tabs={tabs} />
     </Page>
   )
 }
 
-ProfileSettingsPage.getLayout = getSidebarLayout
-export default ProfileSettingsPage
+General.getLayout = getSidebarLayout
+export default General

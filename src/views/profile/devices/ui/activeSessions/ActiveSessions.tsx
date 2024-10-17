@@ -1,5 +1,7 @@
 import { Button, Card, Typography } from '@/components/ui'
 import { LogOutOutlineIcon } from '@/components/ui/icons'
+import DesktopIcon from '@/components/ui/icons/DesktopIcon'
+import PhoneIcon from '@/components/ui/icons/PhoneIcon'
 import { useTranslation } from '@/shared/hooks'
 import UAParser from 'ua-parser-js'
 
@@ -11,14 +13,20 @@ type Props = {
 export const ActiveSessions = ({ date, title }: Props) => {
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
-  const dataParser = new UAParser(title)
+  const { type } = new UAParser().getDevice()
 
-  console.log(dataParser)
+  const getDeviceType = (type: string | undefined) => {
+    if (type === 'mobile' || window.innerWidth < 768) {
+      return <PhoneIcon />
+    } else if (type === 'desktop' || window.innerWidth > 768) {
+      return <DesktopIcon />
+    }
+  }
 
   return (
     <Card>
       <div>
-        {/* <div>{deviceIcon}</div>*/}
+        <div>{getDeviceType(type)}</div>
         <div>
           <Typography variant={'bold_text_16'}>{title}</Typography>
           <Typography variant={'small_text'}>

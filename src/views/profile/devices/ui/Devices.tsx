@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { getSidebarLayout } from '@/components'
-import { Button, Card, Typography } from '@/components/ui'
+import { Page, getSidebarLayout } from '@/components'
+import { Button, Card, Tabs, Typography } from '@/components/ui'
 import {
   BraveIcon,
   ChromeIcon,
@@ -13,9 +13,14 @@ import {
   UcBrowserIcon,
   YandexIcon,
 } from '@/components/ui/icons'
-import { useGetDevicesQuery } from '@/shared/api/devices/devices.api'
+import {
+  useDeleteAllDevicesMutation,
+  useDeleteDeviceMutation,
+  useGetDevicesQuery,
+} from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
-import { ActiveSessions } from '@/views/profile/profile-settings/devices/ui/ActiveSessions'
+import { useTabs } from '@/shared/hooks/useTabs'
+import { ActiveSessions } from '@/views/profile/devices/ui/activeSessions/ActiveSessions'
 import UAParser from 'ua-parser-js'
 
 import s from './Devices.module.scss'
@@ -52,16 +57,24 @@ const Devices = () => {
   const { t } = useTranslation()
   const { activeSessions, currentDevice, terminateSessions } = t.profileSettingsDevices
   const { data } = useGetDevicesQuery()
+  const [deleteDevice] = useDeleteDeviceMutation()
+  const [deleteAllDevices] = useDeleteAllDevicesMutation()
   const [IP, setIP] = useState(null)
   const { browser } = new UAParser().getResult()
+  const tabs = useTabs()
 
   useEffect(() => {
     getIP().then(ip => setIP(ip))
   }, [])
-  console.log(data)
+  console.log(browser.version)
+
+  const handlerTerminateSessions = () => {
+    deleteAllDevices()
+  }
 
   return (
-    <div>
+    <Page mb={36} mt={36}>
+      <Tabs defaultValue={'Devices'} tabs={tabs} />
       <Typography className={s.title} variant={'h3'}>
         {currentDevice}
       </Typography>
@@ -75,7 +88,9 @@ const Devices = () => {
         </div>
       </Card>
       <div className={s.terminateSessions}>
-        <Button variant={'outlined'}>{terminateSessions}</Button>
+        <Button onClick={handlerTerminateSessions} variant={'outlined'}>
+          {terminateSessions}
+        </Button>
       </div>
       <Typography variant={'h3'}>{activeSessions}</Typography>
       <div>
@@ -83,7 +98,7 @@ const Devices = () => {
           <ActiveSessions date={device.lastActiveDate} key={device.id} title={device.title} />
         ))}
       </div>
-    </div>
+    </Page>
   )
 }
 

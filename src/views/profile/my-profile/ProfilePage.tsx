@@ -10,13 +10,13 @@ import s from './ProfilePage.module.scss'
 
 const ProfilePage = () => {
   const { t } = useTranslation()
-  const { profileSettings } = t.profile
+  const { profile_settings } = t.profile
 
   return (
     <Page mt={36}>
       <div className={s.btnContainer}>
         <Button as={Link} href={Paths.profileSettings} variant={'secondary'}>
-          {profileSettings}
+          {profile_settings}
         </Button>
       </div>
     </Page>

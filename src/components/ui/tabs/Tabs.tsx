@@ -1,43 +1,41 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
+import { Button, Typography } from '@/components/ui'
 import * as RadixTabs from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
+import Link from 'next/link'
 
 import s from './Tabs.module.scss'
 
 export type TabType = {
   disabled?: boolean
+  path: string
   title: string
   value: string
 }
 
 type Props = {
-  tabClickCallback: (index: number) => void
+  defaultValue?: 'Account Management' | 'Devices' | 'General information' | 'My payments'
+  onChange?: (value: string) => void
   tabs: TabType[]
+  value?: string
 } & ComponentPropsWithoutRef<typeof RadixTabs.Root>
 
-export const Tabs = ({ tabClickCallback, tabs, ...rest }: Props) => {
-  const [activeTab, setActiveTab] = useState(tabs[0].value || '')
-  const handleTabChange = (value: string) => {
-    setActiveTab(value)
-  }
-
-  const handleTabClick = (index: number) => {
-    tabClickCallback(index)
-  }
-
+export const Tabs = ({ defaultValue, onChange, tabs, value, ...rest }: Props) => {
   return (
-    <RadixTabs.Root onValueChange={handleTabChange} value={activeTab} {...rest}>
+    <RadixTabs.Root defaultValue={defaultValue} onValueChange={onChange} value={value} {...rest}>
       <RadixTabs.List className={s.list} loop>
-        {tabs.map((tab, index) => (
+        {tabs.map(tab => (
           <RadixTabs.Trigger
-            className={clsx(s.trigger, index === 0 && activeTab === tab.value && s.highlight)}
+            asChild
+            className={clsx(s.trigger)}
             disabled={tab.disabled}
             key={tab.value}
-            onClick={() => handleTabClick(index)}
             value={tab.value}
           >
-            {tab.title}
+            <Button as={Link} href={tab.path} variant={''}>
+              {tab.title}
+            </Button>
           </RadixTabs.Trigger>
         ))}
       </RadixTabs.List>
