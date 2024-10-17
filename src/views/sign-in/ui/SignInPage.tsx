@@ -15,7 +15,7 @@ function SignInPage() {
   return (
     <Page className={s.container} mt={36}>
       <Card className={s.card}>
-        <Typography as={'h1'} variant={'h1'}>
+        <Typography as={'h1'} className={s.title} variant={'h1'}>
           {pageTitle}
         </Typography>
         <OAuthIcons />
