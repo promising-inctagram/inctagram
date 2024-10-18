@@ -13,4 +13,4 @@ export const PASSWORD_REGEX =
 
 // api constants:
 export const INCTAGRAM_BASE_URL = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL
-export const ACCESS_TOKEN_STORAGE_NAME = 'inctagram-world-access-token'
+export const ACCESS_TOKEN = 'access-token'

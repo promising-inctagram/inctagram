@@ -1,6 +1,6 @@
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-import { ACCESS_TOKEN_STORAGE_NAME, INCTAGRAM_BASE_URL } from '@/shared/constants'
+import { ACCESS_TOKEN, INCTAGRAM_BASE_URL } from '@/shared/constants'
 import { fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
@@ -9,7 +9,7 @@ const baseQuery = fetchBaseQuery({
   baseUrl: INCTAGRAM_BASE_URL,
   credentials: 'include',
   prepareHeaders: headers => {
-    const token = localStorage.getItem(ACCESS_TOKEN_STORAGE_NAME)
+    const token = localStorage.getItem(ACCESS_TOKEN)
 
     headers.set('Authorization', `Bearer ${token}`)
 
@@ -34,7 +34,6 @@ export const baseQueryWithReauth: BaseQueryFn<
       try {
         const refreshResult = await baseQuery(
           {
-            credentials: 'include',
             method: 'POST',
             url: 'v1/auth/refresh-token',
           },
@@ -45,11 +44,11 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           const data = refreshResult.data as { accessToken: string }
 
-          localStorage.setItem(ACCESS_TOKEN_STORAGE_NAME, data.accessToken)
+          localStorage.setItem(ACCESS_TOKEN, data.accessToken)
 
           result = await baseQuery(args, api, extraOptions)
         } else {
-          const accessToken = localStorage.getItem(ACCESS_TOKEN_STORAGE_NAME)
+          const accessToken = localStorage.getItem(ACCESS_TOKEN)
 
           accessToken &&
             (await baseQuery(

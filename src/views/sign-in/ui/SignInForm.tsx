@@ -1,7 +1,7 @@
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
 import { useLoginMutation } from '@/shared/api/auth/auth.api'
-import { ACCESS_TOKEN_STORAGE_NAME } from '@/shared/constants'
+import { ACCESS_TOKEN } from '@/shared/constants'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { fetchErrorMessageData } from '@/shared/utils/fetch-error-message-data'
@@ -26,7 +26,7 @@ export const SignInForm = () => {
       if (resData) {
         const accessToken = resData.accessToken
 
-        localStorage.setItem(ACCESS_TOKEN_STORAGE_NAME, accessToken)
+        localStorage.setItem(ACCESS_TOKEN, accessToken)
 
         await router.push(Paths.home)
       }
