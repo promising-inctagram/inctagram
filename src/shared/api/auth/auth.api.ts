@@ -5,7 +5,7 @@ import {
   CreateUserArgs,
   LoginData,
   ResendRegistrationArgs,
-  ResponseLogin,
+  ResponseWithAccessToken,
 } from './auth.types'
 
 export const authApi = inctagramApi.injectEndpoints({
@@ -25,7 +25,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
-      login: builder.mutation<ResponseLogin, LoginData>({
+      login: builder.mutation<ResponseWithAccessToken, LoginData>({
         query: args => ({
           body: { ...args },
           method: 'POST',

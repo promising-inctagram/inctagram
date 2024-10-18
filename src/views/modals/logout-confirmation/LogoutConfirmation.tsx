@@ -10,6 +10,7 @@ import {
   showToast,
 } from '@/components/ui'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
+import { ACCESS_TOKEN } from '@/shared/constants'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
@@ -41,7 +42,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
     logout()
       .unwrap()
       .then(() => {
-        // todo: Также будет зачищаться localstorage
+        localStorage.removeItem(ACCESS_TOKEN)
 
         router.push(Paths.logIn)
       })

@@ -1,10 +1,8 @@
-import { INCTAGRAM_BASE_URL } from '@/shared/constants'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseQueryWithReauth } from '@/shared/api/inctagram.api-base-query'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
 export const inctagramApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: INCTAGRAM_BASE_URL,
-  }),
+  baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
   reducerPath: 'inctagramApi',
 })
