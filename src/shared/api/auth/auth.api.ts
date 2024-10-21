@@ -1,6 +1,7 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
 import {
+  CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
   CreateUserArgs,
   ResendRegistrationArgs,
@@ -11,6 +12,13 @@ import {
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
     return {
+      checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeArgs>({
+        query: args => ({
+          body: { ...args },
+          method: 'POST',
+          url: '/v1/auth/check-recovery-code',
+        }),
+      }),
       confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
         query: args => ({
           body: { ...args },
@@ -51,6 +59,7 @@ export const authApi = inctagramApi.injectEndpoints({
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
   useCreateNewPasswordMutation,
   useCreateUserMutation,

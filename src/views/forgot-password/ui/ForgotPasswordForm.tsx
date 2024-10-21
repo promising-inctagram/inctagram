@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Recaptcha from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 
@@ -28,7 +28,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
     t.passwordRecoveryPage.forgotPasswordPage
   const [sentEmail] = useSentEmailMutation()
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
-
+  const recaptchaRef = useRef<Recaptcha | null>(null)
   const {
     control,
     formState: { isValid },
@@ -40,7 +40,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
-      tokenRecaptcha: '',
+      token: '',
     },
     mode: 'onChange',
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
@@ -63,10 +63,11 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
         })
       }
     }
+    recaptchaRef.current?.reset()
   })
 
   const handleTokenChange = (token: null | string) => {
-    setValue('tokenRecaptcha', token!)
+    setValue('token', token!)
     trigger()
   }
 
@@ -92,7 +93,13 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
       <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
         {pageLink}
       </Button>
-      <Recaptcha hl={'en'} onChange={handleTokenChange} sitekey={sitekey} theme={'dark'} />
+      <Recaptcha
+        hl={'en'}
+        onChange={handleTokenChange}
+        ref={recaptchaRef}
+        sitekey={sitekey}
+        theme={'dark'}
+      />
     </form>
   )
 }

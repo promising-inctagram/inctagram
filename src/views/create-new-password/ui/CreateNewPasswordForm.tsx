@@ -14,7 +14,11 @@ import styles from './CreateNewPasswordForm.module.scss'
 import { createNewPasswordSchemeCreator } from '../model/create-new-password-scheme-creator'
 import { CreatePWDFields } from '../model/types'
 
-export const CreateNewPasswordForm = () => {
+type CreateNewPasswordFormProps = {
+  setIsLinkExpired: (value: boolean) => void
+}
+
+export const CreateNewPasswordForm = ({ setIsLinkExpired }: CreateNewPasswordFormProps) => {
   const { t } = useTranslation()
   const {
     formButton,
@@ -27,7 +31,7 @@ export const CreateNewPasswordForm = () => {
   const [createNewPassword] = useCreateNewPasswordMutation()
   const router = useRouter()
 
-  const { control, handleSubmit, reset, setError, setValue } = useForm<CreatePWDFields>({
+  const { control, handleSubmit, setError, setValue } = useForm<CreatePWDFields>({
     defaultValues: {
       confirmPassword: '',
       password: '',
@@ -66,11 +70,9 @@ export const CreateNewPasswordForm = () => {
     try {
       await createNewPassword(fetchData).unwrap()
 
-      reset()
       router.push(Paths.logIn)
     } catch (e) {
-      router.push(Paths.passwordRecovery)
-      console.error(e)
+      setIsLinkExpired(true)
     }
   })
 
