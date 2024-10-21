@@ -39,7 +39,7 @@ export const SignUpForm = () => {
       username: '',
     },
     mode: 'onTouched',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     resolver: zodResolver(signUpSchemeCreator(t.validation)),
   })
 

@@ -1,14 +1,19 @@
-import { Page, getLayout } from '@/components'
+import { Page } from '@/components'
 import { Button, TimeManagementIllustration, Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import styles from './PasswordRecoveryPage.module.scss'
+import styles from './LinkExpired.module.scss'
 
-export default function PasswordRecoveryPage() {
+export default function LinkExpired() {
   const { t } = useTranslation()
   const { pageButton, pageTitle, textContent } = t.passwordRecoveryPage.passwordRecoveryPage
+  const router = useRouter()
+
+  const resendEmail = () => {
+    router.push(Paths.forgotPassword)
+  }
 
   return (
     <Page mt={'35px'}>
@@ -20,14 +25,10 @@ export default function PasswordRecoveryPage() {
           <Typography className={styles.textContent} variant={'regular_text_16'}>
             {textContent}
           </Typography>
-          <Button as={Link} href={Paths.forgotPassword}>
-            {pageButton}
-          </Button>
+          <Button onClick={resendEmail}>{pageButton}</Button>
         </div>
         <TimeManagementIllustration />
       </div>
     </Page>
   )
 }
-
-PasswordRecoveryPage.getLayout = getLayout
