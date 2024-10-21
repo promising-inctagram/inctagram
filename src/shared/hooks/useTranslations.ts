@@ -20,5 +20,5 @@ export const useTranslation = () => {
 
   const t = translations[locale]
 
-  return { t }
+  return { locale, t }
 }

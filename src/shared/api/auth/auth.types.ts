@@ -25,3 +25,10 @@ export type createNewPasswordArgs = {
 export type CheckRecoveryCodeArgs = {
   recoveryCode: string
 }
+export type LoginData = {
+  email: string
+  password: string
+}
+export type ResponseLogin = {
+  accessToken: string
+}

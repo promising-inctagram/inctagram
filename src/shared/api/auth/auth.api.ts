@@ -4,7 +4,9 @@ import {
   CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
   CreateUserArgs,
+  LoginData,
   ResendRegistrationArgs,
+  ResponseLogin,
   SentEmailArgs,
   createNewPasswordArgs,
 } from './auth.types'
@@ -40,6 +42,19 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
+      login: builder.mutation<ResponseLogin, LoginData>({
+        query: args => ({
+          body: { ...args },
+          method: 'POST',
+          url: '/v1/auth/login',
+        }),
+      }),
+      logout: builder.mutation<void, void>({
+        query: () => ({
+          method: 'POST',
+          url: '/v1/auth/logout',
+        }),
+      }),
       resendRegistrationEmail: builder.mutation<void, ResendRegistrationArgs>({
         query: args => ({
           body: { ...args },
@@ -63,6 +78,8 @@ export const {
   useConfirmEmailMutation,
   useCreateNewPasswordMutation,
   useCreateUserMutation,
+  useLoginMutation,
+  useLogoutMutation,
   useResendRegistrationEmailMutation,
   useSentEmailMutation,
 } = authApi
