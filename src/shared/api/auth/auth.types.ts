@@ -19,3 +19,12 @@ export type LoginData = {
 export type ResponseWithAccessToken = {
   accessToken: string
 }
+export type MeResponse = {
+  createdAt: string
+  email: string
+  id: string
+  profile?: Profile
+  username: string
+}
+export type Profile = {}
+//todo:вынести отдельно в profile.types
