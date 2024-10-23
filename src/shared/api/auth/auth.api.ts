@@ -40,6 +40,7 @@ export const authApi = inctagramApi.injectEndpoints({
         }),
       }),
       me: builder.query<MeResponse, void>({
+        providesTags: ['Me'],
         query: () => ({
           method: 'GET',
           url: '/v1/auth/me',
