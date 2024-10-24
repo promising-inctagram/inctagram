@@ -60,6 +60,7 @@ export const authApi = inctagramApi.injectEndpoints({
 export const {
   useConfirmEmailMutation,
   useCreateUserMutation,
+  useLazyMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useResendRegistrationEmailMutation,

@@ -1,6 +1,6 @@
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
-import { useLoginMutation } from '@/shared/api/auth/auth.api'
+import { useLazyMeQuery, useLoginMutation } from '@/shared/api/auth/auth.api'
 import { ACCESS_TOKEN } from '@/shared/constants'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -17,6 +17,7 @@ export const SignInForm = () => {
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
 
   const [login] = useLoginMutation()
+  const [getUser] = useLazyMeQuery()
   const router = useRouter()
 
   const formHandler = handleSubmit(async data => {
@@ -29,6 +30,9 @@ export const SignInForm = () => {
         localStorage.setItem(ACCESS_TOKEN, accessToken)
 
         await router.push(Paths.home)
+        const res = await getUser().unwrap()
+
+        await router.push(`${Paths.profile}/?id=${res?.id}`)
       }
     } catch (err: unknown) {
       const errorsMessage = getErrorMessageData(err)
