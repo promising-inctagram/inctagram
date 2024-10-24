@@ -42,8 +42,8 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
     logout()
       .unwrap()
       .then(() => {
-        // todo: Также будет зачищаться localstorage
         localStorage.removeItem(ACCESS_TOKEN)
+
         router.push(Paths.logIn)
       })
       .catch(e => {

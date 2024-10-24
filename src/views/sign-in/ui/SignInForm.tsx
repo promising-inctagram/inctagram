@@ -1,11 +1,10 @@
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
-import { useLoginMutation } from '@/shared/api/auth/auth.api'
-import { useLazyGetUserQuery } from '@/shared/api/profile/profile.api'
+import { useLazyMeQuery, useLoginMutation } from '@/shared/api/auth/auth.api'
 import { ACCESS_TOKEN } from '@/shared/constants'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { fetchErrorMessageData } from '@/shared/utils/fetch-error-message-data'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useLoginValidation } from '@/views/sign-in/model/hooks/useLoginValidation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -18,7 +17,7 @@ export const SignInForm = () => {
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
 
   const [login] = useLoginMutation()
-  const [getUser] = useLazyGetUserQuery()
+  const [getUser] = useLazyMeQuery()
   const router = useRouter()
 
   const formHandler = handleSubmit(async data => {
@@ -36,14 +35,10 @@ export const SignInForm = () => {
         await router.push(`${Paths.profile}/?id=${res?.id}`)*/
       }
     } catch (err: unknown) {
-      const errors = fetchErrorMessageData(err)
+      const errorsMessage = getErrorMessageData(err)
 
-      if (typeof errors !== 'string') {
-        errors.forEach(el => {
-          setError(el.field, { message: el.message, type: 'manual' })
-        })
-      } else {
-        setError('password', { message: errors, type: 'manual' })
+      if (typeof errorsMessage === 'string') {
+        setError('password', { message: errorsMessage })
       }
     }
   })

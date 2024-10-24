@@ -1,15 +1,16 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 export type FormErrorData = { field: string; message: string }
+type ErrorResponseData = { errorsMessage: string }
 
 export type ServerErrorData = {
-  errorsMessage: FormErrorData[]
+  errorsMessages: FormErrorData[]
   path: string
   timestamp: string
 }
 
 export type CustomerError = {
-  data: ServerErrorData
+  data: ErrorResponseData | ServerErrorData
   status: number
 }
 
@@ -18,6 +19,9 @@ export function getErrorMessageData(error: unknown) {
     if ('data' in error) {
       const errorData = error as CustomerError
 
+      if ('errorsMessages' in errorData.data) {
+        return errorData.data.errorsMessages
+      }
       if ('errorsMessage' in errorData.data) {
         return errorData.data.errorsMessage
       }
