@@ -30,9 +30,9 @@ export const SignInForm = () => {
         localStorage.setItem(ACCESS_TOKEN, accessToken)
 
         await router.push(Paths.home)
-        /*const res = await getUser().unwrap()
+        const res = await getUser().unwrap()
 
-        await router.push(`${Paths.profile}/?id=${res?.id}`)*/
+        await router.push(`${Paths.profile}/?id=${res?.id}`)
       }
     } catch (err: unknown) {
       const errorsMessage = getErrorMessageData(err)
