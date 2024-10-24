@@ -4,8 +4,9 @@ import {
   ConfirmEmailArgs,
   CreateUserArgs,
   LoginData,
+  MeResponse,
   ResendRegistrationArgs,
-  ResponseLogin,
+  ResponseWithAccessToken,
 } from './auth.types'
 
 export const authApi = inctagramApi.injectEndpoints({
@@ -25,7 +26,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
-      login: builder.mutation<ResponseLogin, LoginData>({
+      login: builder.mutation<ResponseWithAccessToken, LoginData>({
         query: args => ({
           body: { ...args },
           method: 'POST',
@@ -36,6 +37,13 @@ export const authApi = inctagramApi.injectEndpoints({
         query: () => ({
           method: 'POST',
           url: '/v1/auth/logout',
+        }),
+      }),
+      me: builder.query<MeResponse, void>({
+        providesTags: ['Me'],
+        query: () => ({
+          method: 'GET',
+          url: '/v1/auth/me',
         }),
       }),
       resendRegistrationEmail: builder.mutation<void, ResendRegistrationArgs>({
