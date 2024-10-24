@@ -57,7 +57,7 @@ const Devices = () => {
   const { t } = useTranslation()
   const { activeSessions, currentDevice, terminateSessions } = t.profileSettingsDevices
   const { data } = useGetDevicesQuery()
-  const [deleteDevice] = useDeleteDeviceMutation()
+
   const [deleteAllDevices] = useDeleteAllDevicesMutation()
   const [IP, setIP] = useState(null)
   const { browser } = new UAParser().getResult()
@@ -66,10 +66,9 @@ const Devices = () => {
   useEffect(() => {
     getIP().then(ip => setIP(ip))
   }, [])
-  console.log(browser.version)
 
   const handlerTerminateSessions = () => {
-    deleteAllDevices()
+    deleteAllDevices().unwrap()
   }
 
   return (
@@ -95,7 +94,12 @@ const Devices = () => {
       <Typography variant={'h3'}>{activeSessions}</Typography>
       <div>
         {data?.map(device => (
-          <ActiveSessions date={device.lastActiveDate} key={device.id} title={device.title} />
+          <ActiveSessions
+            date={device.lastActiveDate}
+            deviceID={device.id}
+            key={device.id}
+            title={device.title}
+          />
         ))}
       </div>
     </Page>
