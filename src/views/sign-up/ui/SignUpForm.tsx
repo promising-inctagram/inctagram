@@ -119,6 +119,7 @@ export const SignUpForm = () => {
         email={email}
         isOpen={showDialog}
         onOpenChange={setShowDialog}
+        overlayStyles={s.overlay}
         t={emailSentDialog}
       />
     </>

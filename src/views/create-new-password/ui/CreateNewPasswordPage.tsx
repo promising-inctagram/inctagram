@@ -22,16 +22,10 @@ function CreateNewPasswordPage() {
   }, [router.query])
 
   useEffect(() => {
-    const checkRecoveryCodeFunction = async () => {
-      try {
-        await checkRecoveryCode({ recoveryCode }).unwrap()
-      } catch (e) {
-        setIsLinkExpired(true)
-      }
-    }
-
     if (recoveryCode) {
-      checkRecoveryCodeFunction()
+      checkRecoveryCode({ recoveryCode })
+        .unwrap()
+        .catch(e => setIsLinkExpired(true))
     }
   }, [recoveryCode])
 

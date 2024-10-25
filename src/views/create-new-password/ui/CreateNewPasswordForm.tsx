@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
@@ -6,6 +6,7 @@ import { Button, Typography } from '@/components/ui'
 import { useCreateNewPasswordMutation } from '@/shared/api/auth/auth.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
@@ -23,6 +24,7 @@ export const CreateNewPasswordForm = ({
   recoveryCode,
   setIsLinkExpired,
 }: CreateNewPasswordFormProps) => {
+  const [errorMessage, setErrorMessage] = useState<string>('')
   const { t } = useTranslation()
   const {
     formButton,
@@ -67,13 +69,30 @@ export const CreateNewPasswordForm = ({
 
       router.push(Paths.logIn)
     } catch (e) {
-      setIsLinkExpired(true)
+      const errors = getErrorMessageData(e)
+
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          if (el.field === 'newPassword') {
+            setError('password', { message: el.message })
+          } else if (el.field === 'recoveryCode') {
+            setIsLinkExpired(true)
+          } else {
+            setErrorMessage(el.message)
+          }
+        })
+      }
     }
   })
 
   return (
     <form className={styles.container} onSubmit={formHandler}>
       <div className={styles.fieldsContainer}>
+        {errorMessage && (
+          <Typography as={'span'} variant={'error'}>
+            {errorMessage}
+          </Typography>
+        )}
         <ControlledTextField
           control={control}
           label={labelPassword}

@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react'
+
 import {
   Button,
   DialogBody,
@@ -20,16 +22,23 @@ type SentEmailDialogProps = {
   email: string
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
+  overlayStyles: string
   t: LocaleEmailSentDialog
 }
-export const SentEmailDialog = ({ email, isOpen, onOpenChange, t }: SentEmailDialogProps) => {
+export const SentEmailDialog = ({
+  email,
+  isOpen,
+  onOpenChange,
+  overlayStyles,
+  t,
+}: SentEmailDialogProps) => {
   const confirmButtonHandler = () => {
     onOpenChange(false)
   }
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
-      <DialogContent className={s.content} overlayClassName={s.overlay}>
+      <DialogContent className={s.content} overlayClassName={overlayStyles}>
         <VisuallyHidden asChild>
           <DialogTitle>{t.accessibilityTitle}</DialogTitle>
         </VisuallyHidden>

@@ -9,8 +9,11 @@ export const passwordRecoveryPage = {
     placeholderPassword: 'Введите новый пароль',
   },
   forgotPasswordModalPage: {
-    modalText: 'Мы отправили ссылку для подтверждения вашего адреса электронной почты на ',
-    modalTitle: 'Письмо отправлено',
+    accessibilityDescription: 'Уведомление об отправке электронного письма',
+    accessibilityTitle: 'Заголовок уведомления в диалоговом окне',
+    confirmButton: 'ОК',
+    visibleBodyText: 'Мы отправили ссылку для подтверждения вашего электронного письма',
+    visibleTitle: 'Электронное письмо отправлено',
   },
   forgotPasswordPage: {
     formButton: 'Отправить Ссылку',
