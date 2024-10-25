@@ -6,10 +6,11 @@ import { CreateNewPasswordForm } from '@/views/create-new-password/ui/CreateNewP
 import styles from './CreateNewPassword.module.scss'
 
 type CreateNewPasswordProps = {
+  recoveryCode: string
   setIsLinkExpired: (value: boolean) => void
 }
 
-export const CreateNewPassword = ({ setIsLinkExpired }: CreateNewPasswordProps) => {
+export const CreateNewPassword = ({ recoveryCode, setIsLinkExpired }: CreateNewPasswordProps) => {
   const { t } = useTranslation()
   const { pageTitle } = t.passwordRecoveryPage.createNewPassword
 
@@ -20,7 +21,7 @@ export const CreateNewPassword = ({ setIsLinkExpired }: CreateNewPasswordProps) 
           <Typography as={'h1'} variant={'h1'}>
             {pageTitle}
           </Typography>
-          <CreateNewPasswordForm setIsLinkExpired={setIsLinkExpired} />
+          <CreateNewPasswordForm recoveryCode={recoveryCode} setIsLinkExpired={setIsLinkExpired} />
         </Card>
       </div>
     </Page>

@@ -12,7 +12,7 @@ export type ResendRegistrationArgs = {
   email: string
 }
 
-export type SentEmailArgs = {
+export type sendPasswordRecoveryEmailArgs = {
   email: string
   token: string
 }
@@ -29,6 +29,15 @@ export type LoginData = {
   email: string
   password: string
 }
-export type ResponseLogin = {
+export type ResponseWithAccessToken = {
   accessToken: string
 }
+export type MeResponse = {
+  createdAt: string
+  email: string
+  id: string
+  profile?: Profile
+  username: string
+}
+export type Profile = {}
+//todo:вынести отдельно в profile.types

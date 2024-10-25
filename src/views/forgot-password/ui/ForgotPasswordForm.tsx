@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
-import { useSentEmailMutation } from '@/shared/api/auth/auth.api'
+import { useSendPasswordRecoveryEmailMutation } from '@/shared/api/auth/auth.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
@@ -26,7 +26,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
   const { t } = useTranslation()
   const { formButton, formContent, pageLink, sentLinkText } =
     t.passwordRecoveryPage.forgotPasswordPage
-  const [sentEmail] = useSentEmailMutation()
+  const [sentEmail] = useSendPasswordRecoveryEmailMutation()
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY as string
   const recaptchaRef = useRef<Recaptcha | null>(null)
   const {

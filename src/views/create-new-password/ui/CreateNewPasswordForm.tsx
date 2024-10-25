@@ -15,10 +15,14 @@ import { createNewPasswordSchemeCreator } from '../model/create-new-password-sch
 import { CreatePWDFields } from '../model/types'
 
 type CreateNewPasswordFormProps = {
+  recoveryCode: string
   setIsLinkExpired: (value: boolean) => void
 }
 
-export const CreateNewPasswordForm = ({ setIsLinkExpired }: CreateNewPasswordFormProps) => {
+export const CreateNewPasswordForm = ({
+  recoveryCode,
+  setIsLinkExpired,
+}: CreateNewPasswordFormProps) => {
   const { t } = useTranslation()
   const {
     formButton,
@@ -31,11 +35,10 @@ export const CreateNewPasswordForm = ({ setIsLinkExpired }: CreateNewPasswordFor
   const [createNewPassword] = useCreateNewPasswordMutation()
   const router = useRouter()
 
-  const { control, handleSubmit, setError, setValue } = useForm<CreatePWDFields>({
+  const { control, handleSubmit, setError } = useForm<CreatePWDFields>({
     defaultValues: {
       confirmPassword: '',
       password: '',
-      recoveryCode: '',
     },
     mode: 'onChange',
     reValidateMode: 'onSubmit',
@@ -53,18 +56,10 @@ export const CreateNewPasswordForm = ({ setIsLinkExpired }: CreateNewPasswordFor
     }
   }, [password, confirmPassword, t.validation.passwordsMatch])
 
-  useEffect(() => {
-    const code = router.query.recoveryCode
-
-    if (code) {
-      setValue('recoveryCode', Array.isArray(code) ? code[0] : code)
-    }
-  }, [router.query])
-
   const formHandler = handleSubmit(async data => {
     const fetchData = {
       newPassword: data.password,
-      recoveryCode: data.recoveryCode,
+      recoveryCode: recoveryCode,
     }
 
     try {

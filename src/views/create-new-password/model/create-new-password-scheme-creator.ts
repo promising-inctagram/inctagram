@@ -7,7 +7,6 @@ export const createNewPasswordSchemeCreator = (t: LocaleValidation) => {
     .object({
       confirmPassword: confirmPasswordScheme,
       password: passwordScheme(t.password),
-      recoveryCode: z.string().min(1),
     })
     .refine(val => val.password === val.confirmPassword, {
       message: t.passwordsMatch,

@@ -35,7 +35,11 @@ function CreateNewPasswordPage() {
     }
   }, [recoveryCode])
 
-  return isLinkExpired ? <LinkExpired /> : <CreateNewPassword setIsLinkExpired={setIsLinkExpired} />
+  return isLinkExpired ? (
+    <LinkExpired />
+  ) : (
+    <CreateNewPassword recoveryCode={recoveryCode} setIsLinkExpired={setIsLinkExpired} />
+  )
 }
 
 CreateNewPasswordPage.getLayout = getLayout
