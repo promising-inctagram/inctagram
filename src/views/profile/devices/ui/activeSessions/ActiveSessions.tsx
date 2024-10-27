@@ -16,6 +16,7 @@ export const ActiveSessions = ({ date, deviceID, title }: Props) => {
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
   const { type } = new UAParser().getDevice()
+
   const [deleteDevice] = useDeleteDeviceMutation()
 
   const getDeviceType = (type: string | undefined) => {

@@ -46,25 +46,36 @@ const iconBrowser = (browserName: string | undefined): React.ReactNode => {
   }
 }
 
-const getIP = async () => {
-  const response = await fetch('https://api.ipify.org/?format=json')
-  const data = await response.json()
-
-  return data.ip
-}
-
 const Devices = () => {
   const { t } = useTranslation()
   const { activeSessions, currentDevice, terminateSessions } = t.profileSettingsDevices
   const { data } = useGetDevicesQuery()
 
   const [deleteAllDevices] = useDeleteAllDevicesMutation()
-  const [IP, setIP] = useState(null)
+  const [IPList, setIPList] = useState<string[]>([])
   const { browser } = new UAParser().getResult()
   const tabs = useTabs()
 
+  /*const getIP = async () => {
+      const response = await fetch('https://api.ipify.org/?format=json')
+      const data = await response.json()
+      const newIP = data.ip
+      const updateIPList = [...IPList, newIP]
+      return data.ip
+    }*/
+
   useEffect(() => {
-    getIP().then(ip => setIP(ip))
+    /*getIP().then(ip => setIP(ip))*/
+    fetch('https://api.ipify.org/?format=json')
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        const newIP = data.ip
+        const updateIPList = [...IPList, newIP]
+
+        setIPList(updateIPList)
+      })
   }, [])
 
   const handlerTerminateSessions = () => {
@@ -83,7 +94,9 @@ const Devices = () => {
           <Typography className={s.browserName} variant={'bold_text_16'}>
             {browser.name}
           </Typography>
-          <Typography variant={'regular_text_14'}>IP: {IP}</Typography>
+          <Typography variant={'regular_text_14'}>
+            IP: {IPList.length > 0 ? IPList[0] : 'Loading...'}
+          </Typography>
         </div>
       </Card>
       <div className={s.terminateSessions}>
