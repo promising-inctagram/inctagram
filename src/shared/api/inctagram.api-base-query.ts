@@ -1,7 +1,5 @@
-import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-
 import { ACCESS_TOKEN, INCTAGRAM_BASE_URL } from '@/shared/constants'
-import { fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
 const mutex = new Mutex()
