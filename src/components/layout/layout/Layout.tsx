@@ -8,12 +8,12 @@ import { NextPage } from 'next'
 import s from './Layout.module.scss'
 
 export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
-  const { data, isError, isLoading } = useMeQuery()
+  const { data, isError, isLoading, isSuccess } = useMeQuery()
   const isAuth = !isError && !isLoading
 
   return (
     <>
-      <Header isAuth={isAuth} />
+      <Header isAuth={isSuccess} />
       <main className={s.layout}>{children}</main>
       <Toaster />
     </>
