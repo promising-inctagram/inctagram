@@ -39,7 +39,7 @@ export const SignUpForm = () => {
       username: '',
     },
     mode: 'onTouched',
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
     resolver: zodResolver(signUpSchemeCreator(t.validation)),
   })
 
@@ -119,6 +119,7 @@ export const SignUpForm = () => {
         email={email}
         isOpen={showDialog}
         onOpenChange={setShowDialog}
+        overlayStyles={s.overlay}
         t={emailSentDialog}
       />
     </>
