@@ -2,6 +2,7 @@ import { SelectLanguage } from '@/components/select-language'
 import { Badge, Button, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
 import { Paths } from '@/shared/enums'
+import { useTranslation } from '@/shared/hooks'
 import Link from 'next/link'
 
 import styles from '@/components/header/Header.module.scss'
@@ -12,6 +13,8 @@ export type HeaderProps = {
 }
 
 export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className={styles.wrapper}>
       <Typography as={'h1'} variant={'large'}>
@@ -29,10 +32,10 @@ export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
         {!isAuth && (
           <div className={styles.buttonContainer}>
             <Button as={Link} className={styles.button} href={Paths.logIn} variant={'nb-outlined'}>
-              Log in
+              {t.header.loginButton}
             </Button>
             <Button as={Link} className={styles.button} href={Paths.signUp} variant={'primary'}>
-              Sign up
+              {t.header.signUpButton}
             </Button>
           </div>
         )}
