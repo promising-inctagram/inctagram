@@ -22,7 +22,6 @@ function ConfirmEmailPage() {
   const code = Array.isArray(router.query.code) ? router.query.code[0] : router.query.code
 
   useEffect(() => {
-    debugger
     if (code) {
       confirmEmail({ code })
         .unwrap()
@@ -30,7 +29,6 @@ function ConfirmEmailPage() {
           const errors = getErrorMessageData(e)
 
           if (typeof errors !== 'string') {
-            console.log(errors)
             errors.forEach(el => {
               showToast({
                 message: el.message,

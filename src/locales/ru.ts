@@ -13,6 +13,10 @@ import { validation } from '@/locales/ru/validation'
 export const ru: LocaleType = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
+  header: {
+    loginButton: 'Войти',
+    signUpButton: 'Зарегистрироваться',
+  },
   language: {
     en: 'Английский',
     ru: ' Русский',

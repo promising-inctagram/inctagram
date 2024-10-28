@@ -3,12 +3,12 @@ import { inctagramApi } from '@/shared/api/inctagram.api'
 import {
   CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
+  CreateNewPasswordArgs,
   CreateUserArgs,
-  LoginData,
+  LoginArgs,
   MeResponse,
   ResendRegistrationArgs,
   ResponseWithAccessToken,
-  createNewPasswordArgs,
   sendPasswordRecoveryEmailArgs,
 } from './auth.types'
 
@@ -29,7 +29,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration-confirmation',
         }),
       }),
-      createNewPassword: builder.mutation<void, createNewPasswordArgs>({
+      createNewPassword: builder.mutation<void, CreateNewPasswordArgs>({
         query: args => ({
           body: { ...args },
           method: 'POST',
@@ -43,7 +43,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
-      login: builder.mutation<ResponseWithAccessToken, LoginData>({
+      login: builder.mutation<ResponseWithAccessToken, LoginArgs>({
         query: args => ({
           body: { ...args },
           method: 'POST',
