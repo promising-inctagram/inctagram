@@ -18,6 +18,10 @@ export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
 export const en = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
+  header: {
+    loginButton: 'Log in',
+    signUpButton: 'Sign up',
+  },
   language: {
     en: 'English',
     ru: ' Russian',
