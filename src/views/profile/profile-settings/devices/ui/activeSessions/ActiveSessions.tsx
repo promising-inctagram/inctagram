@@ -4,18 +4,20 @@ import DesktopIcon from '@/components/ui/icons/DesktopIcon'
 import PhoneIcon from '@/components/ui/icons/PhoneIcon'
 import { useDeleteDeviceMutation } from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
-import UAParser from 'ua-parser-js'
+
+import s from './ActiveSessions.module.scss'
 
 type Props = {
-  date: string | undefined
+  date: string
   deviceID: string
-  title: string
+  deviceName: string
+  deviceType: string
+  ip: string
 }
 
-export const ActiveSessions = ({ date, deviceID, title }: Props) => {
+export const ActiveSessions = ({ date, deviceID, deviceName, deviceType, ip }: Props) => {
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
-  const { type } = new UAParser().getDevice()
 
   const [deleteDevice] = useDeleteDeviceMutation()
 
@@ -32,11 +34,16 @@ export const ActiveSessions = ({ date, deviceID, title }: Props) => {
   }
 
   return (
-    <Card>
-      <div>
-        <div>{getDeviceType(type)}</div>
+    <Card className={s.card}>
+      <div className={s.deviceInfoWrapper}>
+        <div>{getDeviceType(deviceType)}</div>
         <div>
-          <Typography variant={'bold_text_16'}>{title}</Typography>
+          <Typography className={s.deviceName} variant={'bold_text_16'}>
+            {deviceName}
+          </Typography>
+          <Typography className={s.ip} variant={'regular_text_14'}>
+            {ip}
+          </Typography>
           <Typography variant={'small_text'}>
             {lastVisit}: {date}
           </Typography>

@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { Page, getSidebarLayout } from '@/components'
-import { Button, Card, Tabs, Typography } from '@/components/ui'
+import { Button, Card, Typography } from '@/components/ui'
 import {
   BraveIcon,
   ChromeIcon,
@@ -13,18 +12,13 @@ import {
   UcBrowserIcon,
   YandexIcon,
 } from '@/components/ui/icons'
-import {
-  useDeleteAllDevicesMutation,
-  useDeleteDeviceMutation,
-  useGetDevicesQuery,
-} from '@/shared/api/devices/devices.api'
+import { useDeleteAllDevicesMutation, useGetDevicesQuery } from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
 import { ActiveSessions } from '@/views/profile/profile-settings/devices/ui/activeSessions/ActiveSessions'
-import UAParser from 'ua-parser-js'
 
 import s from './Devices.module.scss'
 
-const iconBrowser = (browserName: string | undefined): React.ReactNode => {
+const iconBrowser = (browserName: string | undefined): ReactNode => {
   switch (browserName) {
     case 'Chrome':
       return <ChromeIcon />
@@ -49,36 +43,14 @@ const Devices = () => {
   const { t } = useTranslation()
   const { activeSessions, currentDevice, terminateSessions } = t.profileSettingsDevices
   const { data } = useGetDevicesQuery()
-
   const [deleteAllDevices] = useDeleteAllDevicesMutation()
-  const [IPList, setIPList] = useState<string[]>([])
-  const { browser } = new UAParser().getResult()
-
-  /*const getIP = async () => {
-      const response = await fetch('https://api.ipify.org/?format=json')
-      const data = await response.json()
-      const newIP = data.ip
-      const updateIPList = [...IPList, newIP]
-      return data.ip
-    }*/
-
-  useEffect(() => {
-    /*getIP().then(ip => setIP(ip))*/
-    fetch('https://api.ipify.org/?format=json')
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        const newIP = data.ip
-        const updateIPList = [...IPList, newIP]
-
-        setIPList(updateIPList)
-      })
-  }, [])
 
   const handlerTerminateSessions = () => {
     deleteAllDevices().unwrap()
   }
+  const currentClientDevice = data?.find(el => el.current)
+
+  console.log(currentClientDevice?.deviceType)
 
   return (
     <Page mb={36} mt={36}>
@@ -86,14 +58,12 @@ const Devices = () => {
         {currentDevice}
       </Typography>
       <Card className={s.card}>
-        <div>{iconBrowser(browser.name)}</div>
+        <div>{iconBrowser(currentClientDevice?.browserName)}</div>
         <div>
           <Typography className={s.browserName} variant={'bold_text_16'}>
-            {browser.name}
+            {currentClientDevice?.browserName}
           </Typography>
-          <Typography variant={'regular_text_14'}>
-            IP: {IPList.length > 0 ? IPList[0] : 'Loading...'}
-          </Typography>
+          <Typography variant={'regular_text_14'}>IP: {currentClientDevice?.ip}</Typography>
         </div>
       </Card>
       <div className={s.terminateSessions}>
@@ -101,14 +71,18 @@ const Devices = () => {
           {terminateSessions}
         </Button>
       </div>
-      <Typography variant={'h3'}>{activeSessions}</Typography>
-      <div>
+      <Typography className={s.activeSessionsTitle} variant={'h3'}>
+        {activeSessions}
+      </Typography>
+      <div className={s.activeSessionsWrapper}>
         {data?.map(device => (
           <ActiveSessions
             date={device.lastActiveDate}
             deviceID={device.id}
+            deviceName={device.deviceName}
+            deviceType={device.deviceType}
+            ip={device.ip}
             key={device.id}
-            title={device.title}
           />
         ))}
       </div>

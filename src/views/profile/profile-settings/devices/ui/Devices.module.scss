@@ -17,3 +17,12 @@
   justify-content: flex-end;
   margin-bottom: 18px;
 }
+
+.activeSessionsTitle {
+  margin-bottom: 18px;
+}
+.activeSessionsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
