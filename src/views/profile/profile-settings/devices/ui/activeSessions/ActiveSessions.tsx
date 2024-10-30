@@ -21,7 +21,7 @@ export const ActiveSessions = ({ date, deviceID, deviceName, deviceType, ip }: P
 
   const [deleteDevice] = useDeleteDeviceMutation()
 
-  const getDeviceType = (type: string | undefined) => {
+  const getDeviceIcon = (type: string | undefined) => {
     if (type === 'mobile' || window.innerWidth < 768) {
       return <PhoneIcon />
     } else if (type === 'desktop' || window.innerWidth > 768) {
@@ -36,7 +36,7 @@ export const ActiveSessions = ({ date, deviceID, deviceName, deviceType, ip }: P
   return (
     <Card className={s.card}>
       <div className={s.deviceInfoWrapper}>
-        <div>{getDeviceType(deviceType)}</div>
+        <div>{getDeviceIcon(deviceType)}</div>
         <div>
           <Typography className={s.deviceName} variant={'bold_text_16'}>
             {deviceName}

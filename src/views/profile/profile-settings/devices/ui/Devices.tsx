@@ -50,8 +50,6 @@ const Devices = () => {
   }
   const currentClientDevice = data?.find(el => el.current)
 
-  console.log(currentClientDevice?.deviceType)
-
   return (
     <Page mb={36} mt={36}>
       <Typography className={s.title} variant={'h3'}>

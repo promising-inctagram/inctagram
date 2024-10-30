@@ -14,7 +14,7 @@ const ProfileSettingsPage = () => {
 
   return (
     <Page>
-      <Tabs defaultValue={tab} onValueChange={handleValueChange} tabs={tabs} />
+      <Tabs onValueChange={handleValueChange} tabs={tabs} />
       {tab === 'General information' && 'General information'}
       {tab === 'Devices' && <Devices />}
     </Page>
