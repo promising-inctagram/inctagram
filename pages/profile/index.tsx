@@ -1,7 +1,19 @@
 import { Page, getSidebarLayout } from '@/components'
+import { Button } from '@/components/ui/button'
+import { Paths } from '@/shared/enums'
+import { useRouter } from 'next/router'
 
 function ProfilePage() {
-  return <Page>Profile page</Page>
+  const { push } = useRouter()
+
+  return (
+    <Page>
+      Profile page
+      <Button onClick={() => push(Paths.profileSettings)} variant={'link'}>
+        profile settings
+      </Button>
+    </Page>
+  )
 }
 
 ProfilePage.getLayout = getSidebarLayout
