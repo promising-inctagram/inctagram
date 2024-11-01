@@ -10,6 +10,7 @@ const baseQuery = fetchBaseQuery({
     const token = localStorage.getItem(ACCESS_TOKEN)
 
     headers.set('Authorization', `Bearer ${token}`)
+    headers.set('Base-url', `${process.env.NEXT_PUBLIC_BASE_URL}`)
 
     return headers
   },
