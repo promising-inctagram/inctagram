@@ -17,7 +17,7 @@ export type sendPasswordRecoveryEmailArgs = {
   token: string
 }
 
-export type createNewPasswordArgs = {
+export type CreateNewPasswordArgs = {
   newPassword: string
   recoveryCode: string
 }
@@ -25,7 +25,7 @@ export type createNewPasswordArgs = {
 export type CheckRecoveryCodeArgs = {
   recoveryCode: string
 }
-export type LoginData = {
+export type LoginArgs = {
   email: string
   password: string
 }
