@@ -9,7 +9,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         url: '/profile/avatar',
       }),
     }),
-    updateAvatar: builder.mutation<void, AvatarDto>({
+    uploadAvatar: builder.mutation<void, AvatarDto>({
       query: ({ file }) => {
         const formData = new FormData()
 
@@ -24,3 +24,4 @@ export const profileApi = inctagramApi.injectEndpoints({
     }),
   }),
 })
+export const { useDeleteAvatarMutation, useUploadAvatarMutation } = profileApi

@@ -1,5 +1,5 @@
 export const profileSettingPage = {
-  avatarEditor: {
+  profilePhoto: {
     addProfilePhoto: 'Add a Profile Photo',
     deletePhotoQuestion: 'Are you sure you want to delete the photo?',
     deleteProfilePhoto: 'Delete Photo',

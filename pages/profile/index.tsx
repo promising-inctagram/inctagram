@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button'
 import { Paths } from '@/shared/enums'
 import { useRouter } from 'next/router'
 
+import General from './settings'
+
 function ProfilePage() {
   const { push } = useRouter()
 
