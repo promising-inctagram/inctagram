@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { getSidebarLayout } from '@/components'
 import {
   Button,
   Card,
@@ -8,21 +7,25 @@ import {
   DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogRoot,
   DialogTitle,
   Typography,
 } from '@/components/ui'
-import { CloseOutlineIcon, ImageOutlineIcon } from '@/components/ui/icons'
+import { CloseOutlineIcon } from '@/components/ui/icons'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
-import styles from './AddPost.module.scss'
+import styles from './CloseModal.module.scss'
 
-function AddPost() {
-  const [isOpen, setIsOpen] = useState(true)
-  const onOpenChange = () => {
-    setIsOpen(prev => !prev)
+type CloseModalProps = {
+  closeMainModal: (value: boolean) => void
+  isOpen: boolean
+  onOpenChange: () => void
+}
+
+const CloseModal = ({ closeMainModal, isOpen = true, onOpenChange }: CloseModalProps) => {
+  const handleCloseMainModal = () => {
+    closeMainModal(false)
   }
 
   return (
@@ -36,27 +39,31 @@ function AddPost() {
         </VisuallyHidden>
         <DialogHeader className={styles.header}>
           <Typography as={'h1'} variant={'h1'}>
-            Add photo
+            Close
           </Typography>
-          <DialogClose>
+          <DialogClose asChild>
             <Button title={'close'} variant={'icon'}>
               <CloseOutlineIcon />
             </Button>
           </DialogClose>
         </DialogHeader>
         <DialogBody className={styles.body}>
-          <Card className={styles.card}>
-            <ImageOutlineIcon height={'48'} width={'48'} />
-          </Card>
-          <Button className={styles.button}>Select from computer</Button>
-          <Button className={styles.button} variant={'outlined'}>
-            Open draft
-          </Button>
+          <Typography className={styles.text} variant={'regular_text_16'}>
+            Do you really want to close the creation of a publication?
+          </Typography>
+          <Typography variant={'regular_text_16'}>
+            If you close everything willbe deleted
+          </Typography>
+          <div className={styles.buttonsContainer}>
+            <Button onClick={handleCloseMainModal} variant={'outlined'}>
+              Discard
+            </Button>
+            <Button variant={'primary'}>Save draft</Button>
+          </div>
         </DialogBody>
       </DialogContent>
     </DialogRoot>
   )
 }
 
-AddPost.getLayout = getSidebarLayout
-export default AddPost
+export default CloseModal

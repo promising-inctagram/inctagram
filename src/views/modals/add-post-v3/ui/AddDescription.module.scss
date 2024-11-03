@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+.body {
+  padding: 0;
+  display: flex;
+  height: 503px;
+}
+.imageContainer {
+  width: 490px;
+}
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+}
+.card {
+  background-color: var(--color-dark-300);
+  border-bottom: 1px solid var(--color-dark-100);
+}
+.profileName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.avatar {
+  margin-right: 12px;
+}
+.textField {
+  background-color: var(--color-dark-500);
+  width: 433px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

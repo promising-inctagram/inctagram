@@ -1,0 +1,20 @@
+.content {
+  width: 378px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+}
+.text {
+  margin-top: 18px;
+}
+.buttonsContainer {
+  margin-top: 18px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+}
