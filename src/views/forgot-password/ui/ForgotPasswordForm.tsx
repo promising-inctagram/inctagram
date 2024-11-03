@@ -31,13 +31,12 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
   const recaptchaRef = useRef<Recaptcha | null>(null)
   const {
     control,
-    formState: { errors, isValid },
+    formState: { isValid },
     handleSubmit,
     reset,
     setError,
     setValue,
     trigger,
-    watch,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
@@ -47,9 +46,6 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
   })
 
-  const watchShowAge = watch('token')
-
-  console.log(errors)
   const formHandler = handleSubmit(async (data: ForgotPasswordFields) => {
     try {
       setEmail(data.email)
@@ -91,7 +87,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
           {sentLinkText}
         </Typography>
       )}
-      <Button disabled={!isValid || !watchShowAge} type={'submit'}>
+      <Button disabled={!isValid} type={'submit'}>
         {formButton}
       </Button>
       <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
