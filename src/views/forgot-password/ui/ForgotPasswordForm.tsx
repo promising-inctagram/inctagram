@@ -64,6 +64,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
       }
     }
     recaptchaRef.current?.reset()
+    setValue('token', '')
   })
 
   const handleTokenChange = (token: null | string) => {
