@@ -1,6 +1,6 @@
 import { useTranslation } from '@/shared/hooks/useTranslations'
 
-export const useTabs = () => {
+export const useGetProfileSettingsTabs = () => {
   const { t } = useTranslation()
   const { account_management, devices, general_information, my_payments } = t.profile
 

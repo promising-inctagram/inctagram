@@ -3,40 +3,33 @@ import { LogOutOutlineIcon } from '@/components/ui/icons'
 import DesktopIcon from '@/components/ui/icons/DesktopIcon'
 import PhoneIcon from '@/components/ui/icons/PhoneIcon'
 import { useDeleteDeviceMutation } from '@/shared/api/devices/devices.api'
+import { getDevicesArgs } from '@/shared/api/devices/devices.types'
 import { useTranslation } from '@/shared/hooks'
+import { useDeviceSize } from '@/views/profile/profile-settings/hooks/useDeviceSize'
 
-import s from './ActiveSessions.module.scss'
+import s from './Devices.module.scss'
 
 type Props = {
-  date: string
-  deviceID: string
-  deviceName: string
-  deviceType: string
-  ip: string
+  device: getDevicesArgs
 }
 
-export const ActiveSessions = ({ date, deviceID, deviceName, deviceType, ip }: Props) => {
+export const ActiveSessions = (props: Props) => {
+  const { deviceName, deviceType, id, ip, lastActiveDate } = props.device
+
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
+  const isPhoneScreen = useDeviceSize(deviceType)
 
   const [deleteDevice] = useDeleteDeviceMutation()
 
-  const getDeviceIcon = (type: string | undefined) => {
-    if (type === 'mobile' || window.innerWidth < 768) {
-      return <PhoneIcon />
-    } else if (type === 'desktop' || window.innerWidth > 768) {
-      return <DesktopIcon />
-    }
-  }
-
   const handleDeleteDevice = () => {
-    deleteDevice(deviceID).unwrap()
+    deleteDevice(id).unwrap()
   }
 
   return (
     <Card className={s.card}>
       <div className={s.deviceInfoWrapper}>
-        <div>{getDeviceIcon(deviceType)}</div>
+        <div>{isPhoneScreen ? <PhoneIcon /> : <DesktopIcon />}</div>
         <div>
           <Typography className={s.deviceName} variant={'bold_text_16'}>
             {deviceName}
@@ -45,7 +38,7 @@ export const ActiveSessions = ({ date, deviceID, deviceName, deviceType, ip }: P
             {ip}
           </Typography>
           <Typography variant={'small_text'}>
-            {lastVisit}: {date}
+            {lastVisit}: {lastActiveDate}
           </Typography>
         </div>
       </div>

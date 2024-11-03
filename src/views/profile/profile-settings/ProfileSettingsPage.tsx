@@ -1,22 +1,29 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { Page, getSidebarLayout } from '@/components'
 import { Tabs } from '@/components/ui'
 import Devices from '@/views/profile/profile-settings/devices/ui/Devices'
-import { useTabs } from '@/views/profile/profile-settings/hooks/useTabs'
+import { useGetProfileSettingsTabs } from '@/views/profile/profile-settings/hooks/useGetProfileSettingsTabs'
+
+type RenderTabs = {
+  [key: string]: ReactNode
+}
 
 const ProfileSettingsPage = () => {
-  const tabs = useTabs()
-  const [tab, setTab] = useState('')
+  const tabs = useGetProfileSettingsTabs()
+  const [tab, setTab] = useState<string>('')
   const handleValueChange = (value: string) => {
     setTab(value)
+  }
+
+  const renderTabs: RenderTabs = {
+    Devices: <Devices />,
   }
 
   return (
     <Page>
       <Tabs onValueChange={handleValueChange} tabs={tabs} />
-      {tab === 'General information' && 'General information'}
-      {tab === 'Devices' && <Devices />}
+      {renderTabs[tab]}
     </Page>
   )
 }
