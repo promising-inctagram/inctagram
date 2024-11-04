@@ -42,7 +42,8 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
       email: '',
       token: '',
     },
-    mode: 'onChange',
+    mode: 'onTouched',
+    reValidateMode: 'onChange',
     resolver: zodResolver(forgotPasswordSchemeCreator(t.validation)),
   })
 
@@ -73,31 +74,35 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
 
   return (
     <form className={styles.form} onSubmit={formHandler}>
-      <ControlledTextField
-        control={control}
-        label={'Email'}
-        name={'email'}
-        placeholder={'Epam@epam.com'}
-      />
-      <Typography className={styles.text} variant={'regular_text_14'}>
-        {formContent}
-      </Typography>
-      {isMessageSent && (
-        <Typography className={styles.sentMessage} variant={'regular_text_14'}>
-          {sentLinkText}
+      <div>
+        <ControlledTextField
+          control={control}
+          label={'Email'}
+          name={'email'}
+          placeholder={'Epam@epam.com'}
+        />
+        <Typography className={styles.text} variant={'regular_text_14'}>
+          {formContent}
         </Typography>
-      )}
-      <Button disabled={!isValid} type={'submit'}>
-        {formButton}
-      </Button>
-      <Button as={Link} className={styles.button} href={Paths.logIn} variant={'link'}>
+        {isMessageSent && (
+          <Typography className={styles.sentMessage} variant={'regular_text_14'}>
+            {sentLinkText}
+          </Typography>
+        )}
+        <Button disabled={!isValid} fullWidth type={'submit'}>
+          {formButton}
+        </Button>
+      </div>
+      <Button as={Link} href={Paths.logIn} variant={'nb-outlined'}>
         {pageLink}
       </Button>
       <Recaptcha
         hl={'en'}
+        isolated
         onChange={handleTokenChange}
         ref={recaptchaRef}
         sitekey={sitekey}
+        tabindex={1}
         theme={'dark'}
       />
     </form>

@@ -1,5 +1,3 @@
-import { Profile } from '@/shared/api/profile/profile.types'
-
 export type CreateUserArgs = {
   agreement: boolean
   email: string
@@ -31,13 +29,30 @@ export type LoginArgs = {
   email: string
   password: string
 }
-export type ResponseWithAccessToken = {
+export type LoginResponse = {
   accessToken: string
 }
-export type MeResponse = {
+
+export type ResponseMe = {
   createdAt: string
   email: string
   id: string
-  profile?: Profile
+  profile: ResponseMeProfile
   username: string
+}
+export type ResponseMeProfileAvatarData = {
+  id: string
+  mediumFilePath: string
+  originFilePath: string
+  smallFilePath: string
+  userId: number
+}
+export type ResponseMeProfile = {
+  aboutMe: string
+  avatarInfo: ResponseMeProfileAvatarData
+  city: string
+  country: string
+  dateOfBirth: string
+  firstName: string
+  lastName: string
 }

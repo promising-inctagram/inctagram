@@ -27,6 +27,7 @@ function CreateNewPasswordPage() {
         .unwrap()
         .catch(e => setIsLinkExpired(true))
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recoveryCode])
 
   return isLinkExpired ? (
