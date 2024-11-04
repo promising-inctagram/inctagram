@@ -12,4 +12,4 @@ export const PASSWORD_REGEX =
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-.:;<=>?@[\]^_`{|}~])/
 
 // api constants:
-export const ACCESS_TOKEN = 'access-token'
+export const ACCESS_TOKEN = 'accessToken'

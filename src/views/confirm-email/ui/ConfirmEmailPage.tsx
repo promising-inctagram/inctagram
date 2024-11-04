@@ -22,7 +22,6 @@ function ConfirmEmailPage() {
   const code = Array.isArray(router.query.code) ? router.query.code[0] : router.query.code
 
   useEffect(() => {
-    debugger
     if (code) {
       confirmEmail({ code })
         .unwrap()

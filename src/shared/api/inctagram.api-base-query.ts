@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN } from '@/shared/constants'
+import { ErrorStatus } from '@/shared/enums'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
@@ -8,6 +9,10 @@ const baseQuery = fetchBaseQuery({
   credentials: 'include',
   prepareHeaders: headers => {
     const token = localStorage.getItem(ACCESS_TOKEN)
+
+    if (headers.get('Authorization')) {
+      return headers
+    }
 
     headers.set('Authorization', `Bearer ${token}`)
     headers.set('Base-Url', `${process.env.NEXT_PUBLIC_BASE_URL}`)
@@ -25,25 +30,25 @@ export const baseQueryWithReauth: BaseQueryFn<
   await mutex.waitForUnlock()
   let result = await baseQuery(args, api, extraOptions)
 
-  if (result.error && result.error.status === 401) {
+  if (result.error && result.error.status === ErrorStatus.Unauthorized) {
     // checking whether the mutex is locked
     if (!mutex.isLocked()) {
       const release = await mutex.acquire()
 
       try {
-        const refreshResult = await baseQuery(
+        const refreshResult = (await baseQuery(
           {
             method: 'POST',
             url: 'v1/auth/refresh-token',
           },
           api,
           extraOptions
-        )
+        )) as any
 
         if (refreshResult.data) {
-          const data = refreshResult.data as { accessToken: string }
+          // const data = refreshResult.data as { accessToken: string }
 
-          localStorage.setItem(ACCESS_TOKEN, data.accessToken.trim())
+          localStorage.setItem(ACCESS_TOKEN, refreshResult.data.accessToken.trim())
 
           result = await baseQuery(args, api, extraOptions)
         } else {
