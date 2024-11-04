@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+
 import {
   Button,
   DialogContent,
@@ -11,6 +13,7 @@ import {
 } from '@/components/ui'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
 import { ACCESS_TOKEN } from '@/shared/constants'
+import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
@@ -24,6 +27,7 @@ type Props = {
 }
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
+  const { meData } = useContext(AuthContext)
   const [logout, { isLoading }] = useLogoutMutation()
   const {
     t: {
@@ -79,7 +83,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
           <Typography as={'h3'} variant={'h3'}>
             {confirmationMessage}
           </Typography>
-          <Typography>___email name___?</Typography>
+          <Typography>{meData?.email}</Typography>
         </DialogHeader>
         <DialogFooter className={s.footer}>
           <Button

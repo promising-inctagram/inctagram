@@ -1,6 +1,9 @@
+import { useContext } from 'react'
+
 import { SelectLanguage } from '@/components/select-language'
 import { Badge, Button, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
+import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import Link from 'next/link'
 
@@ -8,10 +11,11 @@ import styles from '@/components/header/Header.module.scss'
 
 export type HeaderProps = {
   countNotification?: number
-  isAuth?: boolean
 }
 
-export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
+export const Header = ({ countNotification }: HeaderProps) => {
+  const { isAuth } = useContext(AuthContext)
+
   return (
     <div className={styles.wrapper}>
       <Typography as={'h1'} variant={'large'}>

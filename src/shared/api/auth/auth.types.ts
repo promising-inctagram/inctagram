@@ -32,12 +32,27 @@ export type LoginData = {
 export type ResponseWithAccessToken = {
   accessToken: string
 }
-export type MeResponse = {
+
+export type ResponseMe = {
   createdAt: string
   email: string
   id: string
-  profile?: Profile
+  profile: ResponseMeProfile
   username: string
 }
-export type Profile = {}
-//todo:вынести отдельно в profile.types
+export type ResponseMeProfileAvatarData = {
+  id: string
+  mediumFilePath: string
+  originFilePath: string
+  smallFilePath: string
+  userId: number
+}
+export type ResponseMeProfile = {
+  aboutMe: string
+  avatarInfo: ResponseMeProfileAvatarData
+  city: string
+  country: string
+  dateOfBirth: string
+  firstName: string
+  lastName: string
+}

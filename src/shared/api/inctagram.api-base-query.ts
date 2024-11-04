@@ -1,16 +1,16 @@
-import { ACCESS_TOKEN, INCTAGRAM_BASE_URL } from '@/shared/constants'
+import { ACCESS_TOKEN } from '@/shared/constants'
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, fetchBaseQuery } from '@reduxjs/toolkit/query'
 import { Mutex } from 'async-mutex'
 
 const mutex = new Mutex()
 const baseQuery = fetchBaseQuery({
-  baseUrl: INCTAGRAM_BASE_URL,
+  baseUrl: process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL,
   credentials: 'include',
   prepareHeaders: headers => {
     const token = localStorage.getItem(ACCESS_TOKEN)
 
     headers.set('Authorization', `Bearer ${token}`)
-    headers.set('Base-url', `${process.env.NEXT_PUBLIC_BASE_URL}`)
+    headers.set('Base-Url', `${process.env.NEXT_PUBLIC_BASE_URL}`)
 
     return headers
   },
@@ -43,21 +43,11 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data) {
           const data = refreshResult.data as { accessToken: string }
 
-          localStorage.setItem(ACCESS_TOKEN, data.accessToken)
+          localStorage.setItem(ACCESS_TOKEN, data.accessToken.trim())
 
           result = await baseQuery(args, api, extraOptions)
         } else {
-          const accessToken = localStorage.getItem(ACCESS_TOKEN)
-
-          accessToken &&
-            (await baseQuery(
-              {
-                method: 'POST',
-                url: '/auth/logout',
-              },
-              api,
-              extraOptions
-            ))
+          localStorage.removeItem(ACCESS_TOKEN)
         }
       } finally {
         // release must be called once the mutex should be released again.

@@ -5,8 +5,8 @@ import {
   ConfirmEmailArgs,
   CreateUserArgs,
   LoginData,
-  MeResponse,
   ResendRegistrationArgs,
+  ResponseMe,
   ResponseWithAccessToken,
   createNewPasswordArgs,
   sendPasswordRecoveryEmailArgs,
@@ -56,7 +56,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/logout',
         }),
       }),
-      me: builder.query<MeResponse, void>({
+      me: builder.query<ResponseMe, void>({
         providesTags: ['Me'],
         query: () => ({
           method: 'GET',
@@ -88,6 +88,7 @@ export const {
   useCreateUserMutation,
   useLoginMutation,
   useLogoutMutation,
+  useMeQuery,
   useResendRegistrationEmailMutation,
   useSendPasswordRecoveryEmailMutation,
 } = authApi

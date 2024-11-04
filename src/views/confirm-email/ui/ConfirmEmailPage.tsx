@@ -30,7 +30,6 @@ function ConfirmEmailPage() {
           const errors = getErrorMessageData(e)
 
           if (typeof errors !== 'string') {
-            console.log(errors)
             errors.forEach(el => {
               showToast({
                 message: el.message,

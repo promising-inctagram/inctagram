@@ -12,5 +12,4 @@ export const PASSWORD_REGEX =
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+,\-.:;<=>?@[\]^_`{|}~])/
 
 // api constants:
-export const INCTAGRAM_BASE_URL = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL
 export const ACCESS_TOKEN = 'access-token'
