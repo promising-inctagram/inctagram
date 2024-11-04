@@ -19,11 +19,11 @@ export const OAuthIcons = () => {
 
   return (
     <div className={s.socials}>
-      <Button className={s.socialsButton} onClick={onGithub} title={githubButton} variant={'icon'}>
-        <GithubIcon className={s.icon} />
-      </Button>
       <Button className={s.socialsButton} onClick={onGoogle} title={googleButton} variant={'icon'}>
         <GoogleIcon className={s.icon} />
+      </Button>
+      <Button className={s.socialsButton} onClick={onGithub} title={githubButton} variant={'icon'}>
+        <GithubIcon className={s.icon} />
       </Button>
     </div>
   )

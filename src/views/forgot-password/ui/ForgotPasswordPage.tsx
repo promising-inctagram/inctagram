@@ -18,19 +18,19 @@ export default function ForgotPasswordPage() {
     <Page mt={'72px'}>
       <div className={styles.container}>
         <Card className={styles.card}>
-          <SentEmailDialog
-            email={email}
-            isOpen={isModal}
-            onOpenChange={setIsModal}
-            overlayStyles={styles.overlay}
-            t={forgotPasswordModalPage}
-          />
           <Typography as={'h1'} variant={'h1'}>
             {forgotPasswordPage.pageTitle}
           </Typography>
           <ForgotPasswordForm setEmail={setEmail} setIsModal={setIsModal} />
         </Card>
       </div>
+      <SentEmailDialog
+        email={email}
+        isOpen={isModal}
+        onOpenChange={setIsModal}
+        overlayStyles={styles.overlay}
+        t={forgotPasswordModalPage}
+      />
     </Page>
   )
 }

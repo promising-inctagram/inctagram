@@ -7,13 +7,13 @@ import { useCreateNewPasswordMutation } from '@/shared/api/auth/auth.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
+import { CreatePWDFields } from '@/views/create-new-password/model/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
 import styles from './CreateNewPasswordForm.module.scss'
 
 import { createNewPasswordSchemeCreator } from '../model/create-new-password-scheme-creator'
-import { CreatePWDFields } from '../model/types'
 
 type CreateNewPasswordFormProps = {
   recoveryCode: string
@@ -56,6 +56,7 @@ export const CreateNewPasswordForm = ({
     } else {
       setError('confirmPassword', { message: '' })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password, confirmPassword, t.validation.passwordsMatch])
 
   const formHandler = handleSubmit(async data => {

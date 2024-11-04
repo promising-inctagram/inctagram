@@ -1,5 +1,3 @@
-import { CSSProperties } from 'react'
-
 import {
   Button,
   DialogBody,
@@ -46,7 +44,7 @@ export const SentEmailDialog = ({
           <DialogDescription>{t.accessibilityDescription}</DialogDescription>
         </VisuallyHidden>
         <DialogHeader className={s.header}>
-          <Typography as={'h3'} variant={'h3'}>
+          <Typography as={'h1'} variant={'h1'}>
             {t.visibleTitle}
           </Typography>
           <DialogClose asChild>
@@ -56,7 +54,7 @@ export const SentEmailDialog = ({
           </DialogClose>
         </DialogHeader>
         <DialogBody>
-          <Typography variant={'regular_text_14'}>{`${t.visibleBodyText} ${email}`}</Typography>
+          <Typography variant={'regular_text_16'}>{`${t.visibleBodyText} ${email}`}</Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>
           <Button className={s.button} onClick={confirmButtonHandler} variant={'primary'}>
