@@ -8,11 +8,6 @@ const meta = {
         type: 'number',
       },
     },
-    isAuth: {
-      control: {
-        type: 'boolean',
-      },
-    },
   },
   component: Header,
   tags: ['autodocs'],
