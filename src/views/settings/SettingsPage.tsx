@@ -1,9 +1,11 @@
 import { Page, getSidebarLayout } from '@/components'
 import { useMeQuery } from '@/shared/api/auth/auth.api'
-import ProfilePhoto from '@/views/profile/ui/ProfilePhoto'
+import { useTranslation } from '@/shared/hooks'
+import AvatarManager from '@/views/profile/ui/AvatarManager'
 
 import s from './SettingsPage.module.scss'
 function SettingsPage() {
+  const { t } = useTranslation()
   const { data: userInfo } = useMeQuery()
 
   console.log(userInfo)
@@ -12,7 +14,7 @@ function SettingsPage() {
   return (
     <Page>
       <div className={s.container}>
-        <ProfilePhoto avatar={avatar} />
+        <AvatarManager avatar={avatar} />
         {/*todo: ProfileInfoForm*/}
       </div>
     </Page>

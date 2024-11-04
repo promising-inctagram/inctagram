@@ -1,0 +1,46 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  margin-top: 24px;
+}
+.avatarContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  margin-top: 24px;
+}
+.btnContainer{
+
+}
+.saveButton {
+  margin: 36px 0 12px auto;
+}
+/*dialog*/
+
+.dialogContent{
+  width: 100%;
+  max-width: 492px;
+}
+.dialogHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialogBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.blankImage{
+  margin-top: 48px;
+  margin-bottom: 60px;
+}
+.fileBtn{
+  padding: 6px 36px;
+}
