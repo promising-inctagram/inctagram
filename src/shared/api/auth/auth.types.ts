@@ -1,5 +1,3 @@
-import { Profile } from '@/shared/api/profile/profile.types'
-
 export type CreateUserArgs = {
   agreement: boolean
   email: string
@@ -41,3 +39,4 @@ export type MeResponse = {
   profile?: Profile
   username: string
 }
+export type Profile = {}
