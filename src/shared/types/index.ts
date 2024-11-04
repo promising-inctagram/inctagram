@@ -3,3 +3,5 @@ export type RadioOption = {
   label: string
   value: string
 }
+
+export type Nullable<T> = T | null
