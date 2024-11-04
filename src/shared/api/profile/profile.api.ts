@@ -1,5 +1,5 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
-import { AvatarDto } from '@/shared/api/profile/profile.types'
+import { AvatarDto, UpdateProfileArgs } from '@/shared/api/profile/profile.types'
 
 export const profileApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
@@ -7,6 +7,14 @@ export const profileApi = inctagramApi.injectEndpoints({
       query: () => ({
         method: 'DELETE',
         url: '/profile/avatar',
+      }),
+    }),
+    updateProfile: builder.mutation<void, UpdateProfileArgs>({
+      invalidatesTags: ['Profile'],
+      query: args => ({
+        body: { ...args },
+        method: 'PUT',
+        url: '/profile/my',
       }),
     }),
     uploadAvatar: builder.mutation<void, AvatarDto>({
@@ -24,4 +32,5 @@ export const profileApi = inctagramApi.injectEndpoints({
     }),
   }),
 })
-export const { useDeleteAvatarMutation, useUploadAvatarMutation } = profileApi
+export const { useDeleteAvatarMutation, useUpdateProfileMutation, useUploadAvatarMutation } =
+  profileApi

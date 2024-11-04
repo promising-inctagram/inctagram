@@ -3,15 +3,20 @@ import { Button } from '@/components/ui/button'
 import { Paths } from '@/shared/enums'
 import { useRouter } from 'next/router'
 
-import General from './settings'
-
 function ProfilePage() {
-  const { push } = useRouter()
+  const {
+    push,
+    query: { id },
+  } = useRouter()
+
+  const openSettings = () => {
+    push(`/${Paths.profile}/${id}/settings`)
+  }
 
   return (
     <Page>
       Profile page
-      <Button onClick={() => push(Paths.profileSettings)} variant={'link'}>
+      <Button onClick={openSettings} variant={'link'}>
         profile settings
       </Button>
     </Page>

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
+
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, Typography } from '@/components/ui'
-import { useLoginMutation } from '@/shared/api/auth/auth.api'
+import { useLoginMutation, useMeQuery } from '@/shared/api/auth/auth.api'
 import { ACCESS_TOKEN } from '@/shared/constants'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -16,8 +18,15 @@ export const SignInForm = () => {
   const { control, handleSubmit, isValid, setError } = useLoginValidation()
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
 
+  const { data: userData, refetch } = useMeQuery()
   const [login] = useLoginMutation()
   const router = useRouter()
+
+  useEffect(() => {
+    if (userData?.id) {
+      router.push(`${Paths.profile}/${userData.id}`)
+    }
+  }, [userData?.id, router])
 
   const formHandler = handleSubmit(async data => {
     try {
@@ -27,8 +36,7 @@ export const SignInForm = () => {
         const accessToken = resData.accessToken
 
         localStorage.setItem(ACCESS_TOKEN, accessToken)
-
-        await router.push(Paths.home)
+        await refetch()
       }
     } catch (err: unknown) {
       const errorsMessage = getErrorMessageData(err)

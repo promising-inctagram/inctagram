@@ -19,7 +19,16 @@ export const ControlledDatePicker = <T extends FieldValues>({
 }: ControlledDatePickerProps<T>) => {
   const {
     field: { onChange, value, ...field },
-  } = useController({ control, defaultValue, disabled, name, rules, shouldUnregister })
+    fieldState: { error },
+  } = useController({ control, defaultValue, name, rules, shouldUnregister })
 
-  return <DatePicker onSelectSingleDate={onChange} selected={value} {...field} {...rest} />
+  return (
+    <DatePicker
+      disabled={disabled}
+      onSelectSingleDate={onChange}
+      selected={value}
+      {...field}
+      {...rest}
+    />
+  )
 }

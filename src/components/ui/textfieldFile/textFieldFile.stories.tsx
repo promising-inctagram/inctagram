@@ -2,9 +2,9 @@ import type { StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import { Button } from '@/shared/ui/Button'
-import { InputFile } from '@/shared/ui/TextFieldFile/TextFieldFile'
-import z from 'zod'
+import { Button } from '@/components/ui'
+import { TextFieldFile } from '@/components/ui/textfieldFile/textFieldFile'
+import * as z from 'zod'
 
 const meta = {
   argTypes: {
@@ -22,7 +22,7 @@ const meta = {
       description: 'A Zod schema for validating the input file.',
     },
   },
-  component: InputFile,
+  component: TextFieldFile,
   parameters: {
     layout: 'centered',
   },
@@ -36,23 +36,21 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: <Button asComponent={'span'}>input file</Button>,
-    zodSchema: z.instanceof(File) as any,
   },
 }
 
 export const Controlled: Story = {
   args: {
     children: <Button asComponent={'span'}>input file</Button>,
-    zodSchema: z.instanceof(File) as any,
   },
   render: () => {
-    const [file, setFile] = useState<Nullable<File>>(null)
+    const [file, setFile] = useState<File | null>(null)
 
     return (
       <>
-        <InputFile setError={() => {}} setFile={setFile} zodSchema={z.instanceof(File) as any}>
+        <TextFieldFile setSelectedImage={setFile}>
           <Button asComponent={'span'}>input file</Button>
-        </InputFile>
+        </TextFieldFile>
 
         <div style={{ marginBottom: '10px', marginTop: '10px' }}>Name: {file?.name}</div>
         <div>Size: {file?.size}</div>

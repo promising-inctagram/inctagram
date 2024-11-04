@@ -59,7 +59,7 @@ export const DatePicker = forwardRef<DatePickerRef, DatePickerProps>(
             value={inputValue}
           />
           <Root onOpenChange={setIsOpen} open={isOpen}>
-            <Trigger disabled={disabled} id={id} title={'open calendar'}>
+            <Trigger id={id} title={'open calendar'}>
               {triggerIcon}
             </Trigger>
             <Portal>

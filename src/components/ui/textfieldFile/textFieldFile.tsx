@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useRef } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
@@ -7,8 +7,8 @@ import { useTranslation } from '@/shared/hooks'
 import s from './textfield.module.scss'
 type Props = {
   setSelectedImage: (image: File) => void
-}
-export const TextFieldFile = ({ setSelectedImage }: Props) => {
+} & ComponentPropsWithoutRef<'input'>
+export const TextFieldFile = ({ setSelectedImage, ...rest }: Props) => {
   const { t } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
   const selectFileHandler = () => {
@@ -34,6 +34,7 @@ export const TextFieldFile = ({ setSelectedImage }: Props) => {
         onChange={uploadHandler}
         ref={inputRef}
         type={'file'}
+        {...rest}
       />
     </div>
   )

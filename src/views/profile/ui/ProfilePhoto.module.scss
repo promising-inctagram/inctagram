@@ -1,31 +1,29 @@
-.root{
+.root {
   display: flex;
   flex-direction: column;
   gap: 24px;
   align-items: center;
-  width: 100%;
+  width: 200px;
   margin-top: 24px;
 }
-.avatar{
-
+.avatar {
 }
-.dialog{
+.dialog {
   max-width: 492px;
   max-height: 564px;
 }
-.dialogHeader{
+.dialogHeader {
   display: flex;
   justify-content: space-between;
 }
-.dialogContent{
+.dialogContent {
   max-width: 492px;
-
 }
-.blankImage{
+.blankImage {
   margin-top: 48px;
   margin-bottom: 60px;
 }
-.dialogBody{
+.dialogBody {
   width: 100%;
   display: flex;
   flex-direction: column;

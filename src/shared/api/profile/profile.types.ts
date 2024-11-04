@@ -18,3 +18,13 @@ export type Avatar = {
 export type AvatarDto = {
   file: File
 }
+
+export type UpdateProfileArgs = {
+  aboutMe?: null | string
+  city?: null | string
+  country?: null | string
+  dateOfBirth?: Date | null
+  firstName: null | string
+  lastName: null | string
+  userName: null | string
+}
