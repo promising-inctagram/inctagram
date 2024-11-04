@@ -16,7 +16,7 @@ export type HeaderProps = {
 
 export const Header = ({ countNotification }: HeaderProps) => {
   const { isAuth } = useContext(AuthContext)
-    const { t } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className={styles.wrapper}>

@@ -29,7 +29,7 @@ export type LoginArgs = {
   email: string
   password: string
 }
-export type ResponseWithAccessToken = {
+export type LoginResponse = {
   accessToken: string
 }
 
