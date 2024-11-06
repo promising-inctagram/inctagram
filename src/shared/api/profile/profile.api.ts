@@ -6,7 +6,7 @@ export const profileApi = inctagramApi.injectEndpoints({
     deleteAvatar: builder.mutation<void, void>({
       query: () => ({
         method: 'DELETE',
-        url: '/profile/avatar',
+        url: 'v1/profile/avatar',
       }),
     }),
     uploadAvatar: builder.mutation<void, AvatarDto>({
@@ -18,7 +18,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         return {
           body: formData,
           method: 'POST',
-          url: '/profile/avatar',
+          url: 'v1/profile/avatar',
         }
       },
     }),

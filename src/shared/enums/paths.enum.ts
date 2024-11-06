@@ -10,7 +10,7 @@ export enum Paths {
   privacyPolicy = '/docs/privacy-policy',
   profile = '/profile',
   search = '/search',
-  settings = 'settings',
+  settings = '/settings',
   signUp = '/auth/sign-up',
   statistics = '/statistics',
   termsOfService = '/docs/terms-of-service',

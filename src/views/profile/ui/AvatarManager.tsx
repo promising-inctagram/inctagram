@@ -19,7 +19,7 @@ import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 
 import s from './AvatarManager.module.scss'
-type Props = { avatar?: null | string }
+type Props = { avatar: string | undefined }
 
 const AvatarManager = ({ avatar }: Props) => {
   const { t } = useTranslation()
@@ -31,31 +31,34 @@ const AvatarManager = ({ avatar }: Props) => {
   const [uploadAvatar] = useUploadAvatarMutation()
   const [deleteAvatar] = useDeleteAvatarMutation()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false)
 
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 })
   const handlePositionChange = (position: { x: number; y: number }) => {
     setPosition(position)
   }
-  const openAddPhotoHandler = (open: boolean) => {
+  const onOpenChangeHandler = (open: boolean) => {
     setIsDialogOpen(open)
+    setUploadSuccess(false)
   }
   const onSaveAvatarHandler = async () => {
     if (editorRef.current) {
-      const canvasScaled = editorRef.current.getImageScaledToCanvas()
+      const canvas = editorRef.current.getImageScaledToCanvas()
 
-      if (canvasScaled) {
-        canvasScaled.toBlob(async blob => {
+      if (canvas) {
+        canvas.toBlob(async blob => {
           if (blob) {
             const timestamp = Date.now()
-            const fileName = `photo_${timestamp}.png`
-            const file = new File([blob], fileName, { type: 'image/png' })
+            const fileName = `avatar${timestamp}.png`
+            const file = new File([blob], fileName, { type: blob.type })
 
             try {
-              await uploadAvatar(file)
+              await uploadAvatar({ file: file })
                 .unwrap()
                 .then(() => {
                   setAvatarFile(null)
                   setIsDialogOpen(false)
+                  setUploadSuccess(false)
                 })
             } catch (e) {
               const errors = getErrorMessageData(e)
@@ -73,7 +76,10 @@ const AvatarManager = ({ avatar }: Props) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
 
-      setAvatarFile(file)
+      if (!uploadSuccess) {
+        setUploadSuccess(true)
+        setAvatarFile(file)
+      }
     }
 
     return
@@ -84,7 +90,7 @@ const AvatarManager = ({ avatar }: Props) => {
       {avatar ? <Avatar size={'s'} src={avatar} userName={'userAvatar'} /> : <BlankImage />}
 
       <DialogRoot
-        onOpenChange={openAddPhotoHandler}
+        onOpenChange={onOpenChangeHandler}
         open={isDialogOpen}
         title={t.profilePage.addProfilePhoto}
       >
@@ -120,7 +126,7 @@ const AvatarManager = ({ avatar }: Props) => {
               <BlankImage className={s.blankImage} type={'square'} />
             )}
             <div>
-              {avatarFile ? (
+              {uploadSuccess ? (
                 <Button className={s.saveButton} onClick={onSaveAvatarHandler}>
                   {t.profilePage.savePhoto}
                 </Button>
