@@ -7,12 +7,10 @@ import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 function ProfilePage() {
   const { t } = useTranslation()
-  const router = useRouter()
-  const { isAuth, meData } = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
 
   return (
     <Page>

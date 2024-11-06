@@ -19,12 +19,12 @@ import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 
 import s from './AvatarManager.module.scss'
-type Props = { avatar: string | undefined }
+type Props = { avatar: string }
 
 const AvatarManager = ({ avatar }: Props) => {
   const { t } = useTranslation()
   const editorRef = useRef<AvatarEditor>(null)
-  const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [avatarFile, setAvatarFile] = useState<File | string>(avatar ?? null)
 
   const [error, setError] = useState('')
 
@@ -34,12 +34,14 @@ const AvatarManager = ({ avatar }: Props) => {
   const [uploadSuccess, setUploadSuccess] = useState(false)
 
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 })
+
   const handlePositionChange = (position: { x: number; y: number }) => {
     setPosition(position)
   }
   const onOpenChangeHandler = (open: boolean) => {
     setIsDialogOpen(open)
     setUploadSuccess(false)
+    setAvatarFile(avatar ?? null)
   }
   const onSaveAvatarHandler = async () => {
     if (editorRef.current) {
@@ -56,7 +58,6 @@ const AvatarManager = ({ avatar }: Props) => {
               await uploadAvatar({ file: file })
                 .unwrap()
                 .then(() => {
-                  setAvatarFile(null)
                   setIsDialogOpen(false)
                   setUploadSuccess(false)
                 })
