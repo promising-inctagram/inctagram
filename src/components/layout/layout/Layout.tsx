@@ -13,7 +13,7 @@ export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <Header isAuth={isSuccess} />
+      <Header isAuth={isAuth} />
       <main className={s.layout}>{children}</main>
       <Toaster />
     </>

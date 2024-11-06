@@ -24,11 +24,11 @@ const Devices = () => {
       <Typography className={s.title} variant={'h3'}>
         {currentDevice}
       </Typography>
-      <Card className={s.card}>
+      <Card className={s.cardDevices}>
         <div>{browserIcon}</div>
         <div>
           <Typography className={s.browserName} variant={'bold_text_16'}>
-            {currentClientDevice?.browserName}
+            {currentClientDevice?.browserName || 'Browser Name'}
           </Typography>
           <Typography variant={'regular_text_14'}>IP: {currentClientDevice?.ip}</Typography>
         </div>

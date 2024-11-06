@@ -15,7 +15,7 @@ export const devicesApi = inctagramApi.injectEndpoints({
         invalidatesTags: ['Devices'],
         query: deviceId => ({
           method: 'DELETE',
-          url: '/v1/security/devices/' + { deviceId },
+          url: '/v1/security/devices/' + deviceId,
         }),
       }),
       getDevices: builder.query<getDevicesArgs[], void>({

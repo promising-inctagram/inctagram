@@ -14,7 +14,7 @@ type Props = {
 }
 
 export const ActiveSessions = (props: Props) => {
-  const { deviceName, deviceType, id, ip, lastActiveDate } = props.device
+  const { deviceType, id, ip, lastActiveDate, osName } = props.device
 
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
@@ -22,23 +22,31 @@ export const ActiveSessions = (props: Props) => {
 
   const [deleteDevice] = useDeleteDeviceMutation()
 
+  const date = new Date(lastActiveDate)
+  const options: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }
+  const dateVisit = date.toLocaleDateString('ru-RU', options)
+
   const handleDeleteDevice = () => {
     deleteDevice(id).unwrap()
   }
 
   return (
-    <Card className={s.card}>
+    <Card className={s.cardSessions}>
       <div className={s.deviceInfoWrapper}>
         <div>{isPhoneScreen ? <PhoneIcon /> : <DesktopIcon />}</div>
         <div>
           <Typography className={s.deviceName} variant={'bold_text_16'}>
-            {deviceName}
+            {osName}
           </Typography>
           <Typography className={s.ip} variant={'regular_text_14'}>
-            {ip}
+            IP: {ip}
           </Typography>
           <Typography variant={'small_text'}>
-            {lastVisit}: {lastActiveDate}
+            {lastVisit}: {dateVisit}
           </Typography>
         </div>
       </div>
