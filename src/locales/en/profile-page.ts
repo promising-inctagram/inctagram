@@ -7,5 +7,5 @@ export const profilePage = {
   profileSettingsBtn: 'Profile Settings',
   savePhoto: 'Save',
   selectPhoto: 'Select from Computer',
-  yesButton: 'Да',
+  yesButton: 'Yes',
 }

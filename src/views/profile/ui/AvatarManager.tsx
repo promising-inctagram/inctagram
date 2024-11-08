@@ -10,13 +10,17 @@ import {
   DialogContent,
   DialogHeader,
   DialogRoot,
+  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { CloseOutlineIcon } from '@/components/ui/icons'
+import { showToast } from '@/components/ui/toast'
 import { Typography } from '@/components/ui/typography'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
+import DeleteAvatarDialog from '@/views/profile/ui/DeleteAvatarDialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import s from './AvatarManager.module.scss'
 type Props = { avatar: string }
@@ -25,12 +29,10 @@ const AvatarManager = ({ avatar }: Props) => {
   const { t } = useTranslation()
   const editorRef = useRef<AvatarEditor>(null)
   const [avatarFile, setAvatarFile] = useState<File | string>(avatar ?? null)
-
-  const [error, setError] = useState('')
-
   const [uploadAvatar] = useUploadAvatarMutation()
   const [deleteAvatar] = useDeleteAvatarMutation()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
 
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 })
@@ -41,33 +43,56 @@ const AvatarManager = ({ avatar }: Props) => {
   const onOpenChangeHandler = (open: boolean) => {
     setIsDialogOpen(open)
     setUploadSuccess(false)
-    setAvatarFile(avatar ?? null)
   }
   const onSaveAvatarHandler = async () => {
-    if (editorRef.current) {
-      const canvas = editorRef.current.getImageScaledToCanvas()
+    try {
+      if (editorRef.current) {
+        const canvas = editorRef.current?.getImageScaledToCanvas()
 
-      if (canvas) {
-        canvas.toBlob(async blob => {
-          if (blob) {
-            const timestamp = Date.now()
-            const fileName = `avatar${timestamp}.png`
-            const file = new File([blob], fileName, { type: blob.type })
+        if (canvas) {
+          canvas.toBlob(async blob => {
+            if (blob) {
+              const timestamp = Date.now()
+              const fileName = `avatar${timestamp}.png`
+              const file = new File([blob], fileName, { type: blob.type })
 
-            try {
               await uploadAvatar({ file: file })
                 .unwrap()
                 .then(() => {
                   setIsDialogOpen(false)
                   setUploadSuccess(false)
                 })
-            } catch (e) {
-              const errors = getErrorMessageData(e)
-              // toast.error('errors')
             }
-          } else {
-            // toast.error('Select a photo')
-          }
+          })
+        }
+      }
+    } catch (e) {
+      const errors = getErrorMessageData(e)
+
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          showToast({
+            message: el.message,
+            variant: 'error',
+          })
+        })
+      }
+    }
+  }
+  const onDeleteAvatarHandler = async () => {
+    try {
+      await deleteAvatar().unwrap()
+      setIsDeleteDialogOpen(false)
+      setAvatarFile(null)
+    } catch (e) {
+      const errors = getErrorMessageData(e)
+
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          showToast({
+            message: el.message,
+            variant: 'error',
+          })
         })
       }
     }
@@ -77,9 +102,11 @@ const AvatarManager = ({ avatar }: Props) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0]
 
-      if (!uploadSuccess) {
+      if (file) {
+        const avatarUrl = URL.createObjectURL(file)
+
         setUploadSuccess(true)
-        setAvatarFile(file)
+        setAvatarFile(avatarUrl)
       }
     }
 
@@ -88,8 +115,28 @@ const AvatarManager = ({ avatar }: Props) => {
 
   return (
     <div className={s.root}>
-      {avatar ? <Avatar size={'s'} src={avatar} userName={'userAvatar'} /> : <BlankImage />}
-
+      {avatar ? (
+        <div className={s.avatar}>
+          <div className={s.deleteBtnWrapper}>
+            <Button
+              className={s.deleteBtn}
+              onClick={setIsDeleteDialogOpen}
+              title={t.profilePage.deleteProfilePhoto}
+              variant={'icon'}
+            >
+              <CloseOutlineIcon className={s.closeIcon} />
+            </Button>
+          </div>
+          <Avatar size={'s'} src={avatar} userName={'userAvatar'} />
+        </div>
+      ) : (
+        <BlankImage />
+      )}
+      <DeleteAvatarDialog
+        isOpen={isDeleteDialogOpen}
+        onConfirm={onDeleteAvatarHandler}
+        onOpenChange={setIsDeleteDialogOpen}
+      />
       <DialogRoot
         onOpenChange={onOpenChangeHandler}
         open={isDialogOpen}
@@ -99,8 +146,13 @@ const AvatarManager = ({ avatar }: Props) => {
           {<Button variant={'outlined'}>{t.profilePage.addProfilePhoto}</Button>}
         </DialogTrigger>
         <DialogContent className={s.dialogContent}>
+          <VisuallyHidden>
+            <DialogTitle>{t.profilePage.addProfilePhoto}</DialogTitle>
+          </VisuallyHidden>
           <DialogHeader className={s.dialogHeader}>
-            <Typography variant={'h3'}>{t.profilePage.addProfilePhoto}</Typography>
+            <Typography as={'h3'} variant={'h3'}>
+              {t.profilePage.addProfilePhoto}
+            </Typography>
             <DialogClose className={'close-button'}>
               <Button title={t.profilePage.closeButton} variant={'icon'}>
                 <CloseOutlineIcon />
@@ -126,7 +178,7 @@ const AvatarManager = ({ avatar }: Props) => {
             ) : (
               <BlankImage className={s.blankImage} type={'square'} />
             )}
-            <div>
+            <div className={s.btnWrapper}>
               {uploadSuccess ? (
                 <Button className={s.saveButton} onClick={onSaveAvatarHandler}>
                   {t.profilePage.savePhoto}
