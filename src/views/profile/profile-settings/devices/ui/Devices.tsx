@@ -20,7 +20,7 @@ const Devices = () => {
   const browserIcon = useGetBrowserIcon(currentClientDevice?.browserName)
 
   return (
-    <Page mb={36} mt={36}>
+    <div className={s.container}>
       <Typography className={s.title} variant={'h3'}>
         {currentDevice}
       </Typography>
@@ -44,7 +44,7 @@ const Devices = () => {
       <div className={s.activeSessionsWrapper}>
         {data?.map(device => <ActiveSessions device={device} key={device.id} />)}
       </div>
-    </Page>
+    </div>
   )
 }
 
