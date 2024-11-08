@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { Breakpoints } from '@/shared/enums/breakpoints.enum'
 
 export const useIsMobileOrTabletVersion = () => {
-  const [isTablet, setIsTablet] = useState(true)
-  const [isMobile, setIsMobile] = useState(true)
+  const [isTablet, setIsTablet] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleWindowResizeForTablet = () => setIsTablet(window.innerWidth < Breakpoints.tablet)
