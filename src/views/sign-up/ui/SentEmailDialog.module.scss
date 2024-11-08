@@ -2,12 +2,6 @@
   width: 380px;
 }
 
-.overlay {
-  &[data-state='open'] {
-    opacity: 1;
-  }
-}
-
 .header {
   display: flex;
   align-items: center;

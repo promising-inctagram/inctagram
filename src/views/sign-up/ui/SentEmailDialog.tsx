@@ -20,16 +20,23 @@ type SentEmailDialogProps = {
   email: string
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
+  overlayStyles: string
   t: LocaleEmailSentDialog
 }
-export const SentEmailDialog = ({ email, isOpen, onOpenChange, t }: SentEmailDialogProps) => {
+export const SentEmailDialog = ({
+  email,
+  isOpen,
+  onOpenChange,
+  overlayStyles,
+  t,
+}: SentEmailDialogProps) => {
   const confirmButtonHandler = () => {
     onOpenChange(false)
   }
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
-      <DialogContent className={s.content} overlayClassName={s.overlay}>
+      <DialogContent className={s.content} overlayClassName={overlayStyles}>
         <VisuallyHidden asChild>
           <DialogTitle>{t.accessibilityTitle}</DialogTitle>
         </VisuallyHidden>
@@ -37,7 +44,7 @@ export const SentEmailDialog = ({ email, isOpen, onOpenChange, t }: SentEmailDia
           <DialogDescription>{t.accessibilityDescription}</DialogDescription>
         </VisuallyHidden>
         <DialogHeader className={s.header}>
-          <Typography as={'h3'} variant={'h3'}>
+          <Typography as={'h1'} variant={'h1'}>
             {t.visibleTitle}
           </Typography>
           <DialogClose asChild>
@@ -47,7 +54,7 @@ export const SentEmailDialog = ({ email, isOpen, onOpenChange, t }: SentEmailDia
           </DialogClose>
         </DialogHeader>
         <DialogBody>
-          <Typography variant={'regular_text_14'}>{`${t.visibleBodyText} ${email}`}</Typography>
+          <Typography variant={'regular_text_16'}>{`${t.visibleBodyText} ${email}`}</Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>
           <Button className={s.button} onClick={confirmButtonHandler} variant={'primary'}>

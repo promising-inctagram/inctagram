@@ -7,6 +7,12 @@
   margin: 12px 0 6px;
 }
 
+.overlay {
+  &[data-state='open'] {
+    opacity: 1;
+  }
+}
+
 .textFieldContainer {
   display: flex;
   flex-direction: column;

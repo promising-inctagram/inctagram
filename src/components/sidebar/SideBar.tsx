@@ -3,7 +3,6 @@ import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef, useSta
 import { menuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
 import { LogOutOutlineIcon } from '@/components/ui/icons'
-import { Paths } from '@/shared/enums'
 import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'

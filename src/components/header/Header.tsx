@@ -1,17 +1,23 @@
+import { useContext } from 'react'
+
 import { SelectLanguage } from '@/components/select-language'
 import { Badge, Button, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
+import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
+import { useTranslation } from '@/shared/hooks'
 import Link from 'next/link'
 
 import styles from '@/components/header/Header.module.scss'
 
 export type HeaderProps = {
   countNotification?: number
-  isAuth?: boolean
 }
 
-export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
+export const Header = ({ countNotification }: HeaderProps) => {
+  const { isAuth } = useContext(AuthContext)
+  const { t } = useTranslation()
+
   return (
     <div className={styles.wrapper}>
       <Typography as={'h1'} variant={'large'}>
@@ -29,10 +35,10 @@ export const Header = ({ countNotification, isAuth = false }: HeaderProps) => {
         {!isAuth && (
           <div className={styles.buttonContainer}>
             <Button as={Link} className={styles.button} href={Paths.logIn} variant={'nb-outlined'}>
-              Log in
+              {t.header.loginButton}
             </Button>
             <Button as={Link} className={styles.button} href={Paths.signUp} variant={'primary'}>
-              Sign up
+              {t.header.signUpButton}
             </Button>
           </div>
         )}

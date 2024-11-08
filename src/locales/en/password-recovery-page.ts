@@ -9,8 +9,11 @@ export const passwordRecoveryPage = {
     placeholderPassword: 'Enter new password',
   },
   forgotPasswordModalPage: {
-    modalText: 'We have sent a link to confirm your email to epam@epam.com',
-    modalTitle: 'Email sent',
+    accessibilityDescription: 'Notification that the email has been sent',
+    accessibilityTitle: 'Dialog notification header',
+    confirmButton: 'OK',
+    visibleBodyText: 'We have sent a link to confirm your email to',
+    visibleTitle: 'Email sent',
   },
   forgotPasswordPage: {
     formButton: 'Send Link',

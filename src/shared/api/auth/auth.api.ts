@@ -1,22 +1,39 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
 import {
+  CheckRecoveryCodeArgs,
   ConfirmEmailArgs,
+  CreateNewPasswordArgs,
   CreateUserArgs,
-  LoginData,
-  MeResponse,
+  LoginArgs,
+  LoginResponse,
   ResendRegistrationArgs,
-  ResponseWithAccessToken,
+  ResponseMe,
+  sendPasswordRecoveryEmailArgs,
 } from './auth.types'
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
     return {
+      checkRecoveryCode: builder.mutation<void, CheckRecoveryCodeArgs>({
+        query: args => ({
+          body: { ...args },
+          method: 'POST',
+          url: '/v1/auth/check-recovery-code',
+        }),
+      }),
       confirmEmail: builder.mutation<void, ConfirmEmailArgs>({
         query: args => ({
           body: { ...args },
           method: 'POST',
           url: '/v1/auth/registration-confirmation',
+        }),
+      }),
+      createNewPassword: builder.mutation<void, CreateNewPasswordArgs>({
+        query: args => ({
+          body: { ...args },
+          method: 'POST',
+          url: '/v1/auth/new-password',
         }),
       }),
       createUser: builder.mutation<void, CreateUserArgs>({
@@ -26,7 +43,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration',
         }),
       }),
-      login: builder.mutation<ResponseWithAccessToken, LoginData>({
+      login: builder.mutation<LoginResponse, LoginArgs>({
         query: args => ({
           body: { ...args },
           method: 'POST',
@@ -39,7 +56,7 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/logout',
         }),
       }),
-      me: builder.query<MeResponse, void>({
+      me: builder.query<ResponseMe, void>({
         providesTags: ['Me'],
         query: () => ({
           method: 'GET',
@@ -53,14 +70,25 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/auth/registration-email-resending',
         }),
       }),
+      sendPasswordRecoveryEmail: builder.mutation<void, sendPasswordRecoveryEmailArgs>({
+        query: args => ({
+          body: { ...args },
+          method: 'POST',
+          url: '/v1/auth/password-recovery',
+        }),
+      }),
     }
   },
 })
 
 export const {
+  useCheckRecoveryCodeMutation,
   useConfirmEmailMutation,
+  useCreateNewPasswordMutation,
   useCreateUserMutation,
   useLoginMutation,
   useLogoutMutation,
+  useMeQuery,
   useResendRegistrationEmailMutation,
+  useSendPasswordRecoveryEmailMutation,
 } = authApi
