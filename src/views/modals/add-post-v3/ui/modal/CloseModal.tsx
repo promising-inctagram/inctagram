@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
   Button,
-  Card,
   DialogBody,
   DialogClose,
   DialogContent,
@@ -20,7 +19,7 @@ import styles from './CloseModal.module.scss'
 type CloseModalProps = {
   closeMainModal: (value: boolean) => void
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: (value: boolean) => void
 }
 
 const CloseModal = ({ closeMainModal, isOpen = true, onOpenChange }: CloseModalProps) => {

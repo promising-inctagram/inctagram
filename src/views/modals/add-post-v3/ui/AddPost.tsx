@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useMemo, useState } from 'react'
 
 import { getSidebarLayout } from '@/components'
 import {
@@ -35,14 +35,19 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
     setStepIndex(i => i - 1)
   }
 
-  const handleOpenCloseModal = e => {
-    if (e.target.className === 'Dialog_overlay__ptaiT') {
+  const handleOpenCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
+    if ((e.target as HTMLDivElement).className === 'Dialog_overlay__ptaiT') {
       setIsOpenCloseModal(true)
     }
   }
 
-  const steps: ReactElement[] = [
-    <UploadPhoto key={'upload'} next={next} setImages={setImages} />,
+  const steps: ReactElement[] = useMemo(() => [
+    <UploadPhoto
+      key={'upload'}
+      next={next}
+      setImages={setImages}
+      setIsOpenCloseModal={setIsOpenCloseModal}
+    />,
     <CroppingPhoto
       back={back}
       images={images}
@@ -51,7 +56,7 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
       setImages={setImages}
     />,
     <AddDescription back={back} images={images} key={'desctiption'} />,
-  ]
+  ], [images])
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
@@ -77,3 +82,9 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
 
 AddPost.getLayout = getSidebarLayout
 export default AddPost
+
+// todo: Формат: JPEG, PNG 20 мб
+// todo:Description field max 500
+// todo: максимум 10 фото
+// todo:
+// todo:
