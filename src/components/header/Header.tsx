@@ -35,7 +35,7 @@ export const Header = ({ countNotification }: HeaderProps) => {
           </Button>
         )}
         <SelectLanguage />
-        {!isAuth && !isTablet ? (
+        {!isAuth && !isTablet && (
           <div className={styles.buttonContainer}>
             <Button as={Link} className={styles.button} href={Paths.logIn} variant={'nb-outlined'}>
               {t.header.loginButton}
@@ -44,9 +44,8 @@ export const Header = ({ countNotification }: HeaderProps) => {
               {t.header.signUpButton}
             </Button>
           </div>
-        ) : (
-          <HeaderMobileMenu />
         )}
+        {!isAuth && isTablet && <HeaderMobileMenu />}
       </div>
     </div>
   )
