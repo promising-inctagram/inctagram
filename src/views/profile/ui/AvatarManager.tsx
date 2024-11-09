@@ -165,7 +165,6 @@ const AvatarManager = ({ avatar }: Props) => {
                 backgroundColor={'black'}
                 borderRadius={155}
                 color={[23, 23, 23, 0.6]}
-                crossOrigin={'anonymous'}
                 disableBoundaryChecks={false}
                 height={316}
                 image={avatarFile}

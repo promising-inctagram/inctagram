@@ -25,9 +25,7 @@
   background-color: var(--color-danger-500);
   border-radius: var(--border-radius-rounded);
 }
-.saveButton {
-  margin: 36px 0 36px auto;
-}
+
 .closeIcon{
   width: 16px;
   height: 16px;
@@ -48,10 +46,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap:36px;
 }
 .blankImage{
-  margin-top: 48px;
-  margin-bottom: 60px;
+  margin-top: 28px;
 }
 .fileBtn{
   padding: 6px 36px;
