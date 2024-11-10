@@ -8,10 +8,16 @@ import styles from './UploadPhoto.module.scss'
 type UploadPhotoProps = {
   next: () => void
   setImages: (images: string[]) => void
+  setImagesFilers: any
   setIsOpenCloseModal: any
 }
 
-const UploadPhoto = ({ next, setImages, setIsOpenCloseModal }: UploadPhotoProps) => {
+const UploadPhoto = ({
+  next,
+  setImages,
+  setImagesFilers,
+  setIsOpenCloseModal,
+}: UploadPhotoProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const onSubmit = () => {
     fileInputRef.current?.click()
@@ -22,6 +28,7 @@ const UploadPhoto = ({ next, setImages, setIsOpenCloseModal }: UploadPhotoProps)
       const file = e.target.files[0]
       const reader = new FileReader()
 
+      setImagesFilers([file])
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setImages([reader.result]) //

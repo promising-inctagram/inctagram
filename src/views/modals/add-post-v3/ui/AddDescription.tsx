@@ -12,22 +12,39 @@ import {
   Typography,
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
+import { useCreatePostMutation } from '@/shared/api/post/post.api'
 
 import styles from './AddDescription.module.scss'
 
 type AddDescriptionProps = {
   back: () => void
   images: string[]
+  imagesFiles: any
 }
 
-const AddDescription = ({ back, images }: AddDescriptionProps) => {
+const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
+  const [createPost] = useCreatePostMutation()
+
+  const createPostHandler = async () => {
+    const fetchData = {
+      files: imagesFiles,
+    }
+
+    console.log(fetchData)
+    try {
+      await createPost(fetchData).unwrap
+    } catch (e) {
+      console.error('АШИБКА:', e)
+    }
+  }
+
   return (
     <>
       <DialogHeader className={styles.header}>
         <Button onClick={back} variant={'icon'}>
           <ArrowIosBackIcon />
         </Button>
-        <Typography as={'h1'} variant={'h1'}>
+        <Typography as={'h1'} onClick={createPostHandler} variant={'h1'}>
           Publication
         </Typography>
         <Button variant={'link'}>Publish </Button>

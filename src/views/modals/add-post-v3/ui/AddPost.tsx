@@ -24,6 +24,7 @@ type AddPostProps = {
 
 function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
   const [images, setImages] = useState<string[]>([])
+  const [imagesFiles, setImagesFilers] = useState<File[]>([])
   const [stepIndex, setStepIndex] = useState<number>(0)
   const [isOpenCloseModal, setIsOpenCloseModal] = useState<boolean>(false)
 
@@ -41,22 +42,27 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
     }
   }
 
-  const steps: ReactElement[] = useMemo(() => [
-    <UploadPhoto
-      key={'upload'}
-      next={next}
-      setImages={setImages}
-      setIsOpenCloseModal={setIsOpenCloseModal}
-    />,
-    <CroppingPhoto
-      back={back}
-      images={images}
-      key={'cropping'}
-      next={next}
-      setImages={setImages}
-    />,
-    <AddDescription back={back} images={images} key={'desctiption'} />,
-  ], [images])
+  const steps: ReactElement[] = useMemo(
+    () => [
+      <UploadPhoto
+        key={'upload'}
+        next={next}
+        setImages={setImages}
+        setImagesFilers={setImagesFilers}
+        setIsOpenCloseModal={setIsOpenCloseModal}
+      />,
+      <CroppingPhoto
+        back={back}
+        images={images}
+        key={'cropping'}
+        next={next}
+        setImages={setImages}
+        setImagesFilers={setImagesFilers}
+      />,
+      <AddDescription back={back} images={images} imagesFiles={imagesFiles} key={'desctiption'} />,
+    ],
+    [images]
+  )
 
   return (
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>

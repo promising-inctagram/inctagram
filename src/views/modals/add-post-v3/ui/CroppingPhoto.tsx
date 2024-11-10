@@ -24,9 +24,10 @@ type CroppingPhotoProps = {
   images: string[]
   next: () => void
   setImages: React.Dispatch<React.SetStateAction<string[]>>
+  setImagesFilers: any
 }
 
-const CroppingPhoto = ({ back, images, next, setImages }: CroppingPhotoProps) => {
+const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const onSubmit = () => {
@@ -38,6 +39,7 @@ const CroppingPhoto = ({ back, images, next, setImages }: CroppingPhotoProps) =>
       const file = e.target.files[0]
       const reader = new FileReader()
 
+      setImagesFilers((prev: string[]) => [...prev, file])
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setImages((prev: string[]) => [...prev, reader.result as string])
@@ -53,7 +55,9 @@ const CroppingPhoto = ({ back, images, next, setImages }: CroppingPhotoProps) =>
 
   const deleteImage = (index: number) => {
     setImages(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
-    if(images.length === 1) back()
+    if (images.length === 1) {
+      back()
+    }
   }
 
   return (
@@ -73,29 +77,24 @@ const CroppingPhoto = ({ back, images, next, setImages }: CroppingPhotoProps) =>
       <DialogBody className={styles.body}>
         <Carousel
           className={styles.image}
-          slides={images}
           onActiveIndexChange={data => console.log(data.activeIndex)}
+          slides={images}
         />
         {showModal && (
           <Card className={styles.card}>
             <ScrollArea className={styles.scroll}>
               <div className={styles.imagesContainer}>
                 {images.map((elem, index) => (
-                  <div className={styles.smallImageContainer}>
-                    <img
-                      alt={'sad'}
-                      className={styles.smallImage}
-                      key={`${elem}${index}`}
-                      src={elem}
-                    />
-                    <Button variant={'icon'} onClick={() => deleteImage(index)}>
+                  <div className={styles.smallImageContainer} key={`${elem}${index}`}>
+                    <img alt={'sad'} className={styles.smallImage} src={elem} />
+                    <Button onClick={() => deleteImage(index)} variant={'icon'}>
                       <CloseOutlineIcon className={styles.closeIcon} height={'12'} width={'12'} />
                     </Button>
                   </div>
                 ))}
               </div>
             </ScrollArea>
-            <Button onClick={onSubmit} variant={'icon'} disabled={images.length === 10}>
+            <Button disabled={images.length === 10} onClick={onSubmit} variant={'icon'}>
               <PlusCircleOutlineIcon height={'36'} width={'36'} />
             </Button>
             <input
