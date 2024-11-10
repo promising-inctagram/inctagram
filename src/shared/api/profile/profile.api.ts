@@ -12,9 +12,9 @@ export const profileApi = inctagramApi.injectEndpoints({
     updateProfile: builder.mutation<void, UpdateProfileArgs>({
       invalidatesTags: ['Profile'],
       query: args => ({
-        body: { ...args },
+        body: args,
         method: 'PUT',
-        url: '/profile/my',
+        url: '/v1/profile/my',
       }),
     }),
     uploadAvatar: builder.mutation<void, AvatarDto>({

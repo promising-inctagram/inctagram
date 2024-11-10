@@ -1,18 +1,18 @@
 import { ReactNode, useState } from 'react'
 
+import { Page, getSidebarLayout } from '@/components'
 import { TabType, Tabs } from '@/components/ui'
-import { GeneralInformation } from '@/views/profile/ui/settings/tabs/general/General'
+import { GeneralInformation } from '@/views/settings/ui/tabs/general/General'
 
-import s from './Settings.module.scss'
-const GeneralInfo = () => <GeneralInformation />
 const Devices = () => <div>Devices Content</div>
 const AccountManagement = () => <div>Account Management Content</div>
 const MyPayments = () => <div>My Payments Content</div>
 
-export const Settings = () => {
+import s from './SettingsPage.module.scss'
+
+function SettingsPage() {
   const [selectedTab, setSelectedTab] = useState('tab1')
 
-  // Данные табов
   const tabs: TabType[] = [
     { title: 'General information', value: 'tab1' },
     { title: 'Devices', value: 'tab2' },
@@ -20,24 +20,19 @@ export const Settings = () => {
     { title: 'My payments', value: 'tab4' },
   ]
 
-  // Объект для сопоставления табов с компонентами
   const contentMap: Record<string, ReactNode> = {
-    tab1: <GeneralInfo />,
+    tab1: <GeneralInformation />,
     tab2: <Devices />,
     tab3: <AccountManagement />,
     tab4: <MyPayments />,
   }
 
   return (
-    <div>
+    <Page className={s.container}>
       <Tabs onValueChange={setSelectedTab} tabs={tabs} value={selectedTab} />
-      <div
-        style={{
-          marginTop: '20px',
-        }}
-      >
-        {contentMap[selectedTab] ?? <div>Content not found</div>}
-      </div>
-    </div>
+      {contentMap[selectedTab] ?? <div>Content not found</div>}
+    </Page>
   )
 }
+SettingsPage.getLayout = getSidebarLayout
+export default SettingsPage

@@ -1,4 +1,4 @@
-import { ElementRef, forwardRef } from 'react'
+import { ElementRef, ReactNode, forwardRef } from 'react'
 import { Locale, PropsSingle } from 'react-day-picker'
 
 import { Calendar, TextField, Typography, useDatePicker } from '@/components/ui'
@@ -9,7 +9,7 @@ import s from './DatePicker.module.scss'
 
 export type DatePickerProps = {
   disabled?: boolean
-  error?: string
+  error?: ReactNode | string
   isRequired?: boolean
   label?: string
   locale?: Locale

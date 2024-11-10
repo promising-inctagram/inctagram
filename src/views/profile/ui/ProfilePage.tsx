@@ -10,7 +10,7 @@ function ProfilePage() {
   } = useRouter()
 
   const openSettings = () => {
-    push(`/${Paths.profile}/${id}/settings`)
+    push(`${Paths.profile}/${id}/settings`)
   }
 
   return (

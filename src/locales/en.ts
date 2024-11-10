@@ -15,6 +15,10 @@ export type LocaleValidationPassword = typeof en.validation.password
 export type LocaleEmailSentDialog = typeof en.signUpPage.signUpForm.emailSentDialog
 export type LocaleEmailConfirmed = typeof en.confirmEmailPage.emailConfirmed
 export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
+export type LocaleSettingsValidation = typeof en.profileSettingPage.settingsForm.validation
+export type LocaleValidationFirstName =
+  typeof en.profileSettingPage.settingsForm.validation.firstName
+export type LocaleValidationLastName = typeof en.profileSettingPage.settingsForm.validation.lastName
 
 export const en = {
   confirmEmailPage: confirmEmailPage,

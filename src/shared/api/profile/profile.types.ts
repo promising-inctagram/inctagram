@@ -23,8 +23,9 @@ export type UpdateProfileArgs = {
   aboutMe?: null | string
   city?: null | string
   country?: null | string
-  dateOfBirth?: Date | null
+  // dateOfBirth?: null | string // todo fix type
+  dateOfBirth?: Date | undefined
   firstName: null | string
   lastName: null | string
-  userName: null | string
+  username: null | string
 }

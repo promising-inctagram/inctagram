@@ -1,1 +1,1 @@
-export { default } from '@/views/profile/ui/SettingsPage'
+export { default } from '@/views/settings/ui/SettingsPage'

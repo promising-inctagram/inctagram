@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   useEffect(() => {
     if (isAuth && data && !isRedirected) {
       setIsRedirected(true)
-      router.push(`${Paths.profile}`)
+      router.push(`${Paths.profile}/${data.id}`)
     }
   }, [isAuth, data, isRedirected, router])
 
