@@ -26,13 +26,14 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
   const [createPost] = useCreatePostMutation()
 
   const createPostHandler = async () => {
-    const fetchData = {
-      files: imagesFiles,
-    }
+    const formData = new FormData()
 
-    console.log(fetchData)
+    imagesFiles.forEach(file => {
+      formData.append('files', file) // добавляем каждый файл к ключу "files"
+    })
+    console.log(formData.getAll('files'))
     try {
-      await createPost(fetchData).unwrap
+      await createPost(formData).unwrap()
     } catch (e) {
       console.error('АШИБКА:', e)
     }
@@ -44,10 +45,12 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
         <Button onClick={back} variant={'icon'}>
           <ArrowIosBackIcon />
         </Button>
-        <Typography as={'h1'} onClick={createPostHandler} variant={'h1'}>
+        <Typography as={'h1'} variant={'h1'}>
           Publication
         </Typography>
-        <Button variant={'link'}>Publish </Button>
+        <Button onClick={createPostHandler} variant={'link'}>
+          Publish{' '}
+        </Button>
       </DialogHeader>
 
       <DialogBody className={styles.body}>
