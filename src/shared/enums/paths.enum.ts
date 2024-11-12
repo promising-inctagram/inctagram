@@ -15,3 +15,5 @@ export enum Paths {
   statistics = '/statistics',
   termsOfService = '/docs/terms-of-service',
 }
+
+export const getProfileSettingsPath = (id: string) => `/profile/${id}/settings`

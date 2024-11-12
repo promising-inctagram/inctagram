@@ -9,6 +9,21 @@ export const profileSettingPage = {
     yesButton: 'Да',
   },
   settingsForm: {
+    labels: {
+      aboutMe: 'About Me',
+      city: 'Select your city',
+      country: 'Select your country',
+      dateOfBirth: 'Date of Birth',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      userName: 'Username',
+    },
+    placeholders: {
+      aboutMePlaceholder: 'Write something about yourself',
+      cityPlaceholder: 'City',
+      countryPlaceholder: 'Country',
+    },
+    submitButton: 'Save Changes',
     toastMessages: {
       error: 'Error! Server is not available!',
       success: 'Your settings are saved!',
@@ -38,5 +53,11 @@ export const profileSettingPage = {
         minLength: 'Minimum number of characters 6',
       },
     },
+  },
+  tabs: {
+    accountManagement: 'Account Management',
+    devices: 'Devices',
+    generalInformation: 'General Information',
+    myPayments: 'My Payments',
   },
 }

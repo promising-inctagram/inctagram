@@ -1,6 +1,6 @@
 import { Page, getSidebarLayout } from '@/components'
 import { Button } from '@/components/ui/button'
-import { Paths } from '@/shared/enums'
+import { Paths, getProfileSettingsPath } from '@/shared/enums'
 import { useRouter } from 'next/router'
 
 function ProfilePage() {
@@ -10,7 +10,10 @@ function ProfilePage() {
   } = useRouter()
 
   const openSettings = () => {
-    push(`${Paths.profile}/${id}/settings`)
+    if (typeof id === 'string') {
+      // todo: Пока не знаю как лучше сделать
+      push(getProfileSettingsPath(id))
+    }
   }
 
   return (

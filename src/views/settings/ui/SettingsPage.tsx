@@ -1,36 +1,34 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 
 import { Page, getSidebarLayout } from '@/components'
-import { TabType, Tabs } from '@/components/ui'
+import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@/components/ui'
+import { useTranslation } from '@/shared/hooks'
 import { GeneralInformation } from '@/views/settings/ui/tabs/general/General'
-
-const Devices = () => <div>Devices Content</div>
-const AccountManagement = () => <div>Account Management Content</div>
-const MyPayments = () => <div>My Payments Content</div>
 
 import s from './SettingsPage.module.scss'
 
 function SettingsPage() {
-  const [selectedTab, setSelectedTab] = useState('tab1')
-
-  const tabs: TabType[] = [
-    { title: 'General information', value: 'tab1' },
-    { title: 'Devices', value: 'tab2' },
-    { title: 'Account Management', value: 'tab3' },
-    { title: 'My payments', value: 'tab4' },
-  ]
-
-  const contentMap: Record<string, ReactNode> = {
-    tab1: <GeneralInformation />,
-    tab2: <Devices />,
-    tab3: <AccountManagement />,
-    tab4: <MyPayments />,
-  }
+  const { t } = useTranslation()
+  const { accountManagement, devices, generalInformation, myPayments } = t.profileSettingPage.tabs
+  const [selectedTab, setSelectedTab] = useState('general')
 
   return (
     <Page className={s.container}>
-      <Tabs onValueChange={setSelectedTab} tabs={tabs} value={selectedTab} />
-      {contentMap[selectedTab] ?? <div>Content not found</div>}
+      <TabsRoot onValueChange={setSelectedTab} value={selectedTab}>
+        <TabsList>
+          <TabsTrigger value={'general'}>{generalInformation}</TabsTrigger>
+          <TabsTrigger value={'devices'}>{devices}</TabsTrigger>
+          <TabsTrigger value={'account'}>{accountManagement}</TabsTrigger>
+          <TabsTrigger value={'payments'}>{myPayments}</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value={'general'}>
+          <GeneralInformation />
+        </TabsContent>
+        <TabsContent value={'devices'}>Content for Devices</TabsContent>
+        <TabsContent value={'account'}>Content for Account Management</TabsContent>
+        <TabsContent value={'payments'}>Content for My Payments</TabsContent>
+      </TabsRoot>
     </Page>
   )
 }

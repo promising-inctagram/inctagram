@@ -8,8 +8,22 @@ export const profileSettingPage = {
     selectPhoto: 'Выберите фото',
     yesButton: 'Да',
   },
-
   settingsForm: {
+    labels: {
+      aboutMe: 'Обо мне',
+      city: 'Выберите свой город',
+      country: 'Выберите свою страну',
+      dateOfBirth: 'Дата рождения',
+      firstName: 'Имя',
+      lastName: 'Фамилия',
+      userName: 'Никнейм',
+    },
+    placeholders: {
+      aboutMePlaceholder: 'Напишите что-нибудь о себе',
+      cityPlaceholder: 'Город',
+      countryPlaceholder: 'Страна',
+    },
+    submitButton: 'Сохранить изменения',
     toastMessages: {
       error: 'Ошибка! Сервер недоступен!',
       success: 'Ваши настройки сохранены!',
@@ -41,5 +55,12 @@ export const profileSettingPage = {
         minLength: 'Минимальное количество символов 6',
       },
     },
+  },
+
+  tabs: {
+    accountManagement: 'Управление аккаунтом',
+    devices: 'Устройства',
+    generalInformation: 'Основная информация',
+    myPayments: 'Мои платежи',
   },
 }

@@ -1,40 +1,36 @@
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RadixTabs from '@radix-ui/react-tabs'
-import { clsx } from 'clsx'
+import clsx from 'clsx'
 
 import s from './Tabs.module.scss'
 
-export type TabType = {
-  disabled?: boolean
-  title: string
-  value: string
-}
+const TabsRoot = forwardRef<
+  ElementRef<typeof RadixTabs.Root>,
+  ComponentPropsWithoutRef<typeof RadixTabs.Root>
+>(({ className, ...props }, ref) => {
+  return <RadixTabs.Root className={clsx(s.root, className)} ref={ref} {...props} />
+})
 
-type Props = {
-  tabs: TabType[]
-} & ComponentPropsWithoutRef<typeof RadixTabs.Root>
+const TabsList = forwardRef<
+  ElementRef<typeof RadixTabs.List>,
+  ComponentPropsWithoutRef<typeof RadixTabs.List>
+>(({ className, ...props }, ref) => {
+  return <RadixTabs.List className={clsx(s.list, className)} ref={ref} {...props} />
+})
 
-export const Tabs = ({ tabs, ...rest }: Props) => {
-  const [activeTab, setActiveTab] = useState(tabs[0].value || '')
-  const handleTabChange = (value: string) => {
-    setActiveTab(value)
-  }
+const TabsTrigger = forwardRef<
+  ElementRef<typeof RadixTabs.Trigger>,
+  ComponentPropsWithoutRef<typeof RadixTabs.Trigger>
+>(({ className, ...props }, ref) => {
+  return <RadixTabs.Trigger className={clsx(s.trigger, className)} ref={ref} {...props} />
+})
 
-  return (
-    <RadixTabs.Root onValueChange={handleTabChange} value={activeTab} {...rest}>
-      <RadixTabs.List className={s.list} loop>
-        {tabs.map((tab, index) => (
-          <RadixTabs.Trigger
-            className={clsx(s.trigger, index === 0 && activeTab === tab.value && s.highlight)}
-            disabled={tab.disabled}
-            key={tab.value}
-            value={tab.value}
-          >
-            {tab.title}
-          </RadixTabs.Trigger>
-        ))}
-      </RadixTabs.List>
-    </RadixTabs.Root>
-  )
-}
+const TabsContent = forwardRef<
+  ElementRef<typeof RadixTabs.Content>,
+  ComponentPropsWithoutRef<typeof RadixTabs.Content>
+>(({ className, ...props }, ref) => {
+  return <RadixTabs.Content className={clsx(s.content, className)} ref={ref} {...props} />
+})
+
+export { TabsContent, TabsList, TabsRoot, TabsTrigger }

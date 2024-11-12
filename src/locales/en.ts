@@ -15,6 +15,7 @@ export type LocaleValidationPassword = typeof en.validation.password
 export type LocaleEmailSentDialog = typeof en.signUpPage.signUpForm.emailSentDialog
 export type LocaleEmailConfirmed = typeof en.confirmEmailPage.emailConfirmed
 export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
+export type LocaleSettingsForm = typeof en.profileSettingPage.settingsForm
 export type LocaleSettingsValidation = typeof en.profileSettingPage.settingsForm.validation
 export type LocaleValidationFirstName =
   typeof en.profileSettingPage.settingsForm.validation.firstName
