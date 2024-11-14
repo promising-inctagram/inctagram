@@ -1,6 +1,6 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
-import { createPostArgs } from './post.types'
+import { createPostArgs, updatePostArgs } from './post.types'
 
 export const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
@@ -12,8 +12,17 @@ export const authApi = inctagramApi.injectEndpoints({
           url: '/v1/posts',
         }),
       }),
+      updatePost: builder.mutation<void, updatePostArgs>({
+        query: ({ ...args }) => ({
+          body: {
+            description: args.description,
+          },
+          method: 'PUT',
+          url: `/v1/posts/${args.id}`,
+        }),
+      }),
     }
   },
 })
 
-export const { useCreatePostMutation } = authApi
+export const { useCreatePostMutation, useUpdatePostMutation } = authApi

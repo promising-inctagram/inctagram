@@ -8,8 +8,8 @@ import styles from './UploadPhoto.module.scss'
 type UploadPhotoProps = {
   next: () => void
   setImages: (images: string[]) => void
-  setImagesFilers: any
-  setIsOpenCloseModal: any
+  setImagesFilers: (value: File[]) => void
+  setIsOpenCloseModal: (value: boolean) => void
 }
 
 const UploadPhoto = ({
@@ -55,13 +55,8 @@ const UploadPhoto = ({
         </Card>
         <Button className={styles.button} onClick={onSubmit}>
           Select from Computer
+          <input hidden onChange={e => handleFileChange(e)} ref={fileInputRef} type={'file'} />
         </Button>
-        <input
-          onChange={e => handleFileChange(e)}
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          type={'file'}
-        />
         <Button className={styles.button} variant={'outlined'}>
           Open draft
         </Button>

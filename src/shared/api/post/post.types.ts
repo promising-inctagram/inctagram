@@ -4,3 +4,8 @@ export type createPostArgs = {
   password: string
   username: string
 }
+
+export type updatePostArgs = {
+  description: string
+  id: string
+}

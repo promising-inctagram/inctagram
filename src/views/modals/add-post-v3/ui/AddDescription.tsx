@@ -1,4 +1,5 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 import { ControlledTextField } from '@/components/controlled-text-field'
 import {
@@ -8,36 +9,66 @@ import {
   Carousel,
   DialogBody,
   DialogHeader,
-  TextField,
   Typography,
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
-import { useCreatePostMutation } from '@/shared/api/post/post.api'
+import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
 import styles from './AddDescription.module.scss'
 
 type AddDescriptionProps = {
   back: () => void
   images: string[]
-  imagesFiles: any
+  imagesFiles: File[]
 }
 
 const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
   const [createPost] = useCreatePostMutation()
+  const [updatePost] = useUpdatePostMutation()
 
-  const createPostHandler = async () => {
+  const {
+    control,
+    formState: { isDirty, isValid },
+    handleSubmit,
+    // reset,
+    setError,
+  } = useForm({
+    defaultValues: {
+      description: '',
+    },
+    mode: 'onBlur',
+    resolver: zodResolver(
+      z.object({
+        description: z
+          .string()
+          .max(500, 'Описание не может быть больше 500 символов')
+          .refine(value => value.length === 0 || value.trim().length > 0, 'Error message'),
+      })
+    ),
+  })
+
+  const createPostHandler = handleSubmit(data => {
     const formData = new FormData()
 
     imagesFiles.forEach(file => {
-      formData.append('files', file) // добавляем каждый файл к ключу "files"
+      formData.append('files', file)
     })
-    console.log(formData.getAll('files'))
-    try {
-      await createPost(formData).unwrap()
-    } catch (e) {
-      console.error('АШИБКА:', e)
-    }
-  }
+    createPost(formData)
+      .unwrap()
+      .then(res => {
+        if (data.description.length !== 0) {
+          updatePost({
+            description: data.description,
+            id: res.id,
+          })
+            .unwrap()
+            .catch(e => setError('description', { message: e.data }))
+        }
+      })
+      .catch(e => setError('description', { message: e.data.errorsMessages }))
+  })
 
   return (
     <>
@@ -63,9 +94,11 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
               <Avatar className={styles.avatar} size={'xs'} src={images[0]} />
               <Typography>URLProfiele</Typography>
             </div>
-            <TextField
+            <ControlledTextField
               className={styles.textField}
+              control={control}
               label={'Add publication descriptions'}
+              name={'description'}
               placeholder={'tdddddype something...'}
             />
           </Card>

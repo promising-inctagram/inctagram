@@ -61,7 +61,7 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
       />,
       <AddDescription back={back} images={images} imagesFiles={imagesFiles} key={'desctiption'} />,
     ],
-    [images]
+    [images, imagesFiles]
   )
 
   return (
@@ -90,7 +90,4 @@ AddPost.getLayout = getSidebarLayout
 export default AddPost
 
 // todo: Формат: JPEG, PNG 20 мб
-// todo:Description field max 500
-// todo: максимум 10 фото
-// todo:
-// todo:
+// todo: пофиксить то что повторные фотки не грузит

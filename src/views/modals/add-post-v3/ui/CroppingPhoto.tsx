@@ -24,7 +24,7 @@ type CroppingPhotoProps = {
   images: string[]
   next: () => void
   setImages: React.Dispatch<React.SetStateAction<string[]>>
-  setImagesFilers: any
+  setImagesFilers: React.Dispatch<React.SetStateAction<File[]>>
 }
 
 const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: CroppingPhotoProps) => {
@@ -39,7 +39,7 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      setImagesFilers((prev: string[]) => [...prev, file])
+      setImagesFilers(prev => [...prev, file])
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setImages((prev: string[]) => [...prev, reader.result as string])
@@ -55,6 +55,7 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
 
   const deleteImage = (index: number) => {
     setImages(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
+    setImagesFilers(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
     if (images.length === 1) {
       back()
     }
@@ -75,11 +76,7 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       </DialogHeader>
 
       <DialogBody className={styles.body}>
-        <Carousel
-          className={styles.image}
-          onActiveIndexChange={data => console.log(data.activeIndex)}
-          slides={images}
-        />
+        <Carousel className={styles.image} slides={images} />
         {showModal && (
           <Card className={styles.card}>
             <ScrollArea className={styles.scroll}>
@@ -96,13 +93,8 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
             </ScrollArea>
             <Button disabled={images.length === 10} onClick={onSubmit} variant={'icon'}>
               <PlusCircleOutlineIcon height={'36'} width={'36'} />
+              <input hidden onChange={e => handleFileChange(e)} ref={fileInputRef} type={'file'} />
             </Button>
-            <input
-              onChange={e => handleFileChange(e)}
-              ref={fileInputRef}
-              style={{ display: 'none' }}
-              type={'file'}
-            />
           </Card>
         )}
         <Button onClick={handleShowModal} variant={'icon'}>
