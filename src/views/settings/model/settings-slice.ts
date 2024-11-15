@@ -28,7 +28,7 @@ const settingsSlice = createSlice({
     },
     updateFormField: (
       state,
-      action: PayloadAction<{ field: keyof SavedSettingsForm; value: any }>
+      action: PayloadAction<{ field: keyof SavedSettingsForm; value: string }>
     ) => {
       state.savedSettingsForm[action.payload.field] = action.payload.value
     },

@@ -10,6 +10,7 @@ import s from './DatePicker.module.scss'
 export type DatePickerProps = {
   disabled?: boolean
   error?: ReactNode | string
+  inputVal: string
   isRequired?: boolean
   label?: string
   locale?: Locale
@@ -20,7 +21,10 @@ export type DatePickerProps = {
 type DatePickerRef = ElementRef<typeof TextField>
 
 export const DatePicker = forwardRef<DatePickerRef, DatePickerProps>(
-  ({ disabled, error, isRequired, label, onSelectSingleDate, selected, ...rest }, ref) => {
+  (
+    { disabled, error, inputVal, isRequired, label, onSelectSingleDate, selected, ...rest },
+    ref
+  ) => {
     const {
       dayPickerSingleHandler,
       id,
@@ -56,7 +60,7 @@ export const DatePicker = forwardRef<DatePickerRef, DatePickerProps>(
             errorMessage={error}
             onChange={inputSingleDateChangeHandler}
             ref={ref}
-            value={inputValue}
+            value={inputValue || inputVal}
           />
           <Root onOpenChange={setIsOpen} open={isOpen}>
             <Trigger id={id} title={'open calendar'}>

@@ -22,9 +22,6 @@ export const ControlledDatePicker = <T extends FieldValues>({
     fieldState: { error },
   } = useController({ control, defaultValue, name, rules, shouldUnregister })
 
-  console.log(value, 'value controlled')
-  console.log(defaultValue, 'defaultValue')
-
   return (
     <DatePicker
       disabled={disabled}

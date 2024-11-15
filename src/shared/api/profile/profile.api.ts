@@ -1,8 +1,20 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
-import { AvatarDto, UpdateProfileArgs } from '@/shared/api/profile/profile.types'
+import { AvatarDto, City, Country, UpdateProfileArgs } from '@/shared/api/profile/profile.types'
 
 export const profileApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
+    cities: builder.query<City[], { id: number | string }>({
+      query: arg => ({
+        method: 'GET',
+        url: `/v1/reference/countries/${arg.id}/cities`,
+      }),
+    }),
+    countries: builder.query<Country[], void>({
+      query: () => ({
+        method: 'GET',
+        url: '/v1/reference/countries',
+      }),
+    }),
     deleteAvatar: builder.mutation<void, void>({
       query: () => ({
         method: 'DELETE',
@@ -32,5 +44,10 @@ export const profileApi = inctagramApi.injectEndpoints({
     }),
   }),
 })
-export const { useDeleteAvatarMutation, useUpdateProfileMutation, useUploadAvatarMutation } =
-  profileApi
+export const {
+  useCountriesQuery,
+  useDeleteAvatarMutation,
+  useLazyCitiesQuery,
+  useUpdateProfileMutation,
+  useUploadAvatarMutation,
+} = profileApi

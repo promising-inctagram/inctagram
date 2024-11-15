@@ -14,8 +14,6 @@ const translations: Translations = {
 export const useTranslation = () => {
   const { locale } = useRouter()
 
-  console.log('locale', locale)
-
   if (!locale || !translations[locale]) {
     return { t: translations.en }
   }
