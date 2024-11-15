@@ -21,6 +21,7 @@
 .activeSessionsTitle {
   margin-bottom: 18px;
 }
+
 .activeSessionsWrapper {
   display: flex;
   flex-direction: column;
@@ -29,8 +30,8 @@
 
 .cardSessions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 20px 24px;
 }
 
@@ -42,6 +43,7 @@
 .deviceName {
   margin-bottom: 13px;
 }
+
 .ip {
   margin-bottom: 5px;
 }
