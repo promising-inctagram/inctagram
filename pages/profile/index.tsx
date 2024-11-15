@@ -1,1 +1,1 @@
-export { default } from '@/views/modals/add-post-v3'
+export { default } from '@/views/profile/my-profile/ProfilePage'
