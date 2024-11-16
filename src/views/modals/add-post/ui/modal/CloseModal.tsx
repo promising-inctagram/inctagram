@@ -71,7 +71,9 @@ const CloseModal = ({
           </Typography>
           <Typography variant={'regular_text_16'}>{modalWarning}</Typography>
           <div className={styles.buttonsContainer}>
-            <Button variant={'outlined'}>{buttonDiscard}</Button>
+            <Button onClick={() => onOpenChange(false)} variant={'outlined'}>
+              {buttonDiscard}
+            </Button>
             <Button className={styles.button} onClick={handleCloseMainModal} variant={'primary'}>
               {buttonSaveDraft}
             </Button>
