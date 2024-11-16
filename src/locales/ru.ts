@@ -1,6 +1,7 @@
 import { LocaleType } from '@/locales/en'
 import { confirmEmailPage } from '@/locales/ru/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/ru/confirm-logout-page'
+import { createPost } from '@/locales/ru/create-post'
 import { passwordRecoveryPage } from '@/locales/ru/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
 import { profile } from '@/locales/ru/profile'
@@ -13,6 +14,7 @@ import { validation } from '@/locales/ru/validation'
 export const ru: LocaleType = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
+  createPost: createPost,
   header: {
     loginButton: 'Войти',
     signUpButton: 'Зарегистрироваться',

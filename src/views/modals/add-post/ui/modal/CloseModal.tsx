@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@/components/ui'
 import { CloseOutlineIcon } from '@/components/ui/icons'
+import { useTranslation } from '@/shared/hooks'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import styles from './CloseModal.module.scss'
@@ -20,11 +21,29 @@ type CloseModalProps = {
   closeMainModal: (value: boolean) => void
   isOpen: boolean
   onOpenChange: (value: boolean) => void
+  setImages: (value: string[]) => void
+  setImagesFilers: (value: File[]) => void
+  setStepIndex: (value: number) => void
 }
 
-const CloseModal = ({ closeMainModal, isOpen = true, onOpenChange }: CloseModalProps) => {
+const CloseModal = ({
+  closeMainModal,
+  isOpen = true,
+  onOpenChange,
+  setImages,
+  setImagesFilers,
+  setStepIndex,
+}: CloseModalProps) => {
+  const { t } = useTranslation()
+  const { buttonDiscard, buttonSaveDraft, modalContext, modalTitle, modalWarning } =
+    t.createPost.closeModal
+
   const handleCloseMainModal = () => {
     closeMainModal(false)
+    onOpenChange(false)
+    setImages([])
+    setImagesFilers([])
+    setStepIndex(0)
   }
 
   return (
@@ -38,7 +57,7 @@ const CloseModal = ({ closeMainModal, isOpen = true, onOpenChange }: CloseModalP
         </VisuallyHidden>
         <DialogHeader className={styles.header}>
           <Typography as={'h1'} variant={'h1'}>
-            Close
+            {modalTitle}
           </Typography>
           <DialogClose asChild>
             <Button title={'close'} variant={'icon'}>
@@ -48,16 +67,14 @@ const CloseModal = ({ closeMainModal, isOpen = true, onOpenChange }: CloseModalP
         </DialogHeader>
         <DialogBody className={styles.body}>
           <Typography className={styles.text} variant={'regular_text_16'}>
-            Do you really want to close the creation of a publication?
+            {modalContext}
           </Typography>
-          <Typography variant={'regular_text_16'}>
-            If you close everything willbe deleted
-          </Typography>
+          <Typography variant={'regular_text_16'}>{modalWarning}</Typography>
           <div className={styles.buttonsContainer}>
-            <Button onClick={handleCloseMainModal} variant={'outlined'}>
-              Discard
+            <Button variant={'outlined'}>{buttonDiscard}</Button>
+            <Button className={styles.button} onClick={handleCloseMainModal} variant={'primary'}>
+              {buttonSaveDraft}
             </Button>
-            <Button variant={'primary'}>Save draft</Button>
           </div>
         </DialogBody>
       </DialogContent>

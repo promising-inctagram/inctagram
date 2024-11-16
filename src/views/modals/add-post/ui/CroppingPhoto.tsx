@@ -13,9 +13,9 @@ import {
   ArrowIosBackIcon,
   CloseOutlineIcon,
   ImageIcon,
-  ImageOutlineIcon,
   PlusCircleOutlineIcon,
 } from '@/components/ui/icons'
+import { useTranslation } from '@/shared/hooks'
 
 import styles from './CroppingPhoto.module.scss'
 
@@ -30,6 +30,9 @@ type CroppingPhotoProps = {
 const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const { t } = useTranslation()
+  const { modalButton, modalTitle } = t.createPost.croppingPhoto
+
   const onSubmit = () => {
     fileInputRef.current?.click()
   }
@@ -68,10 +71,10 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
           <ArrowIosBackIcon />
         </Button>
         <Typography as={'h1'} variant={'h1'}>
-          Cropping
+          {modalTitle}
         </Typography>
         <Button onClick={next} variant={'link'}>
-          Next
+          {modalButton}
         </Button>
       </DialogHeader>
 

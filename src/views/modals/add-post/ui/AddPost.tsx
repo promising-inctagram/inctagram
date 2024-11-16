@@ -8,6 +8,7 @@ import {
   DialogRoot,
   DialogTitle,
 } from '@/components/ui'
+import { useTranslation } from '@/shared/hooks'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import styles from './AddPost.module.scss'
@@ -19,7 +20,7 @@ import CloseModal from './modal/CloseModal'
 
 type AddPostProps = {
   isOpen: boolean
-  onOpenChange: () => void
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
@@ -27,6 +28,8 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
   const [imagesFiles, setImagesFilers] = useState<File[]>([])
   const [stepIndex, setStepIndex] = useState<number>(0)
   const [isOpenCloseModal, setIsOpenCloseModal] = useState<boolean>(false)
+  const { t } = useTranslation()
+  const { addPostDescription, addPostTitle } = t.createPost.createPostMain
 
   const next = () => {
     setStepIndex(i => i + 1)
@@ -65,20 +68,23 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
   )
 
   return (
-    <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
+    <DialogRoot open={isOpen}>
       <DialogOverlay onClick={e => handleOpenCloseModal(e)}>
         <DialogContent className={styles.content}>
           <VisuallyHidden asChild>
-            <DialogTitle>VisuallyHidden</DialogTitle>
+            <DialogTitle>{addPostTitle}</DialogTitle>
           </VisuallyHidden>
           <VisuallyHidden>
-            <DialogDescription>DialogDescription</DialogDescription>
+            <DialogDescription>{addPostDescription}</DialogDescription>
           </VisuallyHidden>
           {steps[stepIndex]}
           <CloseModal
             closeMainModal={onOpenChange}
             isOpen={isOpenCloseModal}
             onOpenChange={setIsOpenCloseModal}
+            setImages={setImages}
+            setImagesFilers={setImagesFilers}
+            setStepIndex={setStepIndex}
           />
         </DialogContent>
       </DialogOverlay>
@@ -91,3 +97,5 @@ export default AddPost
 
 // todo: Формат: JPEG, PNG 20 мб
 // todo: пофиксить то что повторные фотки не грузит
+// todo: пофиксить обработку ошибок
+// todo: аватар

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { ControlledTextField } from '@/components/controlled-text-field'
+import { ControlledTextArea } from '@/components/controlled-text-area'
 import {
   Avatar,
   Button,
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
 import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
+import { useTranslation } from '@/shared/hooks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -25,29 +26,30 @@ type AddDescriptionProps = {
 }
 
 const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
+  const { t } = useTranslation()
+  const { descriptionField, modalButton, modalTitle } = t.createPost.addDescription
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
 
-  const {
-    control,
-    formState: { isDirty, isValid },
-    handleSubmit,
-    // reset,
-    setError,
-  } = useForm({
+  const { control, handleSubmit, setError, watch } = useForm({
     defaultValues: {
       description: '',
     },
-    mode: 'onBlur',
+    mode: 'onChange',
     resolver: zodResolver(
       z.object({
         description: z
           .string()
           .max(500, 'Описание не может быть больше 500 символов')
-          .refine(value => value.length === 0 || value.trim().length > 0, 'Error message'),
+          .refine(
+            value => value.length === 0 || value.trim().length > 0,
+            'Поле не может быть пустым'
+          ),
       })
     ),
   })
+
+  const { description } = watch()
 
   const createPostHandler = handleSubmit(data => {
     const formData = new FormData()
@@ -77,10 +79,10 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
           <ArrowIosBackIcon />
         </Button>
         <Typography as={'h1'} variant={'h1'}>
-          Publication
+          {modalTitle}
         </Typography>
         <Button onClick={createPostHandler} variant={'link'}>
-          Publish{' '}
+          {modalButton}
         </Button>
       </DialogHeader>
 
@@ -94,13 +96,15 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
               <Avatar className={styles.avatar} size={'xs'} src={images[0]} />
               <Typography>URLProfiele</Typography>
             </div>
-            <ControlledTextField
+            <ControlledTextArea
               className={styles.textField}
               control={control}
-              label={'Add publication descriptions'}
+              label={descriptionField}
               name={'description'}
-              placeholder={'tdddddype something...'}
             />
+            <Typography className={styles.smallText} variant={'small_text'}>
+              {description.length}/500
+            </Typography>
           </Card>
           {/* <Card className={styles.card}>Add location</Card> */}
           {/* todo: Примечание: поле Location на текущем этапе не делаем */}

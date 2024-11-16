@@ -2,7 +2,8 @@ import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef, useSta
 
 import { menuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
-import { LogOutOutlineIcon } from '@/components/ui/icons'
+import { LogOutOutlineIcon, PlusSquareIcon, PlusSquareOutlineIcon } from '@/components/ui/icons'
+import AddPost from '@/views/modals/add-post'
 import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -16,14 +17,39 @@ type SideBarRef = ElementRef<'nav'>
 export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...rest }, ref) => {
   const router = useRouter()
   const [openLogoutModal, setOpenLogoutModal] = useState(false)
+  const [openCreatePostModal, setOpenCreatePostModal] = useState(false)
+
   const handleLogoutClick = () => {
     setOpenLogoutModal(true)
+  }
+
+  const handleCreatePostClick = () => {
+    setOpenCreatePostModal(true)
   }
 
   return (
     <nav className={clsx(s.sidebar, className)} ref={ref} {...rest}>
       <div className={s.group}>
-        {menuItems.slice(0, 5).map(({ Icon, OutlineIcon, label, path }, index) => (
+        {menuItems.slice(0, 1).map(({ Icon, OutlineIcon, label, path }, index) => (
+          <Item
+            Icon={Icon}
+            OutlineIcon={OutlineIcon}
+            isActive={router.pathname === path}
+            key={label + index}
+            label={label}
+            path={path}
+          />
+        ))}
+        <Typography
+          as={'button'}
+          className={s.title}
+          onClick={handleCreatePostClick}
+          variant={'medium_text_14'}
+        >
+          <PlusSquareOutlineIcon className={s.icon} />
+          Create
+        </Typography>
+        {menuItems.slice(1, 4).map(({ Icon, OutlineIcon, label, path }, index) => (
           <Item
             Icon={Icon}
             OutlineIcon={OutlineIcon}
@@ -35,7 +61,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
         ))}
       </div>
       <div className={s.group}>
-        {menuItems.slice(5).map(({ Icon, OutlineIcon, label, path }, index) => (
+        {menuItems.slice(4).map(({ Icon, OutlineIcon, label, path }, index) => (
           <Item
             Icon={Icon}
             OutlineIcon={OutlineIcon}
@@ -60,6 +86,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
       {openLogoutModal && (
         <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
       )}
+      <AddPost isOpen={openCreatePostModal} onOpenChange={setOpenCreatePostModal} />
     </nav>
   )
 })

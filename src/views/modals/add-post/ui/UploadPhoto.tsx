@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 
 import { Button, Card, DialogBody, DialogClose, DialogHeader, Typography } from '@/components/ui'
 import { CloseOutlineIcon, ImageOutlineIcon } from '@/components/ui/icons'
+import { useTranslation } from '@/shared/hooks'
 
 import styles from './UploadPhoto.module.scss'
 
@@ -18,7 +19,10 @@ const UploadPhoto = ({
   setImagesFilers,
   setIsOpenCloseModal,
 }: UploadPhotoProps) => {
+  const { t } = useTranslation()
+  const { buttonDraft, buttonUploadPhoto, modalTitle } = t.createPost.uploadPhoto
   const fileInputRef = useRef<HTMLInputElement | null>(null)
+
   const onSubmit = () => {
     fileInputRef.current?.click()
   }
@@ -27,6 +31,16 @@ const UploadPhoto = ({
     if (e.target.files) {
       const file = e.target.files[0]
       const reader = new FileReader()
+
+      // if (file.size > 5 * 1024 * 1024) { // 5MB
+      //   alert('Файл слишком большой!');
+      //   return;
+      // }
+
+      // if (!['image/png', 'image/jpeg'].includes(file.type)) {
+      //   alert('Недопустимый формат файла!');
+      //   return;
+      // }
 
       setImagesFilers([file])
       reader.onloadend = () => {
@@ -43,7 +57,7 @@ const UploadPhoto = ({
     <>
       <DialogHeader className={styles.header}>
         <Typography as={'h1'} variant={'h1'}>
-          Add photo
+          {modalTitle}
         </Typography>
         <Button onClick={() => setIsOpenCloseModal(true)} title={'close'} variant={'icon'}>
           <CloseOutlineIcon />
@@ -54,11 +68,17 @@ const UploadPhoto = ({
           <ImageOutlineIcon height={'48'} width={'48'} />
         </Card>
         <Button className={styles.button} onClick={onSubmit}>
-          Select from Computer
-          <input hidden onChange={e => handleFileChange(e)} ref={fileInputRef} type={'file'} />
+          {buttonUploadPhoto}
+          <input
+            accept={'.jpg,.png'}
+            hidden
+            onChange={e => handleFileChange(e)}
+            ref={fileInputRef}
+            type={'file'}
+          />
         </Button>
         <Button className={styles.button} variant={'outlined'}>
-          Open draft
+          {buttonDraft}
         </Button>
       </DialogBody>
     </>

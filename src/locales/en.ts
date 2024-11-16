@@ -1,5 +1,6 @@
 import { confirmEmailPage } from '@/locales/en/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/en/confirm-logout-page'
+import { createPost } from '@/locales/en/create-post'
 import { passwordRecoveryPage } from '@/locales/en/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { profile } from '@/locales/en/profile'
@@ -20,6 +21,7 @@ export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
 export const en = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
+  createPost: createPost,
   header: {
     loginButton: 'Log in',
     signUpButton: 'Sign up',
