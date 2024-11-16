@@ -1,6 +1,14 @@
 import React, { useRef } from 'react'
 
-import { Button, Card, DialogBody, DialogClose, DialogHeader, Typography } from '@/components/ui'
+import {
+  Button,
+  Card,
+  DialogBody,
+  DialogClose,
+  DialogHeader,
+  Typography,
+  showToast,
+} from '@/components/ui'
 import { CloseOutlineIcon, ImageOutlineIcon } from '@/components/ui/icons'
 import { useTranslation } from '@/shared/hooks'
 
@@ -20,7 +28,7 @@ const UploadPhoto = ({
   setIsOpenCloseModal,
 }: UploadPhotoProps) => {
   const { t } = useTranslation()
-  const { buttonDraft, buttonUploadPhoto, modalTitle } = t.createPost.uploadPhoto
+  const { buttonDraft, buttonUploadPhoto, modalTitle, uploadError } = t.createPost.uploadPhoto
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const onSubmit = () => {
@@ -32,24 +40,21 @@ const UploadPhoto = ({
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      // if (file.size > 5 * 1024 * 1024) { // 5MB
-      //   alert('Файл слишком большой!');
-      //   return;
-      // }
-
-      // if (!['image/png', 'image/jpeg'].includes(file.type)) {
-      //   alert('Недопустимый формат файла!');
-      //   return;
-      // }
-
-      setImagesFilers([file])
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          setImages([reader.result]) //
-          next()
+      if (file.size < 20971520) {
+        setImagesFilers([file])
+        reader.onloadend = () => {
+          if (typeof reader.result === 'string') {
+            setImages([reader.result]) //
+            next()
+          }
         }
+        reader.readAsDataURL(file)
+      } else {
+        showToast({
+          message: uploadError,
+          variant: 'error',
+        })
       }
-      reader.readAsDataURL(file)
     }
   }
 

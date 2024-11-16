@@ -8,6 +8,7 @@ import {
   DialogHeader,
   ScrollArea,
   Typography,
+  showToast,
 } from '@/components/ui'
 import {
   ArrowIosBackIcon,
@@ -31,7 +32,7 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
   const [showModal, setShowModal] = useState<boolean>(false)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const { t } = useTranslation()
-  const { modalButton, modalTitle } = t.createPost.croppingPhoto
+  const { modalButton, modalTitle, uploadError } = t.createPost.croppingPhoto
 
   const onSubmit = () => {
     fileInputRef.current?.click()
@@ -42,14 +43,22 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      setImagesFilers(prev => [...prev, file])
-      reader.onloadend = () => {
-        if (typeof reader.result === 'string') {
-          setImages((prev: string[]) => [...prev, reader.result as string])
+      if (file.size < 20971520) {
+        setImagesFilers(prev => [...prev, file])
+        reader.onloadend = () => {
+          if (typeof reader.result === 'string') {
+            setImages((prev: string[]) => [...prev, reader.result as string])
+          }
         }
+        reader.readAsDataURL(file)
+      } else {
+        showToast({
+          message: uploadError,
+          variant: 'error',
+        })
       }
-      reader.readAsDataURL(file)
     }
+    e.target.value = ''
   }
 
   const handleShowModal = () => {
@@ -96,7 +105,13 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
             </ScrollArea>
             <Button disabled={images.length === 10} onClick={onSubmit} variant={'icon'}>
               <PlusCircleOutlineIcon height={'36'} width={'36'} />
-              <input hidden onChange={e => handleFileChange(e)} ref={fileInputRef} type={'file'} />
+              <input
+                accept={'.jpg,.png'}
+                hidden
+                onChange={e => handleFileChange(e)}
+                ref={fileInputRef}
+                type={'file'}
+              />
             </Button>
           </Card>
         )}

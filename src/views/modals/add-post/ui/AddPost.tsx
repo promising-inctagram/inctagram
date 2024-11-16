@@ -95,7 +95,5 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
 AddPost.getLayout = getSidebarLayout
 export default AddPost
 
-// todo: Формат: JPEG, PNG 20 мб
-// todo: пофиксить то что повторные фотки не грузит
-// todo: пофиксить обработку ошибок
+// todo: ждать пока Ксюша доделает ошибки
 // todo: аватар

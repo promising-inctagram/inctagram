@@ -20,10 +20,12 @@ export const createPost = {
   croppingPhoto: {
     modalButton: 'Next',
     modalTitle: 'Cropping',
+    uploadError: 'The photo must be less than 20Mb',
   },
   uploadPhoto: {
     buttonDraft: 'Open draft',
     buttonUploadPhoto: 'Select from Computer',
     modalTitle: 'Add photo',
+    uploadError: 'The photo must be less than 20Mb',
   },
 }

@@ -20,10 +20,12 @@ export const createPost = {
   croppingPhoto: {
     modalButton: 'Далее',
     modalTitle: 'Обрезка',
+    uploadError: 'Фото должно быть меньше 20 Мб',
   },
   uploadPhoto: {
     buttonDraft: 'Открыть черновик',
     buttonUploadPhoto: 'Выбрать с компьютера',
     modalTitle: 'Добавить фото',
+    uploadError: 'Фото должно быть меньше 20 Мб',
   },
 }

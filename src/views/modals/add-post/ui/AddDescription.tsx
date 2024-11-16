@@ -28,6 +28,7 @@ type AddDescriptionProps = {
 const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
   const { t } = useTranslation()
   const { descriptionField, modalButton, modalTitle } = t.createPost.addDescription
+  const maxLengthDescription = 500
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
 
@@ -103,7 +104,7 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
               name={'description'}
             />
             <Typography className={styles.smallText} variant={'small_text'}>
-              {description.length}/500
+              {description.length}/{maxLengthDescription}
             </Typography>
           </Card>
           {/* <Card className={styles.card}>Add location</Card> */}
