@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Recaptcha from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 
@@ -65,6 +65,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
       }
     }
     recaptchaRef.current?.reset()
+    setValue('token', '')
   })
 
   const handleTokenChange = (token: null | string) => {

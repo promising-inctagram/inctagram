@@ -26,7 +26,7 @@ export const useLoginValidation = () => {
       email: '',
       password: '',
     },
-    mode: 'onBlur',
+    mode: 'onTouched',
     resolver: zodResolver(signInSchemeCreator(t.validation)),
   })
 

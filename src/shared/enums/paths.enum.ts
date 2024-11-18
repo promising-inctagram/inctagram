@@ -9,6 +9,7 @@ export enum Paths {
   passwordRecovery = '/auth/password-recovery',
   privacyPolicy = '/docs/privacy-policy',
   profile = '/profile',
+  profileSettings = '/profile-settings',
   search = '/search',
   settings = '/settings',
   signUp = '/auth/sign-up',
