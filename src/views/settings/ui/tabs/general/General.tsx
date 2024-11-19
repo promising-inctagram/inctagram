@@ -16,8 +16,8 @@ export const GeneralInformation = () => {
       <div style={{ width: '200px' }}>add a profile photo</div>
       <SettingsForm
         aboutMe={meData.profile.aboutMe}
-        city={meData.profile.city}
-        country={meData.profile.country}
+        city={meData?.profile.city}
+        country={meData?.profile.country}
         dateOfBirth={meData.profile.dateOfBirth}
         firstName={meData.profile.firstName}
         lastName={meData.profile.lastName}

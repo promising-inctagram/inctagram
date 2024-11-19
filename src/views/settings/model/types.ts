@@ -5,8 +5,17 @@ export type SettingFields = z.infer<ReturnType<typeof settingsSchemeCreator>>
 
 export type SettingsFormProps = {
   aboutMe: string
-  city: string
-  country: string
+  city: {
+    countryId: number
+    id: number
+    name_en: string
+    name_ru: string
+  }
+  country: {
+    id: number
+    name_en: string
+    name_ru: string
+  }
   dateOfBirth: string
   firstName: string
   lastName: string

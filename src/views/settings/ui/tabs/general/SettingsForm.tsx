@@ -50,12 +50,11 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     resolver: zodResolver(settingsSchemeCreator(t.profileSettingPage.settingsForm.validation)),
   })
 
-  const countryId = watch('country')
-  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
-    locale || 'en',
-    countryId,
-    setValue
-  )
+  const { country, firstName, lastName, username } = watch()
+  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities, isLoadingCountries } =
+    useCountryCity(locale || 'en', country, setValue)
+  const isSaveDisabled =
+    !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
 
   const handleSaveChanges = () => {
     const { dateOfBirth, ...values } = getValues()
@@ -74,13 +73,25 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
       reset(savedSettingsForm)
       dispatch(setReturningFromPolicy(false))
     } else {
-      reset(props)
+      setValue('aboutMe', props.aboutMe)
+      setValue('firstName', props.firstName)
+      setValue('lastName', props.lastName)
+      setValue('username', props.username)
+
+      if (!isLoadingCountries && countryOptions.length > 0) {
+        setValue('country', String(props.country.id))
+      }
+
+      if (!isLoadingCities && cityOptions.length > 0 && props.city?.id) {
+        setValue('city', String(props.city.id))
+      }
     }
-  }, [reset, dispatch])
+  }, [savedSettingsForm, isLoadingCountries, isLoadingCities, reset, setValue, dispatch])
 
   const formHandler = handleSubmit(async data => {
     const transformData = {
       ...data,
+      cityId: Number(data.city),
       dateOfBirth: format(data.dateOfBirth, 'dd/MM/yyyy'),
     }
 
@@ -166,7 +177,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
           name={'aboutMe'}
           placeholder={placeholders.aboutMePlaceholder}
         />
-        <Button className={s.submitButton} type={'submit'}>
+        <Button className={s.submitButton} disabled={isSaveDisabled} type={'submit'}>
           {submitButton}
         </Button>
       </div>

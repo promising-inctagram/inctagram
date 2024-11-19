@@ -7,7 +7,7 @@ import { SettingFields } from '@/views/settings/model/types'
 
 export const useCountryCity = (
   locale: string,
-  id: string,
+  id?: string,
   setValue?: UseFormSetValue<SettingFields>
 ) => {
   const { data: countries, isLoading: isLoadingCountries } = useCountriesQuery()
