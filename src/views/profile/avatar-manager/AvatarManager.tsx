@@ -19,15 +19,18 @@ import { Typography } from '@/components/ui/typography'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
-import DeleteAvatarDialog from '@/views/profile/ui/DeleteAvatarDialog'
+import DeleteAvatarDialog from '@/views/profile/avatar-manager/DeleteAvatarDialog'
+import * as Slider from '@radix-ui/react-slider'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import s from './AvatarManager.module.scss'
+
 type Props = { avatar: string }
 
 const AvatarManager = ({ avatar }: Props) => {
   const { t } = useTranslation()
   const editorRef = useRef<AvatarEditor>(null)
+  const [slideValue, setSlideValue] = useState<number>(10)
   const [avatarFile, setAvatarFile] = useState<File | string>(avatar ?? null)
   const [uploadAvatar] = useUploadAvatarMutation()
   const [deleteAvatar] = useDeleteAvatarMutation()
@@ -43,6 +46,9 @@ const AvatarManager = ({ avatar }: Props) => {
   const onOpenChangeHandler = (open: boolean) => {
     setIsDialogOpen(open)
     setUploadSuccess(false)
+  }
+  const onSliderChange = (value: number) => {
+    setSlideValue(value)
   }
   const onSaveAvatarHandler = async () => {
     try {
@@ -121,7 +127,7 @@ const AvatarManager = ({ avatar }: Props) => {
             <Button
               className={s.deleteBtn}
               onClick={setIsDeleteDialogOpen}
-              title={t.profilePage.deleteProfilePhoto}
+              title={t.profile.deleteProfilePhoto}
               variant={'icon'}
             >
               <CloseOutlineIcon className={s.closeIcon} />
@@ -140,48 +146,64 @@ const AvatarManager = ({ avatar }: Props) => {
       <DialogRoot
         onOpenChange={onOpenChangeHandler}
         open={isDialogOpen}
-        title={t.profilePage.addProfilePhoto}
+        title={t.profile.addProfilePhoto}
       >
         <DialogTrigger asChild>
-          {<Button variant={'outlined'}>{t.profilePage.addProfilePhoto}</Button>}
+          {<Button variant={'outlined'}>{t.profile.addProfilePhoto}</Button>}
         </DialogTrigger>
         <DialogContent className={s.dialogContent}>
           <VisuallyHidden>
-            <DialogTitle>{t.profilePage.addProfilePhoto}</DialogTitle>
+            <DialogTitle>{t.profile.addProfilePhoto}</DialogTitle>
           </VisuallyHidden>
           <DialogHeader className={s.dialogHeader}>
             <Typography as={'h3'} variant={'h3'}>
-              {t.profilePage.addProfilePhoto}
+              {t.profile.addProfilePhoto}
             </Typography>
             <DialogClose className={'close-button'}>
-              <Button title={t.profilePage.closeButton} variant={'icon'}>
+              <Button title={t.profile.closeButton} variant={'icon'}>
                 <CloseOutlineIcon />
               </Button>
             </DialogClose>
           </DialogHeader>
           <DialogBody className={s.dialogBody}>
             {avatarFile ? (
-              <AvatarEditor
-                backgroundColor={'black'}
-                borderRadius={155}
-                color={[23, 23, 23, 0.6]}
-                disableBoundaryChecks={false}
-                height={316}
-                image={avatarFile}
-                onPositionChange={handlePositionChange}
-                position={position}
-                ref={editorRef}
-                scale={1}
-                width={316}
-              />
+              <>
+                <AvatarEditor
+                  backgroundColor={'black'}
+                  borderRadius={155}
+                  color={[23, 23, 23, 0.6]}
+                  disableBoundaryChecks={false}
+                  height={316}
+                  image={avatarFile}
+                  onPositionChange={handlePositionChange}
+                  position={position}
+                  ref={editorRef}
+                  scale={slideValue / 10}
+                  width={316}
+                />
+                <form>
+                  <Slider.Root
+                    className={s.sliderRoot}
+                    defaultValue={[slideValue]}
+                    max={50}
+                    min={10}
+                    onValueChange={onSliderChange}
+                    step={2}
+                    value={[slideValue]}
+                  >
+                    <Slider.Track className={s.track}>
+                      <Slider.Range className={s.range} />
+                    </Slider.Track>
+                    <Slider.Thumb aria-label={'Volume'} className={s.thumb} />
+                  </Slider.Root>
+                </form>
+              </>
             ) : (
               <BlankImage className={s.blankImage} type={'square'} />
             )}
             <div className={s.btnWrapper}>
               {uploadSuccess ? (
-                <Button className={s.saveButton} onClick={onSaveAvatarHandler}>
-                  {t.profilePage.savePhoto}
-                </Button>
+                <Button onClick={onSaveAvatarHandler}>{t.profile.savePhoto}</Button>
               ) : (
                 <Button as={'label'} className={s.fileBtn} variant={'primary'}>
                   <input
@@ -190,7 +212,7 @@ const AvatarManager = ({ avatar }: Props) => {
                     onChange={onUploadHandler}
                     type={'file'}
                   />
-                  {t.profilePage.selectPhoto}
+                  {t.profile.selectPhoto}
                 </Button>
               )}
             </div>

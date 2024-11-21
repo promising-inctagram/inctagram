@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { Page, getSidebarLayout } from '@/components'
 import { AuthContext } from '@/shared/contexts'
-import AvatarManager from '@/views/profile/ui/AvatarManager'
+import AvatarManager from '@/views/profile/avatar-manager/AvatarManager'
 
 import s from './SettingsPage.module.scss'
 const SettingsPage = () => {

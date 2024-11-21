@@ -15,7 +15,7 @@ const ProfilePage = () => {
   return (
     <Page mt={36}>
       <div className={s.btnContainer}>
-        <Button as={Link} href={Paths.profileSettings} variant={'secondary'}>
+        <Button as={Link} href={Paths.settings} variant={'secondary'}>
           {profile_settings}
         </Button>
       </div>

@@ -3,12 +3,10 @@ import {
   DialogBody,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogRoot,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog'
 import { CloseOutlineIcon } from '@/components/ui/icons'
 import { Typography } from '@/components/ui/typography'
@@ -31,11 +29,11 @@ const DeleteAvatarDialog = ({ isOpen, onConfirm, onOpenChange }: Props) => {
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
       <DialogContent className={s.content}>
         <VisuallyHidden asChild>
-          <DialogTitle>{t.profilePage.deleteProfilePhoto}</DialogTitle>
+          <DialogTitle>{t.profile.deleteProfilePhoto}</DialogTitle>
         </VisuallyHidden>
         <DialogHeader className={s.header}>
           <Typography as={'h1'} variant={'h1'}>
-            {t.profilePage.deleteProfilePhoto}
+            {t.profile.deleteProfilePhoto}
           </Typography>
           <DialogClose asChild>
             <Button title={'close'} variant={'icon'}>
@@ -44,14 +42,14 @@ const DeleteAvatarDialog = ({ isOpen, onConfirm, onOpenChange }: Props) => {
           </DialogClose>
         </DialogHeader>
         <DialogBody>
-          <Typography variant={'regular_text_16'}>{t.profilePage.deletePhotoQuestion}</Typography>
+          <Typography variant={'regular_text_16'}>{t.profile.deletePhotoQuestion}</Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>
           <Button className={s.button} onClick={onConfirm} variant={'outlined'}>
-            {t.profilePage.yesButton}
+            {t.profile.yesButton}
           </Button>
-          <Button className={s.button} onClick={closeDialogHandler} variant={'outlined'}>
-            {t.profilePage.noButton}
+          <Button className={s.button} onClick={closeDialogHandler} variant={'primary'}>
+            {t.profile.noButton}
           </Button>
         </DialogFooter>
       </DialogContent>
