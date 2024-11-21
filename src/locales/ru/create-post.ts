@@ -1,5 +1,7 @@
 export const createPost = {
   addDescription: {
+    descriptionError: 'Описание не может быть больше 500 символов',
+    descriptionErrorEmptyField: 'Поле не может быть пустым',
     descriptionField: 'Добавить описание публикации',
     modalButton: 'Опубликовать',
     modalTitle: 'Публикация',

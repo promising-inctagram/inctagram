@@ -1,5 +1,7 @@
 export const createPost = {
   addDescription: {
+    descriptionError: 'Description cannot be longer than 500 characters',
+    descriptionErrorEmptyField: 'Field cannot be empty',
     descriptionField: 'Add publication descriptions',
     modalButton: 'Publish',
     modalTitle: 'Publication',

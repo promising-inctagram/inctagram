@@ -35,8 +35,15 @@ const CloseModal = ({
   setStepIndex,
 }: CloseModalProps) => {
   const { t } = useTranslation()
-  const { buttonDiscard, buttonSaveDraft, modalContext, modalTitle, modalWarning } =
-    t.createPost.closeModal
+  const {
+    buttonDiscard,
+    buttonSaveDraft,
+    closeModalDescription,
+    closeModalTitle,
+    modalContext,
+    modalTitle,
+    modalWarning,
+  } = t.createPost.closeModal
 
   const handleCloseMainModal = () => {
     closeMainModal(false)
@@ -50,10 +57,10 @@ const CloseModal = ({
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
       <DialogContent className={styles.content}>
         <VisuallyHidden asChild>
-          <DialogTitle>тайтл</DialogTitle>
+          <DialogTitle>{closeModalTitle}</DialogTitle>
         </VisuallyHidden>
         <VisuallyHidden>
-          <DialogDescription>висуалити хедер дескриптион</DialogDescription>
+          <DialogDescription>{closeModalDescription}</DialogDescription>
         </VisuallyHidden>
         <DialogHeader className={styles.header}>
           <Typography as={'h1'} variant={'h1'}>

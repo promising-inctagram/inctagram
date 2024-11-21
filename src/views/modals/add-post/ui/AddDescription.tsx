@@ -10,6 +10,7 @@ import {
   DialogBody,
   DialogHeader,
   Typography,
+  showToast,
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
 import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
@@ -27,12 +28,18 @@ type AddDescriptionProps = {
 
 const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
   const { t } = useTranslation()
-  const { descriptionField, modalButton, modalTitle } = t.createPost.addDescription
+  const {
+    descriptionError,
+    descriptionErrorEmptyField,
+    descriptionField,
+    modalButton,
+    modalTitle,
+  } = t.createPost.addDescription
   const maxLengthDescription = 500
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
 
-  const { control, handleSubmit, setError, watch } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       description: '',
     },
@@ -41,10 +48,10 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
       z.object({
         description: z
           .string()
-          .max(500, 'Описание не может быть больше 500 символов')
+          .max(500, descriptionError)
           .refine(
             value => value.length === 0 || value.trim().length > 0,
-            'Поле не может быть пустым'
+            descriptionErrorEmptyField
           ),
       })
     ),
@@ -67,10 +74,20 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
             id: res.id,
           })
             .unwrap()
-            .catch(e => setError('description', { message: e.data }))
+            .catch(e => {
+              showToast({
+                message: e.data.errorsMessages[0].message,
+                variant: 'error',
+              })
+            })
         }
       })
-      .catch(e => setError('description', { message: e.data.errorsMessages }))
+      .catch(e => {
+        showToast({
+          message: e.data.errorsMessages,
+          variant: 'error',
+        })
+      })
   })
 
   return (

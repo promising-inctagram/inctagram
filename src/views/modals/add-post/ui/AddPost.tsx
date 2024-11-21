@@ -95,5 +95,4 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
 AddPost.getLayout = getSidebarLayout
 export default AddPost
 
-// todo: ждать пока Ксюша доделает ошибки
 // todo: аватар
