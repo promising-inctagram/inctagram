@@ -10,7 +10,7 @@ import s from './DatePicker.module.scss'
 export type DatePickerProps = {
   disabled?: boolean
   error?: ReactNode | string
-  inputVal: string
+  inputVal?: string
   isRequired?: boolean
   label?: string
   locale?: Locale

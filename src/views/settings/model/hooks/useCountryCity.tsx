@@ -1,15 +1,9 @@
 import { useEffect, useMemo } from 'react'
-import { UseFormSetValue } from 'react-hook-form'
 
 import { OptionsValue } from '@/components/ui'
 import { useCountriesQuery, useLazyCitiesQuery } from '@/shared/api/profile/profile.api'
-import { SettingFields } from '@/views/settings/model/types'
 
-export const useCountryCity = (
-  locale: string,
-  id?: string,
-  setValue?: UseFormSetValue<SettingFields>
-) => {
+export const useCountryCity = (locale: string, id?: string) => {
   const { data: countries, isLoading: isLoadingCountries } = useCountriesQuery()
 
   const [fetchCities, { data: cities, isFetching: isFetchingCities, isLoading: isLoadingCities }] =
@@ -33,9 +27,6 @@ export const useCountryCity = (
   useEffect(() => {
     if (id) {
       fetchCities({ id: id })
-      if (setValue) {
-        setValue('city', '')
-      }
     }
   }, [id, fetchCities])
 

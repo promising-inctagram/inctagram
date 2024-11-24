@@ -22,7 +22,7 @@ import {
 import { SettingFields, SettingsFormProps } from '@/views/settings/model/types'
 import { AgeError } from '@/views/settings/ui/tabs/general/AgeError'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 
 import s from './SettingsForm.module.scss'
 
@@ -45,14 +45,20 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     setValue,
     watch,
   } = useForm<SettingFields>({
+    defaultValues: {
+      ...props,
+      city: savedSettingsForm.city || String(props.city.id),
+      country: String(props.country.id),
+      dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
+    },
     mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: zodResolver(settingsSchemeCreator(t.profileSettingPage.settingsForm.validation)),
   })
 
-  const { country, firstName, lastName, username } = watch()
+  const { country: countryId, firstName, lastName, username } = watch()
   const { cityOptions, countryOptions, isFetchingCities, isLoadingCities, isLoadingCountries } =
-    useCountryCity(locale || 'en', country, setValue)
+    useCountryCity(locale || 'en', countryId)
   const isSaveDisabled =
     !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
 
@@ -72,27 +78,16 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     if (isReturningFromPolicy) {
       reset(savedSettingsForm)
       dispatch(setReturningFromPolicy(false))
-    } else {
-      setValue('aboutMe', props.aboutMe)
-      setValue('firstName', props.firstName)
-      setValue('lastName', props.lastName)
-      setValue('username', props.username)
-
-      if (!isLoadingCountries && countryOptions.length > 0) {
-        setValue('country', String(props.country.id))
-      }
-
-      if (!isLoadingCities && cityOptions.length > 0 && props.city?.id) {
-        setValue('city', String(props.city.id))
-      }
     }
-  }, [savedSettingsForm, isLoadingCountries, isLoadingCities, reset, setValue, dispatch])
+  }, [reset, setValue, dispatch])
 
   const formHandler = handleSubmit(async data => {
+    const formatDate = format(data.dateOfBirth, 'dd/MM/yyyy')
+
     const transformData = {
       ...data,
       cityId: Number(data.city),
-      dateOfBirth: format(data.dateOfBirth, 'dd/MM/yyyy'),
+      dateOfBirth: formatDate,
     }
 
     if (!isAgeValid(data.dateOfBirth)) {

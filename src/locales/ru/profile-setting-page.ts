@@ -37,7 +37,7 @@ export const profileSettingPage = {
       },
       ageValidationMessage:
         'Пользователь младше 13 не может создать профиль. <1>Политика конфиденциальности</1>',
-      dateOfBirth: 'Введите корректный формат даты',
+      dateOfBirth: 'Введите корректный формат даты dd/MM/yyyy',
       firstName: {
         allowedSymbols: 'Имя может содержать символы: A-Z, a-z, А-Я, а-я',
         maxLength: 'Максимальное количество символов 50',

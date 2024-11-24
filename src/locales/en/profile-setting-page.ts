@@ -35,7 +35,7 @@ export const profileSettingPage = {
         minLength: 'Minimum number of characters 0',
       },
       ageValidationMessage: 'A user under 13 cannot create a profile. <1>Privacy Policy</1>',
-      dateOfBirth: 'Enter the correct date format',
+      dateOfBirth: 'Enter the correct date format dd/MM/yyyy',
       firstName: {
         allowedSymbols: 'FirstName may contain symbols: A-Z, a-z, А-Я, а-я',
         maxLength: 'Maximum number of characters 50',
