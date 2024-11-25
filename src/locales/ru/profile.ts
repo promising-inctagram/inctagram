@@ -1,6 +1,8 @@
 export const profile = {
   account_management: 'Управление аккаунтом',
   addProfilePhoto: 'Добавить фото профиля',
+  avatarSizeError: 'Размер фото должен быть менее 10 МБ',
+  avatarTypeError: 'Формат загружаемой фотографии должен быть PNG или JPEG',
   closeButton: 'Закрыть',
   deletePhotoQuestion: 'Вы уверены, что хотите удалить фото?',
   deleteProfilePhoto: 'Удалить фото',

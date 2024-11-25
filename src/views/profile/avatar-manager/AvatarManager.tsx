@@ -17,6 +17,7 @@ import { CloseOutlineIcon } from '@/components/ui/icons'
 import { showToast } from '@/components/ui/toast'
 import { Typography } from '@/components/ui/typography'
 import { useDeleteAvatarMutation, useUploadAvatarMutation } from '@/shared/api/profile/profile.api'
+import { ALLOWED_FILE_TYPES, AVATAR_MAX_FILE_SIZE } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import DeleteAvatarDialog from '@/views/profile/avatar-manager/DeleteAvatarDialog'
@@ -31,12 +32,13 @@ const AvatarManager = ({ avatar }: Props) => {
   const { t } = useTranslation()
   const editorRef = useRef<AvatarEditor>(null)
   const [slideValue, setSlideValue] = useState<number>(10)
-  const [avatarFile, setAvatarFile] = useState<File | string>(avatar ?? null)
+  const [avatarFile, setAvatarFile] = useState<File | string>(null)
   const [uploadAvatar] = useUploadAvatarMutation()
   const [deleteAvatar] = useDeleteAvatarMutation()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [uploadSuccess, setUploadSuccess] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 })
 
@@ -46,9 +48,34 @@ const AvatarManager = ({ avatar }: Props) => {
   const onOpenChangeHandler = (open: boolean) => {
     setIsDialogOpen(open)
     setUploadSuccess(false)
+    setErrorMsg('')
+    setAvatarFile(avatar ?? null)
   }
   const onSliderChange = (value: number) => {
     setSlideValue(value)
+  }
+  const onUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    if (e.target.files && e.target.files.length > 0) {
+      setErrorMsg('')
+      const file = e.target.files[0]
+      const avatarUrl = URL.createObjectURL(file)
+
+      if (file.size >= AVATAR_MAX_FILE_SIZE) {
+        setErrorMsg(t.profile.avatarSizeError)
+
+        return
+      }
+      if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+        setErrorMsg(t.profile.avatarTypeError)
+
+        return
+      }
+      if (!uploadSuccess) {
+        setUploadSuccess(true)
+        setAvatarFile(avatarUrl)
+      }
+    }
   }
   const onSaveAvatarHandler = async () => {
     try {
@@ -102,21 +129,6 @@ const AvatarManager = ({ avatar }: Props) => {
         })
       }
     }
-  }
-  const onUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0]
-
-      if (file) {
-        const avatarUrl = URL.createObjectURL(file)
-
-        setUploadSuccess(true)
-        setAvatarFile(avatarUrl)
-      }
-    }
-
-    return
   }
 
   return (
@@ -199,7 +211,16 @@ const AvatarManager = ({ avatar }: Props) => {
                 </form>
               </>
             ) : (
-              <BlankImage className={s.blankImage} type={'square'} />
+              <div className={s.blankImageContainer}>
+                {errorMsg && (
+                  <div className={s.errorContainer}>
+                    <Typography className={s.error} color={'primary'} variant={'bold_text_14'}>
+                      {errorMsg}
+                    </Typography>
+                  </div>
+                )}
+                <BlankImage className={s.blankImage} type={'square'} />
+              </div>
             )}
             <div className={s.btnWrapper}>
               {uploadSuccess ? (
@@ -207,7 +228,7 @@ const AvatarManager = ({ avatar }: Props) => {
               ) : (
                 <Button as={'label'} className={s.fileBtn} variant={'primary'}>
                   <input
-                    accept={'image/png,image/jpg, image/jpeg'}
+                    accept={'image/png,image/jpg,image/jpeg'}
                     hidden
                     onChange={onUploadHandler}
                     type={'file'}

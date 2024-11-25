@@ -102,3 +102,27 @@
 .thumb:focus {
   outline: none;
 }
+.blankImageContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+.errorContainer{
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 36px;
+
+  text-align: center;
+
+  background-color: var(--color-danger-900);
+  border: var(--border-size-standard) solid var(--color-danger-500);
+  border-radius: var(--border-radius-xxs);
+}
+.error{
+  color: var(--color-light-100);
+}
