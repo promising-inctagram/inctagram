@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 import { Breakpoints } from '@/shared/enums/breakpoints.enum'
 
@@ -6,16 +6,18 @@ export const useIsMobileOrTabletVersion = () => {
   const [isTablet, setIsTablet] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
-  useEffect(() => {
-    const handleWindowResizeForTablet = () => setIsTablet(window.innerWidth < Breakpoints.tablet)
-    const handleWindowResizeForMobile = () => setIsMobile(window.innerWidth < Breakpoints.mobile)
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setIsTablet(window.innerWidth < Breakpoints.tablet)
+      setIsMobile(window.innerWidth < Breakpoints.mobile)
+    }
 
-    window.addEventListener('resize', handleWindowResizeForTablet)
-    window.addEventListener('resize', handleWindowResizeForMobile)
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener('resize', handleWindowResizeForTablet)
-      window.removeEventListener('resize', handleWindowResizeForMobile)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
