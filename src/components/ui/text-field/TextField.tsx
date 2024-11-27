@@ -3,7 +3,6 @@ import {
   ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
-  memo,
   useEffect,
   useId,
   useRef,
@@ -45,43 +44,33 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   } = props
 
   const [showPassword, setShowPassword] = useState(false)
-  /*const [inputValue, setInputValue] = useState(value)*/
-  let inputRef: any = useRef<any>(null)
+  const inputRef = useRef('')
 
-  console.log('1:' + inputRef)
+  console.log(inputRef)
   const id = useId()
 
   const isPassword = variant === 'password'
   const inputType = !showPassword && isPassword ? 'password' : 'text'
   const isSearch = variant === 'search'
 
-  const inputChangeHandler = (e: any) => {
+  const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
-    /*setInputValue(e.currentTarget.value)*/
-    inputRef = e.currentTarget.value
-    console.log('2:' + inputRef)
+    inputRef.current = e.target.value
   }
 
   const clearInputHandler = () => {
-    /*setInputValue('')*/
-    console.log('3' + inputRef)
-    inputRef = ''
-    console.log('4' + inputRef)
+    inputRef.current = ''
   }
 
   const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
     setShowPassword(prev => !prev)
   }
 
-  /*useEffect(() => {
-        /!* setInputValue(value)*!/
-        inputRef = value
-      }, [value])*/
-  /*console.log(inputRef)*/
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.value = value
-      console.log('5' + inputRef.current.value)
+    if (inputRef) {
+      if (typeof value === 'string') {
+        inputRef.current = value
+      }
     }
   }, [value])
 
@@ -101,7 +90,6 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
       <div className={s.inputContainer}>
         {isSearch && <SearchOutlineIcon className={clsx(s.iconSearch, disabled && s.disabled)} />}
         <input
-          /* autoComplete={variant === 'password' ? 'new-password' : ''}*/
           className={clsx(
             s.input,
             s[variant],
