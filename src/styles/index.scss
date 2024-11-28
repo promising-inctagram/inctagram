@@ -3,3 +3,20 @@
 @forward 'boilerplate';
 @forward 'common';
 @forward 'nprogress';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 1010px;
+  width: 100%;
+  margin: 24px auto;
+  padding: 0 20px;
+}
+
+/*
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(234px, 1fr));
+  gap: 12px;
+}*/
