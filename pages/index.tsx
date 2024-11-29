@@ -1,34 +1,34 @@
 import { getLayout } from '@/components'
+import { PostsData, PostsRes } from '@/shared/types/public-page/Posts'
+import { CountUsersRes } from '@/shared/types/public-page/PublicPage'
 import { CountUsers } from '@/views/public-page/ui/CountUsers'
 import { Posts } from '@/views/public-page/ui/Posts'
 import Head from 'next/head'
 
 export const getStaticProps = async () => {
-  const res = await fetch('https://inctagram.work/api/v1/public-posts/all')
-  const res2 = await fetch('https://inctagram.work/api/v1/public-user')
-  const posts = await res.json()
-  const countUsers = await res2.json()
+  const postsResponse = await fetch('https://gateway.inctagram.world/api/v1/posts')
+  const countUsersResponse = await fetch(
+    'https://gateway.inctagram.world/api/v1/profile/user-count'
+  )
+
+  const postsData: PostsRes = await postsResponse.json()
+  const countUsers: CountUsersRes = await countUsersResponse.json()
 
   return {
     props: {
-      countUsers,
-      posts,
+      countUsers: countUsers.count,
+      posts: postsData.posts,
     },
-    //если написали revalidate, при новом запросе страницы и когда прошло 60 сек
-    //вызывается функция getStaticProps нэкстом и страница проревалидируется и перезапишется с новыми данными
     revalidate: 60,
   }
 }
 
 type Props = {
-  countUsers: any
-  posts: any
+  countUsers: number
+  posts: PostsData
 }
 
 export default function Home({ countUsers, posts }: Props) {
-  console.log(posts)
-  console.log(countUsers)
-
   return (
     <>
       <Head>
@@ -85,7 +85,7 @@ export default function Home({ countUsers, posts }: Props) {
         <link href={'/favicon-dark.ico?v=2'} media={'(prefers-color-scheme: light)'} rel={'icon'} />
       </Head>
       <main className={'container'}>
-        <CountUsers countUsers={countUsers.totalCount} />
+        <CountUsers countUsers={countUsers} />
         <div>
           <Posts posts={posts} />
         </div>

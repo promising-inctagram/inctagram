@@ -1,21 +1,21 @@
-import { Card } from '@/components/ui'
+import { Post, PostsData } from '@/shared/types/public-page/Posts'
+import Link from 'next/link'
 
 type Props = {
-  posts: any
+  posts: PostsData
 }
 export const Posts = ({ posts }: Props) => {
   return (
-    <Card>
-      <div>
-        {posts.items.map(post => {
-          return (
-            <div key={post.id}>
-              <h2>{post.owner.firstName}</h2>
-              <p>{post.owner.firstName}</p>
+    <article>
+      {posts.map((post: Post) => {
+        return (
+          <Link href={`/profile/${post.userInfo.id}/public-posts/${post.id}`} key={post.id}>
+            <div>
+              <p>{post.userInfo.firstName}</p>
             </div>
-          )
-        })}
-      </div>
-    </Card>
+          </Link>
+        )
+      })}
+    </article>
   )
 }
