@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ControlledTextArea } from '@/components/controlled-text-area'
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
 import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
+import { AuthContext } from '@/shared/contexts'
 import { useTranslation } from '@/shared/hooks'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -38,6 +39,9 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
   const maxLengthDescription = 500
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
+  const { meData } = useContext(AuthContext)
+  const avatar = meData?.profile.avatarInfo.smallFilePath
+  const username = meData?.username
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -111,8 +115,8 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
         <div className={styles.descriptionContainer}>
           <Card className={styles.card}>
             <div className={styles.profileName}>
-              <Avatar className={styles.avatar} size={'xs'} src={images[0]} />
-              <Typography>URLProfiele</Typography>
+              <Avatar className={styles.avatar} size={'xs'} src={avatar} />
+              <Typography>{username}</Typography>
             </div>
             <ControlledTextArea
               className={styles.textField}
