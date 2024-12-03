@@ -1,0 +1,26 @@
+.form {
+  width: 100%;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.textArea {
+  height: 84px;
+  resize: none;
+}
+
+.submitButton {
+  margin-left: auto;
+}
+.selectGroup {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  width: 100%;
+}
+.selectGroupItem {
+  flex: 1;
+}
