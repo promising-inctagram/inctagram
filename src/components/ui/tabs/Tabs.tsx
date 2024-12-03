@@ -34,3 +34,4 @@ const TabsContent = forwardRef<
 })
 
 export { TabsContent, TabsList, TabsRoot, TabsTrigger }
+

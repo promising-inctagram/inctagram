@@ -6,4 +6,5 @@ export const inctagramApi = createApi({
   endpoints: () => ({}),
   reducerPath: 'inctagramApi',
   tagTypes: ['Me', 'Profile'],
+  tagTypes: ['Me', 'Devices'],
 })
