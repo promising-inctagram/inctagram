@@ -1,26 +1,16 @@
 import { Page, getSidebarLayout } from '@/components'
 import { Button } from '@/components/ui/button'
-import { Paths, getProfileSettingsPath } from '@/shared/enums'
-import { useRouter } from 'next/router'
-
+import { Paths } from '@/shared/enums'
+import { useTranslation } from '@/shared/hooks'
+import link from 'next/link'
 function ProfilePage() {
-  const {
-    push,
-    query: { id },
-  } = useRouter()
-
-  const openSettings = () => {
-    if (typeof id === 'string') {
-      // todo: Пока не знаю как лучше сделать
-      push(getProfileSettingsPath(id))
-    }
-  }
+  const { t } = useTranslation()
 
   return (
     <Page>
       Profile page
-      <Button onClick={openSettings} variant={'link'}>
-        profile settings
+      <Button as={link} href={Paths.settings} variant={'secondary'}>
+        {t.profile.profile_settings}
       </Button>
     </Page>
   )
