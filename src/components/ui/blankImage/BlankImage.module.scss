@@ -1,0 +1,16 @@
+.root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-dark-500);
+}
+.circle{
+  width: 192px;
+  height: 192px;
+  border-radius: 50%;
+}
+.square{
+  width: 222px;
+  height: 228px;
+  border-radius: 2px;
+}

@@ -1,4 +1,5 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
+import settings from '@/views/settings/model/settings-slice'
 import { Action, ThunkAction, combineSlices, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
@@ -6,7 +7,10 @@ const makeStore = () =>
   configureStore({
     devTools: true,
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(inctagramApi.middleware),
-    reducer: combineSlices(inctagramApi),
+    reducer: combineSlices({
+      [inctagramApi.reducerPath]: inctagramApi.reducer,
+      settings,
+    }),
   })
 
 export type AppStore = ReturnType<typeof makeStore>
