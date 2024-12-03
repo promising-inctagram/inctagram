@@ -7,19 +7,22 @@ import s from '@/components/ui/dropdown/Dropdown.module.scss'
 
 type Props = {
   align?: 'center' | 'end' | 'start'
+  className: string
   trigger: ReactNode
 } & ComponentPropsWithoutRef<typeof Dropdown.Root>
 
-export const DropDownMenu = ({ align = 'start', children, trigger, ...rest }: Props) => {
+export const DropDownMenu = ({ align = 'end', children, className, trigger, ...rest }: Props) => {
   return (
-    <Dropdown.Root {...rest}>
-      <Dropdown.Trigger className={s.trigger}>{trigger}</Dropdown.Trigger>
-      <Dropdown.Portal>
-        <Dropdown.Content align={align} className={s.content}>
-          {children}
-        </Dropdown.Content>
-      </Dropdown.Portal>
-    </Dropdown.Root>
+    <div className={className}>
+      <Dropdown.Root {...rest}>
+        <Dropdown.Trigger className={s.trigger}>{trigger}</Dropdown.Trigger>
+        <Dropdown.Portal>
+          <Dropdown.Content align={align} className={s.content}>
+            {children}
+          </Dropdown.Content>
+        </Dropdown.Portal>
+      </Dropdown.Root>
+    </div>
   )
 }
 

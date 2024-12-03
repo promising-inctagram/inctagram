@@ -47,7 +47,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
       .unwrap()
       .then(() => {
         localStorage.removeItem(ACCESS_TOKEN)
-
+        localStorage.removeItem('hasRedirected')
         router.push(Paths.logIn)
       })
       .catch(e => {

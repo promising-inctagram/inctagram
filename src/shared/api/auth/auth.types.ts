@@ -50,8 +50,17 @@ export type ResponseMeProfileAvatarData = {
 export type ResponseMeProfile = {
   aboutMe: string
   avatarInfo: ResponseMeProfileAvatarData
-  city: string
-  country: string
+  city: {
+    countryId: number
+    id: number
+    name_en: string
+    name_ru: string
+  }
+  country: {
+    id: number
+    name_en: string
+    name_ru: string
+  }
   dateOfBirth: string
   firstName: string
   lastName: string
