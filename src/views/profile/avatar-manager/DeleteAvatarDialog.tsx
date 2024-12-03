@@ -29,11 +29,11 @@ const DeleteAvatarDialog = ({ isOpen, onConfirm, onOpenChange }: Props) => {
     <DialogRoot onOpenChange={onOpenChange} open={isOpen}>
       <DialogContent className={s.content}>
         <VisuallyHidden asChild>
-          <DialogTitle>{t.profile.deleteProfilePhoto}</DialogTitle>
+          <DialogTitle>{t.profileSettingPage.profilePhoto.deleteProfilePhoto}</DialogTitle>
         </VisuallyHidden>
         <DialogHeader className={s.header}>
           <Typography as={'h1'} variant={'h1'}>
-            {t.profile.deleteProfilePhoto}
+            {t.profileSettingPage.profilePhoto.deleteProfilePhoto}
           </Typography>
           <DialogClose asChild>
             <Button title={'close'} variant={'icon'}>
@@ -42,14 +42,16 @@ const DeleteAvatarDialog = ({ isOpen, onConfirm, onOpenChange }: Props) => {
           </DialogClose>
         </DialogHeader>
         <DialogBody>
-          <Typography variant={'regular_text_16'}>{t.profile.deletePhotoQuestion}</Typography>
+          <Typography variant={'regular_text_16'}>
+            {t.profileSettingPage.profilePhoto.deletePhotoQuestion}
+          </Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>
           <Button className={s.button} onClick={onConfirm} variant={'outlined'}>
-            {t.profile.yesButton}
+            {t.profileSettingPage.profilePhoto.yesButton}
           </Button>
           <Button className={s.button} onClick={closeDialogHandler} variant={'primary'}>
-            {t.profile.noButton}
+            {t.profileSettingPage.profilePhoto.noButton}
           </Button>
         </DialogFooter>
       </DialogContent>

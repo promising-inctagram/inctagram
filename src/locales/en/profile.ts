@@ -1,18 +1,10 @@
 export const profile = {
   account_management: 'Account Management',
-  addProfilePhoto: 'Add a Profile Photo',
-  avatarSizeError: 'Photo size must be less than 10 MB',
-  avatarTypeError: 'The format of the uploaded photo must be PNG and JPEG',
-  closeButton: 'Close',
-  deletePhotoQuestion: 'Are you sure you want to delete the photo?',
-  deleteProfilePhoto: 'Delete Photo',
   devices: 'Devices',
   general_information: 'General information',
   my_payments: 'My payments',
   noButton: 'No',
   profile_settings: 'Profile Settings',
   profileSettingsBtn: 'Profile Settings',
-  savePhoto: 'Save',
-  selectPhoto: 'Select from Computer',
   yesButton: 'Yes',
 }

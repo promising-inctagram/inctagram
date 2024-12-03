@@ -1,12 +1,15 @@
 export const profileSettingPage = {
   profilePhoto: {
     addProfilePhoto: 'Add a Profile Photo',
+    avatarSizeError: 'Photo size must be less than 10 MB',
+    avatarTypeError: 'The format of the uploaded photo must be PNG and JPEG',
+    closeButton: 'Close',
     deletePhotoQuestion: 'Are you sure you want to delete the photo?',
     deleteProfilePhoto: 'Delete Photo',
     noButton: 'No',
     savePhoto: 'Save',
     selectPhoto: 'Select from Computer',
-    yesButton: 'Да',
+    yesButton: 'Yes',
   },
   settingsForm: {
     labels: {

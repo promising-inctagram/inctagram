@@ -62,12 +62,12 @@ const AvatarManager = ({ avatar }: Props) => {
       const avatarUrl = URL.createObjectURL(file)
 
       if (file.size >= AVATAR_MAX_FILE_SIZE) {
-        setErrorMsg(t.profile.avatarSizeError)
+        setErrorMsg(t.profileSettingPage.profilePhoto.avatarSizeError)
 
         return
       }
       if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-        setErrorMsg(t.profile.avatarTypeError)
+        setErrorMsg(t.profileSettingPage.profilePhoto.avatarTypeError)
 
         return
       }
@@ -139,7 +139,7 @@ const AvatarManager = ({ avatar }: Props) => {
             <Button
               className={s.deleteBtn}
               onClick={setIsDeleteDialogOpen}
-              title={t.profile.deleteProfilePhoto}
+              title={t.profileSettingPage.profilePhoto.deleteProfilePhoto}
               variant={'icon'}
             >
               <CloseOutlineIcon className={s.closeIcon} />
@@ -158,21 +158,21 @@ const AvatarManager = ({ avatar }: Props) => {
       <DialogRoot
         onOpenChange={onOpenChangeHandler}
         open={isDialogOpen}
-        title={t.profile.addProfilePhoto}
+        title={t.profileSettingPage.profilePhoto.addProfilePhoto}
       >
         <DialogTrigger asChild>
-          {<Button variant={'outlined'}>{t.profile.addProfilePhoto}</Button>}
+          <Button variant={'outlined'}>{t.profileSettingPage.profilePhoto.addProfilePhoto}</Button>
         </DialogTrigger>
         <DialogContent className={s.dialogContent}>
           <VisuallyHidden>
-            <DialogTitle>{t.profile.addProfilePhoto}</DialogTitle>
+            <DialogTitle>{t.profileSettingPage.profilePhoto.addProfilePhoto}</DialogTitle>
           </VisuallyHidden>
           <DialogHeader className={s.dialogHeader}>
             <Typography as={'h3'} variant={'h3'}>
-              {t.profile.addProfilePhoto}
+              {t.profileSettingPage.profilePhoto.addProfilePhoto}
             </Typography>
             <DialogClose className={'close-button'}>
-              <Button title={t.profile.closeButton} variant={'icon'}>
+              <Button title={t.profileSettingPage.profilePhoto.closeButton} variant={'icon'}>
                 <CloseOutlineIcon />
               </Button>
             </DialogClose>
@@ -224,7 +224,9 @@ const AvatarManager = ({ avatar }: Props) => {
             )}
             <div className={s.btnWrapper}>
               {uploadSuccess ? (
-                <Button onClick={onSaveAvatarHandler}>{t.profile.savePhoto}</Button>
+                <Button onClick={onSaveAvatarHandler}>
+                  {t.profileSettingPage.profilePhoto.savePhoto}
+                </Button>
               ) : (
                 <Button as={'label'} className={s.fileBtn} variant={'primary'}>
                   <input
@@ -233,7 +235,7 @@ const AvatarManager = ({ avatar }: Props) => {
                     onChange={onUploadHandler}
                     type={'file'}
                   />
-                  {t.profile.selectPhoto}
+                  {t.profileSettingPage.profilePhoto.selectPhoto}
                 </Button>
               )}
             </div>
