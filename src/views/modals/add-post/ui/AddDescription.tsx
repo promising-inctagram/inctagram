@@ -14,6 +14,7 @@ import {
 } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
 import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
+import { MAX_POST_DESCRIPTION_LENGTH } from '@/shared/constants'
 import { AuthContext } from '@/shared/contexts'
 import { useTranslation } from '@/shared/hooks'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -36,7 +37,6 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
     modalButton,
     modalTitle,
   } = t.createPost.addDescription
-  const maxLengthDescription = 500
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
   const { meData } = useContext(AuthContext)
@@ -125,7 +125,7 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
               name={'description'}
             />
             <Typography className={styles.smallText} variant={'small_text'}>
-              {description.length}/{maxLengthDescription}
+              {description.length}/{MAX_POST_DESCRIPTION_LENGTH}
             </Typography>
           </Card>
           {/* <Card className={styles.card}>Add location</Card> */}

@@ -10,6 +10,7 @@ import {
   showToast,
 } from '@/components/ui'
 import { CloseOutlineIcon, ImageOutlineIcon } from '@/components/ui/icons'
+import { MAX_POST_FILE_SIZE } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
 
 import styles from './UploadPhoto.module.scss'
@@ -40,7 +41,7 @@ const UploadPhoto = ({
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      if (file.size < 20971520) {
+      if (file.size < MAX_POST_FILE_SIZE) {
         setImagesFilers([file])
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {

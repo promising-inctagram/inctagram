@@ -16,6 +16,7 @@ import {
   ImageIcon,
   PlusCircleOutlineIcon,
 } from '@/components/ui/icons'
+import { MAX_POST_FILE_SIZE } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
 
 import styles from './CroppingPhoto.module.scss'
@@ -43,7 +44,7 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      if (file.size < 20971520) {
+      if (file.size < MAX_POST_FILE_SIZE) {
         setImagesFilers(prev => [...prev, file])
         reader.onloadend = () => {
           if (typeof reader.result === 'string') {
