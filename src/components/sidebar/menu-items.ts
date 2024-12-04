@@ -24,12 +24,6 @@ export const menuItems = [
     path: Paths.home,
   },
   {
-    Icon: PlusSquareIcon,
-    OutlineIcon: PlusSquareOutlineIcon,
-    label: 'Create',
-    path: Paths.create,
-  },
-  {
     Icon: PersonIcon,
     OutlineIcon: PersonOutlineIcon,
     label: 'My Profile',

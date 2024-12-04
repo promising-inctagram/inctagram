@@ -1,5 +1,6 @@
 import { confirmEmailPage } from '@/locales/en/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/en/confirm-logout-page'
+import { createPost } from '@/locales/en/create-post'
 import { passwordRecoveryPage } from '@/locales/en/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { profileSettingPage } from '@/locales/en/profile-setting-page'
@@ -26,6 +27,7 @@ export type LocaleValidationLastName = typeof en.profileSettingPage.settingsForm
 export const en = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
+  createPost: createPost,
   header: {
     loginButton: 'Log in',
     signUpButton: 'Sign up',
