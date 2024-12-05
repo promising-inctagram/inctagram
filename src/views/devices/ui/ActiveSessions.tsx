@@ -5,7 +5,7 @@ import PhoneIcon from '@/components/ui/icons/PhoneIcon'
 import { useDeleteDeviceMutation } from '@/shared/api/devices/devices.api'
 import { getDevicesArgs } from '@/shared/api/devices/devices.types'
 import { useTranslation } from '@/shared/hooks'
-import { useDeviceSize } from '@/views/profile/profile-settings/hooks/useDeviceSize'
+import { useDeviceSize } from '@/views/devices/hooks/useDeviceSize'
 
 import s from './Devices.module.scss'
 

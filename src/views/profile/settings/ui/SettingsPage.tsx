@@ -3,7 +3,8 @@ import { useState } from 'react'
 import { Page, getSidebarLayout } from '@/components'
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
-import { GeneralInformation } from '@/views/settings/ui/tabs/general/General'
+import Devices from '@/views/devices/ui/Devices'
+import { GeneralInformation } from '@/views/profile/settings/ui/tabs/general/General'
 
 import s from './SettingsPage.module.scss'
 
@@ -25,7 +26,9 @@ function SettingsPage() {
         <TabsContent value={'general'}>
           <GeneralInformation />
         </TabsContent>
-        <TabsContent value={'devices'}>Content for Devices</TabsContent>
+        <TabsContent value={'devices'}>
+          <Devices />
+        </TabsContent>
         <TabsContent value={'account'}>Content for Account Management</TabsContent>
         <TabsContent value={'payments'}>Content for My Payments</TabsContent>
       </TabsRoot>
