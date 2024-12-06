@@ -2,8 +2,8 @@ import { confirmEmailPage } from '@/locales/en/confirm-email-page'
 import { confirmLogoutPage } from '@/locales/en/confirm-logout-page'
 import { passwordRecoveryPage } from '@/locales/en/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
-import { profileSettingPage } from '@/locales/en/profile-setting-page'
 import { profile } from '@/locales/en/profile'
+import { profileSettingPage } from '@/locales/en/profile-setting-page'
 import { profileSettingsDevices } from '@/locales/en/profile-settings-devices'
 import { signInPage } from '@/locales/en/sign-in-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
@@ -36,8 +36,8 @@ export const en = {
   },
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
-  profileSettingPage: profileSettingPage,
   profile: profile,
+  profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
   signInPage: signInPage,
   signUpPage: signUpPage,

@@ -1,11 +1,22 @@
 .content {
-  width: 380px;
+  width: 438px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.body {
+  padding: 30px 24px;
 }
 
 .footer {
   display: flex;
   gap: 20px;
   justify-content: flex-end;
+  padding-top: 0;
 }
 
 .button {

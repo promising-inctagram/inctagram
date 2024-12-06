@@ -4,5 +4,6 @@ export const confirmLogoutPage = {
   accessibilityTitle: 'Logout confirmation dialog',
   confirmButton: 'Yes',
   confirmationMessage: 'Are you really want to log out of your account',
+  modalHeader: 'Log Out',
   rejectButton: 'No',
 }
