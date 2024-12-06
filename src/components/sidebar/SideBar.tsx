@@ -1,8 +1,7 @@
 import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef, useState } from 'react'
 
-import { menuItems } from '@/components/sidebar/menu-items'
+import { SidebarMenuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
-import { LogOutOutlineIcon } from '@/components/ui/icons'
 import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -15,6 +14,7 @@ type SideBarRef = ElementRef<'nav'>
 
 export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...rest }, ref) => {
   const router = useRouter()
+  const menuItems = SidebarMenuItems()
   const [openLogoutModal, setOpenLogoutModal] = useState(false)
   const handleLogoutClick = () => {
     setOpenLogoutModal(true)
@@ -35,7 +35,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
         ))}
       </div>
       <div className={s.group}>
-        {menuItems.slice(5).map(({ Icon, OutlineIcon, label, path }, index) => (
+        {menuItems.slice(5, 7).map(({ Icon, OutlineIcon, label, path }, index) => (
           <Item
             Icon={Icon}
             OutlineIcon={OutlineIcon}
@@ -47,15 +47,15 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
         ))}
       </div>
       <div className={s.group}>
-        <Typography
-          as={'button'}
-          className={s.title}
-          onClick={handleLogoutClick}
-          variant={'medium_text_14'}
-        >
-          <LogOutOutlineIcon className={s.icon} />
-          Log Out
-        </Typography>
+        {menuItems.slice(7).map(({ Icon, OutlineIcon, label }, index) => (
+          <Item
+            Icon={Icon}
+            OutlineIcon={OutlineIcon}
+            key={label + index}
+            label={label}
+            onClick={handleLogoutClick}
+          />
+        ))}
       </div>
       {openLogoutModal && (
         <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
@@ -67,18 +67,20 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
 type ItemProps = {
   Icon: ComponentType<{ className: string }>
   OutlineIcon: ComponentType<{ className: string }>
-  isActive: boolean
+  isActive?: boolean
   label?: string
-  path: string
+  onClick?: () => void
+  path?: string
 }
 
-export const Item = ({ Icon, OutlineIcon, isActive, label, path }: ItemProps) => {
+export const Item = ({ Icon, OutlineIcon, isActive, label, onClick, path }: ItemProps) => {
   return (
     <Typography
-      as={Link}
+      as={path ? Link : 'button'}
       className={s.title}
       data-active={isActive}
       href={path}
+      onClick={onClick}
       variant={'medium_text_14'}
     >
       {isActive ? <Icon className={s.icon} /> : <OutlineIcon className={s.icon} />}
