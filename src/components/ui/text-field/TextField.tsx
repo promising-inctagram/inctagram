@@ -46,7 +46,6 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   const [showPassword, setShowPassword] = useState(false)
   const inputRef = useRef('')
 
-  console.log(inputRef)
   const id = useId()
 
   const isPassword = variant === 'password'
