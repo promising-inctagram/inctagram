@@ -8,17 +8,31 @@ import s from './DocsContent.module.scss'
 type DocsContentProps = {
   buttonText: string
   docsContent: string
+  handleBack?: () => void
   href: Paths
   title: string
 }
 
-export const DocsContent = ({ buttonText, docsContent, href, title }: DocsContentProps) => {
+export const DocsContent = ({
+  buttonText,
+  docsContent,
+  handleBack,
+  href,
+  title,
+}: DocsContentProps) => {
   return (
     <div className={s.container}>
-      <Button as={Link} className={s.button} href={href} variant={'link'}>
-        <ArrowBackOutlineIcon />
-        {buttonText}
-      </Button>
+      {handleBack ? (
+        <Button className={s.button} onClick={handleBack} variant={'link'}>
+          <ArrowBackOutlineIcon />
+          {buttonText}
+        </Button>
+      ) : (
+        <Button as={Link} className={s.button} href={href} variant={'link'}>
+          <ArrowBackOutlineIcon />
+          {buttonText}
+        </Button>
+      )}
       <div className={s.docsContainer}>
         <Typography as={'h1'} variant={'h1'}>
           {title}
