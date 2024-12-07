@@ -2,6 +2,7 @@ import {
   ChangeEvent,
   ComponentPropsWithoutRef,
   ElementRef,
+  ReactNode,
   forwardRef,
   useEffect,
   useId,
@@ -21,7 +22,7 @@ import clsx from 'clsx'
 import s from './TextField.module.scss'
 
 export type TextFieldProps = {
-  errorMessage?: string
+  errorMessage?: ReactNode | string
   isRequired?: boolean
   label?: string
   variant?: 'password' | 'search' | 'text'
