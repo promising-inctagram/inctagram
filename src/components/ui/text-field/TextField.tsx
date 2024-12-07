@@ -6,6 +6,7 @@ import {
   forwardRef,
   useEffect,
   useId,
+  useRef,
   useState,
 } from 'react'
 
@@ -42,8 +43,10 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
     variant = 'text',
     ...rest
   } = props
+
   const [showPassword, setShowPassword] = useState(false)
-  const [inputValue, setInputValue] = useState(value)
+  const inputRef = useRef('')
+
   const id = useId()
 
   const isPassword = variant === 'password'
@@ -52,11 +55,11 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
-    setInputValue(e.currentTarget.value)
+    inputRef.current = e.target.value
   }
 
   const clearInputHandler = () => {
-    setInputValue('')
+    inputRef.current = ''
   }
 
   const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
@@ -64,7 +67,11 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   }
 
   useEffect(() => {
-    setInputValue(value)
+    if (inputRef) {
+      if (typeof value === 'string') {
+        inputRef.current = value
+      }
+    }
   }, [value])
 
   return (
@@ -96,10 +103,10 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           placeholder={placeholder}
           ref={ref}
           type={inputType}
-          value={inputValue}
+          value={inputRef.current}
           {...rest}
         />
-        {isPassword && !!inputValue && (
+        {isPassword && !!inputRef && (
           <Button
             className={clsx(
               s.passwordControl,
@@ -118,7 +125,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
             )}
           </Button>
         )}
-        {isSearch && !!inputValue && (
+        {isSearch && !!inputRef && (
           <Button
             className={clsx(s.clearIcon, disabled && s.disabled)}
             disabled={disabled}
