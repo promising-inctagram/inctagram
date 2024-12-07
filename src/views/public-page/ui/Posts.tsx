@@ -9,7 +9,7 @@ export const Posts = ({ posts }: Props) => {
     <article>
       {posts.map((post: Post) => {
         return (
-          <Link href={`/profile/${post.userInfo.id}/public-posts/${post.id}`} key={post.id}>
+          <Link href={`/profile?userId=${post.userInfo.id}&postId=${post.id}`} key={post.id}>
             <div>
               <p>{post.userInfo.firstName}</p>
             </div>

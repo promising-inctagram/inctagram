@@ -1,4 +1,48 @@
+.container {
+  margin-top: 35px;
+}
+
 .btnContainer {
   display: flex;
   justify-content: end;
+}
+
+.headerContainer {
+  display: flex;
+  gap: 38px;
+  margin-bottom: 53px;
+}
+
+.image {
+  width: 204px;
+  height: 204px;
+  border-radius: 50%;
+}
+
+.userInfoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.followingContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileInfoContainer {
+  display: flex;
+  gap: 88px;
+  margin: 20px 0 23px;
+}
+
+.postsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.postImage {
+  width: 234px;
+  height: 228px;
 }
