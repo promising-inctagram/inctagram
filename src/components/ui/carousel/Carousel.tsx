@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 import { Button, Card } from '@/components/ui'
 /* eslint-disable import/extensions */
 import { ArrowIosBackOutlineIcon, ArrowIosForwardOutlineIcon } from '@/components/ui/icons'
+import { Image } from '@/shared/types/public-page/Posts'
 import { EffectFade, Keyboard, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 
@@ -15,7 +16,7 @@ import 'swiper/css/pagination'
 import s from './Carousel.module.scss'
 
 type CarouselProps = {
-  slides: any[] // todo: fix type later while real component usage
+  slides: Image[] // todo: fix type later while real component usage
 } & ComponentPropsWithoutRef<typeof Swiper>
 
 type SwiperRef = ElementRef<typeof Swiper>
@@ -39,7 +40,7 @@ export const Carousel = forwardRef<SwiperRef, CarouselProps>(({ slides, ...rest 
       >
         {slides.map((slide, index) => (
           <SwiperSlide className={s.slide} key={index}>
-            <img alt={'slide image'} className={s.image} src={slide} />
+            <img alt={'slide image'} className={s.image} src={slide.originFilePath} />
           </SwiperSlide>
         ))}
         <div className={'swiper-pagination'}></div>

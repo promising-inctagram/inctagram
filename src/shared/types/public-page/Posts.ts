@@ -2,7 +2,7 @@ export type PostsRes = {
   cursor: number
   posts: PostsData
 }
-type Image = {
+export type Image = {
   id: string
   mediumFilePath: string
   originFilePath: string

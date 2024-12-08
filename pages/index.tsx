@@ -29,6 +29,8 @@ type Props = {
 }
 
 export default function Home({ countUsers, posts }: Props) {
+  console.log(posts)
+
   return (
     <>
       <Head>
