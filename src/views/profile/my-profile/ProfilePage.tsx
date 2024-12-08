@@ -73,11 +73,11 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
             <img
               alt={'Avatar'}
               className={s.image}
-              src={profile.profile.avatarInfo.mediumFilePath}
+              src={profile.profile?.avatarInfo.mediumFilePath}
             />
             <div className={s.userInfoContainer}>
               <Typography as={'h1'} variant={'h1'}>
-                {profile.profile.lastName} {profile.profile.firstName}
+                {profile.profile?.lastName} {profile.profile?.firstName}
               </Typography>
               <div className={s.profileInfoContainer}>
                 {dataFollowing.map(el => {
@@ -93,7 +93,7 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
                   )
                 })}
               </div>
-              <Typography variant={'regular_text_16'}>{profile.profile.aboutMe}</Typography>
+              <Typography variant={'regular_text_16'}>{profile.profile?.aboutMe}</Typography>
             </div>
           </div>
           <div className={s.postsWrapper}>
