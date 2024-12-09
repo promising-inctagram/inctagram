@@ -17,48 +17,38 @@ import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/
 import { MAX_POST_DESCRIPTION_LENGTH } from '@/shared/constants'
 import { AuthContext } from '@/shared/contexts'
 import { useTranslation } from '@/shared/hooks'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
+import { useRouter } from 'next/router'
 
 import styles from './AddDescription.module.scss'
+
+import { createPostSchemeCreator } from '../model/create-post-scheme-creator'
+import { AddPostFields } from '../model/types'
 
 type AddDescriptionProps = {
   back: () => void
   images: string[]
   imagesFiles: File[]
+  onOpenChange: (value: boolean) => void
 }
 
-const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
+const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescriptionProps) => {
   const { t } = useTranslation()
-  const {
-    descriptionError,
-    descriptionErrorEmptyField,
-    descriptionField,
-    modalButton,
-    modalTitle,
-  } = t.createPost.addDescription
+  const { descriptionField, modalButton, modalTitle } = t.createPost.addDescription
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
   const { meData } = useContext(AuthContext)
+  const router = useRouter()
   const avatar = meData?.profile.avatarInfo.smallFilePath
   const username = meData?.username
 
-  const { control, handleSubmit, watch } = useForm({
+  const { control, handleSubmit, watch } = useForm<AddPostFields>({
     defaultValues: {
       description: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(
-      z.object({
-        description: z
-          .string()
-          .max(500, descriptionError)
-          .refine(
-            value => value.length === 0 || value.trim().length > 0,
-            descriptionErrorEmptyField
-          ),
-      })
-    ),
+    resolver: zodResolver(createPostSchemeCreator(t.createPost)),
   })
 
   const { description } = watch()
@@ -72,25 +62,47 @@ const AddDescription = ({ back, images, imagesFiles }: AddDescriptionProps) => {
     createPost(formData)
       .unwrap()
       .then(res => {
-        if (data.description.length !== 0) {
-          updatePost({
-            description: data.description,
-            id: res.id,
-          })
-            .unwrap()
-            .catch(e => {
+        updatePost({
+          description: data.description,
+          id: res.id,
+        })
+          .unwrap()
+          .catch(e => {
+            const errors = getErrorMessageData(e)
+
+            if (typeof errors !== 'string') {
+              errors.forEach(el => {
+                showToast({
+                  message: el.message,
+                  variant: 'error',
+                })
+              })
+            } else {
               showToast({
-                message: e.data.errorsMessages[0].message,
+                message: errors,
                 variant: 'error',
               })
-            })
-        }
+            }
+          })
+        onOpenChange(false)
+        router.push('/profile')
       })
       .catch(e => {
-        showToast({
-          message: e.data.errorsMessages,
-          variant: 'error',
-        })
+        const errors = getErrorMessageData(e)
+
+        if (typeof errors !== 'string') {
+          errors.forEach(el => {
+            showToast({
+              message: el.message,
+              variant: 'error',
+            })
+          })
+        } else {
+          showToast({
+            message: errors,
+            variant: 'error',
+          })
+        }
       })
   })
 

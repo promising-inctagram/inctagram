@@ -23,7 +23,7 @@ type AddPostProps = {
   onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
+function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   const [images, setImages] = useState<string[]>([])
   const [imagesFiles, setImagesFilers] = useState<File[]>([])
   const [stepIndex, setStepIndex] = useState<number>(0)
@@ -62,9 +62,15 @@ function AddPost({ isOpen = true, onOpenChange }: AddPostProps) {
         setImages={setImages}
         setImagesFilers={setImagesFilers}
       />,
-      <AddDescription back={back} images={images} imagesFiles={imagesFiles} key={'desctiption'} />,
+      <AddDescription
+        back={back}
+        images={images}
+        imagesFiles={imagesFiles}
+        key={'desctiption'}
+        onOpenChange={onOpenChange}
+      />,
     ],
-    [images, imagesFiles]
+    [images, imagesFiles, onOpenChange]
   )
 
   return (

@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/icons'
 import { MAX_POST_FILE_SIZE } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
+import clsx from 'clsx'
 
 import styles from './CroppingPhoto.module.scss'
 
@@ -117,7 +118,11 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
           </Card>
         )}
         <Button onClick={handleShowModal} variant={'icon'}>
-          <ImageIcon className={styles.icon} height={'36'} width={'36'} />
+          <ImageIcon
+            className={clsx(styles.icon, showModal && styles.iconActive)}
+            height={'36'}
+            width={'36'}
+          />
         </Button>
       </DialogBody>
     </>
