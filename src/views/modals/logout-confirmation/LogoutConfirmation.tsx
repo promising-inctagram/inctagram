@@ -96,11 +96,9 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
         <DialogBody className={s.body}>
           <Typography variant={'regular_text_16'}>
             {confirmationMessage}
-            {' "'}
             <Typography as={'span'} variant={'bold_text_16'}>
-              {meData?.email}
+              {` "${meData?.email}"?`}
             </Typography>
-            {'"?'}
           </Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>
