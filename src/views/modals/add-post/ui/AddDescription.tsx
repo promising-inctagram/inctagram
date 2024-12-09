@@ -85,7 +85,7 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
             }
           })
         onOpenChange(false)
-        router.push('/profile')
+        router.push('/home')
       })
       .catch(e => {
         const errors = getErrorMessageData(e)
