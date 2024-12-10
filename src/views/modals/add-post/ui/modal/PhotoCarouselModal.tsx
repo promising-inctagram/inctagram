@@ -18,13 +18,6 @@ const PhotoCarouselModal = ({ deleteImage, handleFileChange, images }: ProtoCato
     fileInputRef.current?.click()
   }
 
-  card
-  imagesContainer
-  scroll
-  smallImageContainer
-  smallImage
-  closeIcon
-
   return (
     <Card className={styles.card}>
       <ScrollArea className={styles.scroll}>
