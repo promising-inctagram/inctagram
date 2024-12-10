@@ -53,57 +53,44 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
 
   const { description } = watch()
 
-  const createPostHandler = handleSubmit(data => {
+  const handleErrors = (error: unknown) => {
+    const errors = getErrorMessageData(error)
+
+    if (typeof errors === 'string') {
+      showToast({ message: errors, variant: 'error' })
+    } else {
+      errors.forEach(el => {
+        showToast({ message: el.message, variant: 'error' })
+      })
+    }
+  }
+
+  const createPostHandler = handleSubmit(async data => {
     const formData = new FormData()
 
     imagesFiles.forEach(file => {
       formData.append('files', file)
     })
-    createPost(formData)
-      .unwrap()
-      .then(res => {
-        updatePost({
-          description: data.description,
-          id: res.id,
-        })
-          .unwrap()
-          .catch(e => {
-            const errors = getErrorMessageData(e)
 
-            if (typeof errors !== 'string') {
-              errors.forEach(el => {
-                showToast({
-                  message: el.message,
-                  variant: 'error',
-                })
-              })
-            } else {
-              showToast({
-                message: errors,
-                variant: 'error',
-              })
-            }
-          })
-        onOpenChange(false)
-        router.push('/home')
-      })
-      .catch(e => {
-        const errors = getErrorMessageData(e)
+    try {
+      const res = await createPost(formData).unwrap()
 
-        if (typeof errors !== 'string') {
-          errors.forEach(el => {
-            showToast({
-              message: el.message,
-              variant: 'error',
-            })
-          })
-        } else {
-          showToast({
-            message: errors,
-            variant: 'error',
-          })
+      if (data.description.length !== 0) {
+        try {
+          await updatePost({
+            description: data.description,
+            id: res.id,
+          }).unwrap()
+        } catch (updateError) {
+          handleErrors(updateError)
         }
-      })
+      }
+
+      onOpenChange(false)
+      router.push('/home')
+    } catch (createError) {
+      handleErrors(createError)
+    }
   })
 
   return (
@@ -140,7 +127,6 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
               {description.length}/{MAX_POST_DESCRIPTION_LENGTH}
             </Typography>
           </Card>
-          {/* <Card className={styles.card}>Add location</Card> */}
           {/* todo: Примечание: поле Location на текущем этапе не делаем */}
         </div>
       </DialogBody>

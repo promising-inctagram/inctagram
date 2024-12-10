@@ -22,6 +22,8 @@ import clsx from 'clsx'
 
 import styles from './CroppingPhoto.module.scss'
 
+import PhotoCarouselModal from './modal/PhotoCarouselModal'
+
 type CroppingPhotoProps = {
   back: () => void
   images: string[]
@@ -32,13 +34,8 @@ type CroppingPhotoProps = {
 
 const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const { t } = useTranslation()
   const { modalButton, modalTitle, uploadError } = t.createPost.croppingPhoto
-
-  const onSubmit = () => {
-    fileInputRef.current?.click()
-  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -92,30 +89,11 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       <DialogBody className={styles.body}>
         <Carousel className={styles.image} slides={images} />
         {showModal && (
-          <Card className={styles.card}>
-            <ScrollArea className={styles.scroll}>
-              <div className={styles.imagesContainer}>
-                {images.map((elem, index) => (
-                  <div className={styles.smallImageContainer} key={`${elem}${index}`}>
-                    <img alt={'sad'} className={styles.smallImage} src={elem} />
-                    <Button onClick={() => deleteImage(index)} variant={'icon'}>
-                      <CloseOutlineIcon className={styles.closeIcon} height={'12'} width={'12'} />
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-            <Button disabled={images.length === 10} onClick={onSubmit} variant={'icon'}>
-              <PlusCircleOutlineIcon height={'36'} width={'36'} />
-              <input
-                accept={'.jpg,.png'}
-                hidden
-                onChange={e => handleFileChange(e)}
-                ref={fileInputRef}
-                type={'file'}
-              />
-            </Button>
-          </Card>
+          <PhotoCarouselModal
+            deleteImage={deleteImage}
+            handleFileChange={handleFileChange}
+            images={images}
+          />
         )}
         <Button onClick={handleShowModal} variant={'icon'}>
           <ImageIcon
