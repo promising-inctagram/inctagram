@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, useState } from 'react'
 
 import { Button, Card } from '@/components/ui'
 /* eslint-disable import/extensions */
@@ -21,6 +21,7 @@ type CarouselProps = {
 type SwiperRef = ElementRef<typeof Swiper>
 
 export const Carousel = forwardRef<SwiperRef, CarouselProps>(({ slides, ...rest }, ref) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0)
   const isContent = slides && slides?.length > 1
 
   return (
@@ -29,6 +30,7 @@ export const Carousel = forwardRef<SwiperRef, CarouselProps>(({ slides, ...rest 
         centeredSlides
         className={s.swiper}
         modules={[EffectFade, Keyboard, Navigation, Pagination]}
+        onSlideChange={swiper => setActiveIndex(swiper.activeIndex)}
         pagination={{
           clickable: true,
           dynamicBullets: true,
@@ -43,27 +45,36 @@ export const Carousel = forwardRef<SwiperRef, CarouselProps>(({ slides, ...rest 
           </SwiperSlide>
         ))}
         <div className={'swiper-pagination'}></div>
-        {isContent && <SwiperButtons />}
+        {isContent && <SwiperButtons activeIndex={activeIndex} slides={slides} />}
       </Swiper>
     </div>
   )
 })
 
-const SwiperButtons = () => {
+type SwiperButtonsProps = {
+  activeIndex: number
+  slides: string[]
+}
+
+const SwiperButtons = ({ activeIndex, slides }: SwiperButtonsProps) => {
   const swiper = useSwiper()
 
   return (
     <div>
-      <Card className={s.prevBtn} variant={'transparent'}>
-        <Button onClick={() => swiper.slidePrev()} variant={'icon'}>
-          <ArrowIosBackOutlineIcon className={s.icon} />
-        </Button>
-      </Card>
-      <Card className={s.nextBtn} variant={'transparent'}>
-        <Button onClick={() => swiper.slideNext()} variant={'icon'}>
-          <ArrowIosForwardOutlineIcon className={s.icon} />
-        </Button>
-      </Card>
+      {activeIndex !== 0 && (
+        <Card className={s.prevBtn} variant={'transparent'}>
+          <Button onClick={() => swiper.slidePrev()} variant={'icon'}>
+            <ArrowIosBackOutlineIcon className={s.icon} />
+          </Button>
+        </Card>
+      )}
+      {slides.length !== activeIndex + 1 && (
+        <Card className={s.nextBtn} variant={'transparent'}>
+          <Button onClick={() => swiper.slideNext()} variant={'icon'}>
+            <ArrowIosForwardOutlineIcon className={s.icon} />
+          </Button>
+        </Card>
+      )}
     </div>
   )
 }

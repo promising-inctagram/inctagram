@@ -1,0 +1,29 @@
+.content {
+  width: 378px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  margin-top: 18px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
+
+.button {
+  min-width: 128px;
+  padding: 6px 10px;
+}

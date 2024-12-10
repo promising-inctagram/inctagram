@@ -34,7 +34,6 @@ export const SidebarMenuItems = () => {
       Icon: PlusSquareIcon,
       OutlineIcon: PlusSquareOutlineIcon,
       label: create,
-      path: Paths.create,
     },
     {
       Icon: PersonIcon,

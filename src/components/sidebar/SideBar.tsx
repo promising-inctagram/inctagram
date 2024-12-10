@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef, useSta
 
 import { SidebarMenuItems } from '@/components/sidebar/menu-items'
 import { Typography } from '@/components/ui'
+import AddPost from '@/views/modals/add-post'
 import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -16,14 +17,39 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
   const router = useRouter()
   const menuItems = SidebarMenuItems()
   const [openLogoutModal, setOpenLogoutModal] = useState(false)
+  const [openCreatePostModal, setOpenCreatePostModal] = useState(false)
+
   const handleLogoutClick = () => {
     setOpenLogoutModal(true)
+  }
+
+  const handleCreatePostClick = () => {
+    setOpenCreatePostModal(true)
   }
 
   return (
     <nav className={clsx(s.sidebar, className)} ref={ref} {...rest}>
       <div className={s.group}>
-        {menuItems.slice(0, 5).map(({ Icon, OutlineIcon, label, path }, index) => (
+        {menuItems.slice(0, 1).map(({ Icon, OutlineIcon, label, path }, index) => (
+          <Item
+            Icon={Icon}
+            OutlineIcon={OutlineIcon}
+            isActive={router.pathname === path}
+            key={label + index}
+            label={label}
+            path={path}
+          />
+        ))}
+        {menuItems.slice(1, 2).map(({ Icon, OutlineIcon, label, path }, index) => (
+          <Item
+            Icon={Icon}
+            OutlineIcon={OutlineIcon}
+            key={label + index}
+            label={label}
+            onClick={handleCreatePostClick}
+          />
+        ))}
+        {menuItems.slice(2, 4).map(({ Icon, OutlineIcon, label, path }, index) => (
           <Item
             Icon={Icon}
             OutlineIcon={OutlineIcon}
@@ -57,9 +83,8 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
           />
         ))}
       </div>
-      {openLogoutModal && (
-        <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
-      )}
+      <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
+      <AddPost isOpen={openCreatePostModal} onOpenChange={setOpenCreatePostModal} />
     </nav>
   )
 })
