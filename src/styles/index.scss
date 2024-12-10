@@ -4,19 +4,19 @@
 @forward 'common';
 @forward 'nprogress';
 
+.wrapper {
+  max-width: 1012px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   gap: 36px;
 
   margin: 24px auto;
-}
-
-.wrapper {
-  max-width: 1012px;
-  width: 100%;
-  padding: 0 20px;
-  margin: 0 auto;
 }
 
 /*

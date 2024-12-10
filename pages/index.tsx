@@ -86,7 +86,7 @@ export default function Home({ countUsers, posts }: Props) {
         />
         <link href={'/favicon-dark.ico?v=2'} media={'(prefers-color-scheme: light)'} rel={'icon'} />
       </Head>
-      <main className={'container wrapper'}>
+      <main className={'wrapper container'}>
         <CountUsers countUsers={countUsers} />
         <div>
           <Posts posts={posts} />

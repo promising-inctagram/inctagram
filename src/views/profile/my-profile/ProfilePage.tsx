@@ -60,7 +60,7 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
     <section className={clsx('wrapper', s.container)}>
       {isAuth && (
         <div className={s.btnContainer}>
-          <Button as={Link} href={Paths.profileSettings} variant={'secondary'}>
+          <Button as={Link} href={Paths.settings} variant={'secondary'}>
             {profile_settings}
           </Button>
         </div>
@@ -73,11 +73,11 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
             <img
               alt={'Avatar'}
               className={s.image}
-              src={profile.profile?.avatarInfo.mediumFilePath}
+              src={profile.profile.avatarInfo.mediumFilePath}
             />
             <div className={s.userInfoContainer}>
               <Typography as={'h1'} variant={'h1'}>
-                {profile.profile?.lastName} {profile.profile?.firstName}
+                {profile.profile.lastName} {profile.profile.firstName}
               </Typography>
               <div className={s.profileInfoContainer}>
                 {dataFollowing.map(el => {

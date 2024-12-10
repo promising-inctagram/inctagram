@@ -6,6 +6,7 @@ import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
 import { profile } from '@/locales/ru/profile'
 import { profileSettingPage } from '@/locales/ru/profile-setting-page'
 import { profileSettingsDevices } from '@/locales/ru/profile-settings-devices'
+import { publicPage } from '@/locales/ru/public-page'
 import { signInPage } from '@/locales/ru/sign-in-page'
 import { signUpPage } from '@/locales/ru/sign-up-page'
 import { termsOfServicePage } from '@/locales/ru/terms-of-service-page'
@@ -27,6 +28,7 @@ export const ru: LocaleType = {
   profile: profile,
   profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
+  publicPage: publicPage,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,
