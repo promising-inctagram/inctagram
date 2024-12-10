@@ -9,13 +9,11 @@ import s from './Layout.module.scss'
 
 export const Layout: NextPage<PropsWithChildren> = ({ children }) => {
   return (
-    <>
-      <AuthProvider>
-        <Header />
-        <main className={s.layout}>{children}</main>
-        <Toaster />
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <Header />
+      <main className={s.layout}>{children}</main>
+      <Toaster />
+    </AuthProvider>
   )
 }
 

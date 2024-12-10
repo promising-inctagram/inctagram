@@ -1,4 +1,5 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
+import { ACCESS_TOKEN } from '@/shared/constants'
 
 import {
   CheckRecoveryCodeArgs,
@@ -44,6 +45,18 @@ export const authApi = inctagramApi.injectEndpoints({
         }),
       }),
       login: builder.mutation<LoginResponse, LoginArgs>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled
+
+            localStorage.setItem(ACCESS_TOKEN, data.accessToken.trim())
+
+            dispatch(authApi.util.invalidateTags(['Me']))
+          } catch (e) {
+            // todo: error is catches in baseQueryWithReauth & sigInPage component
+            console.error(e, 'Error in login: builder.mutation')
+          }
+        },
         query: args => ({
           body: { ...args },
           method: 'POST',
@@ -51,6 +64,10 @@ export const authApi = inctagramApi.injectEndpoints({
         }),
       }),
       logout: builder.mutation<void, void>({
+        async onQueryStarted(_, { dispatch }) {
+          localStorage.removeItem(ACCESS_TOKEN)
+          dispatch(authApi.util.invalidateTags(['Me']))
+        },
         query: () => ({
           method: 'POST',
           url: '/v1/auth/logout',
