@@ -2,26 +2,31 @@
   display: flex;
   justify-content: space-between;
 }
+
 .body {
-  width: 492px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 492px;
 }
+
 .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 222px;
   height: 228px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
   margin-top: 60px;
   margin-bottom: 60px;
+  padding: 0;
 }
+
 .button {
-  padding: 6px 0;
   width: 220px;
   margin-bottom: 24px;
+  padding: 6px 0;
+
   font-size: var(--font-size-m);
   font-weight: var(--font-weight-600);
   line-height: var(--line-height-m);

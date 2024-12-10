@@ -1,45 +1,44 @@
 .card {
-    position: absolute;
-    z-index: 1;
-    right: 11px;
-    bottom: 49px;
-  
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  
-    padding: 12px;
-  
-    background-color: rgb(17 17 17 / 80%);
-  }
-  
-  .imagesContainer {
-    display: flex;
-    gap: 12px;
-    max-width: 400px;
-  }
-  
-  .scroll {
-    padding-bottom: 5px;
-  }
-  
-  .smallImageContainer {
-    position: relative;
-    display: flex;
-  }
-  
-  .smallImage {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-  }
-  
-  .closeIcon {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-  
-    background-color: rgb(17 17 17 / 80%);
-    border-radius: 2px;
-  }
-  
+  position: absolute;
+  z-index: 1;
+  right: 11px;
+  bottom: 49px;
+
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  padding: 12px;
+
+  background-color: rgb(17 17 17 / 80%);
+}
+
+.imagesContainer {
+  display: flex;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.scroll {
+  padding-bottom: 5px;
+}
+
+.smallImageContainer {
+  position: relative;
+  display: flex;
+}
+
+.smallImage {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+
+  background-color: rgb(17 17 17 / 80%);
+  border-radius: 2px;
+}
