@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { AuthContext } from '@/shared/contexts'
-import AvatarManager from '@/views/profile/avatar-manager/AvatarManager'
+import AvatarManager from '@/views/profile/avatar-manager/ui/AvatarManager'
 import { SettingsForm } from '@/views/profile/settings/ui/tabs/general/SettingsForm'
 
 import s from './General.module.scss'
@@ -14,7 +14,7 @@ export const GeneralInformation = () => {
 
   return (
     <div className={s.container}>
-      <div style={{ width: '250px' }}>
+      <div className={s.avatarWrapper}>
         <AvatarManager
           avatar={meData.profile.avatarInfo ? meData.profile.avatarInfo.originFilePath : ''}
         />
