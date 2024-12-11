@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 import { Translate } from '@/components'
 import { Typography } from '@/components/ui'
 import { Paths } from '@/shared/enums'
-import { isAgeValid } from '@/views/settings/model/is-age-valid'
+import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

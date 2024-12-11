@@ -1,4 +1,4 @@
-import { settingsSchemeCreator } from '@/views/settings/model/settings-scheme-creator'
+import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
 import { z } from 'zod'
 
 export type SettingFields = z.infer<ReturnType<typeof settingsSchemeCreator>>
