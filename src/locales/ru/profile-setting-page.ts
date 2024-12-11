@@ -1,8 +1,15 @@
 export const profileSettingPage = {
+  deletePhoto: {
+    bodyTitle: 'Вы уверены, что хотите удалить фото?',
+    dialogTitle: 'Удалить фото',
+    noButton: 'Нет',
+    yesButton: 'Да',
+  },
   profilePhoto: {
     addProfilePhoto: 'Добавить фото профиля',
-    deletePhotoQuestion: 'Вы уверены, что хотите удалить фото?',
-    deleteProfilePhoto: 'Удалить фото',
+    avatarSizeError: 'Размер фото должен быть менее 10 МБ',
+    avatarTypeError: 'Формат загружаемой фотографии должен быть PNG или JPEG',
+    closeButton: 'Закрыть',
     noButton: 'Нет',
     savePhoto: 'Сохранить',
     selectPhoto: 'Выберите фото',

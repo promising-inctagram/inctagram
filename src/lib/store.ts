@@ -1,5 +1,5 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
-import settings from '@/views/settings/model/settings-slice'
+import settings from '@/views/profile/settings/model/settings-slice'
 import { combineSlices, configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
 
