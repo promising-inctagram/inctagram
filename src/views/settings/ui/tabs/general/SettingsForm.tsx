@@ -47,8 +47,8 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   } = useForm<SettingFields>({
     defaultValues: {
       ...props,
-      city: savedSettingsForm.city || String(props.city.id),
-      country: String(props.country.id),
+      city: savedSettingsForm.city || String(props.city?.id),
+      country: String(props.country?.id),
       dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
     },
     mode: 'onChange',
@@ -57,8 +57,10 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   })
 
   const { country: countryId, firstName, lastName, username } = watch()
-  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities, isLoadingCountries } =
-    useCountryCity(locale || 'en', countryId)
+  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
+    locale || 'en',
+    countryId
+  )
   const isSaveDisabled =
     !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
 

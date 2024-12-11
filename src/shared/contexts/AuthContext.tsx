@@ -24,40 +24,20 @@ type AuthProviderProps = {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter()
   const { data, isError, isLoading } = useMeQuery()
-  const isAuth = !isError && !isLoading && !!data
 
   const token = typeof window !== 'undefined' ? localStorage.getItem(ACCESS_TOKEN) : null
+  const hasRedirected = typeof window !== 'undefined' ? localStorage.getItem('hasRedirected') : null
+  const isAuth = !isError && !isLoading && !!token
 
+  // Первый login в приложение
   useEffect(() => {
-    if (isLoading) {
-      return
-    }
-
-    const hasRedirected = localStorage.getItem('hasRedirected')
-    const currentPath = router.pathname
-
-    // Первый login в приложение
-    if (isAuth && token && !hasRedirected && currentPath !== `${Paths.profile}/${data?.id}`) {
+    if (isAuth && !hasRedirected) {
       localStorage.setItem('hasRedirected', 'true')
-      router.push(`${Paths.profile}/${data.id}`)
+      router.push(`${Paths.profile}/${data?.id}`)
     }
 
-    // Если пользователь не авторизован и не на странице логина, редирект на логин
-    if (!isAuth && !token && currentPath !== Paths.logIn) {
-      localStorage.removeItem('hasRedirected')
-      router.push(Paths.logIn)
-    }
-  }, [isAuth, isLoading, data, router, token])
-
-  // Логика на logout
-  useEffect(() => {
-    if (!isAuth && !token) {
-      localStorage.removeItem('hasRedirected')
-      if (router.pathname !== Paths.logIn) {
-        router.push(Paths.logIn)
-      }
-    }
-  }, [isAuth, token, router])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth, hasRedirected])
 
   return (
     <AuthContext.Provider value={{ isAuth, meData: data ?? null }}>{children}</AuthContext.Provider>
