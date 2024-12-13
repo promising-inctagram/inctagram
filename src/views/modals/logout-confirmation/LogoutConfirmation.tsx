@@ -16,9 +16,11 @@ import {
 import { CloseOutlineIcon } from '@/components/ui/icons'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
 import { AuthContext } from '@/shared/contexts'
+import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useRouter } from 'next/router'
 
 import s from './LogoutConfirmation.module.scss'
 
@@ -29,6 +31,7 @@ type Props = {
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   const { meData } = useContext(AuthContext)
+  const router = useRouter()
   const [logout, { isLoading }] = useLogoutMutation()
   const {
     t: {
@@ -46,6 +49,10 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   const logoutHandler = () => {
     logout()
       .unwrap()
+      .then(() => {
+        localStorage.removeItem('hasRedirected')
+        router.push(Paths.logIn)
+      })
       .catch(e => {
         const error = getErrorMessageData(e)
 
