@@ -15,7 +15,6 @@ import {
 } from '@/components/ui'
 import { CloseOutlineIcon } from '@/components/ui/icons'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
-import { ACCESS_TOKEN } from '@/shared/constants'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -24,6 +23,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRouter } from 'next/router'
 
 import s from './LogoutConfirmation.module.scss'
+
 type Props = {
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
@@ -31,6 +31,7 @@ type Props = {
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   const { meData } = useContext(AuthContext)
+  const router = useRouter()
   const [logout, { isLoading }] = useLogoutMutation()
   const {
     t: {
@@ -44,13 +45,11 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
       },
     },
   } = useTranslation()
-  const router = useRouter()
 
   const logoutHandler = () => {
     logout()
       .unwrap()
       .then(() => {
-        localStorage.removeItem(ACCESS_TOKEN)
         localStorage.removeItem('hasRedirected')
         router.push(Paths.logIn)
       })

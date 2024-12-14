@@ -1,4 +1,6 @@
 export const MAX_BADGE_COUNT = 99
+export const AVATAR_MAX_FILE_SIZE = 10 * 1024 * 1024 //10MB
+export const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png']
 
 // validation constants:
 export const MIN_USERNAME_LENGTH = 6

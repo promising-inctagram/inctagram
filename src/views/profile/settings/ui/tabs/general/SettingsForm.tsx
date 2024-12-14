@@ -9,18 +9,18 @@ import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, showToast } from '@/components/ui'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
-import { useCountryCity } from '@/views/settings/model/hooks/useCountryCity'
-import { isAgeValid } from '@/views/settings/model/is-age-valid'
-import { settingsSchemeCreator } from '@/views/settings/model/settings-scheme-creator'
+import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
+import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
+import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
 import {
   SavedSettingsForm,
   selectIsReturningFromPolicy,
   selectSavedSettingsForm,
   setReturningFromPolicy,
   updateFormField,
-} from '@/views/settings/model/settings-slice'
-import { SettingFields, SettingsFormProps } from '@/views/settings/model/types'
-import { AgeError } from '@/views/settings/ui/tabs/general/AgeError'
+} from '@/views/profile/settings/model/settings-slice'
+import { SettingFields, SettingsFormProps } from '@/views/profile/settings/model/types'
+import { AgeError } from '@/views/profile/settings/ui/tabs/general/AgeError'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format, parse } from 'date-fns'
 
@@ -47,8 +47,8 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   } = useForm<SettingFields>({
     defaultValues: {
       ...props,
-      city: savedSettingsForm.city || String(props.city.id),
-      country: String(props.country.id),
+      city: savedSettingsForm.city || String(props?.city?.id),
+      country: String(props?.country?.id),
       dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
     },
     mode: 'onChange',
@@ -57,8 +57,10 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   })
 
   const { country: countryId, firstName, lastName, username } = watch()
-  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities, isLoadingCountries } =
-    useCountryCity(locale || 'en', countryId)
+  const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
+    locale || 'en',
+    countryId
+  )
   const isSaveDisabled =
     !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
 
