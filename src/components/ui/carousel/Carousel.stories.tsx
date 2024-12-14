@@ -1,6 +1,7 @@
 import dummyImage2 from '@/assets/webp/Mask group.png'
 import dummyImage from '@/assets/webp/dummy-image.webp'
 import { Carousel } from '@/components/ui/carousel/Carousel'
+import { Image } from '@/shared/types/public-page/Posts'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Carousel> = {
@@ -13,11 +14,24 @@ const meta: Meta<typeof Carousel> = {
 export default meta
 type Story = StoryObj<typeof Carousel>
 
-const slides = [dummyImage, dummyImage2]
+const slides: Image[] = [
+  {
+    id: '1',
+    mediumFilePath: dummyImage.src,
+    originFilePath: dummyImage2.src,
+    smallFilePath: dummyImage2.src,
+  },
+  {
+    id: '2',
+    mediumFilePath: dummyImage.src,
+    originFilePath: dummyImage2.src,
+    smallFilePath: dummyImage2.src,
+  },
+]
 
 export const DefaultStory: Story = {
   args: {
-    slides: slides.map(i => i.src),
+    slides: slides.map(i => i),
   },
   name: 'Carousel',
   render: args => (
