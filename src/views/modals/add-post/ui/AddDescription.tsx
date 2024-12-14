@@ -87,7 +87,7 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
       }
 
       onOpenChange(false)
-      router.push('/home')
+      router.push('/')
     } catch (createError) {
       handleErrors(createError)
     }
