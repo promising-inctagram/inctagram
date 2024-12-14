@@ -45,7 +45,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
   } = props
 
   const [showPassword, setShowPassword] = useState(false)
-  const inputRef = useRef('')
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const id = useId()
 
@@ -55,11 +55,15 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
 
   const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e)
-    inputRef.current = e.target.value
+    if (inputRef.current) {
+      inputRef.current.value = e.target.value
+    }
   }
 
   const clearInputHandler = () => {
-    inputRef.current = ''
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
   }
 
   const showPasswordHandler = (e: ChangeEvent<HTMLButtonElement>) => {
@@ -68,8 +72,8 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
 
   useEffect(() => {
     if (inputRef) {
-      if (typeof value === 'string') {
-        inputRef.current = value
+      if (typeof value === 'string' && inputRef.current) {
+        inputRef.current.value = value
       }
     }
   }, [value])
@@ -103,7 +107,7 @@ export const TextField = forwardRef<TextFieldRef, TextFieldProps>((props, ref) =
           placeholder={placeholder}
           ref={ref}
           type={inputType}
-          value={inputRef.current}
+          value={value}
           {...rest}
         />
         {isPassword && !!inputRef && (
