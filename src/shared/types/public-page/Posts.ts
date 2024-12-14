@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export type PostsRes = {
   cursor: number
   posts: PostsData
@@ -23,11 +25,11 @@ export type UserInfo = {
   lastName: string
 }
 
-export type Post<T = UserInfo> = {
+export type PostType<T = UserInfo> = {
   description: string
   id: number
   images: Image[]
   userInfo: T
 }
 
-export type PostsData = Post[]
+export type PostsData = PostType[]

@@ -4,6 +4,8 @@
   --swiper-pagination-color: var(--color-accent-500);
   --swiper-pagination-bullet-horizontal-gap: 6px;
   --swiper-pagination-bottom: 12px;
+  overflow: hidden;
+  height: 100%;
 }
 
 .swiper {
@@ -45,4 +47,9 @@
 .icon {
   width: 40px;
   height: 40px;
+}
+
+.minIcon {
+  width: 24px;
+  height: 24px;
 }

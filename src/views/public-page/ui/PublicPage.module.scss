@@ -1,16 +1,15 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
+//CountUsers
 
 .card {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
 }
 
 .countUsers {
   display: flex;
+  justify-content: center;
   height: 48px;
   width: 203px;
   background-color: var(--color-dark-700);
@@ -22,18 +21,14 @@
 .digitWrapper {
   display: flex;
   align-items: center;
+
   &::before {
     content: '';
     border-right: 1px solid var(--color-dark-300);
     height: 30px;
     width: 1px;
-    padding: 0 3px;
   }
 
-  &:first-child,
-  &:last-child {
-    padding: 0;
-  }
   &:first-child::before {
     display: none;
   }
@@ -42,4 +37,57 @@
 .digit {
   width: 24px;
   text-align: center;
+  margin: 0 3px;
+}
+
+//Posts
+
+.cardLink {
+  position: relative;
+}
+
+.sliderContainer {
+  width: 234px;
+  height: 240px;
+}
+
+.link {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  display: block;
+}
+
+.content {
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+.expanded {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--color-dark-700);
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.time {
+  margin-bottom: 3px;
+}
+
+.showMore {
+  cursor: pointer;
+
+  position: relative;
+  z-index: 2;
 }

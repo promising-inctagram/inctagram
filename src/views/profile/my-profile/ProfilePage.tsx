@@ -6,7 +6,7 @@ import { Button, Typography } from '@/components/ui'
 import { useGetUserPostsQuery } from '@/shared/api/profile/profile.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { Post, PostsRes } from '@/shared/types/public-page/Posts'
+import { PostType, PostsRes } from '@/shared/types/public-page/Posts'
 import { User } from '@/shared/types/public-page/User'
 import clsx from 'clsx'
 import { NextPageContext } from 'next'
@@ -32,7 +32,7 @@ const dataFollowing = [
 
 type Props = {
   isAuth: boolean
-  post: Post<{}>
+  post: PostType<{}>
   profile: User
 }
 const ProfilePage = ({ isAuth, post, profile }: Props) => {
@@ -50,11 +50,11 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
 
   console.log(data)
 
-  /*useEffect(() => {
-                      if (!isAuth) {
-                        setIsModal(true)
-                      }
-                    }, [isAuth])*/
+  useEffect(() => {
+    if (!isAuth) {
+      setIsModal(true)
+    }
+  }, [isAuth])
 
   return (
     <section className={clsx('wrapper', s.container)}>
@@ -97,7 +97,7 @@ const ProfilePage = ({ isAuth, post, profile }: Props) => {
             </div>
           </div>
           <div className={s.postsWrapper}>
-            {data?.posts.map((post: Post<{}>) => (
+            {data?.posts.map((post: PostType<{}>) => (
               <a href={''} key={post.id}>
                 <img alt={'Image'} className={s.postImage} src={post.images[0].mediumFilePath} />
               </a>

@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { getLayout } from '@/components'
 import { useMeQuery } from '@/shared/api/auth/auth.api'
 import { AuthContext } from '@/shared/contexts'
-import { Post } from '@/shared/types/public-page/Posts'
+import { PostType } from '@/shared/types/public-page/Posts'
 import { User } from '@/shared/types/public-page/User'
 import ProfilePage from '@/views/profile/my-profile/ProfilePage'
 import { NextPageContext } from 'next'
@@ -15,16 +15,16 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const profileResponse = await fetch(`https://gateway.inctagram.world/api/v1/profile/${userId}`)
   const postResponse = await fetch(`https://gateway.inctagram.world/api/v1/posts/${postId}`)
 
-  /*if (!profileResponse.ok) {
-                return {
-                  notFound: true, // Если профиль не найден, вернуть 404
-                }
-              }*/
-  /*if (!postResponse.ok) {
-               return {
-                 notFound: true, // Если пост не найден, вернуть 404
-               }
-             }*/
+  if (!profileResponse.ok) {
+    return {
+      notFound: true, // Если профиль не найден, вернуть 404
+    }
+  }
+  if (!postResponse.ok) {
+    return {
+      notFound: true, // Если пост не найден, вернуть 404
+    }
+  }
   const profile = await profileResponse.json()
   const post = await postResponse.json()
 
@@ -37,7 +37,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
 }
 
 type Props = {
-  post: Post<{}>
+  post: PostType<{}>
   profile: User
 }
 
@@ -48,15 +48,15 @@ function Profile({ post, profile }: Props) {
 
   return (
     /* <div>
-           <Card
-             onClick={closeHandler}
-             style={{ position: 'absolute', right: '50%', top: '50%', zIndex: 1 }}
-           >
-             <Carousel slides={post.images} />
-             <p>{post.id}</p>
-             <p>{post.description}</p>
-           </Card>
-         </div>*/
+               <Card
+                 onClick={closeHandler}
+                 style={{ position: 'absolute', right: '50%', top: '50%', zIndex: 1 }}
+               >
+                 <Carousel slides={post.images} />
+                 <p>{post.id}</p>
+                 <p>{post.description}</p>
+               </Card>
+             </div>*/
     <ProfilePage isAuth={isAuth} post={post} profile={profile} />
   )
 }

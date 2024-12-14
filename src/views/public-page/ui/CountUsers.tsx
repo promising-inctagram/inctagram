@@ -12,7 +12,7 @@ export const CountUsers = ({ countUsers }: Props) => {
   const { registeredUsers } = t.publicPage
   const minDigits = 6
   const formattedCount = countUsers
-    .toString()
+    ?.toString()
     .padStart(Math.max(minDigits, countUsers.toString().length), '0')
 
   return (
@@ -21,7 +21,7 @@ export const CountUsers = ({ countUsers }: Props) => {
         {registeredUsers}
       </Typography>
       <div className={s.countUsers}>
-        {formattedCount.split('').map((digit, index) => (
+        {formattedCount?.split('').map((digit, index) => (
           <div className={s.digitWrapper} key={index}>
             <Typography as={'h2'} className={s.digit} key={index} variant={'h2'}>
               {digit}

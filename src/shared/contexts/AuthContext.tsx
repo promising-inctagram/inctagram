@@ -36,6 +36,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const isLoggedIn = isAuth && data && token
     const currentPath = router.pathname
 
+    if (Paths.home) {
+      return
+    }
+
     // Если есть токен, но пользователь не авторизован, запрашиваем данные пользователя
     if (token && !isAuth) {
       return

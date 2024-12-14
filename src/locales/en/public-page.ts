@@ -1,3 +1,5 @@
 export const publicPage = {
-    registeredUsers: 'Registered users: '
+  hide: 'Hide',
+  registeredUsers: 'Registered users: ',
+  showMore: ' Show more',
 }
