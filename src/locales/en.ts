@@ -11,6 +11,8 @@ import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
 import { validation } from '@/locales/en/validation'
 
+import { sidebar } from './en/sidebar'
+
 export type LocaleType = typeof en
 export type LocaleValidation = typeof en.validation
 export type LocaleValidationUserName = typeof en.validation.userName
@@ -41,6 +43,7 @@ export const en = {
   profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
   publicPage: publicPage,
+  sidebar: sidebar,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,

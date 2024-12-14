@@ -12,6 +12,8 @@ import { signUpPage } from '@/locales/ru/sign-up-page'
 import { termsOfServicePage } from '@/locales/ru/terms-of-service-page'
 import { validation } from '@/locales/ru/validation'
 
+import { sidebar } from './ru/sidebar'
+
 export const ru: LocaleType = {
   confirmEmailPage: confirmEmailPage,
   confirmLogoutPage: confirmLogoutPage,
@@ -29,6 +31,7 @@ export const ru: LocaleType = {
   profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
   publicPage: publicPage,
+  sidebar: sidebar,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,

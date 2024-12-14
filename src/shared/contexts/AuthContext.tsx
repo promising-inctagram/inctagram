@@ -24,50 +24,20 @@ type AuthProviderProps = {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter()
   const { data, isError, isLoading } = useMeQuery()
-  const isAuth = !isError && !isLoading && data !== undefined
 
+  const token = typeof window !== 'undefined' ? localStorage.getItem(ACCESS_TOKEN) : null
+  const hasRedirected = typeof window !== 'undefined' ? localStorage.getItem('hasRedirected') : null
+  const isAuth = !isError && !isLoading && !!token
+
+  // Первый login в приложение
   useEffect(() => {
-    if (isLoading) {
-      return
-    } // Пока данные загружаются, ничего не делаем
-
-    const token = localStorage.getItem(ACCESS_TOKEN)
-    const hasRedirected = localStorage.getItem('hasRedirected')
-    const isLoggedIn = isAuth && data && token
-    const currentPath = router.pathname
-
-    if (Paths.home) {
-      return
-    }
-
-    // Если есть токен, но пользователь не авторизован, запрашиваем данные пользователя
-    if (token && !isAuth) {
-      return
-    }
-
-    // Если пользователь не авторизован и не на странице логина, редирект на логин
-    if (!isLoggedIn && currentPath !== Paths.logIn) {
-      router.push(Paths.logIn)
-
-      return
-    }
-
-    // Если авторизован и нет флага редиректа, направляем на профиль и устанавливаем флаг
-    if (isLoggedIn && !hasRedirected && currentPath !== `${Paths.profile}/${data?.id}`) {
+    if (isAuth && !hasRedirected) {
       localStorage.setItem('hasRedirected', 'true')
-      router.push(`${Paths.profile}/${data.id}`)
-
-      return
+      router.push(`${Paths.profile}/${data?.id}`)
     }
 
-    // Если пользователь выходит из аккаунта, очищаем флаг и редиректим на логин
-    if (!token) {
-      localStorage.removeItem('hasRedirected')
-      if (currentPath !== Paths.logIn) {
-        router.push(Paths.logIn)
-      }
-    }
-  }, [isAuth, isLoading, data, router])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuth, hasRedirected])
 
   return (
     <AuthContext.Provider value={{ isAuth, meData: data ?? null }}>{children}</AuthContext.Provider>

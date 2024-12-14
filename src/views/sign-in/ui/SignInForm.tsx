@@ -7,7 +7,6 @@ import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useLoginValidation } from '@/views/sign-in/model/hooks/useLoginValidation'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import s from './SignIn.module.scss'
 
@@ -17,7 +16,6 @@ export const SignInForm = () => {
   const { forgotPassword, labels, placeholders, submitButton } = t.signInPage.signInForm
 
   const [login] = useLoginMutation()
-  const router = useRouter()
 
   const formHandler = handleSubmit(async data => {
     try {
@@ -27,8 +25,6 @@ export const SignInForm = () => {
         const accessToken = resData.accessToken
 
         localStorage.setItem(ACCESS_TOKEN, accessToken)
-
-        await router.push(Paths.home)
       }
     } catch (err: unknown) {
       const errorsMessage = getErrorMessageData(err)

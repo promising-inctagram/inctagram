@@ -2,8 +2,8 @@ import { Page, getSidebarLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
 import { useDeleteAllDevicesMutation, useGetDevicesQuery } from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
-import { ActiveSessions } from '@/views/profile/profile-settings/devices/ui/ActiveSessions'
-import { useGetBrowserIcon } from '@/views/profile/profile-settings/hooks/useGetBrowserIcon'
+import { useGetBrowserIcon } from '@/views/devices/hooks/useGetBrowserIcon'
+import { ActiveSessions } from '@/views/devices/ui/ActiveSessions'
 
 import s from './Devices.module.scss'
 
