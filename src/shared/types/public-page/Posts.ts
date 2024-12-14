@@ -1,5 +1,3 @@
-import { StaticImageData } from 'next/image'
-
 export type PostsRes = {
   cursor: number
   posts: PostsData

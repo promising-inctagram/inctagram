@@ -1,13 +1,11 @@
 import { useContext } from 'react'
 
 import { getLayout } from '@/components'
-import { useMeQuery } from '@/shared/api/auth/auth.api'
 import { AuthContext } from '@/shared/contexts'
 import { PostType } from '@/shared/types/public-page/Posts'
 import { User } from '@/shared/types/public-page/User'
-import ProfilePage from '@/views/profile/my-profile/ProfilePage'
+import ProfilePage from '@/views/profile/ProfilePage'
 import { NextPageContext } from 'next'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps = async (context: NextPageContext) => {
   const { postId, userId } = context.query

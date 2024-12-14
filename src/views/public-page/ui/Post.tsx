@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Avatar, Button, Carousel, Typography } from '@/components/ui'
+import { Avatar, Carousel, Typography } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
 import { PostType } from '@/shared/types/public-page/Posts'
 import clsx from 'clsx'

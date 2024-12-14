@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 
-import { Page, getSidebarLayout } from '@/components'
+import { getSidebarLayout } from '@/components'
 import { Button, Typography } from '@/components/ui'
 import { useGetUserPostsQuery } from '@/shared/api/profile/profile.api'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
-import { PostType, PostsRes } from '@/shared/types/public-page/Posts'
+import { PostType } from '@/shared/types/public-page/Posts'
 import { User } from '@/shared/types/public-page/User'
 import clsx from 'clsx'
-import { NextPageContext } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
