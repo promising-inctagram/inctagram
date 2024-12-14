@@ -3,6 +3,7 @@ export const confirmLogoutPage = {
     'Уведомление, предлагающее пользователю выбрать между выходом из приложения или продолжением работы',
   accessibilityTitle: 'Диалог подтверждения выхода',
   confirmButton: 'Да',
-  confirmationMessage: 'Вы уверены в том что вы хотите выйти из аккаунта?',
+  confirmationMessage: 'Вы уверены в том что вы хотите выйти из аккаунта',
+  modalHeader: 'Выйти из системы',
   rejectButton: 'Нет',
 }

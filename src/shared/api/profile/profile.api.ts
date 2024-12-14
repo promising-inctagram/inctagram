@@ -16,9 +16,10 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     deleteAvatar: builder.mutation<void, void>({
+      invalidatesTags: ['Me'],
       query: () => ({
         method: 'DELETE',
-        url: '/profile/avatar',
+        url: 'v1/profile/avatar',
       }),
     }),
     updateProfile: builder.mutation<void, UpdateProfileArgs>({
@@ -30,6 +31,7 @@ export const profileApi = inctagramApi.injectEndpoints({
       }),
     }),
     uploadAvatar: builder.mutation<void, AvatarDto>({
+      invalidatesTags: ['Me'],
       query: ({ file }) => {
         const formData = new FormData()
 
@@ -38,7 +40,7 @@ export const profileApi = inctagramApi.injectEndpoints({
         return {
           body: formData,
           method: 'POST',
-          url: '/profile/avatar',
+          url: 'v1/profile/avatar',
         }
       },
     }),

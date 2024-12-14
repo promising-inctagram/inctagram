@@ -57,7 +57,7 @@ export default function Home() {
         />
         <link href={'/favicon-dark.ico?v=2'} media={'(prefers-color-scheme: light)'} rel={'icon'} />
       </Head>
-      <main></main>
+      <main> Home Page! </main>
     </>
   )
 }
