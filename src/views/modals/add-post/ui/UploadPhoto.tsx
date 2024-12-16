@@ -1,35 +1,29 @@
 import React, { useRef } from 'react'
 
-import {
-  Button,
-  Card,
-  DialogBody,
-  DialogClose,
-  DialogHeader,
-  Typography,
-  showToast,
-} from '@/components/ui'
+import { Button, Card, DialogBody, DialogHeader, Typography, showToast } from '@/components/ui'
+import { BlankImage } from '@/components/ui/blankImage'
 import { CloseOutlineIcon, ImageOutlineIcon } from '@/components/ui/icons'
-import { MAX_POST_FILE_SIZE } from '@/shared/constants'
+import { MAX_POST_FILE_SIZE, POST_FILE_TYPES } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
 
 import styles from './UploadPhoto.module.scss'
 
 type UploadPhotoProps = {
   next: () => void
-  setImages: (images: string[]) => void
   setImagesFilers: (value: File[]) => void
+  setImagesPreviews: (images: string[]) => void
   setIsOpenCloseModal: (value: boolean) => void
 }
 
 const UploadPhoto = ({
   next,
-  setImages,
   setImagesFilers,
+  setImagesPreviews,
   setIsOpenCloseModal,
 }: UploadPhotoProps) => {
   const { t } = useTranslation()
-  const { buttonDraft, buttonUploadPhoto, modalTitle, uploadError } = t.createPost.uploadPhoto
+  const { buttonDraft, buttonUploadPhoto, modalTitle, typeImageError, uploadError } =
+    t.createPost.uploadPhoto
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const onSubmit = () => {
@@ -41,21 +35,32 @@ const UploadPhoto = ({
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      if (file.size < MAX_POST_FILE_SIZE) {
-        setImagesFilers([file])
-        reader.onloadend = () => {
-          if (typeof reader.result === 'string') {
-            setImages([reader.result]) //
-            next()
-          }
-        }
-        reader.readAsDataURL(file)
-      } else {
+      if (!POST_FILE_TYPES.includes(file.type)) {
+        showToast({
+          message: typeImageError,
+          variant: 'error',
+        })
+
+        return
+      }
+
+      if (file.size >= MAX_POST_FILE_SIZE) {
         showToast({
           message: uploadError,
           variant: 'error',
         })
+
+        return
       }
+
+      setImagesFilers([file])
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setImagesPreviews([reader.result]) //
+          next()
+        }
+      }
+      reader.readAsDataURL(file)
     }
   }
 
@@ -70,9 +75,7 @@ const UploadPhoto = ({
         </Button>
       </DialogHeader>
       <DialogBody className={styles.body}>
-        <Card className={styles.card}>
-          <ImageOutlineIcon height={'48'} width={'48'} />
-        </Card>
+        <BlankImage className={styles.card} height={48} type={'square'} width={48} />
         <Button className={styles.button} onClick={onSubmit}>
           {buttonUploadPhoto}
           <input

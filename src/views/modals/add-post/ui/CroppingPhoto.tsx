@@ -10,13 +10,8 @@ import {
   Typography,
   showToast,
 } from '@/components/ui'
-import {
-  ArrowIosBackIcon,
-  CloseOutlineIcon,
-  ImageIcon,
-  PlusCircleOutlineIcon,
-} from '@/components/ui/icons'
-import { MAX_POST_FILE_SIZE } from '@/shared/constants'
+import { ArrowIosBackIcon, ImageIcon } from '@/components/ui/icons'
+import { MAX_POST_FILE_SIZE, POST_FILE_TYPES } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
 import clsx from 'clsx'
 
@@ -26,36 +21,53 @@ import PhotoCarouselModal from './modal/PhotoCarouselModal'
 
 type CroppingPhotoProps = {
   back: () => void
-  images: string[]
+  imagesPreviews: string[]
   next: () => void
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
   setImagesFilers: React.Dispatch<React.SetStateAction<File[]>>
+  setImagesPreviews: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: CroppingPhotoProps) => {
+const CroppingPhoto = ({
+  back,
+  imagesPreviews,
+  next,
+  setImagesFilers,
+  setImagesPreviews,
+}: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { t } = useTranslation()
-  const { modalButton, modalTitle, uploadError } = t.createPost.croppingPhoto
+  const { modalButton, modalTitle, typeImageError, uploadError } = t.createPost.croppingPhoto
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
       const reader = new FileReader()
 
-      if (file.size < MAX_POST_FILE_SIZE) {
-        setImagesFilers(prev => [...prev, file])
-        reader.onloadend = () => {
-          if (typeof reader.result === 'string') {
-            setImages((prev: string[]) => [...prev, reader.result as string])
-          }
-        }
-        reader.readAsDataURL(file)
-      } else {
+      if (!POST_FILE_TYPES.includes(file.type)) {
+        showToast({
+          message: typeImageError,
+          variant: 'error',
+        })
+
+        return
+      }
+
+      if (file.size >= MAX_POST_FILE_SIZE) {
         showToast({
           message: uploadError,
           variant: 'error',
         })
+
+        return
       }
+
+      setImagesFilers(prev => [...prev, file])
+      reader.onloadend = () => {
+        if (typeof reader.result === 'string') {
+          setImagesPreviews((prev: string[]) => [...prev, reader.result as string])
+        }
+      }
+      reader.readAsDataURL(file)
     }
     e.target.value = ''
   }
@@ -65,9 +77,9 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
   }
 
   const deleteImage = (index: number) => {
-    setImages(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
+    setImagesPreviews(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
     setImagesFilers(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
-    if (images.length === 1) {
+    if (imagesPreviews.length === 1) {
       back()
     }
   }
@@ -87,12 +99,12 @@ const CroppingPhoto = ({ back, images, next, setImages, setImagesFilers }: Cropp
       </DialogHeader>
 
       <DialogBody className={styles.body}>
-        <Carousel className={styles.image} slides={images} />
+        <Carousel className={styles.image} slides={imagesPreviews} />
         {showModal && (
           <PhotoCarouselModal
             deleteImage={deleteImage}
             handleFileChange={handleFileChange}
-            images={images}
+            imagesPreviews={imagesPreviews}
           />
         )}
         <Button onClick={handleShowModal} variant={'icon'}>

@@ -12,6 +12,7 @@ import {
   Typography,
   showToast,
 } from '@/components/ui'
+import { BlankImage } from '@/components/ui/blankImage'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
 import { useCreatePostMutation, useUpdatePostMutation } from '@/shared/api/post/post.api'
 import { MAX_POST_DESCRIPTION_LENGTH } from '@/shared/constants'
@@ -28,19 +29,26 @@ import { AddPostFields } from '../model/types'
 
 type AddDescriptionProps = {
   back: () => void
-  images: string[]
   imagesFiles: File[]
+  imagesPreviews: string[]
   onOpenChange: (value: boolean) => void
+  setStepIndex: (value: number) => void
 }
 
-const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescriptionProps) => {
+const AddDescription = ({
+  back,
+  imagesFiles,
+  imagesPreviews,
+  onOpenChange,
+  setStepIndex,
+}: AddDescriptionProps) => {
   const { t } = useTranslation()
   const { descriptionField, modalButton, modalTitle } = t.createPost.addDescription
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
   const { meData } = useContext(AuthContext)
   const router = useRouter()
-  const avatar = meData?.profile.avatarInfo.smallFilePath
+  const avatar = meData?.profile.avatarInfo?.smallFilePath
   const username = meData?.username
 
   const { control, handleSubmit, watch } = useForm<AddPostFields>({
@@ -85,7 +93,7 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
           handleErrors(updateError)
         }
       }
-
+      setStepIndex(0)
       onOpenChange(false)
       router.push('/')
     } catch (createError) {
@@ -109,13 +117,17 @@ const AddDescription = ({ back, images, imagesFiles, onOpenChange }: AddDescript
 
       <DialogBody className={styles.body}>
         <div className={styles.imageContainer}>
-          <Carousel slides={images} />
+          <Carousel slides={imagesPreviews} />
         </div>
         <div className={styles.descriptionContainer}>
           <Card className={styles.card}>
             <div className={styles.profileName}>
-              <Avatar className={styles.avatar} size={'xs'} src={avatar} />
-              <Typography>{username}</Typography>
+              {avatar ? (
+                <Avatar className={styles.avatar} size={'xs'} src={avatar} />
+              ) : (
+                <BlankImage className={styles.blankImage} height={18} type={'circle'} width={18} />
+              )}
+              <Typography>{username ? username : 'username'}</Typography>
             </div>
             <ControlledTextArea
               className={styles.textField}

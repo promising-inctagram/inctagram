@@ -24,7 +24,7 @@ type AddPostProps = {
 }
 
 function AddPost({ isOpen, onOpenChange }: AddPostProps) {
-  const [images, setImages] = useState<string[]>([])
+  const [imagesPreviews, setImagesPreviews] = useState<string[]>([])
   const [imagesFiles, setImagesFilers] = useState<File[]>([])
   const [stepIndex, setStepIndex] = useState<number>(0)
   const [isOpenCloseModal, setIsOpenCloseModal] = useState<boolean>(false)
@@ -50,27 +50,28 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
       <UploadPhoto
         key={'upload'}
         next={next}
-        setImages={setImages}
         setImagesFilers={setImagesFilers}
+        setImagesPreviews={setImagesPreviews}
         setIsOpenCloseModal={setIsOpenCloseModal}
       />,
       <CroppingPhoto
         back={back}
-        images={images}
+        imagesPreviews={imagesPreviews}
         key={'cropping'}
         next={next}
-        setImages={setImages}
         setImagesFilers={setImagesFilers}
+        setImagesPreviews={setImagesPreviews}
       />,
       <AddDescription
         back={back}
-        images={images}
         imagesFiles={imagesFiles}
+        imagesPreviews={imagesPreviews}
         key={'desctiption'}
         onOpenChange={onOpenChange}
+        setStepIndex={setStepIndex}
       />,
     ],
-    [images, imagesFiles, onOpenChange]
+    [imagesPreviews, imagesFiles, onOpenChange]
   )
 
   return (
@@ -88,8 +89,8 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
             closeMainModal={onOpenChange}
             isOpen={isOpenCloseModal}
             onOpenChange={setIsOpenCloseModal}
-            setImages={setImages}
             setImagesFilers={setImagesFilers}
+            setImagesPreviews={setImagesPreviews}
             setStepIndex={setStepIndex}
           />
         </DialogContent>
@@ -98,7 +99,4 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   )
 }
 
-AddPost.getLayout = getSidebarLayout
 export default AddPost
-
-// todo: аватар

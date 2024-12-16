@@ -172,7 +172,7 @@ export const AvatarDialog = ({ avatar }: Props) => {
                   </Typography>
                 </div>
               )}
-              <BlankImage className={s.blankImage} type={'square'} />
+              <BlankImage className={s.blankImage} height={36} type={'square'} width={36} />
             </div>
           )}
           <div>

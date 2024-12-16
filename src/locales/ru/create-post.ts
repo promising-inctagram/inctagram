@@ -22,12 +22,14 @@ export const createPost = {
   croppingPhoto: {
     modalButton: 'Далее',
     modalTitle: 'Обрезка',
+    typeImageError: 'Файл должен быть формата JPEG, PNG',
     uploadError: 'Фото должно быть меньше 20 Мб',
   },
   uploadPhoto: {
     buttonDraft: 'Открыть черновик',
     buttonUploadPhoto: 'Выбрать с компьютера',
     modalTitle: 'Добавить фото',
+    typeImageError: 'Файл должен быть формата JPEG, PNG',
     uploadError: 'Фото должно быть меньше 20 Мб',
   },
 }

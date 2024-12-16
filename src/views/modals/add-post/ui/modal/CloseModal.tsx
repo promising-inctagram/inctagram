@@ -21,8 +21,8 @@ type CloseModalProps = {
   closeMainModal: (value: boolean) => void
   isOpen: boolean
   onOpenChange: (value: boolean) => void
-  setImages: (value: string[]) => void
   setImagesFilers: (value: File[]) => void
+  setImagesPreviews: (value: string[]) => void
   setStepIndex: (value: number) => void
 }
 
@@ -30,8 +30,8 @@ const CloseModal = ({
   closeMainModal,
   isOpen = true,
   onOpenChange,
-  setImages,
   setImagesFilers,
+  setImagesPreviews,
   setStepIndex,
 }: CloseModalProps) => {
   const { t } = useTranslation()
@@ -48,7 +48,7 @@ const CloseModal = ({
   const handleCloseMainModal = () => {
     closeMainModal(false)
     onOpenChange(false)
-    setImages([])
+    setImagesPreviews([])
     setImagesFilers([])
     setStepIndex(0)
   }

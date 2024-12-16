@@ -8,10 +8,14 @@ import styles from './PhotoCarouselModal.module.scss'
 export type ProtoCatouselModalProps = {
   deleteImage: (index: number) => void
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  images: string[]
+  imagesPreviews: string[]
 }
 
-const PhotoCarouselModal = ({ deleteImage, handleFileChange, images }: ProtoCatouselModalProps) => {
+const PhotoCarouselModal = ({
+  deleteImage,
+  handleFileChange,
+  imagesPreviews,
+}: ProtoCatouselModalProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
   const onSubmit = () => {
@@ -22,7 +26,7 @@ const PhotoCarouselModal = ({ deleteImage, handleFileChange, images }: ProtoCato
     <Card className={styles.card}>
       <ScrollArea className={styles.scroll}>
         <div className={styles.imagesContainer}>
-          {images.map((elem, index) => (
+          {imagesPreviews.map((elem, index) => (
             <div className={styles.smallImageContainer} key={`${elem}${index}`}>
               <img alt={'sad'} className={styles.smallImage} src={elem} />
               <Button onClick={() => deleteImage(index)} variant={'icon'}>
@@ -32,7 +36,7 @@ const PhotoCarouselModal = ({ deleteImage, handleFileChange, images }: ProtoCato
           ))}
         </div>
       </ScrollArea>
-      <Button disabled={images.length === 10} onClick={onSubmit} variant={'icon'}>
+      <Button disabled={imagesPreviews.length === 10} onClick={onSubmit} variant={'icon'}>
         <PlusCircleOutlineIcon height={'36'} width={'36'} />
         <input
           accept={'.jpg,.png'}
