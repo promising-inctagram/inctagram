@@ -1,23 +1,23 @@
-.dialogContent{
+.dialogContent {
   width: 100%;
   max-width: 492px;
 }
 
-.dialogHeader{
+.dialogHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.dialogBody{
+.dialogBody {
   display: flex;
   flex-direction: column;
-  gap:36px;
+  gap: 36px;
   align-items: center;
   justify-content: center;
 }
 
-.sliderRoot{
+.sliderRoot {
   touch-action: none;
   user-select: none;
 
@@ -30,7 +30,7 @@
   height: 20px;
 }
 
-.track{
+.track {
   position: relative;
 
   flex-grow: 1;
@@ -41,14 +41,14 @@
   border-radius: 9999px;
 }
 
-.range{
+.range {
   position: absolute;
   height: 100%;
   background-color: white;
   border-radius: 9999px;
 }
 
-.thumb{
+.thumb {
   display: block;
 
   width: 12px;
@@ -67,14 +67,14 @@
   outline: none;
 }
 
-.blankImageContainer{
+.blankImageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.errorContainer{
+.errorContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,11 +90,10 @@
   border-radius: var(--border-radius-xxs);
 }
 
-.fileBtn{
+.fileBtn {
   padding: 6px 36px;
 }
 
-.blankImage{
+.blankImage {
   margin-top: 28px;
 }
-

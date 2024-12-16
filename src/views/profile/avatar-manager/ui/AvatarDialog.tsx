@@ -71,8 +71,8 @@ export const AvatarDialog = ({ avatar }: Props) => {
     setAvatarUrl(avatar ?? null)
   }
 
-  const onSliderChange = (value: number) => {
-    setSlideValue(value)
+  const onSliderChange = (value: number | number[]) => {
+    setSlideValue(value as number)
   }
 
   const onSaveAvatarHandler = async () => {
