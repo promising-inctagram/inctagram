@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { HeaderMobileMenu } from '@/components/header/HeaderMobileMenu'
 import { SelectLanguage } from '@/components/select-language'
 import { Badge, Button, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
@@ -45,7 +44,8 @@ export const Header = ({ countNotification }: HeaderProps) => {
             </Button>
           </div>
         )}
-        {!isAuth && isTablet && <HeaderMobileMenu />}
+        {/*todo:fix hydration error*/}
+        {/*!isAuth && isTablet && <HeaderMobileMenu />*/}
       </div>
     </div>
   )
