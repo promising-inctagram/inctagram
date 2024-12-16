@@ -1,7 +1,8 @@
 import * as React from 'react'
 
-import { Page, getSidebarLayout } from '@/components'
-import { Button } from '@/components/ui'
+import { getSidebarLayout } from '@/components/layout/sidebar-layout'
+import { Page } from '@/components/page'
+import { Button } from '@/components/ui/button'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
 import Link from 'next/link'
