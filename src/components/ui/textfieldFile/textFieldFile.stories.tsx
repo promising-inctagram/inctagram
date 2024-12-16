@@ -36,12 +36,18 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: <Button asComponent={'span'}>input file</Button>,
+    setSelectedImage: (image: File) => {
+      console.log('Selected image:', image)
+    },
   },
 }
 
 export const Controlled: Story = {
   args: {
     children: <Button asComponent={'span'}>input file</Button>,
+    setSelectedImage: (image: File) => {
+      console.log('Selected image:', image)
+    },
   },
   render: () => {
     const [file, setFile] = useState<File | null>(null)

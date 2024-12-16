@@ -7,7 +7,7 @@ import s from '@/components/ui/dropdown/Dropdown.module.scss'
 
 type Props = {
   align?: 'center' | 'end' | 'start'
-  className: string
+  className?: string
   trigger: ReactNode
 } & ComponentPropsWithoutRef<typeof Dropdown.Root>
 
