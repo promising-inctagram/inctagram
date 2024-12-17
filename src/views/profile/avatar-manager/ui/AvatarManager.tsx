@@ -55,7 +55,7 @@ const AvatarManager = ({ avatar }: Props) => {
           <Avatar size={'s'} src={avatar} userName={'userAvatar'} />
         </div>
       ) : (
-        <BlankImage />
+        <BlankImage height={36} width={36} />
       )}
       <AvatarDialog avatar={avatar} />
       {openDelete && (

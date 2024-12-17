@@ -20,6 +20,7 @@ import {
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
+import AddPost from '@/views/modals/add-post'
 import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -35,12 +36,17 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
   const { t } = useTranslation()
   const { isAuth, meData } = useContext(AuthContext)
   const [openLogoutModal, setOpenLogoutModal] = useState(false)
+  const [openCreatePostModal, setOpenCreatePostModal] = useState(false)
 
   if (!isAuth) {
     return null
   }
   const handleLogoutClick = () => {
     setOpenLogoutModal(true)
+  }
+
+  const handleCreatePostClick = () => {
+    setOpenCreatePostModal(true)
   }
 
   return (
@@ -60,7 +66,7 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
           )}
           {t.sidebar.home}
         </Typography>
-        <Button className={s.title} fullWidth variant={'icon'}>
+        <Button className={s.title} fullWidth onClick={handleCreatePostClick} variant={'icon'}>
           <PlusSquareIcon className={s.icon} />
           {t.sidebar.create}
         </Button>
@@ -145,9 +151,8 @@ export const SideBar = forwardRef<SideBarRef, SideBarProps>(({ className, ...res
           </Typography>
         )}
       </div>
-      {openLogoutModal && (
-        <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
-      )}
+      <LogoutConfirmation isOpen={openLogoutModal} onOpenChange={setOpenLogoutModal} />
+      <AddPost isOpen={openCreatePostModal} onOpenChange={setOpenCreatePostModal} />
     </nav>
   )
 })

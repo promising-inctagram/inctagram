@@ -81,7 +81,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
       reset(savedSettingsForm)
       dispatch(setReturningFromPolicy(false))
     }
-  }, [reset, setValue, dispatch])
+  }, [reset, setValue, dispatch, isReturningFromPolicy, savedSettingsForm])
 
   const formHandler = handleSubmit(async data => {
     const formatDate = format(data.dateOfBirth, 'dd/MM/yyyy')
