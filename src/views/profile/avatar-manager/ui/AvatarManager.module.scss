@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+
+  margin-top: 24px;
+}
+
+.avatar {
+  position: relative;
+}
+
+.deleteBtnWrapper {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: var(--color-dark-900);
+  border-radius: var(--border-radius-rounded);
+}
+
+.deleteBtn {
+  background-color: var(--color-danger-500);
+  border-radius: var(--border-radius-rounded);
+}
+
+.closeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.error {
+  color: var(--color-light-100);
+}

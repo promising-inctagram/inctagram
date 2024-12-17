@@ -1,4 +1,4 @@
-import { ChangeEvent, useId, useState } from 'react'
+import { ChangeEvent, ReactNode, useId, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
 import { CalendarIcon, CalendarOutlineIcon } from '@/components/ui/icons'
@@ -9,7 +9,7 @@ import s from '@/components/ui/date-picker/date-picker-single/DatePicker.module.
 
 type UseDatePickerArgs = {
   disabled?: boolean
-  error?: string
+  error?: ReactNode | string
   onSelectRangeDate?: (date: DateRange | undefined) => void
   onSelectSingleDate?: (date: Date | undefined) => void
 }

@@ -1,0 +1,99 @@
+.dialogContent {
+  width: 100%;
+  max-width: 492px;
+}
+
+.dialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialogBody {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderRoot {
+  touch-action: none;
+  user-select: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 200px;
+  height: 20px;
+}
+
+.track {
+  position: relative;
+
+  flex-grow: 1;
+
+  height: 3px;
+
+  background-color: rgb(255 255 255 / 25%);
+  border-radius: 9999px;
+}
+
+.range {
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  border-radius: 9999px;
+}
+
+.thumb {
+  display: block;
+
+  width: 12px;
+  height: 12px;
+
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgb(248 242 242 / 0%);
+}
+
+.thumb:hover {
+  box-shadow: rgb(25 118 210 / 16%) 0 0 0 8px;
+}
+
+.thumb:focus {
+  outline: none;
+}
+
+.blankImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 36px;
+  padding: 10px 20px;
+
+  text-align: center;
+
+  background-color: var(--color-danger-900);
+  border: var(--border-size-standard) solid var(--color-danger-500);
+  border-radius: var(--border-radius-xxs);
+}
+
+.fileBtn {
+  padding: 6px 36px;
+}
+
+.blankImage {
+  margin-top: 28px;
+}

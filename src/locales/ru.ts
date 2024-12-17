@@ -4,11 +4,14 @@ import { confirmLogoutPage } from '@/locales/ru/confirm-logout-page'
 import { passwordRecoveryPage } from '@/locales/ru/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/ru/privacy-policy-page'
 import { profile } from '@/locales/ru/profile'
+import { profileSettingPage } from '@/locales/ru/profile-setting-page'
 import { profileSettingsDevices } from '@/locales/ru/profile-settings-devices'
 import { signInPage } from '@/locales/ru/sign-in-page'
 import { signUpPage } from '@/locales/ru/sign-up-page'
 import { termsOfServicePage } from '@/locales/ru/terms-of-service-page'
 import { validation } from '@/locales/ru/validation'
+
+import { sidebar } from './ru/sidebar'
 
 export const ru: LocaleType = {
   confirmEmailPage: confirmEmailPage,
@@ -24,7 +27,9 @@ export const ru: LocaleType = {
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   profile: profile,
+  profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
+  sidebar: sidebar,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,

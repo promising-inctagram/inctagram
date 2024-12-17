@@ -2,6 +2,8 @@ import { useContext } from 'react'
 
 import {
   Button,
+  DialogBody,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -11,8 +13,8 @@ import {
   Typography,
   showToast,
 } from '@/components/ui'
+import { CloseOutlineIcon } from '@/components/ui/icons'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
-import { ACCESS_TOKEN } from '@/shared/constants'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -21,6 +23,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useRouter } from 'next/router'
 
 import s from './LogoutConfirmation.module.scss'
+
 type Props = {
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
@@ -28,6 +31,7 @@ type Props = {
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   const { meData } = useContext(AuthContext)
+  const router = useRouter()
   const [logout, { isLoading }] = useLogoutMutation()
   const {
     t: {
@@ -36,18 +40,17 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
         accessibilityTitle,
         confirmButton,
         confirmationMessage,
+        modalHeader,
         rejectButton,
       },
     },
   } = useTranslation()
-  const router = useRouter()
 
   const logoutHandler = () => {
     logout()
       .unwrap()
       .then(() => {
-        localStorage.removeItem(ACCESS_TOKEN)
-
+        localStorage.removeItem('hasRedirected')
         router.push(Paths.logIn)
       })
       .catch(e => {
@@ -80,21 +83,33 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
           <DialogDescription>{accessibilityDescription}</DialogDescription>
         </VisuallyHidden>
         <DialogHeader className={s.header}>
-          <Typography as={'h3'} variant={'h3'}>
-            {confirmationMessage}
+          <Typography as={'h1'} variant={'h1'}>
+            {modalHeader}
           </Typography>
-          <Typography>{meData?.email}</Typography>
+          <DialogClose>
+            <Button variant={'icon'}>
+              <CloseOutlineIcon />
+            </Button>
+          </DialogClose>
         </DialogHeader>
+        <DialogBody className={s.body}>
+          <Typography variant={'regular_text_16'}>
+            {confirmationMessage}
+            <Typography as={'span'} variant={'bold_text_16'}>
+              {` "${meData?.email}"?`}
+            </Typography>
+          </Typography>
+        </DialogBody>
         <DialogFooter className={s.footer}>
           <Button
             className={s.button}
             disabled={isLoading}
             onClick={logoutHandler}
-            variant={'primary'}
+            variant={'outlined'}
           >
             {confirmButton}
           </Button>
-          <Button className={s.button} onClick={closeHandler} variant={'outlined'}>
+          <Button className={s.button} onClick={closeHandler} variant={'primary'}>
             {rejectButton}
           </Button>
         </DialogFooter>

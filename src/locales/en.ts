@@ -3,11 +3,14 @@ import { confirmLogoutPage } from '@/locales/en/confirm-logout-page'
 import { passwordRecoveryPage } from '@/locales/en/password-recovery-page'
 import { privacyPolicyPage } from '@/locales/en/privacy-policy-page'
 import { profile } from '@/locales/en/profile'
+import { profileSettingPage } from '@/locales/en/profile-setting-page'
 import { profileSettingsDevices } from '@/locales/en/profile-settings-devices'
 import { signInPage } from '@/locales/en/sign-in-page'
 import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
 import { validation } from '@/locales/en/validation'
+
+import { sidebar } from './en/sidebar'
 
 export type LocaleType = typeof en
 export type LocaleValidation = typeof en.validation
@@ -16,6 +19,11 @@ export type LocaleValidationPassword = typeof en.validation.password
 export type LocaleEmailSentDialog = typeof en.signUpPage.signUpForm.emailSentDialog
 export type LocaleEmailConfirmed = typeof en.confirmEmailPage.emailConfirmed
 export type LocaleLinkExpired = typeof en.confirmEmailPage.linkExpired
+export type LocaleSettingsForm = typeof en.profileSettingPage.settingsForm
+export type LocaleSettingsValidation = typeof en.profileSettingPage.settingsForm.validation
+export type LocaleValidationFirstName =
+  typeof en.profileSettingPage.settingsForm.validation.firstName
+export type LocaleValidationLastName = typeof en.profileSettingPage.settingsForm.validation.lastName
 
 export const en = {
   confirmEmailPage: confirmEmailPage,
@@ -31,7 +39,9 @@ export const en = {
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   profile: profile,
+  profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
+  sidebar: sidebar,
   signInPage: signInPage,
   signUpPage: signUpPage,
   termsOfServicePage: termsOfServicePage,
