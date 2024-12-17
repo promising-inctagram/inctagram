@@ -1,0 +1,19 @@
+.content {
+  width: 972px;
+  display: flex;
+}
+.carouselContainer {
+  height: 562px;
+  max-width: 490px;
+}
+
+.postInfoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}

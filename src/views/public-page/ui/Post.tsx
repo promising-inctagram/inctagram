@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Avatar, Carousel, Typography } from '@/components/ui'
+import { UrlProfile } from '@/components/urlProfile'
 import { useTranslation } from '@/shared/hooks'
 import { PostType } from '@/shared/types/public-page/Posts'
 import clsx from 'clsx'
@@ -75,21 +76,15 @@ export const Post = ({ post }: Props) => {
 
   return (
     <article className={s.cardLink} key={post.id}>
-      <a className={s.link} href={`/profile?userId=${post.userInfo.id}&postId=${post.id}`}></a>
+      <a className={s.link} href={`/profile/${post.userInfo.id}/post/${post.id}`}></a>
       <div className={s.sliderContainer}>
         <Carousel minIcon slides={post.images} />
       </div>
       <div className={clsx(s.content, isExpanded && s.expanded)}>
-        <div className={s.user}>
-          <Avatar
-            size={'xs'}
-            src={post.userInfo.avatarInfo?.smallFilePath}
-            userName={post.userInfo.firstName}
-          />
-          <Typography as={'h3'} variant={'h3'}>
-            {post.userInfo.firstName}
-          </Typography>
-        </div>
+        <UrlProfile
+          src={post.userInfo.avatarInfo?.smallFilePath}
+          userName={post.userInfo.firstName}
+        />
 
         <Typography className={s.time} grey variant={'small_text'}>
           Время последней публикации поста

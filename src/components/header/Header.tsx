@@ -11,6 +11,7 @@ import { useIsMobileOrTabletVersion } from '@/shared/hooks/useIsMobileOrTabletVe
 import Link from 'next/link'
 
 import styles from '@/components/header/Header.module.scss'
+import s from '@/views/public-page/ui/PublicPage.module.scss'
 
 export type HeaderProps = {
   countNotification?: number
@@ -23,9 +24,11 @@ export const Header = ({ countNotification }: HeaderProps) => {
 
   return (
     <div className={styles.wrapper}>
-      <Typography as={'h1'} variant={'large'}>
-        Inctagram
-      </Typography>
+      <a href={`/`}>
+        <Typography as={'h1'} variant={'large'}>
+          Inctagram
+        </Typography>
+      </a>
       <div className={styles.container}>
         {isAuth && (
           <Button className={styles.buttonBell} variant={'icon'}>

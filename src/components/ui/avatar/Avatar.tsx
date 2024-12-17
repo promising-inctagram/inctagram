@@ -19,6 +19,8 @@ export const Avatar = ({ className, size = 'm', src, userName, ...rest }: Avatar
   }
   const fallbackTitle = userName?.[0].toUpperCase()
 
+  console.log(src)
+
   return (
     <AvatarPrimitive.Root className={classNames.root} {...rest}>
       <AvatarPrimitive.Image alt={'avatar'} className={classNames.image} src={src ?? ''} />

@@ -41,7 +41,7 @@ export const Carousel = forwardRef<SwiperRef, CarouselProps>(
           ref={ref}
           {...rest}
         >
-          {slides.map((slide, index) => (
+          {slides?.map((slide, index) => (
             <SwiperSlide className={s.slide} key={index}>
               <img alt={'slide image'} className={s.image} src={slide.originFilePath} />
             </SwiperSlide>
