@@ -1,4 +1,4 @@
-import { getLayout } from '@/components'
+import { getSidebarLayout } from '@/components'
 import Head from 'next/head'
 
 export default function Home() {
@@ -62,4 +62,4 @@ export default function Home() {
   )
 }
 
-Home.getLayout = getLayout
+Home.getLayout = getSidebarLayout

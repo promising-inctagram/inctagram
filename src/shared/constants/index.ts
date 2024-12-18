@@ -14,6 +14,10 @@ export const MIN_LAST_NAME_LENGTH = 1
 export const MAX_LAST_NAME_LENGTH = 50
 export const MAX_ABOUT_ME_LENGTH = 200
 
+export const MAX_POST_DESCRIPTION_LENGTH = 500
+export const MAX_POST_FILE_SIZE = 20971520
+export const POST_FILE_TYPES = ['image/jpeg', 'image/png']
+
 export const USERNAME_REGEX = /^[a-zA-Z0-9_-]*$/
 
 export const PASSWORD_REGEX =

@@ -1,5 +1,4 @@
 export enum Paths {
-  create = '/create',
   createPassword = '/auth/create-password',
   favourites = '/favourites',
   forgotPassword = '/auth/forgot-password',

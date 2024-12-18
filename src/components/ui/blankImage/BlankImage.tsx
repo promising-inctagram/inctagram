@@ -4,14 +4,16 @@ import { clsx } from 'clsx'
 import s from './BlankImage.module.scss'
 type Props = {
   className?: string
+  height: number
   type?: 'circle' | 'square'
+  width: number
 }
-export const BlankImage = ({ className, type = 'circle' }: Props) => {
+export const BlankImage = ({ className, height, type = 'circle', width }: Props) => {
   const cn = clsx(s.root, s[type], className)
 
   return (
     <div className={cn}>
-      <ImageOutlineIcon height={36} width={36} />
+      <ImageOutlineIcon height={height} width={width} />
     </div>
   )
 }
