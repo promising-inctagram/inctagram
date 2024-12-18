@@ -13,12 +13,16 @@ type Story = StoryObj<typeof meta>
 
 export const Circle: Story = {
   args: {
+    height: 100,
     type: 'circle',
+    width: 100,
   },
 }
 
 export const Square: Story = {
   args: {
+    height: 60,
     type: 'square',
+    width: 60,
   },
 }
