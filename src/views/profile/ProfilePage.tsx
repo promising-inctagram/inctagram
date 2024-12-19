@@ -1,24 +1,34 @@
-import * as React from 'react'
+import { useEffect, useState } from 'react'
 
 import { getSidebarLayout } from '@/components/layout/sidebar-layout'
 import { Page } from '@/components/page'
-import { Button } from '@/components/ui/button'
-import { Paths } from '@/shared/enums'
-import { useTranslation } from '@/shared/hooks'
-import Link from 'next/link'
+import { ProfileHeader } from '@/features/ui/header'
+import { Publications } from '@/features/ui/publications'
+import { useRouter } from 'next/router'
 
 import s from './ProfilePage.module.scss'
 
 const ProfilePage = () => {
-  const { t } = useTranslation()
-  const { profile_settings } = t.profile
+  const router = useRouter()
+  const [userId, setUserId] = useState('')
+
+  useEffect(() => {
+    if (router.query.id) {
+      const id = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id
+
+      setUserId(id)
+    }
+  }, [router.query.id])
+
+  if (!userId) {
+    return null
+  }
 
   return (
     <Page mt={36}>
-      <div className={s.btnContainer}>
-        <Button as={Link} href={Paths.settings} variant={'secondary'}>
-          {profile_settings}
-        </Button>
+      <div className={s.container}>
+        <ProfileHeader className={s.header} userId={userId} />
+        <Publications userId={userId} />
       </div>
     </Page>
   )

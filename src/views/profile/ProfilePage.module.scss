@@ -1,4 +1,14 @@
-.btnContainer {
+.container {
   display: flex;
-  justify-content: end;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+  max-width: var(--max-screen-width);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 50px;
 }
