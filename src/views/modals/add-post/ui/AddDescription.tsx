@@ -20,7 +20,6 @@ import { AuthContext } from '@/shared/contexts'
 import { useTranslation } from '@/shared/hooks'
 import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/router'
 
 import styles from './AddDescription.module.scss'
 
@@ -47,7 +46,6 @@ const AddDescription = ({
   const [createPost] = useCreatePostMutation()
   const [updatePost] = useUpdatePostMutation()
   const { meData } = useContext(AuthContext)
-  const router = useRouter()
   const avatar = meData?.profile.avatarInfo?.smallFilePath
   const username = meData?.username
 
@@ -95,7 +93,6 @@ const AddDescription = ({
       }
       setStepIndex(0)
       onOpenChange(false)
-      router.push('/')
     } catch (createError) {
       handleErrors(createError)
     }

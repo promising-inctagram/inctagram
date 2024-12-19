@@ -22,3 +22,18 @@ export type CreatePostResponse = {
   id: string
   images: Images[]
 }
+
+export type GetPostsArgs = {
+  cursor?: number
+  id: string
+}
+export type ResponseGetPosts = {
+  cursor: number
+  posts: Post[]
+}
+
+export type Post = {
+  description: string
+  id: number
+  images: Images[]
+}

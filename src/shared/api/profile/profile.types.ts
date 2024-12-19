@@ -1,3 +1,5 @@
+import { Nullable } from '@/shared/types'
+
 export type Profile = {
   aboutMe: null | string
   avatar: Avatar | null
@@ -40,4 +42,34 @@ export type City = {
   id: number
   name_en: string
   name_ru: string
+}
+
+export type GetUserProfileArgs = {
+  id: string
+}
+
+export type ResponseGetUserProfile = {
+  avatarInfo: GetUserProfileAvatarInfo
+  createdAt: string
+  email: string
+  id: string
+  profile: GetUserProfileProfileInfo
+  username: string
+}
+
+export type GetUserProfileAvatarInfo = {
+  id: string
+  mediumFilePath: string
+  originFilePath: string
+  smallFilePath: string
+}
+
+export type GetUserProfileProfileInfo = {
+  aboutMe: Nullable<string>
+  avatarInfo: GetUserProfileAvatarInfo
+  city: Nullable<string>
+  country: Nullable<string>
+  dateOfBirth: Nullable<string>
+  firstName: string
+  lastName: string
 }
