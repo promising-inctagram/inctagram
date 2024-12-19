@@ -1,15 +1,24 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
-import { CreatePostResponse, UpdatePostArgs } from './post.types'
+import { CreatePostResponse, GetPostsArgs, ResponseGetPosts, UpdatePostArgs } from './post.types'
 
 export const postApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
     return {
       createPost: builder.mutation<CreatePostResponse, FormData>({
+        invalidatesTags: ['Posts'],
         query: (formData: FormData) => ({
           body: formData,
           method: 'POST',
           url: '/v1/posts',
+        }),
+      }),
+      getPosts: builder.query<ResponseGetPosts, GetPostsArgs>({
+        providesTags: ['Posts'],
+        query: ({ cursor, id, ...args }) => ({
+          method: 'GET',
+          params: args ?? undefined,
+          url: `v1/posts/user/${id}`,
         }),
       }),
       updatePost: builder.mutation<CreatePostResponse, UpdatePostArgs>({
@@ -25,4 +34,4 @@ export const postApi = inctagramApi.injectEndpoints({
   },
 })
 
-export const { useCreatePostMutation, useUpdatePostMutation } = postApi
+export const { useCreatePostMutation, useGetPostsQuery, useUpdatePostMutation } = postApi

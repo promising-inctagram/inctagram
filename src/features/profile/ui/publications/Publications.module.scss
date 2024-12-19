@@ -1,0 +1,12 @@
+.publicationsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.post {
+  height: 228px;
+  position: relative;
+  width: 234px;
+}
