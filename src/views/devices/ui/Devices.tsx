@@ -1,4 +1,4 @@
-import { Page, getSidebarLayout } from '@/components'
+import { getSidebarLayout } from '@/components'
 import { Button, Card, Typography } from '@/components/ui'
 import { useDeleteAllDevicesMutation, useGetDevicesQuery } from '@/shared/api/devices/devices.api'
 import { useTranslation } from '@/shared/hooks'
@@ -17,6 +17,7 @@ const Devices = () => {
     deleteAllDevices().unwrap()
   }
   const currentClientDevice = data?.find(el => el.current)
+  const otherActiveDevices = data?.filter(device => !device.current)
   const browserIcon = useGetBrowserIcon(currentClientDevice?.browserName)
 
   return (
@@ -28,22 +29,28 @@ const Devices = () => {
         <div>{browserIcon}</div>
         <div>
           <Typography className={s.browserName} variant={'bold_text_16'}>
-            {currentClientDevice?.browserName || 'Browser Name'}
+            {currentClientDevice?.browserName}
           </Typography>
           <Typography variant={'regular_text_14'}>IP: {currentClientDevice?.ip}</Typography>
         </div>
       </Card>
-      <div className={s.terminateSessions}>
-        <Button onClick={handlerTerminateSessions} variant={'outlined'}>
-          {terminateSessions}
-        </Button>
-      </div>
-      <Typography className={s.activeSessionsTitle} variant={'h3'}>
-        {activeSessions}
-      </Typography>
-      <div className={s.activeSessionsWrapper}>
-        {data?.map(device => <ActiveSessions device={device} key={device.id} />)}
-      </div>
+      {(otherActiveDevices ?? []).length > 0 && (
+        <>
+          <div className={s.terminateSessions}>
+            <Button onClick={handlerTerminateSessions} variant={'outlined'}>
+              {terminateSessions}
+            </Button>
+          </div>
+          <Typography className={s.activeSessionsTitle} variant={'h3'}>
+            {activeSessions}
+          </Typography>
+          <div className={s.activeSessionsWrapper}>
+            {otherActiveDevices
+              ?.filter(device => !device.current)
+              .map(device => <ActiveSessions device={device} key={device.id} />)}
+          </div>
+        </>
+      )}
     </div>
   )
 }
