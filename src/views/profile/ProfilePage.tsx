@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 import { getSidebarLayout } from '@/components/layout/sidebar-layout'
 import { Page } from '@/components/page'
-import { ProfileHeader } from '@/features/ui/header'
-import { Publications } from '@/features/ui/publications'
+import { ProfileHeader } from '@/features/profile/ui/header'
+import { Publications } from '@/features/profile/ui/publications'
 import { useRouter } from 'next/router'
 
 import s from './ProfilePage.module.scss'

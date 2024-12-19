@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, useContext } from 'react'
 
 import { Avatar, Button, Typography } from '@/components/ui'
-import { ProfileStats } from '@/features/ui/stats'
 import { useGetUserProfileQuery } from '@/shared/api/profile/profile.api'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
@@ -11,6 +10,8 @@ import link from 'next/link'
 import { useRouter } from 'next/router'
 
 import s from './ProfileHeader.module.scss'
+
+import { ProfileStats } from '../stats'
 
 type ProfileHeaderProps = { userId: string } & ComponentPropsWithoutRef<'section'>
 
