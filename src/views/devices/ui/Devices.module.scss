@@ -51,3 +51,9 @@
 .container {
   margin: 36px 0;
 }
+
+.iconsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
