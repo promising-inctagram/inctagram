@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useContext } from 'react'
 
 import { Avatar, Button, Typography } from '@/components/ui'
-import { ProfileStats } from '@/features/ui/stats'
+import { ProfileStats } from '@/features/profile/ui/stats'
 import { useGetUserProfileQuery } from '@/shared/api/profile/profile.api'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
