@@ -1,10 +1,7 @@
 .content {
   width: 972px;
-  display: flex;
-}
-.carouselContainer {
-  height: 562px;
-  max-width: 490px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .postInfoContainer {

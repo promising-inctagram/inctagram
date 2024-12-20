@@ -9,9 +9,9 @@ type Props = {
 export const UrlProfile = ({ src, userName }: Props) => {
   return (
     <div className={s.user}>
-      <Avatar size={'xs'} src={src} userName={userName} />
+      <Avatar size={'xs'} src={src} userName={userName || 'UserName'} />
       <Typography as={'h3'} variant={'h3'}>
-        {userName}
+        {userName || 'UserName'}
       </Typography>
     </div>
   )

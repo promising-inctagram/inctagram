@@ -17,7 +17,7 @@ export const Avatar = ({ className, size = 'm', src, userName, ...rest }: Avatar
     image: s.avatar_img,
     root: clsx(s.root, s[size], className),
   }
-  const fallbackTitle = userName?.[0].toUpperCase()
+  const fallbackTitle = userName?.[0]?.toUpperCase()
 
   console.log(src)
 

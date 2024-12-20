@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { Avatar, Carousel, Typography } from '@/components/ui'
 import { UrlProfile } from '@/components/urlProfile'
 import { useTranslation } from '@/shared/hooks'
 import { PostType } from '@/shared/types/public-page/Posts'
+import { TimeAgo } from '@/views/public-page/TimeAgo'
 import clsx from 'clsx'
 
 import s from './PublicPage.module.scss'
@@ -87,7 +88,7 @@ export const Post = ({ post }: Props) => {
         />
 
         <Typography className={s.time} grey variant={'small_text'}>
-          Время последней публикации поста
+          {TimeAgo('2024-10-15T12:00:00Z')}
         </Typography>
         <Typography className={s.descriptionContainer} variant={'regular_text_14'}>
           {renderDescription()}
