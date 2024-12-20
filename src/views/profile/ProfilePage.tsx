@@ -25,7 +25,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <Page mt={36}>
+    <Page pt={36}>
       <div className={s.container}>
         <ProfileHeader className={s.header} userId={userId} />
         <Publications userId={userId} />

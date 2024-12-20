@@ -15,7 +15,7 @@ export default function ForgotPasswordPage() {
   const { forgotPasswordModalPage, forgotPasswordPage } = t.passwordRecoveryPage
 
   return (
-    <Page mt={'72px'}>
+    <Page pt={'72px'}>
       <div className={styles.container}>
         <Card className={styles.card}>
           <Typography as={'h1'} variant={'h1'}>
