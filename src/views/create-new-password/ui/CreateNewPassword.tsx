@@ -15,7 +15,7 @@ export const CreateNewPassword = ({ recoveryCode, setIsLinkExpired }: CreateNewP
   const { pageTitle } = t.passwordRecoveryPage.createNewPassword
 
   return (
-    <Page mt={'60px'}>
+    <Page pt={'60px'}>
       <div className={styles.container}>
         <Card className={styles.card}>
           <Typography as={'h1'} variant={'h1'}>

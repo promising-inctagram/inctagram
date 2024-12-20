@@ -44,8 +44,6 @@ export const Header = ({ countNotification }: HeaderProps) => {
             </Button>
           </div>
         )}
-        {/*todo:fix hydration error*/}
-        {/*!isAuth && isTablet && <HeaderMobileMenu />*/}
       </div>
     </div>
   )
