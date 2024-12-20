@@ -5,7 +5,7 @@ import PhoneIcon from '@/components/ui/icons/PhoneIcon'
 import { useDeleteDeviceMutation } from '@/shared/api/devices/devices.api'
 import { getDevicesArgs } from '@/shared/api/devices/devices.types'
 import { useTranslation } from '@/shared/hooks'
-import { useDeviceSize } from '@/views/devices/hooks/useDeviceSize'
+import { useGetBrowserIcon } from '@/views/devices/hooks/useGetBrowserIcon'
 
 import s from './Devices.module.scss'
 
@@ -14,12 +14,11 @@ type Props = {
 }
 
 export const ActiveSessions = (props: Props) => {
-  const { deviceType, id, ip, lastActiveDate, osName } = props.device
+  const { browserName, deviceType, id, ip, lastActiveDate, osName } = props.device
 
   const { t } = useTranslation()
   const { lastVisit, logOut } = t.profileSettingsDevices
-  const isPhoneScreen = useDeviceSize(deviceType)
-
+  const browserIcon = useGetBrowserIcon(browserName)
   const [deleteDevice] = useDeleteDeviceMutation()
 
   const date = new Date(lastActiveDate)
@@ -37,7 +36,10 @@ export const ActiveSessions = (props: Props) => {
   return (
     <Card className={s.cardSessions}>
       <div className={s.deviceInfoWrapper}>
-        <div>{isPhoneScreen ? <PhoneIcon /> : <DesktopIcon />}</div>
+        <div className={s.iconsBlock}>
+          {deviceType === 'Desktop' ? <DesktopIcon /> : <PhoneIcon />}
+          {browserIcon}
+        </div>
         <div>
           <Typography className={s.deviceName} variant={'bold_text_16'}>
             {osName}
