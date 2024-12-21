@@ -1,6 +1,5 @@
 import React, { ReactElement, useMemo, useState } from 'react'
 
-import { getSidebarLayout } from '@/components'
 import {
   DialogContent,
   DialogDescription,
