@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo, useState } from 'react'
+import React, { ReactElement, useMemo, useRef, useState } from 'react'
 
 import {
   DialogContent,
@@ -29,7 +29,7 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   const [isOpenCloseModal, setIsOpenCloseModal] = useState<boolean>(false)
   const { t } = useTranslation()
   const { addPostDescription, addPostTitle } = t.createPost.createPostMain
-
+  const overlayRef = useRef<HTMLDivElement>(null)
   const next = () => {
     setStepIndex(i => i + 1)
   }
@@ -39,8 +39,12 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   }
 
   const handleOpenCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
-    if ((e.target as HTMLDivElement).className === 'Dialog_overlay__ptaiT') {
-      setIsOpenCloseModal(true)
+    if ((e.target as HTMLDivElement).className === overlayRef.current?.className) {
+      if (imagesPreviews.length) {
+        setIsOpenCloseModal(true)
+      } else {
+        onOpenChange(false)
+      }
     }
   }
 
@@ -75,7 +79,7 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
 
   return (
     <DialogRoot open={isOpen}>
-      <DialogOverlay onClick={e => handleOpenCloseModal(e)}>
+      <DialogOverlay onClick={e => handleOpenCloseModal(e)} ref={overlayRef}>
         <DialogContent className={styles.content}>
           <VisuallyHidden asChild>
             <DialogTitle>{addPostTitle}</DialogTitle>

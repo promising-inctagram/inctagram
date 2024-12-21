@@ -1,57 +1,55 @@
 import React, { useState } from 'react'
 
-import { Avatar, Carousel, Typography, showToast } from '@/components/ui'
+import { AlertDialog } from '@/components/alert-dialog'
+import { Avatar, Carousel, Typography } from '@/components/ui'
 import { BlankImage } from '@/components/ui/blankImage'
-import { useDeletePostMutation } from '@/shared/api/post/post.api'
-import { Post } from '@/shared/api/post/post.types'
+import { useDeletePostMutation, useGetOnePostQuery } from '@/shared/api/post/post.api'
 import { useGetUserProfileQuery } from '@/shared/api/profile/profile.api'
-import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
+import { useTranslation } from '@/shared/hooks'
 
 import s from './ProfilePost.module.scss'
 
-import { PostCloseModal } from './PostCloseModal'
+import { handleErrors } from '../utils/errorHandlers'
 import { PostDropDownMenu } from './PostDropDownMenu'
+import { PostEdit } from './PostEdit'
 import { PostWrapper } from './PostWrapper'
 
 type ProfilePostProps = {
   isOpen: boolean
   onOpenChange: (value: boolean) => void
-  post: Post | null
+  postId: number
   userId: string
 }
 
-export const ProfilePost = ({ isOpen, onOpenChange, post, userId }: ProfilePostProps) => {
-  const { data } = useGetUserProfileQuery({ id: userId }, { skip: !userId })
-  const avatar = data?.profile.avatarInfo?.mediumFilePath
-  const username = data?.username
-  const images = post?.images.map(elem => elem.originFilePath) || []
-  const description = post?.description
+//todo: сделать так чтобы при открытии не показывало старый пост
+
+export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePostProps) => {
+  const { data: userData } = useGetUserProfileQuery({ id: userId }, { skip: !userId })
+  const { data: postData } = useGetOnePostQuery(postId)
+  const avatar = userData?.profile?.avatarInfo?.mediumFilePath || ''
+  const username = userData?.username || ''
+  const images = postData?.images?.map(elem => elem.originFilePath) || []
+  const description = postData?.description || ''
   const [deletePost] = useDeletePostMutation()
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
+  const { t } = useTranslation()
 
   const handleCloseModal = () => {
     setIsOpenModal(prev => !prev)
   }
 
-  const handleErrors = (error: unknown) => {
-    const errors = getErrorMessageData(error)
-
-    if (typeof errors === 'string') {
-      showToast({ message: errors, variant: 'error' })
-    } else {
-      errors.forEach(el => {
-        showToast({ message: el.message, variant: 'error' })
-      })
-    }
+  const handleEditModal = () => {
+    setIsOpenEditModal(prev => !prev)
   }
 
   const handleDeletePost = async () => {
-    if (!post?.id) {
+    if (!postId) {
       return
     }
 
     try {
-      await deletePost(post?.id).unwrap()
+      await deletePost(postId).unwrap()
       onOpenChange(false)
       setIsOpenModal(false)
     } catch (e) {
@@ -73,10 +71,10 @@ export const ProfilePost = ({ isOpen, onOpenChange, post, userId }: ProfilePostP
               <BlankImage className={s.blankImage} height={18} type={'circle'} width={18} />
             )}
             <Typography as={'h3'} variant={'h3'}>
-              {username ? username : 'username'}
+              {username || 'username'}
             </Typography>
           </div>
-          <PostDropDownMenu handleCloseModal={handleCloseModal} />
+          <PostDropDownMenu handleCloseModal={handleCloseModal} handleEditModal={handleEditModal} />
         </div>
         {description && (
           <div className={s.description}>
@@ -95,10 +93,20 @@ export const ProfilePost = ({ isOpen, onOpenChange, post, userId }: ProfilePostP
             </Typography>
           </div>
         )}
-        <PostCloseModal
-          handleDeletePost={handleDeletePost}
-          isOpen={isOpenModal}
+        <AlertDialog
+          confirmCallback={handleDeletePost}
           onOpenChange={handleCloseModal}
+          open={isOpenModal}
+          t={t.profilePost.deletePostAlert}
+        />
+        <PostEdit
+          avatar={avatar}
+          descriptionProp={description}
+          handleEditModal={handleEditModal}
+          images={images}
+          isOpen={isOpenEditModal}
+          postId={postId}
+          username={username}
         />
       </div>
     </PostWrapper>

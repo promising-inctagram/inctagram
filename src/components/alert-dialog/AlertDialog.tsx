@@ -48,7 +48,7 @@ export const AlertDialog = ({ confirmCallback, onOpenChange, open, t }: Props) =
             </Button>
           </DialogClose>
         </DialogHeader>
-        <DialogBody>
+        <DialogBody className={s.body}>
           <Typography variant={'regular_text_16'}>{t.bodyTitle}</Typography>
         </DialogBody>
         <DialogFooter className={s.footer}>

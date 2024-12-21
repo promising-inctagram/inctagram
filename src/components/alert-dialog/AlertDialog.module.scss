@@ -8,9 +8,13 @@
   justify-content: space-between;
 }
 
+.body {
+  padding: 30px 24px 18px;
+}
+
 .footer {
   display: flex;
-  gap: 12px;
+  gap: 24px;
   align-items: center;
   justify-content: flex-end;
 }
