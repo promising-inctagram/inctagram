@@ -15,7 +15,7 @@ export const postApi = inctagramApi.injectEndpoints({
       }),
       getPosts: builder.query<ResponseGetPosts, GetPostsArgs>({
         providesTags: ['Posts'],
-        query: ({ cursor, id, ...args }) => ({
+        query: ({ id, ...args }) => ({
           method: 'GET',
           params: args ?? undefined,
           url: `v1/posts/user/${id}`,

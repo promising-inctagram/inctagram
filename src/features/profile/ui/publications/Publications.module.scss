@@ -3,6 +3,9 @@
   flex-wrap: wrap;
   gap: 12px;
   justify-content: flex-start;
+
+  max-width: var(--max-width-desktop);
+  margin: 0 auto;
 }
 
 .post {

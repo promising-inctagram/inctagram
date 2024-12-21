@@ -1,19 +1,29 @@
-import { useGetPostsQuery } from '@/shared/api/post/post.api'
+import { useEffect } from 'react'
+
+import { Post } from '@/shared/api/post/post.types'
+import { useIntersectionObserver } from '@uidotdev/usehooks'
 import Image from 'next/image'
 
 import s from './Publications.module.scss'
 
 type PublicationsProps = {
-  userId: string
+  posts: Post[]
+  updateCursor: () => void
 }
 
-export const Publications = ({ userId }: PublicationsProps) => {
-  const { data } = useGetPostsQuery({ id: userId })
+export const Publications = ({ posts, updateCursor }: PublicationsProps) => {
+  const [ref, entry] = useIntersectionObserver()
+
+  useEffect(() => {
+    // Когда последний элемент появляется в области видимости, обновляем курсор
+    updateCursor()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entry?.isIntersecting])
 
   return (
     <div className={s.publicationsContainer}>
-      {data?.posts.map(post => (
-        <div className={s.post} key={post.id}>
+      {posts.map((post, index) => (
+        <div className={s.post} key={post.id} ref={posts.length - 1 === index ? ref : null}>
           <Image
             alt={'Picture of the author'}
             fill
