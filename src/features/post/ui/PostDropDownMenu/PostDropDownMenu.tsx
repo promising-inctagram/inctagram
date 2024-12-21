@@ -1,30 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Button, Item } from '@/components/ui'
 import { DropDownMenu } from '@/components/ui/dropdown/DropDownMenu'
 import { EditOutlineIcon, MoreHorizontalIcon, TrashOutlineIcon } from '@/components/ui/icons'
+import { useTranslation } from '@/shared/hooks'
 
 import s from './PostDropDownMeny.module.scss'
 
-import { PostCloseModal } from '../PostCloseModal'
-
 type PostDropDownMenuProps = {
   handleCloseModal: (value: boolean) => void
+  handleEditModal: () => void
 }
 
-export const PostDropDownMenu = ({ handleCloseModal }: PostDropDownMenuProps) => {
+export const PostDropDownMenu = ({ handleCloseModal, handleEditModal }: PostDropDownMenuProps) => {
+  const { t } = useTranslation()
+  const { deletePost, editPost } = t.profilePost.postDropDownMenu
+
   return (
     <DropDownMenu trigger={<MoreHorizontalIcon />}>
       <Item>
-        <Button className={s.dropDownButton} variant={'icon'}>
+        <Button className={s.dropDownButton} onClick={handleEditModal} variant={'icon'}>
           <EditOutlineIcon />
-          Edit Post
+          {editPost}
         </Button>
       </Item>
       <Item>
         <Button className={s.dropDownButton} onClick={handleCloseModal} variant={'icon'}>
           <TrashOutlineIcon />
-          Delete Post
+          {deletePost}
         </Button>
       </Item>
     </DropDownMenu>

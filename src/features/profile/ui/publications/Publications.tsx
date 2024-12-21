@@ -35,7 +35,9 @@ export const Publications = ({ userId }: PublicationsProps) => {
           />
         </div>
       ))}
-      <ProfilePost isOpen={isOpen} onOpenChange={setIsOpen} post={post} userId={userId} />
+      {post?.id && (
+        <ProfilePost isOpen={isOpen} onOpenChange={setIsOpen} postId={post?.id} userId={userId} />
+      )}
     </div>
   )
 }
