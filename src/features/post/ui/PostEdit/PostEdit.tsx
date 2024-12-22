@@ -33,20 +33,20 @@ import { handleErrors } from '../../utils/errorHandlers'
 type PostEditProps = {
   avatar: string
   descriptionProp: string
-  handleEditModal: () => void
   images: string[]
   isOpen: boolean
   postId: number
+  toggleEditPostModal: () => void
   username: string
 }
 
 export const PostEdit = ({
   avatar,
   descriptionProp,
-  handleEditModal,
   images,
   isOpen,
   postId,
+  toggleEditPostModal,
   username,
 }: PostEditProps) => {
   const { t } = useTranslation()
@@ -54,12 +54,12 @@ export const PostEdit = ({
   const { postEditAlert } = t.profilePost
   const descriptionPost = descriptionProp ? descriptionProp : ''
   const [updatePost] = useUpdatePostMutation()
-  const [isOpenCloseModal, setIsOpenCloseModal] = useState<boolean>(false)
+  const [isConfirmExitOpen, setIsConfirmExitOpen] = useState<boolean>(false)
   const overlayRef = useRef<HTMLDivElement>(null)
 
-  const handleCloseEditPost = () => {
-    setIsOpenCloseModal(prev => !prev)
-    handleEditModal()
+  const toggleConfirmExitEditModal = () => {
+    setIsConfirmExitOpen(prev => !prev)
+    toggleEditPostModal()
   }
 
   const { control, handleSubmit, reset, watch } = useForm<AddPostFields>({
@@ -80,9 +80,9 @@ export const PostEdit = ({
 
   const handleCloseModal = () => {
     if (description === descriptionPost) {
-      handleEditModal()
+      toggleEditPostModal()
     } else {
-      setIsOpenCloseModal(prev => !prev)
+      setIsConfirmExitOpen(prev => !prev)
     }
   }
 
@@ -92,7 +92,7 @@ export const PostEdit = ({
         description: data.description,
         id: postId.toString(),
       }).unwrap()
-      handleEditModal()
+      toggleEditPostModal()
     } catch (updateError) {
       handleErrors(updateError)
     }
@@ -152,9 +152,9 @@ export const PostEdit = ({
               </Button>
             </div>
             <AlertDialog
-              confirmCallback={handleCloseEditPost}
-              onOpenChange={setIsOpenCloseModal}
-              open={isOpenCloseModal}
+              confirmCallback={toggleConfirmExitEditModal}
+              onOpenChange={setIsConfirmExitOpen}
+              open={isConfirmExitOpen}
               t={postEditAlert}
             />
           </DialogBody>

@@ -6,8 +6,8 @@ export const profilePost = {
     yesButton: 'Да',
   },
   postDropDownMenu: {
-    deletePost: 'Удалить пост',
-    editPost: 'Редактировать пост',
+    deletePostButton: 'Удалить пост',
+    editPostButton: 'Редактировать пост',
   },
   postEdit: {
     descriptionField: 'Добавить описания публикаций',

@@ -6,8 +6,8 @@ export const profilePost = {
     yesButton: 'Yes',
   },
   postDropDownMenu: {
-    deletePost: 'Delete Post',
-    editPost: 'Edit Post',
+    deletePostButton: 'Delete Post',
+    editPostButton: 'Edit Post',
   },
   postEdit: {
     descriptionField: 'Add publication descriptions',

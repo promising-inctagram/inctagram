@@ -13,11 +13,11 @@ type PublicationsProps = {
 
 export const Publications = ({ userId }: PublicationsProps) => {
   const { data } = useGetPostsQuery({ id: userId })
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isPostOpen, setIsPostOpen] = useState<boolean>(false)
   const [post, setPost] = useState<Post | null>(null)
   const handleOpenPost = (post: Post) => {
     setPost(post)
-    setIsOpen(true)
+    setIsPostOpen(true)
   }
 
   return (
@@ -36,7 +36,12 @@ export const Publications = ({ userId }: PublicationsProps) => {
         </div>
       ))}
       {post?.id && (
-        <ProfilePost isOpen={isOpen} onOpenChange={setIsOpen} postId={post?.id} userId={userId} />
+        <ProfilePost
+          isPostOpen={isPostOpen}
+          postId={post?.id}
+          setIsPostOpen={setIsPostOpen}
+          userId={userId}
+        />
       )}
     </div>
   )

@@ -8,26 +8,29 @@ import { useTranslation } from '@/shared/hooks'
 import s from './PostDropDownMeny.module.scss'
 
 type PostDropDownMenuProps = {
-  handleCloseModal: (value: boolean) => void
-  handleEditModal: () => void
+  toggleConfirmDeleteModal: (value: boolean) => void
+  toggleEditPostModal: () => void
 }
 
-export const PostDropDownMenu = ({ handleCloseModal, handleEditModal }: PostDropDownMenuProps) => {
+export const PostDropDownMenu = ({
+  toggleConfirmDeleteModal,
+  toggleEditPostModal,
+}: PostDropDownMenuProps) => {
   const { t } = useTranslation()
-  const { deletePost, editPost } = t.profilePost.postDropDownMenu
+  const { deletePostButton, editPostButton } = t.profilePost.postDropDownMenu
 
   return (
     <DropDownMenu trigger={<MoreHorizontalIcon />}>
       <Item>
-        <Button className={s.dropDownButton} onClick={handleEditModal} variant={'icon'}>
+        <Button className={s.dropDownButton} onClick={toggleEditPostModal} variant={'icon'}>
           <EditOutlineIcon />
-          {editPost}
+          {editPostButton}
         </Button>
       </Item>
       <Item>
-        <Button className={s.dropDownButton} onClick={handleCloseModal} variant={'icon'}>
+        <Button className={s.dropDownButton} onClick={toggleConfirmDeleteModal} variant={'icon'}>
           <TrashOutlineIcon />
-          {deletePost}
+          {deletePostButton}
         </Button>
       </Item>
     </DropDownMenu>

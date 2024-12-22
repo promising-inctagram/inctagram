@@ -15,15 +15,15 @@ import { PostEdit } from './PostEdit'
 import { PostWrapper } from './PostWrapper'
 
 type ProfilePostProps = {
-  isOpen: boolean
-  onOpenChange: (value: boolean) => void
+  isPostOpen: boolean
   postId: number
+  setIsPostOpen: (value: boolean) => void
   userId: string
 }
 
 //todo: сделать так чтобы при открытии не показывало старый пост
 
-export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePostProps) => {
+export const ProfilePost = ({ isPostOpen, postId, setIsPostOpen, userId }: ProfilePostProps) => {
   const { data: userData } = useGetUserProfileQuery({ id: userId }, { skip: !userId })
   const { data: postData } = useGetOnePostQuery(postId)
   const avatar = userData?.profile?.avatarInfo?.mediumFilePath || ''
@@ -31,16 +31,17 @@ export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePos
   const images = postData?.images?.map(elem => elem.originFilePath) || []
   const description = postData?.description || ''
   const [deletePost] = useDeletePostMutation()
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-  const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
+
+  const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState<boolean>(false)
+  const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
   const { t } = useTranslation()
 
-  const handleCloseModal = () => {
-    setIsOpenModal(prev => !prev)
+  const toggleConfirmDeleteModal = () => {
+    setIsConfirmDeleteOpen(prev => !prev)
   }
 
-  const handleEditModal = () => {
-    setIsOpenEditModal(prev => !prev)
+  const toggleEditPostModal = () => {
+    setIsEditOpen(prev => !prev)
   }
 
   const handleDeletePost = async () => {
@@ -50,15 +51,15 @@ export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePos
 
     try {
       await deletePost(postId).unwrap()
-      onOpenChange(false)
-      setIsOpenModal(false)
+      setIsPostOpen(false)
+      setIsConfirmDeleteOpen(false)
     } catch (e) {
       handleErrors(e)
     }
   }
 
   return (
-    <PostWrapper isOpen={isOpen} onOpenChange={onOpenChange}>
+    <PostWrapper isOpen={isPostOpen} onOpenChange={setIsPostOpen}>
       <div className={s.carouselContainer}>
         <Carousel slides={images} />
       </div>
@@ -74,7 +75,10 @@ export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePos
               {username || 'username'}
             </Typography>
           </div>
-          <PostDropDownMenu handleCloseModal={handleCloseModal} handleEditModal={handleEditModal} />
+          <PostDropDownMenu
+            toggleConfirmDeleteModal={toggleConfirmDeleteModal}
+            toggleEditPostModal={toggleEditPostModal}
+          />
         </div>
         {description && (
           <div className={s.description}>
@@ -95,17 +99,17 @@ export const ProfilePost = ({ isOpen, onOpenChange, postId, userId }: ProfilePos
         )}
         <AlertDialog
           confirmCallback={handleDeletePost}
-          onOpenChange={handleCloseModal}
-          open={isOpenModal}
+          onOpenChange={toggleConfirmDeleteModal}
+          open={isConfirmDeleteOpen}
           t={t.profilePost.deletePostAlert}
         />
         <PostEdit
           avatar={avatar}
           descriptionProp={description}
-          handleEditModal={handleEditModal}
           images={images}
-          isOpen={isOpenEditModal}
+          isOpen={isEditOpen}
           postId={postId}
+          toggleEditPostModal={toggleEditPostModal}
           username={username}
         />
       </div>
