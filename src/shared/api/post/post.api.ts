@@ -1,6 +1,12 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
-import { CreatePostResponse, GetPostsArgs, ResponseGetPosts, UpdatePostArgs } from './post.types'
+import {
+  CreatePostResponse,
+  GetPostsArgs,
+  Post,
+  ResponseGetPosts,
+  UpdatePostArgs,
+} from './post.types'
 
 export const postApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
@@ -18,6 +24,13 @@ export const postApi = inctagramApi.injectEndpoints({
         query: id => ({
           method: 'DELETE',
           url: `/v1/posts/${id}`,
+        }),
+      }),
+      getOnePost: builder.query<Post, number>({
+        providesTags: ['Posts'],
+        query: id => ({
+          method: 'GET',
+          url: `v1/posts/${id}`,
         }),
       }),
       getPosts: builder.query<ResponseGetPosts, GetPostsArgs>({
@@ -45,6 +58,7 @@ export const postApi = inctagramApi.injectEndpoints({
 export const {
   useCreatePostMutation,
   useDeletePostMutation,
+  useGetOnePostQuery,
   useGetPostsQuery,
   useUpdatePostMutation,
 } = postApi
