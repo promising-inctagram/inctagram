@@ -28,7 +28,7 @@ export const Publications = ({ userId }: PublicationsProps) => {
             alt={'Picture of the author'}
             fill
             sizes={'300px'}
-            src={post.images[0].originFilePath ?? ''}
+            src={post.images[0]?.originFilePath ?? ''}
             style={{
               objectFit: 'cover',
             }}

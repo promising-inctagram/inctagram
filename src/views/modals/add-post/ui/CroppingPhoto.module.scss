@@ -9,6 +9,9 @@
   width: 492px;
   height: 503px;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image {
@@ -20,15 +23,24 @@
 .icon {
   position: absolute;
   z-index: 1;
-  right: 11px;
   bottom: 11px;
 
   padding: 6px;
 
   background-color: rgb(17 17 17 / 80%);
   border-radius: 2px;
+  height: 36px;
+  width: 36px;
+}
 
-  &.iconActive {
-    color: var(--color-accent-500);
-  }
+.imageIcon {
+  right: 11px;
+}
+
+.maximizeIcon {
+  left: 11px;
+}
+
+.iconActive {
+  color: var(--color-accent-500);
 }

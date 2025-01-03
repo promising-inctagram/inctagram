@@ -1,21 +1,20 @@
-import React, { useRef, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 
+import { Button, Carousel, DialogBody, DialogHeader, Typography, showToast } from '@/components/ui'
 import {
-  Button,
-  Card,
-  Carousel,
-  DialogBody,
-  DialogHeader,
-  ScrollArea,
-  Typography,
-  showToast,
-} from '@/components/ui'
-import { ArrowIosBackIcon, ImageIcon } from '@/components/ui/icons'
+  ArrowIosBackIcon,
+  ImageIcon,
+  MaximizeIcon,
+  MaximizeOutlineIcon,
+} from '@/components/ui/icons'
 import { MAX_POST_FILE_SIZE, POST_FILE_TYPES } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
+import ImageEditor from '@/views/modals/add-post/ui/ImageEditor'
+import * as Slider from '@radix-ui/react-slider'
 import clsx from 'clsx'
 
 import styles from './CroppingPhoto.module.scss'
+import s from '@/views/profile/avatar-manager/ui/AvatarDialog.module.scss'
 
 import PhotoCarouselModal from './modal/PhotoCarouselModal'
 
@@ -23,8 +22,8 @@ type CroppingPhotoProps = {
   back: () => void
   imagesPreviews: string[]
   next: () => void
-  setImagesFilers: React.Dispatch<React.SetStateAction<File[]>>
-  setImagesPreviews: React.Dispatch<React.SetStateAction<string[]>>
+  setImagesFilers: Dispatch<SetStateAction<File[]>>
+  setImagesPreviews: Dispatch<SetStateAction<string[]>>
 }
 
 const CroppingPhoto = ({
@@ -35,10 +34,12 @@ const CroppingPhoto = ({
   setImagesPreviews,
 }: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [showZoom, setShowZoom] = useState<boolean>(false)
+  const [slideValue, setSlideValue] = useState<number>(10)
   const { t } = useTranslation()
   const { modalButton, modalTitle, typeImageError, uploadError } = t.createPost.croppingPhoto
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0]
       const reader = new FileReader()
@@ -76,12 +77,20 @@ const CroppingPhoto = ({
     setShowModal(prev => !prev)
   }
 
+  const handleShowZoom = () => {
+    setShowZoom(prev => !prev)
+  }
+
   const deleteImage = (index: number) => {
     setImagesPreviews(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
     setImagesFilers(prev => [...prev.slice(0, index), ...prev.slice(index + 1)])
     if (imagesPreviews.length === 1) {
       back()
     }
+  }
+
+  const onSliderChange = (value: number | number[]) => {
+    setSlideValue(value as number)
   }
 
   return (
@@ -99,7 +108,34 @@ const CroppingPhoto = ({
       </DialogHeader>
 
       <DialogBody className={styles.body}>
-        <Carousel className={styles.image} slides={imagesPreviews} />
+        {showZoom ? (
+          <>
+            <ImageEditor
+              imagesPreviews={imagesPreviews}
+              setImagesPreviews={setImagesPreviews}
+              setShowZoom={setShowZoom}
+              slideValue={slideValue}
+            />
+            <form>
+              <Slider.Root
+                className={s.sliderRoot}
+                defaultValue={[slideValue]}
+                max={50}
+                min={10}
+                onValueChange={onSliderChange}
+                step={2}
+                value={[slideValue]}
+              >
+                <Slider.Track className={s.track}>
+                  <Slider.Range className={s.range} />
+                </Slider.Track>
+                <Slider.Thumb aria-label={'Volume'} className={s.thumb} />
+              </Slider.Root>
+            </form>
+          </>
+        ) : (
+          <Carousel className={styles.image} slides={imagesPreviews} />
+        )}
         {showModal && (
           <PhotoCarouselModal
             deleteImage={deleteImage}
@@ -107,11 +143,16 @@ const CroppingPhoto = ({
             imagesPreviews={imagesPreviews}
           />
         )}
+        <Button onClick={handleShowZoom} variant={'icon'}>
+          {showZoom ? (
+            <MaximizeIcon className={clsx(styles.icon, styles.maximizeIcon, styles.iconActive)} />
+          ) : (
+            <MaximizeOutlineIcon className={clsx(styles.icon, styles.maximizeIcon)} />
+          )}
+        </Button>
         <Button onClick={handleShowModal} variant={'icon'}>
           <ImageIcon
-            className={clsx(styles.icon, showModal && styles.iconActive)}
-            height={'36'}
-            width={'36'}
+            className={clsx(styles.icon, styles.imageIcon, showModal && styles.iconActive)}
           />
         </Button>
       </DialogBody>
