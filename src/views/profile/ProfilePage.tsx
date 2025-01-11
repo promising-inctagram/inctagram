@@ -60,7 +60,7 @@ const ProfilePage = () => {
     <Page pt={36}>
       <div className={s.container}>
         <ProfileHeader className={s.header} userId={userId} />
-        <Publications posts={posts} updateCursor={updateCursor} />
+        <Publications posts={posts} updateCursor={updateCursor} userId={userId} />
       </div>
     </Page>
   )
