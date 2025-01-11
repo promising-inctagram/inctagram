@@ -1,8 +1,14 @@
+import { useState } from 'react'
+
+import { ProfilePost } from '@/features/post/ui'
+import { useGetPostsQuery } from '@/shared/api/post/post.api'
+import { Post } from '@/shared/api/post/post.types'
+import Image from 'next/image'
+
 import { useEffect } from 'react'
 
 import { Post } from '@/shared/api/post/post.types'
 import { useIntersectionObserver } from '@uidotdev/usehooks'
-import Image from 'next/image'
 
 import s from './Publications.module.scss'
 
@@ -11,14 +17,22 @@ type PublicationsProps = {
   updateCursor: () => void
 }
 
-export const Publications = ({ posts, updateCursor }: PublicationsProps) => {
-  const [ref, entry] = useIntersectionObserver()
+export const Publications = ({ userId }: PublicationsProps) => {
+  const { data } = useGetPostsQuery({ id: userId })
+  const [isPostOpen, setIsPostOpen] = useState<boolean>(false)
+  const [post, setPost] = useState<Post | null>(null)
+  const handleOpenPost = (post: Post) => {
+    setPost(post)
+    setIsPostOpen(true)
+  }
 
-  useEffect(() => {
-    // Когда последний элемент появляется в области видимости, обновляем курсор
-    updateCursor()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry?.isIntersecting])
+    const [ref, entry] = useIntersectionObserver()
+
+    useEffect(() => {
+        // Когда последний элемент появляется в области видимости, обновляем курсор
+        updateCursor()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [entry?.isIntersecting])
 
   return (
     <div className={s.publicationsContainer}>
@@ -35,6 +49,14 @@ export const Publications = ({ posts, updateCursor }: PublicationsProps) => {
           />
         </div>
       ))}
+      {post?.id && (
+        <ProfilePost
+          isPostOpen={isPostOpen}
+          postId={post?.id}
+          setIsPostOpen={setIsPostOpen}
+          userId={userId}
+        />
+      )}
     </div>
   )
 }

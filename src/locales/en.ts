@@ -11,9 +11,11 @@ import { signUpPage } from '@/locales/en/sign-up-page'
 import { termsOfServicePage } from '@/locales/en/terms-of-service-page'
 import { validation } from '@/locales/en/validation'
 
+import { profilePost } from './en/profile-post'
 import { sidebar } from './en/sidebar'
 
 export type LocaleType = typeof en
+export type LocaleTypeProfilePost = typeof en.profilePost
 export type LocaleAddPost = typeof en.createPost
 export type LocaleValidation = typeof en.validation
 export type LocaleValidationUserName = typeof en.validation.userName
@@ -42,6 +44,7 @@ export const en = {
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   profile: profile,
+  profilePost: profilePost,
   profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
   sidebar: sidebar,

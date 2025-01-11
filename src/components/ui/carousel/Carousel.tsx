@@ -15,7 +15,7 @@ import 'swiper/css/pagination'
 import s from './Carousel.module.scss'
 
 type CarouselProps = {
-  slides: any[] // todo: fix type later while real component usage
+  slides: string[]
 } & ComponentPropsWithoutRef<typeof Swiper>
 
 type SwiperRef = ElementRef<typeof Swiper>
