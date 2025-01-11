@@ -16,7 +16,7 @@ export default function LinkExpired() {
   }
 
   return (
-    <Page mt={'35px'}>
+    <Page pt={'35px'}>
       <div className={styles.container}>
         <div className={styles.content}>
           <Typography as={'h1'} variant={'h1'}>

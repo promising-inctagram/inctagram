@@ -12,6 +12,7 @@ import { signUpPage } from '@/locales/ru/sign-up-page'
 import { termsOfServicePage } from '@/locales/ru/terms-of-service-page'
 import { validation } from '@/locales/ru/validation'
 
+import { profilePost } from './ru/profile-post'
 import { sidebar } from './ru/sidebar'
 
 export const ru: LocaleType = {
@@ -29,6 +30,7 @@ export const ru: LocaleType = {
   passwordRecoveryPage: passwordRecoveryPage,
   privacyPolicyPage: privacyPolicyPage,
   profile: profile,
+  profilePost: profilePost,
   profileSettingPage: profileSettingPage,
   profileSettingsDevices: profileSettingsDevices,
   sidebar: sidebar,

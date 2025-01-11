@@ -1,6 +1,12 @@
 import { inctagramApi } from '@/shared/api/inctagram.api'
 
-import { CreatePostResponse, GetPostsArgs, ResponseGetPosts, UpdatePostArgs } from './post.types'
+import {
+  CreatePostResponse,
+  GetPostsArgs,
+  Post,
+  ResponseGetPosts,
+  UpdatePostArgs,
+} from './post.types'
 
 export const postApi = inctagramApi.injectEndpoints({
   endpoints: builder => {
@@ -13,6 +19,20 @@ export const postApi = inctagramApi.injectEndpoints({
           url: '/v1/posts',
         }),
       }),
+      deletePost: builder.mutation<void, number>({
+        invalidatesTags: ['Posts'],
+        query: id => ({
+          method: 'DELETE',
+          url: `/v1/posts/${id}`,
+        }),
+      }),
+      getOnePost: builder.query<Post, number>({
+        providesTags: ['Posts'],
+        query: id => ({
+          method: 'GET',
+          url: `v1/posts/${id}`,
+        }),
+      }),
       getPosts: builder.query<ResponseGetPosts, GetPostsArgs>({
         providesTags: ['Posts'],
         query: ({ cursor, id, ...args }) => ({
@@ -22,6 +42,7 @@ export const postApi = inctagramApi.injectEndpoints({
         }),
       }),
       updatePost: builder.mutation<CreatePostResponse, UpdatePostArgs>({
+        invalidatesTags: ['Posts'],
         query: ({ ...args }) => ({
           body: {
             description: args.description,
@@ -34,4 +55,10 @@ export const postApi = inctagramApi.injectEndpoints({
   },
 })
 
-export const { useCreatePostMutation, useGetPostsQuery, useUpdatePostMutation } = postApi
+export const {
+  useCreatePostMutation,
+  useDeletePostMutation,
+  useGetOnePostQuery,
+  useGetPostsQuery,
+  useUpdatePostMutation,
+} = postApi
