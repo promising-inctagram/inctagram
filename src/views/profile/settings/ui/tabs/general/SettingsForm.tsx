@@ -1,14 +1,17 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Translate } from '@/components'
 import { ControlledDatePicker } from '@/components/controlled-date-picker'
 import { ControlledSelect } from '@/components/controlled-select'
 import { ControlledTextArea } from '@/components/controlled-text-area'
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, showToast } from '@/components/ui'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
+import { MAX_ABOUT_ME_LENGTH } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
+import { CustomerError, getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
 import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
 import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
@@ -57,12 +60,22 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   })
 
   const { country: countryId, firstName, lastName, username } = watch()
+  const aboutMeValue = watch('aboutMe')
   const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
     locale || 'en',
     countryId
   )
+
+  const isValidAboutMeField = aboutMeValue && aboutMeValue.length > MAX_ABOUT_ME_LENGTH
+
   const isSaveDisabled =
-    !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
+    !firstName ||
+    !lastName ||
+    !username ||
+    errors.firstName ||
+    errors.lastName ||
+    errors.username ||
+    isValidAboutMeField
 
   const handleSaveChanges = () => {
     const { dateOfBirth, ...values } = getValues()
@@ -111,8 +124,15 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     try {
       await updateProfile(transformData).unwrap()
       showToast({ message: toastMessages.success })
-    } catch {
-      showToast({ message: toastMessages.error, variant: 'error' })
+    } catch (e: unknown) {
+      const errors = getErrorMessageData(e)
+
+      /*if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          setAboutMeError(<Translate text={el.message} />)
+        })
+      }*/
+      /*showToast({ message: toastMessages.error, variant: 'error' })*/
     }
   })
 
@@ -170,6 +190,9 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
         <ControlledTextArea
           className={s.textArea}
           control={control}
+          errorMessage={
+            isValidAboutMeField ? validation.aboutMe.maxLength : errors.aboutMe?.message
+          }
           label={labels.aboutMe}
           name={'aboutMe'}
           placeholder={placeholders.aboutMePlaceholder}
