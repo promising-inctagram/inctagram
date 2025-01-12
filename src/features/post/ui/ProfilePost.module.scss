@@ -1,39 +1,39 @@
-.carouselContainer{
-    width: 490px;
-    height: 562px;
+.carouselContainer {
+  width: 490px;
+  height: 562px;
 }
 
 .postInfo {
-    flex: 1;
+  flex: 1;
 }
 
 .postHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    width: 100%;
-    padding: 11px 24px;
+  width: 100%;
+  padding: 11px 24px;
 
-    border-bottom: 1px solid var(--color-dark-100);
+  border-bottom: 1px solid var(--color-dark-100);
 }
 
 .profileName {
-    display: flex;
-    align-items: center;
-  }
-
-.avatar {
-    margin-right: 12px;
-  }
-  
-.blankImage {
-    width: 36px;
-    height: 36px;
-    margin-right: 12px;
+  display: flex;
+  align-items: center;
 }
 
-.description{
-    display: flex;
-    padding: 19px 24px;
+.avatar {
+  margin-right: 12px;
+}
+
+.blankImage {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+
+.description {
+  display: flex;
+  padding: 19px 24px;
 }

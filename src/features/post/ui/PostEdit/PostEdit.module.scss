@@ -1,20 +1,20 @@
 .content {
-    width: fit-content;
+  width: fit-content;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .body {
-    display: flex;
-    height: 503px;
-    padding: 0;
+  display: flex;
+  height: 503px;
+  padding: 0;
 }
 
 .imageContainer {
-    width: 490px;
+  width: 490px;
 }
 
 .container {
@@ -29,45 +29,45 @@
 }
 
 .descriptionContainer {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
+}
 
-  .profileName {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  
-  .avatar {
-    margin-right: 12px;
-  }
-  
-  .blankImage {
-    width: 36px;
-    height: 36px;
-    margin-right: 12px;
-  }
-  
-  .textField {
-    resize: none;
-    width: 433px;
-    height: 120px;
-    background-color: var(--color-dark-500);
-  }
-  
-  .smallText {
-    position: absolute;
-    top: 227px;
-    left: -25px;
-  
-    width: 100%;
-  
-    color: var(--color-light-900);
-    text-align: end;
-  }
+.profileName {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
 
-  .button {
-    align-items: end;
-    padding: 6px 12px;
-  }
+.avatar {
+  margin-right: 12px;
+}
+
+.blankImage {
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+
+.textField {
+  resize: none;
+  width: 433px;
+  height: 120px;
+  background-color: var(--color-dark-500);
+}
+
+.smallText {
+  position: absolute;
+  top: 227px;
+  left: -25px;
+
+  width: 100%;
+
+  color: var(--color-light-900);
+  text-align: end;
+}
+
+.button {
+  align-items: end;
+  padding: 6px 12px;
+}
