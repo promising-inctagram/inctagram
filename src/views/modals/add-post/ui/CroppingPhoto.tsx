@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/icons'
 import { MAX_POST_FILE_SIZE, POST_FILE_TYPES } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
+import { CarouselD } from '@/views/modals/add-post/ui/DDD'
 import ImageEditor from '@/views/modals/add-post/ui/ImageEditor'
 import * as Slider from '@radix-ui/react-slider'
 import clsx from 'clsx'
@@ -109,7 +110,7 @@ const CroppingPhoto = ({
 
       <DialogBody className={styles.body}>
         {showZoom ? (
-          <>
+          /*<>
             <ImageEditor
               imagesPreviews={imagesPreviews}
               setImagesPreviews={setImagesPreviews}
@@ -132,7 +133,8 @@ const CroppingPhoto = ({
                 <Slider.Thumb aria-label={'Volume'} className={s.thumb} />
               </Slider.Root>
             </form>
-          </>
+          </>*/
+          <CarouselD slides={imagesPreviews} />
         ) : (
           <Carousel className={styles.image} slides={imagesPreviews} />
         )}
