@@ -1,8 +1,7 @@
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Translate } from '@/components'
 import { ControlledDatePicker } from '@/components/controlled-date-picker'
 import { ControlledSelect } from '@/components/controlled-select'
 import { ControlledTextArea } from '@/components/controlled-text-area'
@@ -11,7 +10,7 @@ import { Button, showToast } from '@/components/ui'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
 import { MAX_ABOUT_ME_LENGTH } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
-import { CustomerError, getErrorMessageData } from '@/shared/utils/get-error-message-data'
+import { FormErrorData, getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
 import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
 import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
@@ -38,6 +37,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   const { labels, placeholders, submitButton, toastMessages, validation } =
     t.profileSettingPage.settingsForm
   const [ageError, setAgeError] = useState<ReactNode | null>(null)
+  const [aboutMeError, setAboutMeError] = useState('')
   const [updateProfile] = useUpdateProfileMutation()
   const {
     control,
@@ -124,15 +124,15 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     try {
       await updateProfile(transformData).unwrap()
       showToast({ message: toastMessages.success })
+      setAboutMeError('')
     } catch (e: unknown) {
-      const errors = getErrorMessageData(e)
+      const errors: FormErrorData[] | string = getErrorMessageData(e)
 
-      /*if (typeof errors !== 'string') {
-        errors.forEach(el => {
-          setAboutMeError(<Translate text={el.message} />)
-        })
-      }*/
-      /*showToast({ message: toastMessages.error, variant: 'error' })*/
+      if (Array.isArray(errors)) {
+        setAboutMeError(errors[0].message)
+      } else {
+        setAboutMeError(errors)
+      }
     }
   })
 
@@ -191,7 +191,9 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
           className={s.textArea}
           control={control}
           errorMessage={
-            isValidAboutMeField ? validation.aboutMe.maxLength : errors.aboutMe?.message
+            isValidAboutMeField
+              ? validation.aboutMe.maxLength
+              : /*errors.aboutMe?.message*/ aboutMeError
           }
           label={labels.aboutMe}
           name={'aboutMe'}
