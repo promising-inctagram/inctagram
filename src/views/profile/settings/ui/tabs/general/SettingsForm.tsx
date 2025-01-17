@@ -190,11 +190,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
         <ControlledTextArea
           className={s.textArea}
           control={control}
-          errorMessage={
-            isValidAboutMeField
-              ? validation.aboutMe.maxLength
-              : /*errors.aboutMe?.message*/ aboutMeError
-          }
+          errorMessage={isValidAboutMeField ? validation.aboutMe.maxLength : aboutMeError}
           label={labels.aboutMe}
           name={'aboutMe'}
           placeholder={placeholders.aboutMePlaceholder}
