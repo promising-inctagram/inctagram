@@ -39,7 +39,6 @@ export const profileSettingPage = {
       aboutMe: {
         allowedSymbols: 'About me may contain symbols: 0-9, A-Z, a-z, А-Я, а-я + special symbols',
         maxLength: 'Maximum number of characters 200',
-        minLength: 'Minimum number of characters 0',
       },
       ageValidationMessage: 'A user under 13 cannot create a profile. <1>Privacy Policy</1>',
       dateOfBirth: 'Enter the correct date format dd/MM/yyyy',
