@@ -4,7 +4,7 @@ export const sidebar = {
   home: 'Home',
   log_out: 'Log Out',
   messenger: 'Messenger',
-  my_profile: 'My profile',
+  my_profile: 'My Profile',
   search: 'Search',
   statistics: 'Statistics',
 }
