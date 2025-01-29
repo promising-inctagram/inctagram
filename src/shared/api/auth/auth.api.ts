@@ -51,7 +51,7 @@ export const authApi = inctagramApi.injectEndpoints({
 
             localStorage.setItem(ACCESS_TOKEN, data.accessToken.trim())
 
-            dispatch(authApi.util.invalidateTags(['Me']))
+            dispatch(authApi.util.invalidateTags(['Me', 'Profile']))
           } catch (e) {
             // todo: error is catches in baseQueryWithReauth & sigInPage component
             console.error(e, 'Error in login: builder.mutation')

@@ -4,6 +4,7 @@ import { getSidebarLayout } from '@/components/layout/sidebar-layout'
 import { Page } from '@/components/page'
 import { ProfileHeader } from '@/features/profile/ui/header'
 import { Publications } from '@/features/profile/ui/publications'
+import { useMeQuery } from '@/shared/api/auth/auth.api'
 import { useGetPostsQuery } from '@/shared/api/post/post.api'
 import { Post } from '@/shared/api/post/post.types'
 import { useRouter } from 'next/router'
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   const [posts, setPosts] = useState<Post[]>([])
   const [cursor, setCursor] = useState<number>()
   const requestIdRef = useRef<string[]>([])
+  const { data: me } = useMeQuery()
 
   const { data, isSuccess, requestId } = useGetPostsQuery(
     { cursor: cursor, id: userId },
@@ -23,12 +25,13 @@ const ProfilePage = () => {
   )
 
   useEffect(() => {
-    if (router.query.id) {
-      const id = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id
+    if (router.query.id && me) {
+      const id = Array.isArray(router.query.id) ? router.query.id[0] : me.id
 
       setUserId(id)
+      router.push(`/profile/${me.id}`)
     }
-  }, [router.query.id])
+  }, [router.query.id, me])
 
   useEffect(() => {
     // Выходим если запрос за постами не успешен.
