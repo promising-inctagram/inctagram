@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ControlledDatePicker } from '@/components/controlled-date-picker'
@@ -23,6 +23,7 @@ import {
 } from '@/views/profile/settings/model/settings-slice'
 import { SettingFields, SettingsFormProps } from '@/views/profile/settings/model/types'
 import { AgeError } from '@/views/profile/settings/ui/tabs/general/AgeError'
+import { SignUpFields } from '@/views/sign-up/model/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format, parse } from 'date-fns'
 
@@ -37,36 +38,38 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   const { labels, placeholders, submitButton, toastMessages, validation } =
     t.profileSettingPage.settingsForm
   const [ageError, setAgeError] = useState<ReactNode | null>(null)
-  const [aboutMeError, setAboutMeError] = useState('')
   const [updateProfile] = useUpdateProfileMutation()
   const {
+    clearErrors,
     control,
     formState: { errors },
     getValues,
     handleSubmit,
     reset,
+    setError,
     setValue,
     watch,
   } = useForm<SettingFields>({
     defaultValues: {
       ...props,
+      aboutMe: '',
       city: savedSettingsForm.city || String(props?.city?.id),
       country: String(props?.country?.id),
       dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
     },
-    mode: 'onChange',
+    mode: 'onBlur',
     reValidateMode: 'onChange',
     resolver: zodResolver(settingsSchemeCreator(t.profileSettingPage.settingsForm.validation)),
   })
 
+  const aboutMe = useWatch({ control, name: 'aboutMe' })
+
   const { country: countryId, firstName, lastName, username } = watch()
-  const aboutMeValue = watch('aboutMe')
+
   const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
     locale || 'en',
     countryId
   )
-
-  const isValidAboutMeField = aboutMeValue && aboutMeValue.length > MAX_ABOUT_ME_LENGTH
 
   const isSaveDisabled =
     !firstName ||
@@ -75,7 +78,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     errors.firstName ||
     errors.lastName ||
     errors.username ||
-    isValidAboutMeField
+    (aboutMe && aboutMe.length > MAX_ABOUT_ME_LENGTH)
 
   const handleSaveChanges = () => {
     const { dateOfBirth, ...values } = getValues()
@@ -95,6 +98,21 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
       dispatch(setReturningFromPolicy(false))
     }
   }, [reset, setValue, dispatch, isReturningFromPolicy, savedSettingsForm])
+
+  useEffect(() => {
+    if (aboutMe && aboutMe.length > MAX_ABOUT_ME_LENGTH) {
+      setError('aboutMe', {
+        message: t.profileSettingPage.settingsForm.validation.aboutMe.maxLength,
+      })
+    } else {
+      clearErrors('aboutMe')
+    }
+  }, [
+    aboutMe,
+    clearErrors,
+    setError,
+    t.profileSettingPage.settingsForm.validation.aboutMe.maxLength,
+  ])
 
   const formHandler = handleSubmit(async data => {
     const formatDate = format(data.dateOfBirth, 'dd/MM/yyyy')
@@ -124,14 +142,13 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     try {
       await updateProfile(transformData).unwrap()
       showToast({ message: toastMessages.success })
-      setAboutMeError('')
-    } catch (e: unknown) {
-      const errors: FormErrorData[] | string = getErrorMessageData(e)
+    } catch (e) {
+      const errors = getErrorMessageData(e)
 
-      if (Array.isArray(errors)) {
-        setAboutMeError(errors[0].message)
-      } else {
-        setAboutMeError(errors)
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          setError(el.field as keyof SettingFields, { message: el.message })
+        })
       }
     }
   })
@@ -190,7 +207,6 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
         <ControlledTextArea
           className={s.textArea}
           control={control}
-          errorMessage={isValidAboutMeField ? validation.aboutMe.maxLength : aboutMeError}
           label={labels.aboutMe}
           name={'aboutMe'}
           placeholder={placeholders.aboutMePlaceholder}
