@@ -28,6 +28,7 @@ export type LocaleSettingsValidation = typeof en.profileSettingPage.settingsForm
 export type LocaleValidationFirstName =
   typeof en.profileSettingPage.settingsForm.validation.firstName
 export type LocaleValidationLastName = typeof en.profileSettingPage.settingsForm.validation.lastName
+export type LocaleValidationAboutMe = typeof en.profileSettingPage.settingsForm.validation.aboutMe
 
 export const en = {
   confirmEmailPage: confirmEmailPage,

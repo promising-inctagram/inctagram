@@ -11,7 +11,10 @@ import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
 import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
-import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
+import {
+  aboutMeType,
+  settingsSchemeCreator,
+} from '@/views/profile/settings/model/settings-scheme-creator'
 import {
   SavedSettingsForm,
   selectIsReturningFromPolicy,
@@ -30,6 +33,26 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   const savedSettingsForm = useSelector(selectSavedSettingsForm)
   const isReturningFromPolicy = useSelector(selectIsReturningFromPolicy)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!props.aboutMe) {
+      localStorage.setItem('firstAboutMe', 'primary')
+    } else {
+      localStorage.setItem('firstAboutMe', 'secondary')
+    }
+
+    return () => {
+      if (localStorage.getItem('firstAboutMe') === 'primary') {
+        localStorage.removeItem('firstAboutMe')
+      }
+    }
+  }, [props.aboutMe])
+
+  const changeAboutMeHandler = () => {
+    if (localStorage.getItem('firstAboutMe') === 'primary') {
+      localStorage.setItem('firstAboutMe', 'secondary')
+    }
+  }
 
   const { locale, t } = useTranslation()
   const { labels, placeholders, submitButton, toastMessages, validation } =
@@ -53,7 +76,12 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     },
     mode: 'onChange',
     reValidateMode: 'onChange',
-    resolver: zodResolver(settingsSchemeCreator(t.profileSettingPage.settingsForm.validation)),
+    resolver: zodResolver(
+      settingsSchemeCreator(
+        t.profileSettingPage.settingsForm.validation,
+        (localStorage.getItem('firstAboutMe') as aboutMeType) || ('secondary' as aboutMeType)
+      )
+    ),
   })
 
   const { country: countryId, firstName, lastName, username } = watch()
@@ -68,7 +96,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     const { dateOfBirth, ...values } = getValues()
 
     Object.entries(values).forEach(([field, value]) => {
-      if (value !== '') {
+      if (value && value !== '') {
         dispatch(updateFormField({ field: field as keyof SavedSettingsForm, value }))
       }
     })
@@ -110,6 +138,9 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
 
     try {
       await updateProfile(transformData).unwrap()
+      if (props.aboutMe) {
+        localStorage.setItem('firstAboutMe', 'secondary')
+      }
       showToast({ message: toastMessages.success })
     } catch {
       showToast({ message: toastMessages.error, variant: 'error' })
@@ -172,6 +203,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
           control={control}
           label={labels.aboutMe}
           name={'aboutMe'}
+          onChangeCapture={changeAboutMeHandler}
           placeholder={placeholders.aboutMePlaceholder}
         />
         <Button className={s.submitButton} disabled={isSaveDisabled} type={'submit'}>

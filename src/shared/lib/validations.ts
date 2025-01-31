@@ -1,12 +1,16 @@
 import {
+  LocaleSettingsValidation,
+  LocaleValidationAboutMe,
   LocaleValidationFirstName,
   LocaleValidationLastName,
   LocaleValidationPassword,
   LocaleValidationUserName,
 } from '@/locales/en'
 import {
+  ABOUT_ME_REGEX,
   FIRST_NAME_REGEX,
   LAST_NAME_REGEX,
+  MAX_ABOUT_ME_LENGTH,
   MAX_FIRST_NAME_LENGTH,
   MAX_LAST_NAME_LENGTH,
   MAX_PASSWORD_LENGTH,
@@ -64,4 +68,12 @@ export const lastNameScheme = (args: LocaleValidationLastName) =>
 
 export const dateOfBirthScheme = (errorMessage: string) => {
   return z.date({ message: errorMessage })
+}
+
+export const aboutMeValidate = (args: LocaleValidationAboutMe) => {
+  return z
+    .string()
+    .regex(ABOUT_ME_REGEX, { message: args.allowedSymbols })
+    .max(MAX_ABOUT_ME_LENGTH, { message: args.maxLength })
+    .min(MIN_FIRST_NAME_LENGTH, { message: args.minLength })
 }

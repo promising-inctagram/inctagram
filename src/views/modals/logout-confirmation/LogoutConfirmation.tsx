@@ -51,6 +51,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
       .unwrap()
       .then(() => {
         localStorage.removeItem('hasRedirected')
+        localStorage.removeItem('firstAboutMe')
         router.push(Paths.logIn)
       })
       .catch(e => {

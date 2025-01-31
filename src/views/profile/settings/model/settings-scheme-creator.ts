@@ -1,5 +1,8 @@
+import { useEffect } from 'react'
+
 import { LocaleSettingsValidation } from '@/locales/en'
 import {
+  aboutMeValidate,
   dateOfBirthScheme,
   firstNameScheme,
   lastNameScheme,
@@ -7,9 +10,11 @@ import {
 } from '@/shared/lib/validations'
 import { z } from 'zod'
 
-export const settingsSchemeCreator = (t: LocaleSettingsValidation) => {
+export type aboutMeType = 'primary' | 'secondary'
+
+export const settingsSchemeCreator = (t: LocaleSettingsValidation, aboutMe: aboutMeType) => {
   return z.object({
-    aboutMe: z.string().optional(),
+    aboutMe: aboutMe === 'secondary' ? aboutMeValidate(t.aboutMe) : z.any().optional(),
     city: z.string().optional(),
     country: z.string().optional(),
     dateOfBirth: dateOfBirthScheme(t.dateOfBirth),
