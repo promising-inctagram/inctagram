@@ -24,6 +24,7 @@ import {
 } from '@/views/profile/settings/model/settings-slice'
 import { SettingFields, SettingsFormProps } from '@/views/profile/settings/model/types'
 import { AgeError } from '@/views/profile/settings/ui/tabs/general/AgeError'
+import { useSettingsForm } from '@/views/profile/settings/ui/tabs/general/useSettingsForm'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format, parse } from 'date-fns'
 
@@ -33,26 +34,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   const savedSettingsForm = useSelector(selectSavedSettingsForm)
   const isReturningFromPolicy = useSelector(selectIsReturningFromPolicy)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (!props.aboutMe) {
-      localStorage.setItem('firstAboutMe', 'primary')
-    } else {
-      localStorage.setItem('firstAboutMe', 'secondary')
-    }
-
-    return () => {
-      if (localStorage.getItem('firstAboutMe') === 'primary') {
-        localStorage.removeItem('firstAboutMe')
-      }
-    }
-  }, [props.aboutMe])
-
-  const changeAboutMeHandler = () => {
-    if (localStorage.getItem('firstAboutMe') === 'primary') {
-      localStorage.setItem('firstAboutMe', 'secondary')
-    }
-  }
+  const { changeAboutMeHandler } = useSettingsForm(props.aboutMe)
 
   const { locale, t } = useTranslation()
   const { labels, placeholders, submitButton, toastMessages, validation } =
