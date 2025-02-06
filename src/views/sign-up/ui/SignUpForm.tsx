@@ -111,7 +111,7 @@ export const SignUpForm = () => {
           }
           name={'agreement'}
         />
-        <Button disabled={isSubmitDisabled} type={'submit'}>
+        <Button className={s.signUpBtn} disabled={isSubmitDisabled} type={'submit'}>
           {submitButton}
         </Button>
       </form>
