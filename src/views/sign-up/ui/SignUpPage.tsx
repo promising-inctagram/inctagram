@@ -25,7 +25,7 @@ function SignUpPage() {
           <OAuthIcons />
           <SignUpForm />
           <div className={s.footer}>
-            <Typography variant={'regular_text_16'}>{accountExistsQuestion}</Typography>
+            <Typography variant={'regular_text_14'}>{accountExistsQuestion}</Typography>
             <Button as={Link} href={Paths.logIn} variant={'link'}>
               {linkToSignIn}
             </Button>
