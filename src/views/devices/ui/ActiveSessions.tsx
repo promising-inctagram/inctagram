@@ -53,7 +53,7 @@ export const ActiveSessions = (props: Props) => {
         </div>
       </div>
       <div>
-        <Button onClick={handleDeleteDevice} variant={'icon'}>
+        <Button className={s.deviceLogoutBtn} onClick={handleDeleteDevice} variant={'icon'}>
           <LogOutOutlineIcon />
           {logOut}
         </Button>
