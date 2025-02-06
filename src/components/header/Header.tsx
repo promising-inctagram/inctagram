@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { SelectLanguage } from '@/components/select-language'
 import { Badge, Button, Typography } from '@/components/ui'
 import { BellOutlineIcon } from '@/components/ui/icons'
+import { useMeQuery } from '@/shared/api/auth/auth.api'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -16,6 +17,7 @@ export type HeaderProps = {
 }
 
 export const Header = ({ countNotification }: HeaderProps) => {
+  const { isFetching } = useMeQuery()
   const { isAuth } = useContext(AuthContext)
   const { t } = useTranslation()
   const isTablet = useIsMobileOrTabletVersion()
@@ -26,7 +28,7 @@ export const Header = ({ countNotification }: HeaderProps) => {
         Inctagram
       </Typography>
       <div className={styles.container}>
-        {isAuth && (
+        {!isFetching && isAuth && (
           <Button className={styles.buttonBell} variant={'icon'}>
             <Badge count={countNotification}>
               <BellOutlineIcon />
@@ -34,7 +36,7 @@ export const Header = ({ countNotification }: HeaderProps) => {
           </Button>
         )}
         <SelectLanguage />
-        {!isAuth && !isTablet && (
+        {!isFetching && !isAuth && !isTablet && (
           <div className={styles.buttonContainer}>
             <Button as={Link} className={styles.button} href={Paths.logIn} variant={'nb-outlined'}>
               {t.header.loginButton}
