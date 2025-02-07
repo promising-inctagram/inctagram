@@ -26,10 +26,11 @@ import s from './LogoutConfirmation.module.scss'
 
 type Props = {
   isOpen: boolean
+  onConfirm?: () => void
   onOpenChange: (isOpen: boolean) => void
 }
 
-export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
+export function LogoutConfirmation({ isOpen, onConfirm, onOpenChange }: Props) {
   const { meData } = useContext(AuthContext)
   const router = useRouter()
   const [logout, { isLoading }] = useLogoutMutation()
@@ -47,26 +48,30 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
   } = useTranslation()
 
   const logoutHandler = () => {
-    logout()
-      .unwrap()
-      .then(() => {
-        localStorage.removeItem('hasRedirected')
-        router.push(Paths.logIn)
-      })
-      .catch(e => {
-        const error = getErrorMessageData(e)
+    if (onConfirm) {
+      onConfirm()
+    } else {
+      logout()
+        .unwrap()
+        .then(() => {
+          localStorage.removeItem('hasRedirected')
+          router.push(Paths.logIn)
+        })
+        .catch(e => {
+          const error = getErrorMessageData(e)
 
-        if (typeof error !== 'string') {
-          error.forEach(el => {
-            showToast({ message: el.message, variant: 'error' })
-          })
-        } else {
-          showToast({ message: error, variant: 'error' })
-        }
-      })
-      .finally(() => {
-        closeHandler()
-      })
+          if (typeof error !== 'string') {
+            error.forEach(el => {
+              showToast({ message: el.message, variant: 'error' })
+            })
+          } else {
+            showToast({ message: error, variant: 'error' })
+          }
+        })
+        .finally(() => {
+          closeHandler()
+        })
+    }
   }
 
   const closeHandler = () => {
