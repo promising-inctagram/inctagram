@@ -7,6 +7,7 @@ import { ControlledSelect } from '@/components/controlled-select'
 import { ControlledTextArea } from '@/components/controlled-text-area'
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, showToast } from '@/components/ui'
+import { useMeQuery } from '@/shared/api/auth/auth.api'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
@@ -36,6 +37,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     t.profileSettingPage.settingsForm
   const [ageError, setAgeError] = useState<ReactNode | null>(null)
   const [updateProfile] = useUpdateProfileMutation()
+  const { refetch } = useMeQuery()
   const {
     control,
     formState: { errors },
@@ -110,6 +112,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
 
     try {
       await updateProfile(transformData).unwrap()
+      refetch()
       showToast({ message: toastMessages.success })
     } catch {
       showToast({ message: toastMessages.error, variant: 'error' })
