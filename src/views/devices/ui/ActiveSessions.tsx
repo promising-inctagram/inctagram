@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Button, Card, Typography } from '@/components/ui'
 import { LogOutOutlineIcon } from '@/components/ui/icons'
 import DesktopIcon from '@/components/ui/icons/DesktopIcon'
@@ -6,6 +8,7 @@ import { useDeleteDeviceMutation } from '@/shared/api/devices/devices.api'
 import { getDevicesArgs } from '@/shared/api/devices/devices.types'
 import { useTranslation } from '@/shared/hooks'
 import { useGetBrowserIcon } from '@/views/devices/hooks/useGetBrowserIcon'
+import { LogoutConfirmation } from '@/views/modals/logout-confirmation/LogoutConfirmation'
 
 import s from './Devices.module.scss'
 
@@ -21,6 +24,8 @@ export const ActiveSessions = (props: Props) => {
   const browserIcon = useGetBrowserIcon(browserName)
   const [deleteDevice] = useDeleteDeviceMutation()
 
+  const [openLogoutModal, setOpenLogoutModal] = useState(false)
+
   const date = new Date(lastActiveDate)
   const options: Intl.DateTimeFormatOptions = {
     day: '2-digit',
@@ -30,7 +35,15 @@ export const ActiveSessions = (props: Props) => {
   const dateVisit = date.toLocaleDateString('ru-RU', options)
 
   const handleDeleteDevice = () => {
-    deleteDevice(id).unwrap()
+    setOpenLogoutModal(true)
+  }
+
+  const confirmDeleteDevice = () => {
+    deleteDevice(id)
+      .unwrap()
+      .finally(() => {
+        setOpenLogoutModal(false)
+      })
   }
 
   return (
@@ -57,6 +70,11 @@ export const ActiveSessions = (props: Props) => {
           <LogOutOutlineIcon />
           {logOut}
         </Button>
+        <LogoutConfirmation
+          isOpen={openLogoutModal}
+          onConfirm={confirmDeleteDevice}
+          onOpenChange={setOpenLogoutModal}
+        />
       </div>
     </Card>
   )
