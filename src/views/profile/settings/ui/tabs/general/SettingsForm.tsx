@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { ControlledDatePicker } from '@/components/controlled-date-picker'
@@ -8,9 +8,8 @@ import { ControlledTextArea } from '@/components/controlled-text-area'
 import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, showToast } from '@/components/ui'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
-import { MAX_ABOUT_ME_LENGTH } from '@/shared/constants'
 import { useTranslation } from '@/shared/hooks'
-import { FormErrorData, getErrorMessageData } from '@/shared/utils/get-error-message-data'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
 import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
 import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
@@ -23,7 +22,6 @@ import {
 } from '@/views/profile/settings/model/settings-slice'
 import { SettingFields, SettingsFormProps } from '@/views/profile/settings/model/types'
 import { AgeError } from '@/views/profile/settings/ui/tabs/general/AgeError'
-import { SignUpFields } from '@/views/sign-up/model/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format, parse } from 'date-fns'
 
@@ -40,7 +38,6 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   const [ageError, setAgeError] = useState<ReactNode | null>(null)
   const [updateProfile] = useUpdateProfileMutation()
   const {
-    clearErrors,
     control,
     formState: { errors },
     getValues,
@@ -57,12 +54,10 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
       country: String(props?.country?.id),
       dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: zodResolver(settingsSchemeCreator(t.profileSettingPage.settingsForm.validation)),
   })
-
-  const aboutMe = useWatch({ control, name: 'aboutMe' })
 
   const { country: countryId, firstName, lastName, username } = watch()
 
@@ -78,7 +73,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     errors.firstName ||
     errors.lastName ||
     errors.username ||
-    (aboutMe && aboutMe.length > MAX_ABOUT_ME_LENGTH)
+    errors.aboutMe
 
   const handleSaveChanges = () => {
     const { dateOfBirth, ...values } = getValues()
@@ -98,21 +93,6 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
       dispatch(setReturningFromPolicy(false))
     }
   }, [reset, setValue, dispatch, isReturningFromPolicy, savedSettingsForm])
-
-  useEffect(() => {
-    if (aboutMe && aboutMe.length > MAX_ABOUT_ME_LENGTH) {
-      setError('aboutMe', {
-        message: t.profileSettingPage.settingsForm.validation.aboutMe.maxLength,
-      })
-    } else {
-      clearErrors('aboutMe')
-    }
-  }, [
-    aboutMe,
-    clearErrors,
-    setError,
-    t.profileSettingPage.settingsForm.validation.aboutMe.maxLength,
-  ])
 
   const formHandler = handleSubmit(async data => {
     const formatDate = format(data.dateOfBirth, 'dd/MM/yyyy')
