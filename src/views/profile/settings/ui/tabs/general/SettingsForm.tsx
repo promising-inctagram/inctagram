@@ -49,7 +49,6 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   } = useForm<SettingFields>({
     defaultValues: {
       ...props,
-      aboutMe: '',
       city: savedSettingsForm.city || String(props?.city?.id),
       country: String(props?.country?.id),
       dateOfBirth: dateOfBirth ? parse(dateOfBirth, 'dd/MM/yyyy', new Date()) : undefined,
