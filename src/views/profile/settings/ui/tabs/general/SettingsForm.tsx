@@ -9,6 +9,7 @@ import { ControlledTextField } from '@/components/controlled-text-field'
 import { Button, showToast } from '@/components/ui'
 import { useUpdateProfileMutation } from '@/shared/api/profile/profile.api'
 import { useTranslation } from '@/shared/hooks'
+import { getErrorMessageData } from '@/shared/utils/get-error-message-data'
 import { useCountryCity } from '@/views/profile/settings/model/hooks/useCountryCity'
 import { isAgeValid } from '@/views/profile/settings/model/is-age-valid'
 import { settingsSchemeCreator } from '@/views/profile/settings/model/settings-scheme-creator'
@@ -42,6 +43,7 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     getValues,
     handleSubmit,
     reset,
+    setError,
     setValue,
     watch,
   } = useForm<SettingFields>({
@@ -57,12 +59,20 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
   })
 
   const { country: countryId, firstName, lastName, username } = watch()
+
   const { cityOptions, countryOptions, isFetchingCities, isLoadingCities } = useCountryCity(
     locale || 'en',
     countryId
   )
+
   const isSaveDisabled =
-    !firstName || !lastName || !username || errors.firstName || errors.lastName || errors.username
+    !firstName ||
+    !lastName ||
+    !username ||
+    errors.firstName ||
+    errors.lastName ||
+    errors.username ||
+    errors.aboutMe
 
   const handleSaveChanges = () => {
     const { dateOfBirth, ...values } = getValues()
@@ -111,8 +121,14 @@ export const SettingsForm = ({ dateOfBirth, ...props }: SettingsFormProps) => {
     try {
       await updateProfile(transformData).unwrap()
       showToast({ message: toastMessages.success })
-    } catch {
-      showToast({ message: toastMessages.error, variant: 'error' })
+    } catch (e) {
+      const errors = getErrorMessageData(e)
+
+      if (typeof errors !== 'string') {
+        errors.forEach(el => {
+          setError(el.field as keyof SettingFields, { message: el.message })
+        })
+      }
     }
   })
 
