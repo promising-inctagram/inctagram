@@ -24,7 +24,9 @@ type CroppingPhotoProps = {
   imagesPreviews: string[]
   next: () => void
   setImagesFilers: React.Dispatch<React.SetStateAction<File[]>>
+  setImagesFilersResetFilter: React.Dispatch<React.SetStateAction<File[]>>
   setImagesPreviews: React.Dispatch<React.SetStateAction<string[]>>
+  setImagesPreviewsResetFilter: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const CroppingPhoto = ({
@@ -32,7 +34,9 @@ const CroppingPhoto = ({
   imagesPreviews,
   next,
   setImagesFilers,
+  setImagesFilersResetFilter,
   setImagesPreviews,
+  setImagesPreviewsResetFilter,
 }: CroppingPhotoProps) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const { t } = useTranslation()
@@ -62,9 +66,11 @@ const CroppingPhoto = ({
       }
 
       setImagesFilers(prev => [...prev, file])
+      setImagesFilersResetFilter(prev => [...prev, file])
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
           setImagesPreviews((prev: string[]) => [...prev, reader.result as string])
+          setImagesPreviewsResetFilter((prev: string[]) => [...prev, reader.result as string])
         }
       }
       reader.readAsDataURL(file)

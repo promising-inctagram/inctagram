@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo, useRef, useState } from 'react'
+import React, { ReactElement, useEffect, useMemo, useRef, useState } from 'react'
 
 import {
   DialogContent,
@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from '@/components/ui'
 import { useTranslation } from '@/shared/hooks'
+import { FilterPost } from '@/views/modals/add-post/ui/FilterPost'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import styles from './AddPost.module.scss'
@@ -30,12 +31,27 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   const { t } = useTranslation()
   const { addPostDescription, addPostTitle } = t.createPost.createPostMain
   const overlayRef = useRef<HTMLDivElement>(null)
+
+  const [imagesPreviewsResetFilter, setImagesPreviewsResetFilter] = useState<string[]>([])
+  const [imagesFilesResetFilter, setImagesFilersResetFilter] = useState<File[]>([])
+
   const next = () => {
     setStepIndex(i => i + 1)
   }
 
+  const [isBack, setIsBack] = useState(false)
+
+  useEffect(() => {
+    if (isBack) {
+      setImagesFilers(imagesFilesResetFilter)
+      setImagesPreviews(imagesPreviewsResetFilter)
+      setIsBack(false)
+    }
+  }, [isBack])
+
   const back = () => {
     setStepIndex(i => i - 1)
+    setIsBack(true)
   }
 
   const handleOpenCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -54,13 +70,27 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
         key={'upload'}
         next={next}
         setImagesFilers={setImagesFilers}
+        setImagesFilersResetFilter={setImagesFilersResetFilter}
         setImagesPreviews={setImagesPreviews}
+        setImagesPreviewsResetFilter={setImagesPreviewsResetFilter}
         setIsOpenCloseModal={setIsOpenCloseModal}
       />,
       <CroppingPhoto
         back={back}
         imagesPreviews={imagesPreviews}
         key={'cropping'}
+        next={next}
+        setImagesFilers={setImagesFilers}
+        setImagesFilersResetFilter={setImagesFilersResetFilter}
+        setImagesPreviews={setImagesPreviews}
+        setImagesPreviewsResetFilter={setImagesPreviewsResetFilter}
+      />,
+      <FilterPost
+        back={back}
+        imagesFiles={imagesFiles}
+        imagesPreviews={imagesPreviews}
+        isBack={isBack}
+        key={'filters'}
         next={next}
         setImagesFilers={setImagesFilers}
         setImagesPreviews={setImagesPreviews}

@@ -25,6 +25,10 @@ export const createPost = {
     typeImageError: 'The file must be in JPEG, PNG format.',
     uploadError: 'The photo must be less than 20Mb',
   },
+  filterPhoto: {
+    modalButton: 'Next',
+    modalTitle: 'Filters',
+  },
   uploadPhoto: {
     buttonDraft: 'Open draft',
     buttonUploadPhoto: 'Select from Computer',

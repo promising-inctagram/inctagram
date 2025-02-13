@@ -1,0 +1,16 @@
+.filterPhotoWrapper {
+  width: 972px !important;
+  display: flex;
+}
+
+.filterPhoto {
+  width: 492px;
+  height: 503px;
+}
+
+.filtersMenu {
+  border: 1px solid green;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+}
