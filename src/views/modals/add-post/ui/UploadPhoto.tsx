@@ -11,14 +11,18 @@ import styles from './UploadPhoto.module.scss'
 type UploadPhotoProps = {
   next: () => void
   setImagesFilers: (value: File[]) => void
+  setImagesFilersResetFilter: (value: File[]) => void
   setImagesPreviews: (images: string[]) => void
+  setImagesPreviewsResetFilter: (images: string[]) => void
   setIsOpenCloseModal: (value: boolean) => void
 }
 
 const UploadPhoto = ({
   next,
   setImagesFilers,
+  setImagesFilersResetFilter,
   setImagesPreviews,
+  setImagesPreviewsResetFilter,
   setIsOpenCloseModal,
 }: UploadPhotoProps) => {
   const { t } = useTranslation()
@@ -54,9 +58,11 @@ const UploadPhoto = ({
       }
 
       setImagesFilers([file])
+      setImagesFilersResetFilter([file])
       reader.onloadend = () => {
         if (typeof reader.result === 'string') {
-          setImagesPreviews([reader.result]) //
+          setImagesPreviews([reader.result])
+          setImagesPreviewsResetFilter([reader.result])
           next()
         }
       }
@@ -70,9 +76,7 @@ const UploadPhoto = ({
         <Typography as={'h1'} variant={'h1'}>
           {modalTitle}
         </Typography>
-        <Button onClick={() => setIsOpenCloseModal(true)} title={'close'} variant={'icon'}>
-          <CloseOutlineIcon />
-        </Button>
+        <Button onClick={() => setIsOpenCloseModal(true)} title={'close'} variant={'icon'}></Button>
       </DialogHeader>
       <DialogBody className={styles.body}>
         <BlankImage className={styles.card} height={48} type={'square'} width={48} />
