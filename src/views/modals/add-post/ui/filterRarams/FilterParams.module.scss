@@ -1,10 +1,73 @@
 .blockFilterParams {
-  outline: 1px solid green;
+  width: 100%;
   display: flex;
 }
 
 .FilterParamsPhoto {
-  width: 492px;
+  width: 490px;
   height: 503px;
   object-fit: cover;
+}
+
+.wrapperFilterImages {
+  max-width: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 20px;
+  padding: 30px 48px;
+}
+
+.filterImages {
+  width: 100px;
+}
+
+.FilterImage {
+  width: 100px;
+}
+
+.wrapperFilterImage {
+  text-align: center;
+  width: 108px;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  letter-spacing: 1.2px;
+}
+
+.imageValue {
+  margin: 0;
+}
+
+.imageValue::first-letter {
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.filterImage {
+  width: 100%;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.sepia {
+  filter: sepia(100%);
+}
+
+.invert {
+  filter: invert(100%);
+}
+
+.brightness {
+  filter: brightness(120%); /* Увеличиваем яркость на 50% */
+}
+
+.contrast {
+  filter: contrast(150%); /* Увеличиваем контрастность на 50% */
+}
+
+.pixelate {
+  image-rendering: pixelated; /* или -moz-crisp-edges, -webkit-optimize-contrast */
 }

@@ -32,6 +32,7 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
   const { addPostDescription, addPostTitle } = t.createPost.createPostMain
   const overlayRef = useRef<HTMLDivElement>(null)
 
+  // это нужно чтобы сохранить изначальные картины чтобы потом можно было сбрасывать фильтры с них!
   const [imagesPreviewsResetFilter, setImagesPreviewsResetFilter] = useState<string[]>([])
   const [imagesFilesResetFilter, setImagesFilersResetFilter] = useState<File[]>([])
 
@@ -41,6 +42,7 @@ function AddPost({ isOpen, onOpenChange }: AddPostProps) {
 
   const [isBack, setIsBack] = useState(false)
 
+  // это нужно чтобы фильтры с картинок сбрасывались если юзер будет идти назад!
   useEffect(() => {
     if (isBack) {
       setImagesFilers(imagesFilesResetFilter)

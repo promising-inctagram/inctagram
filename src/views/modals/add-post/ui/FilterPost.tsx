@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Button, Carousel, DialogBody, DialogHeader, Typography } from '@/components/ui'
 import { ArrowIosBackIcon } from '@/components/ui/icons'
@@ -27,13 +27,8 @@ export const FilterPost = ({
   setImagesFilers,
   setImagesPreviews,
 }: FilterPostProps) => {
-  const [showModal, setShowModal] = useState<boolean>(false)
   const { t } = useTranslation()
   const { modalButton, modalTitle } = t.createPost.filterPhoto
-
-  const handleShowModal = () => {
-    setShowModal(prev => !prev)
-  }
 
   return (
     <>

@@ -26,6 +26,15 @@ export const createPost = {
     uploadError: 'Фото должно быть меньше 20 Мб',
   },
   filterPhoto: {
+    filterValues: {
+      brightness: 'яркость',
+      contrast: 'контраст',
+      grayscale: 'серый',
+      invert: 'инверт',
+      original: 'оригинал',
+      pixelate: 'пиксел',
+      sepia: 'сепиа',
+    },
     modalButton: 'Далее',
     modalTitle: 'Фильтры',
   },
