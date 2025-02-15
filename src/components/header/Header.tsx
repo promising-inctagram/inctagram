@@ -21,6 +21,7 @@ export const Header = ({ countNotification }: HeaderProps) => {
   const { isAuth } = useContext(AuthContext)
   const { t } = useTranslation()
   const isTablet = useIsMobileOrTabletVersion()
+  //
 
   return (
     <div className={styles.wrapper}>
