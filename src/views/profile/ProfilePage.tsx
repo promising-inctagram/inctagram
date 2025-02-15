@@ -34,7 +34,7 @@ const ProfilePage = () => {
   }, [router.query.id, me])
 
   useEffect(() => {
-    // Выходим если запрос за постами не успешен.
+    // Выходим если запрос за постами не успешен
     if (!isSuccess || !data || !requestId) {
       return
     }
