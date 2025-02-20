@@ -30,7 +30,7 @@ export const SignInForm = () => {
       const errorsMessage = getErrorMessageData(err)
 
       if (typeof errorsMessage === 'string') {
-        setError('password', { message: errorsMessage })
+        setError('password', { message: t.validation.passwordOrEmailIsIncorrect })
       }
     }
   })

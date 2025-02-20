@@ -9,6 +9,8 @@ export const validation = {
       '_` { | } ~',
     noWhiteSpace: 'Использование пробелов запрещено',
   },
+  passwordOrEmailIsIncorrect:
+    'Адрес электронной почты или пароль неверны. Попробуйте еще раз, пожалуйста',
   passwordsMatch: 'Пароли должны совпадать',
   requiredField: 'Обязательное поле',
   userName: {
