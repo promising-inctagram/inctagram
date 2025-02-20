@@ -9,6 +9,7 @@ export const validation = {
       '_` { | } ~',
     noWhiteSpace: 'Whitespace characters are not allowed',
   },
+  passwordOrEmailIsIncorrect: 'The email or password are incorrect. Try again please',
   passwordsMatch: 'Passwords must match',
   requiredField: 'Required field',
   userName: {
