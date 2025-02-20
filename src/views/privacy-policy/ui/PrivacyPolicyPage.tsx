@@ -11,9 +11,7 @@ function PrivacyPolicyPage() {
   const { redirectTo } = router.query
 
   const handleBack = () => {
-    if (redirectTo) {
-      router.push(redirectTo as string)
-    }
+    router.push('/auth/sign-up')
   }
 
   return (
