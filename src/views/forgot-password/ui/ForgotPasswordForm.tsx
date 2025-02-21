@@ -60,7 +60,7 @@ export const ForgotPasswordForm = ({ setEmail, setIsModal }: ForgotPasswordFormP
 
       if (typeof errors !== 'string') {
         errors.forEach(el => {
-          setError(el.field as keyof ForgotPasswordFields, { message: el.message })
+          setError(el.field as keyof ForgotPasswordFields, { message: t.validation.emailNotFound })
         })
       }
     }
