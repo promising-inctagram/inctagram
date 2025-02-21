@@ -1,6 +1,7 @@
 export const validation = {
   agreeToTerms: 'Пожалуйста, согласитесь с правилами и условиями',
   email: 'Email должен соответствовать формату example@example.com',
+  emailNotFound: 'Пользователь с таким адресом электронной почты не существует!',
   password: {
     maxLength: 'Максимальное количество символов 20',
     minLength: 'Минимальное количество символов 6',
