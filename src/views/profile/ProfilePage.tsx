@@ -54,8 +54,10 @@ const ProfilePage = () => {
   }
 
   const updateCursor = () => {
-    if (data?.cursor !== 0) {
+    if (data?.cursor && data?.cursor !== 0) {
       setCursor(data?.cursor)
+    } else {
+      setCursor(0)
     }
   }
 
