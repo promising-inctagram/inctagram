@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
 
 import {
   Button,
@@ -15,6 +16,7 @@ import {
 } from '@/components/ui'
 import { CloseOutlineIcon } from '@/components/ui/icons'
 import { useLogoutMutation } from '@/shared/api/auth/auth.api'
+import { inctagramApi } from '@/shared/api/inctagram.api'
 import { AuthContext } from '@/shared/contexts'
 import { Paths } from '@/shared/enums'
 import { useTranslation } from '@/shared/hooks'
@@ -30,6 +32,7 @@ type Props = {
 }
 
 export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
+  const dispatch = useDispatch()
   const { meData } = useContext(AuthContext)
   const router = useRouter()
   const [logout, { isLoading }] = useLogoutMutation()
@@ -51,6 +54,7 @@ export function LogoutConfirmation({ isOpen, onOpenChange }: Props) {
       .unwrap()
       .then(() => {
         localStorage.removeItem('hasRedirected')
+        dispatch(inctagramApi.util.resetApiState())
         router.push(Paths.logIn)
       })
       .catch(e => {
